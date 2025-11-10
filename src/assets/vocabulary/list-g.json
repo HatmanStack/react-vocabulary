@@ -1,0 +1,336 @@
+{
+  "id": "list-g",
+  "name": "List G",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "g-basic-0",
+          "word": "remiss",
+          "definition": "neglectful in performance of one's duty or careless",
+          "fillInBlank": "The babysitter was rather _____ in her duties, allowing the children to build a blanket fort encompassing the entire kitchen. "
+        },
+        {
+          "id": "g-basic-1",
+          "word": "reprieve",
+          "definition": "cancellation or postponement of a punishment",
+          "fillInBlank": "The overdue library book notice offered a temporary _____ before the late fees became truly alarming. "
+        },
+        {
+          "id": "g-basic-2",
+          "word": "reprobate",
+          "definition": "a person without moral scruples ",
+          "fillInBlank": "The villainous politician was a true _____ , known for tax evasion, slandering adorable puppies, and an inexplicable dislike of ice cream."
+        },
+        {
+          "id": "g-basic-3",
+          "word": "rescind",
+          "definition": "to revoke, cancel, or repeal (a law, order, or agreement)",
+          "fillInBlank": "The committee voted to _____ the new rule requiring all meetings to be conducted while wearing hats shaped like fruit."
+        },
+        {
+          "id": "g-basic-4",
+          "word": "requisition",
+          "definition": "an official order laying claim to the use of property or materials ",
+          "fillInBlank": "The army sent an urgent _____ for more tinned sardines, a vital strategic resource. "
+        },
+        {
+          "id": "g-basic-5",
+          "word": "rife",
+          "definition": "of common occurrence; widespread ",
+          "fillInBlank": "Rumors of scandalous behavior were _____ in the small town, spreading faster than wildfire through a stack of old newspapers."
+        },
+        {
+          "id": "g-basic-6",
+          "word": "sanctimonious",
+          "definition": "making a show of being morally superior to other people",
+          "fillInBlank": "The self-proclaimed health guru was surprisingly _____ , lecturing on the benefits of kale while secretly indulging in cheesy snacks."
+        },
+        {
+          "id": "g-basic-7",
+          "word": "sanguine",
+          "definition": "optimistic or positive, especially in an apparently bad or difficult situation",
+          "fillInBlank": "Despite the dire situation, the team leader remained _____ , insisting they could still win with a sufficient number of rubber bands and positive thinking."
+        },
+        {
+          "id": "g-basic-8",
+          "word": "scurrilous",
+          "definition": "making or suggesting coarsely abusive and offensive remarks",
+          "fillInBlank": "The rival sports commentators engaged in a _____ exchange of insults, much to the amusement of the audience."
+        },
+        {
+          "id": "g-basic-9",
+          "word": "redoubtable",
+          "definition": "formidable; inspiring fear or awe",
+          "fillInBlank": "The _____ castle guards, with their gleaming armor and questionable haircuts, were enough to deter most would-be intruders. "
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "g-intermediate-0",
+          "word": "semaphore",
+          "definition": "a system of sending messages by holding the arms or two flags or poles in certain positions ",
+          "fillInBlank": "The disgruntled mime resorted to interpretive semaphore to express his disapproval of the all-beige costume selection."
+        },
+        {
+          "id": "g-intermediate-1",
+          "word": "serendipity",
+          "definition": "the occurrence of fortunate events by chance",
+          "fillInBlank": "In a stroke of _____, the hungry traveler stumbled upon a food festival dedicated entirely to cheese sculptures."
+        },
+        {
+          "id": "g-intermediate-2",
+          "word": "sobriety",
+          "definition": "the state of being sober; refraining from alcohol",
+          "fillInBlank": "His newfound commitment to _____ led him to replace his extensive beer bottle collection with motivational posters featuring squirrels. "
+        },
+        {
+          "id": "g-intermediate-3",
+          "word": "solicitous",
+          "definition": "showing concern or care for someone's feelings or well-being ",
+          "fillInBlank": "The _____ nurse tended to the grumpy patient with excessive cheerfulness, which he found almost as unsettling as the illness itself."
+        },
+        {
+          "id": "g-intermediate-4",
+          "word": "solipsism",
+          "definition": "the philosophical theory that only one's own mind is sure to exist",
+          "fillInBlank": "The philosopher's argument for _____ collapsed when he absentmindedly bumped into a chair, acknowledging the existence of the external world. "
+        },
+        {
+          "id": "g-intermediate-5",
+          "word": "spurious",
+          "definition": "not genuine in nature, authenticity, or origin; false ",
+          "fillInBlank": "The art critic dismissed the forgery as a _____ imitation, noting the imposter's unfortunate overuse of glitter."
+        },
+        {
+          "id": "g-intermediate-6",
+          "word": "staid",
+          "definition": "sedate, respectable, and unadventurous",
+          "fillInBlank": "The couple's _____ lifestyle involved meticulously planned outfits, tasteful home decor, and a shared calendar app."
+        },
+        {
+          "id": "g-intermediate-7",
+          "word": "stolid",
+          "definition": "calm, dependable, and showing little emotion or animation",
+          "fillInBlank": "With a _____ expression, the security guard watched the teenager suspiciously eyeing the cookie display. "
+        },
+        {
+          "id": "g-intermediate-8",
+          "word": "subjugate",
+          "definition": "to bring a person or country under control, especially by military force",
+          "fillInBlank": "The invading army sought to _____ the neighboring country, primarily to gain access to their superior pastry selection."
+        },
+        {
+          "id": "g-intermediate-9",
+          "word": "surfeit",
+          "definition": " an excessive amount of something, especially food or drink",
+          "fillInBlank": "After a Thanksgiving _____ featuring three kinds of pie, a deep sense of regret settled upon the guests.  "
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "g-advanced-0",
+          "word": "surreptitious",
+          "definition": "done in a secret or unauthorized way",
+          "fillInBlank": "The detective's _____ surveillance involved binoculars, a long trench coat, and questionable attempts to blend in with a flock of pigeons."
+        },
+        {
+          "id": "g-advanced-1",
+          "word": "swarthy",
+          "definition": "dark-skinned",
+          "fillInBlank": "The actor's naturally _____ complexion made his beach vacation photos rather alarming after a weekend out of the sun."
+        },
+        {
+          "id": "g-advanced-2",
+          "word": "tangential",
+          "definition": "diverging from a previous course or line; erratic",
+          "fillInBlank": "The professor's lecture took a series of _____ turns, covering everything from taxidermy to the mating rituals of the garden snail. "
+        },
+        {
+          "id": "g-advanced-3",
+          "word": "tirade",
+          "definition": "a long and angry speech of criticism or accusation",
+          "fillInBlank": "The disgruntled employee went on a lengthy _____ about the unfair vending machine snack selection."
+        },
+        {
+          "id": "g-advanced-4",
+          "word": "tome",
+          "definition": "a large, heavy book (typically on a scholarly topic)",
+          "fillInBlank": "The dusty _____ on forgotten library shelves contained wisdom from ages past and surprisingly effective cockroach eradication techniques."
+        },
+        {
+          "id": "g-advanced-5",
+          "word": "toady",
+          "definition": "a person who behaves obsequiously to someone important",
+          "fillInBlank": "The aspiring politician transformed into a shameless _____ in the presence of wealthy donors, eagerly agreeing with any opinion that might result in a campaign contribution."
+        },
+        {
+          "id": "g-advanced-6",
+          "word": "torpid",
+          "definition": "mentally or physically inactive; lethargic",
+          "fillInBlank": "After a large Thanksgiving meal, the family dog lay _____ on the rug, barely able to lift an eyelid."
+        },
+        {
+          "id": "g-advanced-7",
+          "word": "travesty",
+          "definition": "a false, absurd, or distorted representation of something",
+          "fillInBlank": "The school play was an unintentional _____ of Shakespeare, featuring a lightsaber duel and a tap-dancing chorus line."
+        },
+        {
+          "id": "g-advanced-8",
+          "word": "trenchant",
+          "definition": "(of language) vigorous or incisive in expression or style",
+          "fillInBlank": "The politician delivered a _____ speech against corruption, conveniently ignoring questions about his own questionable donations. "
+        },
+        {
+          "id": "g-advanced-9",
+          "word": "trundle",
+          "definition": "to move slowly and heavily, typically in a noisy or uneven way",
+          "fillInBlank": "The overloaded cart _____ noisily through the grocery aisles, leaving a trail of dislodged cereal boxes in its wake. "
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "g-expert-0",
+          "word": "vilify",
+          "definition": "to speak ill of; defame; slander",
+          "fillInBlank": "The rival politician sought to _____ his opponent with a series of thinly-veiled accusations about her questionable taste in hats. "
+        },
+        {
+          "id": "g-expert-1",
+          "word": "virtuoso",
+          "definition": "a person highly skilled in music or another artistic pursuit",
+          "fillInBlank": "The child _____ displayed a talent for both the violin and breaking windows with a poorly-aimed slingshot."
+        },
+        {
+          "id": "g-expert-2",
+          "word": "vitriolic",
+          "definition": "filled with bitter criticism or malice",
+          "fillInBlank": "The disgruntled theater critic penned a _____ review, comparing the play to a root canal without anesthesia."
+        },
+        {
+          "id": "g-expert-3",
+          "word": "vituperate",
+          "definition": "to scold or criticize with harsh language",
+          "fillInBlank": "The coach _____ the team after their dismal performance, his words echoing unpleasantly off the locker room walls. "
+        },
+        {
+          "id": "g-expert-4",
+          "word": "vociferous",
+          "definition": "loud and forceful in speech or expression",
+          "fillInBlank": "The protesters were undeniably _____, their chants reverberating through the city streets."
+        },
+        {
+          "id": "g-expert-5",
+          "word": "wanton",
+          "definition": "done deliberately for no good reason; reckless",
+          "fillInBlank": "The teenagers' _____ act of spray-painting a mustache on the school statue was met with less amusement than they anticipated."
+        },
+        {
+          "id": "g-expert-6",
+          "word": "wily",
+          "definition": "skilled at gaining an advantage, especially deceitfully",
+          "fillInBlank": "The _____ con artist charmed his way into the hearts (and wallets) of unsuspecting victims. "
+        },
+        {
+          "id": "g-expert-7",
+          "word": "winsome",
+          "definition": "attractive or appealing in appearance or character",
+          "fillInBlank": "The puppy's _____ expression quickly melted the hearts of even the most committed cat-lovers."
+        },
+        {
+          "id": "g-expert-8",
+          "word": "yoke",
+          "definition": "a wooden crosspiece fastened over the necks of two animals; a symbol of oppression or servitude",
+          "fillInBlank": "The revolution sought to throw off the _____ of the oppressive regime, yearning for freedom."
+        },
+        {
+          "id": "g-expert-9",
+          "word": "zephyr",
+          "definition": "a soft gentle breeze",
+          "fillInBlank": "A gentle _____ rustled the leaves, offering a momentary respite from the summer heat. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "g-professional-0",
+          "word": "trite",
+          "definition": "overused and consequently of little import; lacking originality or freshness",
+          "fillInBlank": "The motivational speaker's speech relied on _____ clichés, leaving the audience feeling uninspired and slightly sleepy. "
+        },
+        {
+          "id": "g-professional-1",
+          "word": "truculent",
+          "definition": "eager or quick to argue or fight; aggressively defiant",
+          "fillInBlank": "The customer service representative faced a _____ customer who insisted that his pet parrot qualified for a frequent flyer card. "
+        },
+        {
+          "id": "g-professional-2",
+          "word": "turpitude",
+          "definition": "depravity, wickedness",
+          "fillInBlank": "The politician's history of scandals hinted at a deep moral _____, making his promises of honesty ring rather hollow."
+        },
+        {
+          "id": "g-professional-3",
+          "word": "ubiquitous",
+          "definition": "present, appearing, or found everywhere",
+          "fillInBlank": "The internet meme spread with _____ speed, appearing on every social media platform and even inexplicably on Aunt Ethel's embroidered pillows. "
+        },
+        {
+          "id": "g-professional-4",
+          "word": "umbrage",
+          "definition": "offense or annoyance ",
+          "fillInBlank": "He took _____ at the slightest criticism, interpreting a raised eyebrow as a declaration of war."
+        },
+        {
+          "id": "g-professional-5",
+          "word": "upbraid",
+          "definition": "to find fault with or reproach severely; to scold",
+          "fillInBlank": "The teacher had to _____ the student for attempting to build a potato-powered time machine in chemistry class. "
+        },
+        {
+          "id": "g-professional-6",
+          "word": "utilitarian",
+          "definition": "designed to be useful or practical rather than attractive",
+          "fillInBlank": "The office building had a strictly _____ design, favoring gray carpets and flickering fluorescent lights. "
+        },
+        {
+          "id": "g-professional-7",
+          "word": "veracity",
+          "definition": "conformity to truth in statement; accuracy",
+          "fillInBlank": "His reputation for _____ preceded him, though occasionally he just happened to be telling the truth. "
+        },
+        {
+          "id": "g-professional-8",
+          "word": "vestige",
+          "definition": "a trace of something that is disappearing or no longer exists ",
+          "fillInBlank": "The old photograph was the only _____ of a bustling town square, now replaced by a strip mall. "
+        },
+        {
+          "id": "g-professional-9",
+          "word": "vicissitude",
+          "definition": "a change of circumstances or fortune, typically one that is unwelcome or unpleasant",
+          "fillInBlank": "The stock market's unpredictable _____ left investors feeling both exhilarated and vaguely nauseous. "
+        }
+      ]
+    }
+  ]
+}

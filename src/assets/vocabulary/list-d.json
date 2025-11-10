@@ -1,0 +1,336 @@
+{
+  "id": "list-d",
+  "name": "List D",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "d-basic-0",
+          "word": "exigent",
+          "definition": "pressing; demanding ",
+          "fillInBlank": "The _____  leak in the roof demanded immediate attention, especially as the weather report involved suspiciously large rain clouds and a possible frognado."
+        },
+        {
+          "id": "d-basic-1",
+          "word": "expedient",
+          "definition": "convenient for a particular purpose (although perhaps improper or immoral) ",
+          "fillInBlank": "Though morally questionable, bribing the pigeons with stale popcorn proved an _____ way to reclaim the park bench. "
+        },
+        {
+          "id": "d-basic-2",
+          "word": "expiate",
+          "definition": "to make amends or reparation for ",
+          "fillInBlank": "To _____  his guilt for eating all the cookies, he offered to do the dishes (though his track record on that front wasn't exactly stellar)."
+        },
+        {
+          "id": "d-basic-3",
+          "word": "expunge",
+          "definition": "to erase or obliterate completely ",
+          "fillInBlank": "The frustrated editor tried to _____  several misspelled words, a questionable yodeling reference, and a strangely detailed ode to cheese from the manuscript."
+        },
+        {
+          "id": "d-basic-4",
+          "word": "extraneous",
+          "definition": "irrelevant or unrelated to the subject being dealt with ",
+          "fillInBlank": "The lawyer's argument included so many _____  details that the jury began to suspect he was just trying to stall for time. "
+        },
+        {
+          "id": "d-basic-5",
+          "word": "extol",
+          "definition": "to praise enthusiastically ",
+          "fillInBlank": "The celebrity chef enthusiastically _____ the virtues of kale smoothies, despite the skeptical looks and sudden urge to flee toward the nearest pizza place. "
+        },
+        {
+          "id": "d-basic-6",
+          "word": "extant",
+          "definition": "still in existence; survivingiving",
+          "fillInBlank": "Despite years of searching, no dinosaur remains were ever found, save for a few  _____ footprints and a rather suspicious-looking pebble. "
+        },
+        {
+          "id": "d-basic-7",
+          "word": "expurgate",
+          "definition": "to remove objectionable material from a book or account ",
+          "fillInBlank": "The movie censors decided to _____ several scenes of questionable taste, including one involving interpretive dance, a giant squid, and a concerning amount of mayonnaise. "
+        },
+        {
+          "id": "d-basic-8",
+          "word": "fallacious",
+          "definition": "based on a mistaken belief; erroneous ",
+          "fillInBlank": "His _____  theory that squirrels were secretly plotting world domination was dismissed with amused eye rolls and a gentle suggestion of less coffee. "
+        },
+        {
+          "id": "d-basic-9",
+          "word": "fatuous",
+          "definition": "silly and pointless  ",
+          "fillInBlank": "The self-proclaimed fashion guru's _____  advice involved wearing mismatched socks, top hats, and strategically placed rubber ducks. "
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "d-intermediate-0",
+          "word": "fetter",
+          "definition": "a chain or shackle placed on the feet (often used in plural); anything that confines or restrains",
+          "fillInBlank": "The prisoner desperately rattled his _____ , but the sound was lost in the wind and the guard's questionable humming. "
+        },
+        {
+          "id": "d-intermediate-1",
+          "word": "flagrant",
+          "definition": "conspicuously or obviously offensive",
+          "fillInBlank": "The politician's _____ disregard for the truth was as obvious as his blindingly orange hairpiece. "
+        },
+        {
+          "id": "d-intermediate-2",
+          "word": "foil",
+          "definition": "to prevent (someone) from accomplishing something; to frustrate or thwart",
+          "fillInBlank": "The pesky squirrel managed to _____ the bird's attempts to build a nest, stealing twigs and shiny bottle caps with equal enthusiasm. "
+        },
+        {
+          "id": "d-intermediate-3",
+          "word": "forbearance",
+          "definition": "patient self-control; restraint and tolerance",
+          "fillInBlank": "With admirable _____, the teacher refrained from confiscating the student's 20-page essay on the social lives of dust bunnies. "
+        },
+        {
+          "id": "d-intermediate-4",
+          "word": "fortuitous",
+          "definition": "happening by accident or chance rather than design",
+          "fillInBlank": "In a ______  turn of events, the lost hiker stumbled upon a fully-stocked cabin, complete with hot chocolate and a surprisingly well-behaved moose. "
+        },
+        {
+          "id": "d-intermediate-5",
+          "word": "fractious",
+          "definition": "irritable and quarrelsome",
+          "fillInBlank": "The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter. "
+        },
+        {
+          "id": "d-intermediate-6",
+          "word": "garrulous",
+          "definition": "excessively talkative, especially on trivial matters or in a rambling way",
+          "fillInBlank": "The _____ restaurant critic was known for his long, winding descriptions of meals and his tendency to fall asleep mid-bite. "
+        },
+        {
+          "id": "d-intermediate-7",
+          "word": "gourmand",
+          "definition": "a person who enjoys eating and often eats too much",
+          "fillInBlank": "The self-proclaimed _____  loved nothing more than feasting on elaborate meals and waxing poetic about the importance of truffle oil. "
+        },
+        {
+          "id": "d-intermediate-8",
+          "word": "grandiloquent",
+          "definition": "pompous or extravagant in language, style, or manner",
+          "fillInBlank": "The speaker's _____  claims of inventing the internet were met with skeptical sighs and a sudden mass exodus towards the nearest coffee machine."
+        },
+        {
+          "id": "d-intermediate-9",
+          "word": "gratuitous",
+          "definition": "uncalled for; lacking good reason; unwarranted",
+          "fillInBlank": "The neighbor's _____  offer to mow the lawn at 5 AM with a rusty chainsaw and a polka band was politely declined. "
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "d-advanced-0",
+          "word": "hapless",
+          "definition": "unfortunate; unlucky",
+          "fillInBlank": "The _____ burglar tripped over his own shoelaces, landed face-first in a pie, and was then promptly apprehended by a confused basset hound. "
+        },
+        {
+          "id": "d-advanced-1",
+          "word": "hegemony",
+          "definition": "leadership or dominance, especially by one country or social group over others",
+          "fillInBlank": "The fashion designer sought sartorial _____ over the city, aiming to establish the dominance of neon yellow and questionable animal prints."
+        },
+        {
+          "id": "d-advanced-2",
+          "word": "heterogeneous",
+          "definition": "diverse in character or content",
+          "fillInBlank": "The professor's office contained a wonderfully _____ collection of mismatched mugs, dusty books on obscure topics, and a surprising number of rubber chickens. "
+        },
+        {
+          "id": "d-advanced-3",
+          "word": "iconoclast",
+          "definition": "a person who attacks cherished beliefs or institutions",
+          "fillInBlank": "The outspoken writer was a true _____, fearlessly criticizing anything from pineapple on pizza to the excessive use of glitter in holiday decorations."
+        },
+        {
+          "id": "d-advanced-4",
+          "word": "idiosyncratic",
+          "definition": "peculiar or individual, relating to a person's distinctive character",
+          "fillInBlank": "The artist had a delightfully _____ style, creating sculptures from used chewing gum wrappers and paintings inspired by the strange stains on his carpet."
+        },
+        {
+          "id": "d-advanced-5",
+          "word": "impecunious",
+          "definition": "having little or no money",
+          "fillInBlank": "Despite his grand ambitions, the would-be entrepreneur was sadly _____, relying mostly on packets of ramen noodles and increasingly desperate calls to his parents. "
+        },
+        {
+          "id": "d-advanced-6",
+          "word": "impetuous",
+          "definition": "acting or done quickly and without thought or care",
+          "fillInBlank": "Her _____ decision to adopt twelve puppies on a whim seemed destined to lead to chaos, chewed furniture, and a distinct lack of sleep."
+        },
+        {
+          "id": "d-advanced-7",
+          "word": "impinge",
+          "definition": "to have a negative effect on something; to encroach",
+          "fillInBlank": "The intrusive pop-up ads constantly _____ on his reading experience, offering dubious hair growth remedies and questionable vacation packages."
+        },
+        {
+          "id": "d-advanced-8",
+          "word": "impute",
+          "definition": "to attribute or ascribe (a fault or cause) to a person or thing",
+          "fillInBlank": "The conspiracy theorist was quick to _____  blame for his missing sock on everything from telepathic squirrels to interdimensional aliens."
+        },
+        {
+          "id": "d-advanced-9",
+          "word": "inane",
+          "definition": "silly; stupid",
+          "fillInBlank": "The celebrity's memoir was filled with surprisingly _____ observations on the meaning of life, the importance of pedicures, and the ideal cheese-to-cracker ratio. "
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "d-expert-0",
+          "word": "fervent",
+          "definition": "having or displaying a passionate intensity",
+          "fillInBlank": "He was a _____ believer in the healing power of cheese, leading to a rather pungent refrigerator and a notable lack of mice."
+        },
+        {
+          "id": "d-expert-1",
+          "word": "fortitude",
+          "definition": "courage in pain or adversity",
+          "fillInBlank": "With remarkable _____, the lost hiker faced down a startled chipmunk, two suspicious squirrels, and a persistent mosquito."
+        },
+        {
+          "id": "d-expert-2",
+          "word": "gallivant",
+          "definition": "go around from one place to another in the pursuit of pleasure or entertainment",
+          "fillInBlank": "Bored with normal vacations, the socialite decided to _____ about the globe, collecting stamps in her passport and the occasional startled llama. "
+        },
+        {
+          "id": "d-expert-3",
+          "word": "guise",
+          "definition": "an external form, appearance, or manner of presentation ",
+          "fillInBlank": "In a clever _____, the burglar disguised himself as a giant potted plant, which fooled absolutely no one (especially the dog). "
+        },
+        {
+          "id": "d-expert-4",
+          "word": "hyperbole",
+          "definition": "exaggerated statements or claims not meant to be taken literally",
+          "fillInBlank": "His _____ was legendary; he once claimed to eat ten whole pizzas in one sitting, though this might have been slightly exaggerated. "
+        },
+        {
+          "id": "d-expert-5",
+          "word": "hypnosis",
+          "definition": "a trancelike state that resembles sleep but is induced by another person whose suggestions are readily accepted by the subject ",
+          "fillInBlank": "Under _____, the witness admitted his story of being abducted by tap-dancing aliens may have been slightly embellished for dramatic effect. "
+        },
+        {
+          "id": "d-expert-6",
+          "word": "integrity",
+          "definition": "the quality of being honest and having strong moral principles",
+          "fillInBlank": "His unwavering _____ was evident in his refusal to cheat at board games, even when everyone else was suspiciously winning. "
+        },
+        {
+          "id": "d-expert-7",
+          "word": "irony",
+          "definition": "the  incongruity between what might be expected and what actually occurs",
+          "fillInBlank": "In a twist of delicious _____, the chef known for his overly spicy dishes suffered from a fear of peppercorns. "
+        },
+        {
+          "id": "d-expert-8",
+          "word": "jejune",
+          "definition": "dull; lacking interest; naive and simplistic",
+          "fillInBlank": "The teenager's _____ explanation for the missing cake involved time travel, talking squirrels, and strangely convenient amnesia. "
+        },
+        {
+          "id": "d-expert-9",
+          "word": "karma",
+          "definition": "the idea that a person's actions will determine the good or bad things that happen to them in the future ",
+          "fillInBlank": "Believing in _____, she vowed revenge on the pigeon that pooped on her freshly-painted car… though revenge involving glitter may have been excessive. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "d-professional-0",
+          "word": "inchoate",
+          "definition": "just begun; not fully formed or developed",
+          "fillInBlank": "The architect's initial design was rather _____, involving a vague sketch resembling either a spaceship or a squashed potato."
+        },
+        {
+          "id": "d-professional-1",
+          "word": "incontrovertible",
+          "definition": "not able to be doubted or questioned; irrefutable",
+          "fillInBlank": "To his dismay, the lawyer realized the evidence supporting his client's alibi of \"eaten by giant wombats\" was sadly not _____. "
+        },
+        {
+          "id": "d-professional-2",
+          "word": "incumbent",
+          "definition": "currently holding a specific office or position",
+          "fillInBlank": "As the _____ mayor, she faced the daunting task of reversing the town's recent ban on polka-dot socks."
+        },
+        {
+          "id": "d-professional-3",
+          "word": "inexorable",
+          "definition": "impossible to stop or prevent",
+          "fillInBlank": "The relentless rain, combined with his leaky umbrella, provided an _____ reminder of the importance of checking the weather forecast."
+        },
+        {
+          "id": "d-professional-4",
+          "word": "inimical",
+          "definition": "tending to harm or obstruct developments; hostile",
+          "fillInBlank": "His _____ attitude toward exercise made the idea of joining a gym seem almost as terrifying as the possibility of running into anyone he knew there. "
+        },
+        {
+          "id": "d-professional-5",
+          "word": "injunction",
+          "definition": "an authoritative warning or order; a court order ",
+          "fillInBlank": "The judge issued a stern _____  against using the courtroom as a karaoke venue, regardless of the quality of one's Elvis impersonation. "
+        },
+        {
+          "id": "d-professional-6",
+          "word": "inoculate",
+          "definition": "to treat with a vaccine to produce immunity against a disease ",
+          "fillInBlank": "As a precaution, the hikers decided to get _____ against mosquito bites, leading to a rather lively interpretive dance designed to ward off any potential attackers. "
+        },
+        {
+          "id": "d-professional-7",
+          "word": "insidious",
+          "definition": "proceeding in a gradual, subtle, way, but with harmful effects",
+          "fillInBlank": "An _____ feeling of dread spread through the office as news of the impending surprise karaoke party leaked. "
+        },
+        {
+          "id": "d-professional-8",
+          "word": "instigate",
+          "definition": "to bring about (an action or event); incite ",
+          "fillInBlank": "Frustrated with the slow pace of change, the activist knew it was time to _____ a protest outside the surprisingly well-guarded pickle factory. "
+        },
+        {
+          "id": "d-professional-9",
+          "word": "insurgent",
+          "definition": "rising in active revolt against a constituted authority ",
+          "fillInBlank": "A band of _____ squirrels, tired of being underestimated, staged a daring mutiny and seized control of the park's peanut supply. "
+        }
+      ]
+    }
+  ]
+}

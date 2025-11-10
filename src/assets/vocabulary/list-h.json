@@ -1,0 +1,138 @@
+{
+  "id": "list-h",
+  "name": "List H",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "h-basic-0",
+          "word": "abominous",
+          "definition": "causing moral revulsion; detestable",
+          "fillInBlank": "The food critic declared the chef's latest creation an _____ fusion of flavors that should never be repeated."
+        },
+        {
+          "id": "h-basic-1",
+          "word": "billingsgate",
+          "definition": "coarsely abusive language; foul-mouthed attack",
+          "fillInBlank": "The politician's speech descended into pure _____, leaving his opponents both baffled and mildly amused."
+        },
+        {
+          "id": "h-basic-2",
+          "word": "cacoethes",
+          "definition": "an irresistible urge to do something inadvisable ",
+          "fillInBlank": "An inexplicable _____ compelled him to collect mismatched buttons, much to the bewilderment of his family."
+        },
+        {
+          "id": "h-basic-3",
+          "word": "daedal",
+          "definition": "skillful; intricate; cleverly complex",
+          "fillInBlank": "The labyrinthine bureaucracy, with its _____ forms and endless procedures, seemed designed to frustrate even the most determined individual. "
+        },
+        {
+          "id": "h-basic-4",
+          "word": "embrangle",
+          "definition": "to confuse, entangle, or throw into disorder",
+          "fillInBlank": "The scandal quickly _____ the senator's career, leaving his reputation in tatters."
+        },
+        {
+          "id": "h-basic-5",
+          "word": "febrile",
+          "definition": "having or showing a feverish activity; restless",
+          "fillInBlank": "Her _____ attempts to remain focused resulted in piles of half-completed tasks and a growing sense of unease."
+        },
+        {
+          "id": "h-basic-6",
+          "word": "gliddery",
+          "definition": "slippery, difficult to hold firm",
+          "fillInBlank": "The _____ path through the icy forest proved treacherous, making for a less-than-pleasant hike."
+        },
+        {
+          "id": "h-basic-7",
+          "word": "horripilation",
+          "definition": "the act or sensation of having one's hair stand on end (goosebumps)",
+          "fillInBlank": "The horror movie's chilling soundtrack induced a distinct sense of _____ in the audience."
+        },
+        {
+          "id": "h-basic-8",
+          "word": "idoneous",
+          "definition": "appropriate; fitting; suitable",
+          "fillInBlank": "The candidate's impressive resume deemed him _____ for the position, despite his questionable hairstyle."
+        },
+        {
+          "id": "h-basic-9",
+          "word": "jactance",
+          "definition": "boasting, bragging",
+          "fillInBlank": "His habit of  _____ about his accomplishments made him rather tedious company at dinner parties. "
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "h-intermediate-0",
+          "word": "kenspeckle",
+          "definition": "easily recognizable; conspicuous",
+          "fillInBlank": "His unusually bright tie made him rather _____ in the otherwise somber boardroom. "
+        },
+        {
+          "id": "h-intermediate-1",
+          "word": "laodicean",
+          "definition": "lukewarm or indifferent, especially in religion or politics",
+          "fillInBlank": "The politician's _____ response to the crisis statement left the public both uninformed and mildly concerned."
+        },
+        {
+          "id": "h-intermediate-2",
+          "word": "mephitic",
+          "definition": "offensive to the smell; foul-smelling",
+          "fillInBlank": "A faint _____ odor lingered in the old library, hinting at forgotten lunches and decaying paperbacks."
+        },
+        {
+          "id": "h-intermediate-3",
+          "word": "nipcheese",
+          "definition": "a parsimonious person; a miser",
+          "fillInBlank": "The _____ meticulously tracked his bus fare expenses in a leather-bound ledger.  "
+        },
+        {
+          "id": "h-intermediate-4",
+          "word": "zoilism",
+          "definition": "harsh literary criticism; captious or ill-tempered criticism",
+          "fillInBlank": "The critic's review contained a touch of _____, suggesting the novel's potential was overshadowed by its overuse of adverbs. "
+        },
+        {
+          "id": "h-intermediate-5",
+          "word": "pauciloquent",
+          "definition": "using few words; reserved ",
+          "fillInBlank": "The notoriously _____ witness offered only \"yes\" or \"no\" answers, leaving the courtroom buzzing with speculation. "
+        },
+        {
+          "id": "h-intermediate-6",
+          "word": "quiddity",
+          "definition": "the essence of something; what makes something the kind of thing it is",
+          "fillInBlank": "The philosopher pondered the _____ of a table, questioning whether it was truly a table if no one was there to dine upon it."
+        },
+        {
+          "id": "h-intermediate-7",
+          "word": "riant",
+          "definition": "cheerful and merry ",
+          "fillInBlank": "The hostess's _____ smile seemed a bit strained after hours of forced cheerfulness."
+        },
+        {
+          "id": "h-intermediate-8",
+          "word": "saccadic",
+          "definition": "relating to the rapid movement of the eyes in short jerks ",
+          "fillInBlank": "The patient's _____ eye movements made the optometrist's examination surprisingly difficult."
+        },
+        {
+          "id": "h-intermediate-9",
+          "word": "vaticinate",
+          "definition": "to prophesy or foretell the future ",
+          "fillInBlank": "The psychic laid out her tarot cards, preparing to _____ a future filled with unexpected parking tickets and questionable haircuts. "
+        }
+      ]
+    }
+  ]
+}

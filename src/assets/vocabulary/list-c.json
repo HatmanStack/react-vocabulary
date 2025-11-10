@@ -1,0 +1,336 @@
+{
+  "id": "list-c",
+  "name": "List C",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "c-basic-0",
+          "word": "denigrate",
+          "definition": "criticize unfairly; disparage",
+          "fillInBlank": "The rival art critics engaged in a fierce battle to _____ each other's work, using words like \"derivative\" and \"uninspired\" as their weapons of choice."
+        },
+        {
+          "id": "c-basic-1",
+          "word": "derivative",
+          "definition": "imitative of the work of another person or artist and lacking originality",
+          "fillInBlank": "The pop song, with its predictable lyrics and catchy-yet-annoying tune, was painfully _____  of countless other pop songs. "
+        },
+        {
+          "id": "c-basic-2",
+          "word": "despot",
+          "definition": "a ruler with absolute power and authority ",
+          "fillInBlank": "The self-proclaimed fashion _____ ruled the catwalk with an iron fist, a bedazzled scepter, and a deep loathing of anyone wearing comfortable shoes."
+        },
+        {
+          "id": "c-basic-3",
+          "word": "diaphanous",
+          "definition": "(especially of fabric) light, delicate, and translucent",
+          "fillInBlank": "A delicate, _____  gown seemed a questionable choice for attempting to wrestle a bear, but the princess was determined to look fabulous while doing it."
+        },
+        {
+          "id": "c-basic-4",
+          "word": "didactic",
+          "definition": "intended to teach, particularly in having moral instruction as an ulterior motive",
+          "fillInBlank": "The _____  professor lectured for hours about the importance of correct semicolon usage, leaving his students both terrified and vaguely impressed. "
+        },
+        {
+          "id": "c-basic-5",
+          "word": "dirge",
+          "definition": "a lament for the dead, especially one forming part of a funeral rite",
+          "fillInBlank": "The bagpipe player's rendition of a mournful _____  caused a mass exodus from the picnic, leaving behind only one slightly deaf squirrel and a flock of confused pigeons. "
+        },
+        {
+          "id": "c-basic-6",
+          "word": "disaffected",
+          "definition": "dissatisfied with people in authority or control",
+          "fillInBlank": "The employees grew increasingly _____  with their boss, whose ideas included mandatory kazoo practice and a \"no talking Tuesday\" policy. "
+        },
+        {
+          "id": "c-basic-7",
+          "word": "discomfit",
+          "definition": "to make (someone) feel uneasy or embarrassed ",
+          "fillInBlank": "The speaker's awkward joke and mistimed pratfall managed to thoroughly _____ both himself and the audience."
+        },
+        {
+          "id": "c-basic-8",
+          "word": "disparate",
+          "definition": "fundamentally different; essentially dissimilar",
+          "fillInBlank": "The research team analyzed the _____ evidence: a half-eaten cheeseburger, a strangely shaped muddy footprint, and a flock of suspiciously smug pigeons. "
+        },
+        {
+          "id": "c-basic-9",
+          "word": "dispel",
+          "definition": "to make (a doubt, feeling, or belief) disappear",
+          "fillInBlank": "With a wave of her hand and a suspiciously well-timed gust of wind, the sorceress managed to _____  the swirling fog of confusion and doubt."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "c-intermediate-0",
+          "word": "disrepute",
+          "definition": "the state of being held in low esteem by the public",
+          "fillInBlank": "The politician's reputation fell into _____ after the unfortunate hot mic incident involving goats, a yodeling contest, and a questionable amount of cheese."
+        },
+        {
+          "id": "c-intermediate-1",
+          "word": "divisive",
+          "definition": "tending to cause disagreement or hostility between people",
+          "fillInBlank": "His _____ speech about the evils of socks only served to further divide the room into the staunchly pro-sock camp and the defiantly anti-sock faction. "
+        },
+        {
+          "id": "c-intermediate-2",
+          "word": "dogmatic",
+          "definition": "opinionated in an arrogant way; stubbornly asserting unproven or incorrect beliefs",
+          "fillInBlank": "The _____ professor refused to entertain any theories that didn't involve 15th-century poetry, suspicious hand gestures, and a belief in talking squirrels. "
+        },
+        {
+          "id": "c-intermediate-3",
+          "word": "dour",
+          "definition": "severe, stern, or gloomy in manner or appearance",
+          "fillInBlank": "The _____ art critic dismissed the exhibit with a frown, declaring it \"derivative, uninspired, and lacking in thematically appropriate snacks.\" "
+        },
+        {
+          "id": "c-intermediate-4",
+          "word": "duplicity",
+          "definition": "deceitfulness; double-dealing",
+          "fillInBlank": "The con artist's scheme was built on a foundation of _____ , involving a fake lottery ticket, a sob story about lost penguins, and an unfortunate gullibility on the part of his victims."
+        },
+        {
+          "id": "c-intermediate-5",
+          "word": "duress",
+          "definition": "threats or violence used to make someone do something",
+          "fillInBlank": "The confession obtained under _____ was deemed inadmissible in court, much to the relief of the parrot and its surprisingly proficient lawyer."
+        },
+        {
+          "id": "c-intermediate-6",
+          "word": "eclectic",
+          "definition": "deriving ideas, styles, or tastes from a broad and diverse range of sources",
+          "fillInBlank": "The artist had an _____ style, with her paintings featuring everything from dancing hot dogs to philosophical cacti sporting tiny spectacles."
+        },
+        {
+          "id": "c-intermediate-7",
+          "word": "edict",
+          "definition": "a decree or official order issued by a person in authority",
+          "fillInBlank": "The queen's _____ about wearing hats shaped like fruit caused widespread confusion, a boom in the watermelon industry, and the resignation of several bewildered palace gardeners."
+        },
+        {
+          "id": "c-intermediate-8",
+          "word": "ebullient",
+          "definition": "cheerful and full of energy",
+          "fillInBlank": "Their _____ celebration after solving a particularly tricky crossword involved confetti cannons, a polka band, and an impromptu conga line through the library."
+        },
+        {
+          "id": "c-intermediate-9",
+          "word": "egregious",
+          "definition": "outstandingly bad; shocking",
+          "fillInBlank": "The restaurant's attempt at fusion cuisine was an _____ disaster, featuring sushi pizza, spaghetti tacos, and a dessert resembling a pineapple wearing a beret."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "c-advanced-0",
+          "word": "elegy",
+          "definition": "a poem in elegiac couplets, often expressing sorrow or a lament for the dead",
+          "fillInBlank": "His heartfelt _____ for the office plant involved a wilted daisy, a single tear, and a suspiciously empty bag of cheese puffs."
+        },
+        {
+          "id": "c-advanced-1",
+          "word": "elicit",
+          "definition": "to draw or bring out; evoke",
+          "fillInBlank": "The detective's skillful questioning managed to _____ a confession from the parrot, who admitted a fondness for shiny objects and a dislike of opera music. "
+        },
+        {
+          "id": "c-advanced-2",
+          "word": "embezzlement",
+          "definition": "theft or misappropriation of funds placed in one's trust (especially by a public official)",
+          "fillInBlank": "The scandal-plagued politician was accused of _____, leaving him with a depleted bank account, a sudden interest in obscure hobbies, and a one-way ticket to a remote island. "
+        },
+        {
+          "id": "c-advanced-3",
+          "word": "emend",
+          "definition": "to make corrections or improvements (usually to text)",
+          "fillInBlank": "The editor carefully _____ the manuscript, removing typos (along with any references to squirrels with questionable fashion sense). "
+        },
+        {
+          "id": "c-advanced-4",
+          "word": "emollient",
+          "definition": "having a softening or soothing effect",
+          "fillInBlank": "After a stressful day, a cup of tea and a soothing facemask provided the perfect _____ effect. "
+        },
+        {
+          "id": "c-advanced-5",
+          "word": "empirical",
+          "definition": "based on, concerned with, or verifiable by observation or experience rather than theory or pure logic ",
+          "fillInBlank": "His _____ research on the mating habits of goldfish was based on meticulous observation, several romance novels, and a slight obsession with interpretive dance. "
+        },
+        {
+          "id": "c-advanced-6",
+          "word": "emulate",
+          "definition": "match or surpass (a person or achievement), typically by imitation",
+          "fillInBlank": "Inspired by the great explorers, the adventurous snail set out to _____ Magellan, armed with a map drawn on a lettuce leaf and an impressive sense of determination."
+        },
+        {
+          "id": "c-advanced-7",
+          "word": "enervate",
+          "definition": "cause (someone) to feel drained of energy or vitality; weaken",
+          "fillInBlank": "Sitting through the endless budget meeting had a distinctly _____ effect, leaving everyone with a glazed expression and a sudden craving for naps."
+        },
+        {
+          "id": "c-advanced-8",
+          "word": "enfranchise",
+          "definition": "give the right to vote to ",
+          "fillInBlank": "The determined activists worked tirelessly to _____ underrepresented groups, ensuring their voices would be heard in the upcoming election. "
+        },
+        {
+          "id": "c-advanced-9",
+          "word": "engender",
+          "definition": "cause or give rise to (a feeling, situation, or condition)",
+          "fillInBlank": "His disastrous cooking attempts tended to _____ feelings of horror, a frantic search for takeout menus, and the suspicion that he could somehow burn water. "
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "c-expert-0",
+          "word": "vituperative",
+          "definition": "filled with bitter criticism or malice",
+          "fillInBlank": "The disgruntled theater critic unleashed a torrent of _____ remarks about the play, comparing it to a confused sloth attempting interpretive dance. "
+        },
+        {
+          "id": "c-expert-1",
+          "word": "prevaricate",
+          "definition": "to speak or act in an evasive way; to mislead ",
+          "fillInBlank": "The politician, caught in a lie, began to _____ , offering vague promises of jam tomorrow and blaming the disappearance of the national cookie supply on a rogue band of squirrels. "
+        },
+        {
+          "id": "c-expert-2",
+          "word": "antipathy",
+          "definition": "a deep-seated feeling of dislike; aversion",
+          "fillInBlank": "A deep _____ developed between the cat and the goldfish, mainly centered around differing opinions on the concept of personal space and snacking preferences."
+        },
+        {
+          "id": "c-expert-3",
+          "word": "desultory",
+          "definition": "lacking a plan, purpose, or enthusiasm",
+          "fillInBlank": "With a _____  sigh, he picked up the scattered papers, his attempt at writing a novel proving as focused and successful as a toddler conducting brain surgery. "
+        },
+        {
+          "id": "c-expert-4",
+          "word": "spurious",
+          "definition": "not genuine in nature, authenticity, or origin; false",
+          "fillInBlank": "The _____ charity fundraiser turned out to be a scam, its organizers disappearing with the donations and a curiously large collection of rubber duckies. "
+        },
+        {
+          "id": "c-expert-5",
+          "word": "perfidious",
+          "definition": "deceitful and untrustworthy; treacherous",
+          "fillInBlank": "The _____ villain, with his suspiciously twirled mustache and fondness for dramatic capes, seemed plucked straight from a cheesy comic book. "
+        },
+        {
+          "id": "c-expert-6",
+          "word": "foment",
+          "definition": "instigate or stir up (an undesirable or violent sentiment or course of action)",
+          "fillInBlank": "Social media influencers began to _____  unrest with surprisingly effective memes and poorly photoshopped images of squirrels in questionable hats. "
+        },
+        {
+          "id": "c-expert-7",
+          "word": "capricious",
+          "definition": "given to sudden and unaccountable changes of mood or behavior ",
+          "fillInBlank": "The notoriously _____  weather changed abruptly from sunshine to hail to a sudden downpour of maple syrup, leaving everyone confused and slightly sticky. "
+        },
+        {
+          "id": "c-expert-8",
+          "word": "erudite",
+          "definition": "having or showing great knowledge or learning",
+          "fillInBlank": "The _____ scholar could quote obscure 12th-century poetry, identify the mating calls of extinct birds, yet remained utterly baffled by the concept of self-checkout machines. "
+        },
+        {
+          "id": "c-expert-9",
+          "word": "resplendent",
+          "definition": "attractive and impressive through being richly colorful or sumptuous",
+          "fillInBlank": "Dressed in a golden gown, a tiara, and enough glitter to blind a satellite, the princess was positively _____ for her visit to the local turnip-carving festival. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "c-professional-0",
+          "word": "ephemeral",
+          "definition": "lasting for a very short time",
+          "fillInBlank": "The beauty of the rainbow was sadly _____, disappearing as quickly as the toddler's promise to share his candy. "
+        },
+        {
+          "id": "c-professional-1",
+          "word": "epistolary",
+          "definition": "(of a piece of writing) in the form of letters",
+          "fillInBlank": "The old chest contained a series of _____ love letters involving passionate declarations, questionable poetry, and a surprising number of spelling errors.  "
+        },
+        {
+          "id": "c-professional-2",
+          "word": "equanimity",
+          "definition": "mental calmness, composure, and evenness of temper ",
+          "fillInBlank": "With admirable _____, the seasoned gardener greeted news of yet another squirrel-inflicted crop disaster with a philosophical sigh and a renewed subscription to the hot sauce of the month club. "
+        },
+        {
+          "id": "c-professional-3",
+          "word": "equivocal",
+          "definition": "open to more than one interpretation; ambiguous",
+          "fillInBlank": "The defendant's _____ answers frustrated the lawyer, who longed for a simple yes or no, rather than references to tap-dancing llamas and the importance of cheese. "
+        },
+        {
+          "id": "c-professional-4",
+          "word": "espouse",
+          "definition": "adopt or support (a belief, cause, etc.) ",
+          "fillInBlank": "The environmental advocate passionately _____ the cause of renewable energy, using charts, alarming statistics, and a strategically placed inflatable polar bear. "
+        },
+        {
+          "id": "c-professional-5",
+          "word": "evanescent",
+          "definition": "soon passing out of sight, memory, or existence; quickly fading ",
+          "fillInBlank": "The ghostly figure, with its flickering form and suspiciously squeaky shoes, proved rather _____, vanishing before anyone could take a halfway decent photo. "
+        },
+        {
+          "id": "c-professional-6",
+          "word": "evince",
+          "definition": "give clear evidence of; display ",
+          "fillInBlank": "The child's drawing proudly _____ a love of dinosaurs, a fascination with explosions, and a questionable grasp of perspective. "
+        },
+        {
+          "id": "c-professional-7",
+          "word": "exacerbate",
+          "definition": "to make worse (a problem, bad situation, or negative feeling)",
+          "fillInBlank": "The incessant beeping of the alarm clock only served to _____ the headache caused by the polka band practicing next door."
+        },
+        {
+          "id": "c-professional-8",
+          "word": "exhort",
+          "definition": "to strongly urge (someone) to do something",
+          "fillInBlank": "The motivational speaker enthusiastically _____ the virtues of waking up at 4 AM, even on those days that involved rain, grumpy cats, and a distinct lack of coffee."
+        },
+        {
+          "id": "c-professional-9",
+          "word": "execrable",
+          "definition": "extremely bad or unpleasant ",
+          "fillInBlank": "The comedian's attempt at stand-up was so _____  that the audience resorted to throwing vegetables and attempting to communicate their displeasure through mime."
+        }
+      ]
+    }
+  ]
+}

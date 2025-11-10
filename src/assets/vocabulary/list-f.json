@@ -1,0 +1,336 @@
+{
+  "id": "list-f",
+  "name": "List F",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "f-basic-0",
+          "word": "paradigm",
+          "definition": "a typical example or pattern of something; a model",
+          "fillInBlank": "The company's new business _____ involved elaborate flowcharts, excessive use of buzzwords, and a surprising number of inspirational cat posters."
+        },
+        {
+          "id": "f-basic-1",
+          "word": "pariah",
+          "definition": "an outcast",
+          "fillInBlank": "The fashion critic became a social _____ after declaring sweatpants to be a crime against humanity."
+        },
+        {
+          "id": "f-basic-2",
+          "word": "partisan",
+          "definition": "a strong supporter of a party, cause, or person",
+          "fillInBlank": "The political commentator was a known _____ , incapable of discussing the opposing party without referencing farm animals and questionable hairstyles. "
+        },
+        {
+          "id": "f-basic-3",
+          "word": "paucity",
+          "definition": "the presence of something only in small or insufficient quantities or amounts; scarcity",
+          "fillInBlank": "The museum exhibit featured a notable _____ of dinosaur bones, consisting mainly of a single fossilized toe.  "
+        },
+        {
+          "id": "f-basic-4",
+          "word": "pejorative",
+          "definition": "expressing contempt or disapproval",
+          "fillInBlank": "The restaurant review contained several _____ remarks about the chef's creative use of ketchup and his questionable understanding of the word 'seasoning'."
+        },
+        {
+          "id": "f-basic-5",
+          "word": "pellucid",
+          "definition": "transparently clear; easily understandable",
+          "fillInBlank": "The lawyer's explanation of the contract was remarkably _____, causing his client to briefly consider a career in interpretive dance instead."
+        },
+        {
+          "id": "f-basic-6",
+          "word": "penchant",
+          "definition": "a strong or habitual liking for something or tendency to do something",
+          "fillInBlank": "The detective had a particular _____ for solving mysteries involving missing socks and questionable fashion choices."
+        },
+        {
+          "id": "f-basic-7",
+          "word": "penurious",
+          "definition": "extremely poor; stingy ",
+          "fillInBlank": "The _____ landlord refused to fix the leaky roof, suggesting a system of strategically placed buckets instead."
+        },
+        {
+          "id": "f-basic-8",
+          "word": "pert",
+          "definition": "attractive in a lively or cheeky way",
+          "fillInBlank": "The _____ puppy was adorably destructive, with a particular fondness for chewing on important documents and shoelaces. "
+        },
+        {
+          "id": "f-basic-9",
+          "word": "pernicious",
+          "definition": "having a harmful effect, especially in a gradual or subtle way",
+          "fillInBlank": "The scientist warned that the unchecked growth of toxic algae had _____ consequences for anyone who enjoyed swimming or having functioning ecosystems."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "f-intermediate-0",
+          "word": "pertinacious",
+          "definition": "holding firmly to an opinion or a course of action",
+          "fillInBlank": "The _____ telemarketer refused to be discouraged, even after being told the family was on an extended llama-trekking vacation."
+        },
+        {
+          "id": "f-intermediate-1",
+          "word": "phlegmatic",
+          "definition": "(of a person) having an unemotional and stolidly calm disposition",
+          "fillInBlank": "With a _____ disposition, the accountant remained unfazed even during the surprise office mariachi band performance."
+        },
+        {
+          "id": "f-intermediate-2",
+          "word": "philanthropic",
+          "definition": "seeking to promote the welfare of others, especially by donating money to good causes",
+          "fillInBlank": "The _____ billionaire donated generously to the cause of building solid gold statues of himself. "
+        },
+        {
+          "id": "f-intermediate-3",
+          "word": "pithy",
+          "definition": "(of speech or writing) concise and forcefully expressive",
+          "fillInBlank": "The motivational speaker's _____ advice, \"Just be yourself!\", was met with skeptical eyebrow raises from the audience."
+        },
+        {
+          "id": "f-intermediate-4",
+          "word": "platitude",
+          "definition": "a remark or statement, especially one with a moral content, that has been used too often to be interesting or thoughtful",
+          "fillInBlank": "The self-help book was filled with inspirational _____ such as \"follow your dreams\" and \"carpe diem (but maybe check your calendar first)\"."
+        },
+        {
+          "id": "f-intermediate-5",
+          "word": "plaudit",
+          "definition": "an expression of praise or approval",
+          "fillInBlank": "The actor received enthusiastic _____ from the audience, despite the fact that his performance involved very little movement and questionable yodeling."
+        },
+        {
+          "id": "f-intermediate-6",
+          "word": "plenitude",
+          "definition": "a state of fullness or abundance",
+          "fillInBlank": "The garden produced a _____ of tomatoes, leading to a desperate neighborhood zucchini-gifting campaign. "
+        },
+        {
+          "id": "f-intermediate-7",
+          "word": "plethora",
+          "definition": "a large or excessive amount",
+          "fillInBlank": "The office supply closet contained a _____ of highlighters in astonishingly similar shades of yellow."
+        },
+        {
+          "id": "f-intermediate-8",
+          "word": "portent",
+          "definition": "a sign or warning that something, especially something momentous or calamitous, is likely to happen",
+          "fillInBlank": "The ominous cracking sounds from the attic served as a _____ of either impending structural collapse or the discovery of a disgruntled raccoon family. "
+        },
+        {
+          "id": "f-intermediate-9",
+          "word": "potentate",
+          "definition": "a monarch or ruler, especially an autocratic one",
+          "fillInBlank": "The tiny island nation was ruled by a self-proclaimed _____ with a fondness for elaborate hats and unusually long speeches. "
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "f-advanced-0",
+          "word": "preclude",
+          "definition": "to prevent something from happening; make impossible",
+          "fillInBlank": "His allergy to peanuts sadly _____ him from enjoying most trail mix varieties."
+        },
+        {
+          "id": "f-advanced-1",
+          "word": "predilection",
+          "definition": "a preference or special liking for something; a bias in favor of something",
+          "fillInBlank": "The detective had a distinct _____ for tweed jackets, obscure trivia, and solving murders in quaint villages."
+        },
+        {
+          "id": "f-advanced-2",
+          "word": "preponderance",
+          "definition": "the quality or fact of being greater in number, quantity, or importance",
+          "fillInBlank": "The sheer _____ of cat memes on the internet proved a significant threat to workplace productivity worldwide. "
+        },
+        {
+          "id": "f-advanced-3",
+          "word": "presage",
+          "definition": "to be a sign or warning that something (typically bad) will happen in the future",
+          "fillInBlank": "The ominous background music in the movie clearly _____ an unfortunate encounter with a chainsaw-wielding clown. "
+        },
+        {
+          "id": "f-advanced-4",
+          "word": "probity",
+          "definition": "the quality of having strong moral principles; honesty and decency",
+          "fillInBlank": "His reputation for _____ preceded him; his bank manager sighed wearily upon seeing his name on the appointment schedule. "
+        },
+        {
+          "id": "f-advanced-5",
+          "word": "proclivity",
+          "definition": "a tendency to choose or do something regularly; an inclination or predisposition toward a particular thing",
+          "fillInBlank": "The chameleon had a natural _____ for blending in, though its attempts to camouflage as a plaid sofa were less successful. "
+        },
+        {
+          "id": "f-advanced-6",
+          "word": "profligate",
+          "definition": "recklessly extravagant or wasteful in the use of resources",
+          "fillInBlank": "The senator's _____ spending habits quickly drained the campaign funds, leaving only enough for a few stickers and a slightly used kazoo."
+        },
+        {
+          "id": "f-advanced-7",
+          "word": "promulgate",
+          "definition": "promote or make widely known (an idea or cause)",
+          "fillInBlank": "The health guru sought to _____ the benefits of an all-kale diet, conveniently ignoring the existence of pizza."
+        },
+        {
+          "id": "f-advanced-8",
+          "word": "proscribe",
+          "definition": "forbid, especially by law; to denounce or condemn",
+          "fillInBlank": "The government chose to _____ the use of spoons, leading to widespread confusion and an unexpected boom in the straw industry. "
+        },
+        {
+          "id": "f-advanced-9",
+          "word": "protean",
+          "definition": "tending or able to change frequently or easily",
+          "fillInBlank": "The shape-shifting villain proved difficult to track down, especially after his unfortunate transformation into a pigeon."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "f-expert-0",
+          "word": "wonky",
+          "definition": "shaky, unsteady, or unreliable",
+          "fillInBlank": "The bookshelf, assembled after midnight and several glasses of wine, had a distinctly _____ angle."
+        },
+        {
+          "id": "f-expert-1",
+          "word": "xenophobia",
+          "definition": "dislike of or prejudice against people from other countries ",
+          "fillInBlank": "His _____ led him to believe that anyone who didn't share his taste in polka-dotted socks was secretly plotting against him."
+        },
+        {
+          "id": "f-expert-2",
+          "word": "zealot",
+          "definition": "a person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals",
+          "fillInBlank": "The environmental _____ chained himself to a bulldozer and refused to budge until the tree was given a name and weekly therapy sessions."
+        },
+        {
+          "id": "f-expert-3",
+          "word": "zenith",
+          "definition": "the time or point at which something is most powerful, successful, or furthest along",
+          "fillInBlank": "Though past its _____, the aging rock band's reunion tour still involved surprising amounts of spandex. "
+        },
+        {
+          "id": "f-expert-4",
+          "word": "relegate",
+          "definition": "to assign an inferior rank or position to",
+          "fillInBlank": "Tired of menial tasks, the office worker felt _____ to the position of official coffee cup washer."
+        },
+        {
+          "id": "f-expert-5",
+          "word": "vapid",
+          "definition": "offering nothing that is stimulating or challenging",
+          "fillInBlank": "The celebrity's memoir was a surprisingly _____ read, filled with inspirational quotes and questionable grammar."
+        },
+        {
+          "id": "f-expert-6",
+          "word": "hornswoggle",
+          "definition": "to trick or swindle",
+          "fillInBlank": "The con man tried to _____ the farmer with a scheme involving a time-traveling chicken and a 'magic' bean."
+        },
+        {
+          "id": "f-expert-7",
+          "word": "sacerdotal",
+          "definition": "of or relating to priests or the priesthood ",
+          "fillInBlank": "Wearing an elaborate robe and an excessive amount of glitter, he performed his _____ duties at the festival of cheese. "
+        },
+        {
+          "id": "f-expert-8",
+          "word": "fete",
+          "definition": "a celebration or festival (often a lavish one)",
+          "fillInBlank": "The castle grounds were abuzz in preparation for the grand _____ celebrating the king's exceptionally fluffy cat."
+        },
+        {
+          "id": "f-expert-9",
+          "word": "hortative",
+          "definition": "giving encouragement or urging someone to do something",
+          "fillInBlank": "The motivational speaker's _____ speech involved shouting, several PowerPoint slides of waterfalls, and questionable life advice.  "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "f-professional-0",
+          "word": "prurient",
+          "definition": "having or encouraging an excessive interest in sexual matters",
+          "fillInBlank": "The tabloid magazine specialized in _____ headlines and blurry photographs of celebrities buying groceries."
+        },
+        {
+          "id": "f-professional-1",
+          "word": "puerile",
+          "definition": "childishly silly and immature",
+          "fillInBlank": "The debate devolved into a _____ exchange of insults, mostly focused on questionable hair choices of historical figures."
+        },
+        {
+          "id": "f-professional-2",
+          "word": "pugnacious",
+          "definition": "eager or quick to argue, quarrel, or fight",
+          "fillInBlank": "The notoriously _____ lawyer was known to start courtroom brawls in response to misspelled names or lukewarm coffee. "
+        },
+        {
+          "id": "f-professional-3",
+          "word": "pulchritude",
+          "definition": "physical beauty; comeliness",
+          "fillInBlank": "The beauty pageant winner was praised for her dazzling smile, impressive hairspray collection, and undeniable _____."
+        },
+        {
+          "id": "f-professional-4",
+          "word": "punctilious",
+          "definition": "showing great attention to detail or correct behavior",
+          "fillInBlank": "The _____ editor insisted on using a typewriter, scoffed at anything written after 1920, and used the word 'egregious' at every opportunity. "
+        },
+        {
+          "id": "f-professional-5",
+          "word": "quaint",
+          "definition": "attractively old-fashioned and unusual",
+          "fillInBlank": "The charming village, with its cobblestone streets and abundance of thatched roofs, had a delightfully _____ quality. "
+        },
+        {
+          "id": "f-professional-6",
+          "word": "quixotic",
+          "definition": "exceedingly idealistic; unrealistic and impractical",
+          "fillInBlank": "His _____ plan involved battling windmills, befriending sheep, and pursuing a surprisingly elusive Dulcinea."
+        },
+        {
+          "id": "f-professional-7",
+          "word": "quandary",
+          "definition": "a state of perplexity or uncertainty over what to do in a difficult situation",
+          "fillInBlank": "The student found himself in a _____ after realizing he had accidentally submitted his English essay for his Chemistry final. "
+        },
+        {
+          "id": "f-professional-8",
+          "word": "recalcitrant",
+          "definition": "having an obstinately uncooperative attitude toward authority or discipline",
+          "fillInBlank": "The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter. "
+        },
+        {
+          "id": "f-professional-9",
+          "word": "redoubtable",
+          "definition": "formidable; inspiring fear or awe",
+          "fillInBlank": "The _____ fortress overlooked the valley, though it was rumored to be haunted by the ghost of a disgruntled interior decorator. "
+        }
+      ]
+    }
+  ]
+}

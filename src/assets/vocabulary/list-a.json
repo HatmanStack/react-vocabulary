@@ -1,0 +1,276 @@
+{
+  "id": "list-a",
+  "name": "List A",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "a-basic-0",
+          "word": "abject",
+          "definition": "(of something bad) experienced or present to the maximum degree",
+          "fillInBlank": "Timmy was _____ after falling off the jungle gym and into the lava"
+        },
+        {
+          "id": "a-basic-1",
+          "word": "aberration",
+          "definition": "a departure from what is normal, usual, or expected, typically one that is unwelcome",
+          "fillInBlank": "It wasn't an ________ they really were making her pull her hair out"
+        },
+        {
+          "id": "a-basic-2",
+          "word": "abjure",
+          "definition": "solemnly renounce (a belief, cause, or claim)",
+          "fillInBlank": "After months of late-night cheese binges, she decided to ______ all dairy, embracing the concept of salads and reluctantly turning her back on extra-mature cheddar. "
+        },
+        {
+          "id": "a-basic-3",
+          "word": "abnegate",
+          "definition": "renounce or reject (something desired or valuable)",
+          "fillInBlank": "The monk chose to _______ worldly pleasures, seeking enlightenment through meditation and a surprisingly competitive board game collection."
+        },
+        {
+          "id": "a-basic-4",
+          "word": "abrogate",
+          "definition": "repeal or do away with (a law, right, or formal agreement)",
+          "fillInBlank": "The band was ______ from the hotel after an unfortunate incident involving a flock of pigeons, a confetti cannon, and some questionable room service choices."
+        },
+        {
+          "id": "a-basic-5",
+          "word": "abscond",
+          "definition": "leave hurriedly and secretly, typically to avoid detection of or arrest for an unlawful action",
+          "fillInBlank": "Seeking sun over spreadsheets, the overworked employee simply _______, leaving behind nothing but a lingering whiff of rebellion."
+        },
+        {
+          "id": "a-basic-6",
+          "word": "abstruse",
+          "definition": "difficult to understand; obscure",
+          "fillInBlank": "He stared at her blankly as if the words were ______."
+        },
+        {
+          "id": "a-basic-7",
+          "word": "accede",
+          "definition": "assent or agree to a demand, request, or treaty",
+          "fillInBlank": "Later, in the ditch, he ______ they did have the right of way"
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "a-intermediate-0",
+          "word": "accost",
+          "definition": "approach and address (someone) boldly or aggressively",
+          "fillInBlank": "The charity worker tried to _____  passersby on the street for donations, but after the third failed attempt, had to revise her strategy to involve less eye contact and a faster walking pace."
+        },
+        {
+          "id": "a-intermediate-1",
+          "word": "accretion",
+          "definition": "the growth or increase of something by the gradual accumulation of additional layers or matter ",
+          "fillInBlank": "The coral reef grows slowly due to the ______ of tiny marine organisms, a process that makes for a surprisingly soothing nature documentary but somewhat less exciting live-action adventure."
+        },
+        {
+          "id": "a-intermediate-2",
+          "word": "acumen",
+          "definition": "the ability to make good judgments and quick decisions",
+          "fillInBlank": "The seasoned detective possessed remarkable _____ , solving complex cases with an unnerving speed that involved crumpled newspapers, an old magnifying glass, and a collection of half-eaten donuts."
+        },
+        {
+          "id": "a-intermediate-3",
+          "word": "adamant",
+          "definition": "refusing to be persuaded or to change one's mind",
+          "fillInBlank": "The toddler stood with ______ resolve, arms crossed, refusing to eat broccoli even when it was disguised as a tiny tree, a landing pad for superheroes, or a dinosaur snack."
+        },
+        {
+          "id": "a-intermediate-4",
+          "word": "admonish",
+          "definition": "warn or reprimand someone firmly",
+          "fillInBlank": "After repeatedly misplacing her keys, the teacher had to ______ herself, developing an elaborate system of brightly colored keychains, jangling bracelets, and increasingly frantic morning searches. "
+        },
+        {
+          "id": "a-intermediate-5",
+          "word": "adumbrate",
+          "definition": "represent in outline or in a suggestive way ",
+          "fillInBlank": "The artist's sketch seemed to ______  the deeper emotions of the subject, hinting at a hidden sorrow with a few skillfully drawn lines and a strategically placed shadow. "
+        },
+        {
+          "id": "a-intermediate-6",
+          "word": "adverse",
+          "definition": "preventing success or development; harmful; unfavorable",
+          "fillInBlank": "The storm created ______ sailing conditions for the small boat, which bravely endured waves the size of small mountains and a distinct feeling among the crew that they should have just stayed home."
+        },
+        {
+          "id": "a-intermediate-7",
+          "word": "advocate",
+          "definition": "a person who publicly supports or recommends a particular cause or policy",
+          "fillInBlank": "She became a passionate _____ for animal rights, fiercely determined to make a difference, one rescued hedgehog and indignantly protesting squirrel at a time."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "a-advanced-0",
+          "word": "affluent",
+          "definition": "having a great deal of money or wealth",
+          "fillInBlank": "The ______ neighborhood was filled with sprawling mansions, suspiciously well-groomed poodles, and a distinct lack of anyone willing to admit to ever having eaten instant noodles."
+        },
+        {
+          "id": "a-advanced-1",
+          "word": "aggrandize",
+          "definition": "increase the power, status, or wealth of (someone or something)",
+          "fillInBlank": "The power-hungry politician sought to ______ his own reputation with lengthy speeches, questionable statues, and a rather impressive collection ofhats."
+        },
+        {
+          "id": "a-advanced-2",
+          "word": "alacrity",
+          "definition": "brisk and cheerful readiness",
+          "fillInBlank": "The enthusiastic puppy greeted his returning owner with remarkable ______, bouncing around the room with enough energy to power a small village and a rather slobbery tennis ball."
+        },
+        {
+          "id": "a-advanced-3",
+          "word": "alias",
+          "definition": "a false or assumed name",
+          "fillInBlank": "The master of disguise slipped into the party under the ______  of a cheese enthusiast with a questionable accent and a suspiciously large wheel of brie."
+        },
+        {
+          "id": "a-advanced-4",
+          "word": "ambivalent",
+          "definition": "having or showing mixed feelings or contradictory ideas about something or someone",
+          "fillInBlank": "The student felt strangely ______  about the final exam, a mix of quiet confidence and the lingering suspicion that she might have forgotten what a \"noun\" was."
+        },
+        {
+          "id": "a-advanced-5",
+          "word": "amenable",
+          "definition": "open and responsive to suggestion; easily persuaded or controlled",
+          "fillInBlank": "The notoriously stubborn toddler proved surprisingly ______ when bribed with the promise of extra ice cream and a new episode of his favorite cartoon involving talking dinosaurs. "
+        },
+        {
+          "id": "a-advanced-6",
+          "word": "amorphous",
+          "definition": "without a clearly defined shape or form ",
+          "fillInBlank": "The swirling fog had an ______ shape, shifting and changing form in a way that was either hauntingly beautiful or a great way to make someone accidentally walk into a tree."
+        },
+        {
+          "id": "a-advanced-7",
+          "word": "anachronistic",
+          "definition": "belonging to a period other than that being portrayed",
+          "fillInBlank": "The knight in shining armor charging into battle on a segway seemed somewhat ______ , leading to confused looks from the dragon and a hasty rewriting of the history books."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "a-expert-0",
+          "word": "arbitrary",
+          "definition": "based on random choice or personal whim, rather than any reason or system",
+          "fillInBlank": "The art critic's choices seemed entirely ______, declaring a piece of crumpled paper a masterpiece and dismissing an actual sculpture as \"too representational of reality.\""
+        },
+        {
+          "id": "a-expert-1",
+          "word": "arboreal",
+          "definition": "of, relating to, or living in trees",
+          "fillInBlank": "Those squirrels, with their bushy tails and love of heights, were clearly ______ creatures. "
+        },
+        {
+          "id": "a-expert-2",
+          "word": "arcane",
+          "definition": "understood by few; mysterious or secret",
+          "fillInBlank": "The ancient spell was shrouded in ______ language, its meaning decipherable only by those with a fondness for dusty books, questionable potions, and long naps."
+        },
+        {
+          "id": "a-expert-3",
+          "word": "archetypal",
+          "definition": "very typical of a certain kind of person or thing",
+          "fillInBlank": "The detective story featured the ______ cast of characters: the gruff detective, the suspicious butler, and the enigmatic femme fatale with a tragic past and a collection of deadly hatpins."
+        },
+        {
+          "id": "a-expert-4",
+          "word": "arrogate",
+          "definition": "to take or claim (something) without justification",
+          "fillInBlank": "The power-hungry villain sought to ______ control of the kingdom, based mainly on his impressive cape collection and rather loud declarations of his own brilliance."
+        },
+        {
+          "id": "a-expert-5",
+          "word": "ascetic",
+          "definition": "characterized by severe self-discipline and abstention from all forms of indulgence",
+          "fillInBlank": "The ______ monk lived in a tiny hut, subsisting on a diet of water, contemplation, and the occasional stale rice cracker."
+        },
+        {
+          "id": "a-expert-6",
+          "word": "aspersion",
+          "definition": "an attack on the reputation or integrity of someone or something",
+          "fillInBlank": "The rival scientists hurled ______ at each other, disputing everything from the existence of invisible sheep to the optimal temperature for brewing tea."
+        },
+        {
+          "id": "a-expert-7",
+          "word": "assiduous",
+          "definition": "showing great care and perseverance",
+          "fillInBlank": "The ______ student meticulously copied out her notes, color-coded her flashcards, and practiced her exam answers in front of a slightly bewildered cat. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "a-professional-0",
+          "word": "anathema",
+          "definition": "something or someone that one vehemently dislikes",
+          "fillInBlank": "To the rebellious teenager, chores and the mere concept of mornings were an absolute ______, to be avoided at all costs."
+        },
+        {
+          "id": "a-professional-1",
+          "word": "annex",
+          "definition": "to add a territory or space (typically by force) ",
+          "fillInBlank": "The ambitious emperor planned to ______  the neighboring island, motivated by dreams of expanding his beach towel collection and building an empire of questionable sandcastles."
+        },
+        {
+          "id": "a-professional-2",
+          "word": "antediluvian",
+          "definition": "of or belonging to the period before the biblical flood",
+          "fillInBlank": "The museum's fossil collection included the ______ remains of a dinosaur with a particularly grumpy expression and an unfortunate fondness for eating ferns."
+        },
+        {
+          "id": "a-professional-3",
+          "word": "antiseptic",
+          "definition": "substances that act against infection by inhibiting the growth of microorganisms",
+          "fillInBlank": "With its potent smell and suspicious ability to make even the tiniest paper cut sting, the old-fashioned ______ did its job, though perhaps with excessive enthusiasm. "
+        },
+        {
+          "id": "a-professional-4",
+          "word": "apathetic",
+          "definition": "showing or feeling no interest, enthusiasm, or concern",
+          "fillInBlank": "The ______ audience stared blankly at the comedian, who began to suspect his elaborate mime routine about the perils of mismatched socks might not be as funny as he'd imagined. "
+        },
+        {
+          "id": "a-professional-5",
+          "word": "antithesis",
+          "definition": "a person or thing that is the direct opposite of someone or something else",
+          "fillInBlank": "In a world obsessed with speed and instant gratification, the slow-moving sloth was the ______ of modern life, proving the enduring appeal of naps and a relaxed philosophy. "
+        },
+        {
+          "id": "a-professional-6",
+          "word": "apocryphal",
+          "definition": "(of a story or statement) of doubtful authenticity, although widely circulated as being true",
+          "fillInBlank": "The internet was filled with ______ stories involving celebrity encounters with aliens and surprisingly well-spoken pigeons with a fondness for conspiracy theories."
+        },
+        {
+          "id": "a-professional-7",
+          "word": "approbation",
+          "definition": "approval or praise",
+          "fillInBlank": "Earning the dreaded \"Most Improved Handwriting\" award did little to raise the student's spirits, as he considered it rather faint ______ considering his previous penmanship resembled spiderwebs dipped in ink. "
+        }
+      ]
+    }
+  ]
+}

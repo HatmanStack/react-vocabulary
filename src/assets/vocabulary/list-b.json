@@ -1,0 +1,276 @@
+{
+  "id": "list-b",
+  "name": "List B",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "b-basic-0",
+          "word": "atrophy",
+          "definition": "to gradually decline or waste away due to disease or disuse",
+          "fillInBlank": "After months stuck on the couch with a broken leg, the adventurer feared his hiking muscles might ______, leaving him only able to conquer the daunting staircase to the snack pantry."
+        },
+        {
+          "id": "b-basic-1",
+          "word": "bane",
+          "definition": "a cause of great distress or annoyance",
+          "fillInBlank": "Mosquitoes, with their annoying buzz and itchy bites, were the ______ of every delightful summer evening."
+        },
+        {
+          "id": "b-basic-2",
+          "word": "bashful",
+          "definition": "shy, reticent, or easily embarrassed",
+          "fillInBlank": "The ______ puppy hid behind the sofa, peeking out only occasionally with big, nervous eyes and a hesitantly wagging tail."
+        },
+        {
+          "id": "b-basic-3",
+          "word": "beguile",
+          "definition": "to charm or deceive by trickery",
+          "fillInBlank": "The charming con artist sought to ______ the wealthy widow out of her fortune with tales of lost treasure and suspiciously adorable kittens in need of diamond-encrusted collars."
+        },
+        {
+          "id": "b-basic-4",
+          "word": "bereft",
+          "definition": "deprived of or lacking something (especially something non-material)",
+          "fillInBlank": "Losing his beloved dog left the man feeling utterly ______, the laughter and tail-wagging enthusiasm gone from his once-vibrant home."
+        },
+        {
+          "id": "b-basic-5",
+          "word": "blandishment",
+          "definition": "a flattering or pleasing statement or action used to persuade someone",
+          "fillInBlank": "The overly enthusiastic used car salesman attempted to sell the rusty jalopy with a series of outrageous ______ that involved its \"untapped race car potential\" and \"unique vintage aroma.\""
+        },
+        {
+          "id": "b-basic-6",
+          "word": "bilk",
+          "definition": "to obtain or withhold money by deceit or without justification",
+          "fillInBlank": "Hoping to avoid paying for dinner, the shifty customer attempted to ______ the waiter with a confusing story about an escaped octopus and a sudden aversion to seafood."
+        },
+        {
+          "id": "b-basic-7",
+          "word": "bombastic",
+          "definition": "high-sounding but with little meaning; inflated",
+          "fillInBlank": "The politician's speech was filled with ______ phrases and dramatic hand gestures, but it was disappointingly short on actual solutions. "
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "b-intermediate-0",
+          "word": "cajole",
+          "definition": "to persuade someone to do something by sustained coaxing or flattery",
+          "fillInBlank": "With promises of extra treats and endless belly rubs, the dog walker attempted to ______ the stubborn basset hound out from under the sofa. "
+        },
+        {
+          "id": "b-intermediate-1",
+          "word": "callous",
+          "definition": "showing or feeling no sympathy for others",
+          "fillInBlank": "The ruthless food critic, known for his ______ takedowns of even the most earnest culinary attempts, had a particular fondness for deflating the egos of overly ambitious chefs."
+        },
+        {
+          "id": "b-intermediate-2",
+          "word": "calumny",
+          "definition": "the making of false and defamatory statements to damage someone's reputation; slander",
+          "fillInBlank": "The rumor mill churned with wild ______, involving a missing garden gnome, a conspiracy of squirrels, and an elaborate heist of suspiciously tasty birdseed."
+        },
+        {
+          "id": "b-intermediate-3",
+          "word": "camaraderie",
+          "definition": "mutual trust and friendship among people who spend a lot of time together",
+          "fillInBlank": "After a grueling hike, the team collapsed at the campsite, exhausted but filled with a sense of ______ and the shared aroma of burnt marshmallows and mosquito spray."
+        },
+        {
+          "id": "b-intermediate-4",
+          "word": "candor",
+          "definition": "the quality of being open and honest in expression ",
+          "fillInBlank": "Disdaining deception, the CEO opted for brutal ______, informing the board that their latest business venture shared a striking resemblance to a dumpster fire fueled by questionable hair gels."
+        },
+        {
+          "id": "b-intermediate-5",
+          "word": "capitulate",
+          "definition": "to cease to resist an opponent or an unwelcome demand; surrender",
+          "fillInBlank": "After weeks of heroic resistance, the sleep-deprived student finally ______ to the lure of her inviting bed and the pile of unread textbooks."
+        },
+        {
+          "id": "b-intermediate-6",
+          "word": "carouse",
+          "definition": "enjoy oneself with others in a noisy, lively way, especially while drinking alcohol",
+          "fillInBlank": "The pirates gathered to ______ on the island, their raucous laughter and questionable sea shanties carrying far across the ocean waves."
+        },
+        {
+          "id": "b-intermediate-7",
+          "word": "carp",
+          "definition": "to complain or find fault continually about trivial matters",
+          "fillInBlank": "The grumpy old man continued to ______ about everything from the weather to the excessive cheerfulness of the squirrels, proving that some people truly excel at finding the dark cloud in every silver lining."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "b-advanced-0",
+          "word": "caucus",
+          "definition": "a meeting of the supporters or members of a specific political party or  movement ",
+          "fillInBlank": "The squirrel _____ convened on the park bench, their agenda presumably involving world nut domination and the strategic hoarding of acorns. "
+        },
+        {
+          "id": "b-advanced-1",
+          "word": "cavort",
+          "definition": "to jump or dance around excitedly  ",
+          "fillInBlank": "The enthusiastic puppy continued to ______ around the house, blissfully unaware of the potential damage caused by its wagging tail and questionable understanding of valuable vases. "
+        },
+        {
+          "id": "b-advanced-2",
+          "word": "circumlocution",
+          "definition": "the use of many words where fewer would do, especially in a deliberate attempt to be vague or evasive ",
+          "fillInBlank": "The spokesperson's mastery of _________ was impressive: a five-minute speech somehow managed to say absolutely nothing of consequence. "
+        },
+        {
+          "id": "b-advanced-3",
+          "word": "circumscribe",
+          "definition": "to restrict something within limits",
+          "fillInBlank": "The ambitious toddler, determined to reach the cookie jar, found his explorations ________ by the kitchen gate and his lack of opposable thumbs. "
+        },
+        {
+          "id": "b-advanced-4",
+          "word": "circumvent",
+          "definition": "to find a way around an obstacle",
+          "fillInBlank": "The wily detective managed to _________ the usual bureaucracy with a well-timed distraction involving a runaway donut and several easily confused officers. "
+        },
+        {
+          "id": "b-advanced-5",
+          "word": "conflagration",
+          "definition": "an extensive fire that destroys a great deal of land or property ",
+          "fillInBlank": "The campfire, after several ill-advised attempts to roast marshmallows with a magnifying glass, erupted into a small but alarming ____________. "
+        },
+        {
+          "id": "b-advanced-6",
+          "word": "congruity",
+          "definition": "the quality of being in agreement or harmony ",
+          "fillInBlank": "The odd _______ between the polka-dotted wallpaper, the classical music, and the suspicious collection of rubber chickens gave the detective pause. "
+        },
+        {
+          "id": "b-advanced-7",
+          "word": "connive",
+          "definition": "to secretly allow (something considered immoral or illegal) to occur",
+          "fillInBlank": "The museum guards seemed to be suspiciously turning a blind eye, subtly ________ the daring heist of the world's largest cheese sculpture by a team of particularly motivated mice. "
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "b-expert-0",
+          "word": "corpulence",
+          "definition": "the state of being fat; obesity",
+          "fillInBlank": "After a month-long voyage with the ship's chef and his questionable culinary inventions, the sailor's newfound _________ made getting back into his uniform a daunting challenge."
+        },
+        {
+          "id": "b-expert-1",
+          "word": "covet",
+          "definition": "yearn to possess or have (something).",
+          "fillInBlank": "The dragon jealously ________ the neighboring kingdom's impressive collection of bottle caps, occasionally breathing fire in their general direction to emphasize its point. "
+        },
+        {
+          "id": "b-expert-2",
+          "word": "cupidity",
+          "definition": "extreme greed for material wealth",
+          "fillInBlank": "Driven by insatiable ________, the villain stole the world's entire supply of cheese, causing widespread panic and a resurgence in cracker-related culinary experiments. "
+        },
+        {
+          "id": "b-expert-3",
+          "word": "dearth",
+          "definition": "a scarcity or lack of something",
+          "fillInBlank": "A sudden _______ of hair ties caused the hero's impeccably styled mane to collapse into disarray just before the ball, leading to a desperate quest involving a lint brush and a suspiciously hairy squirrel. "
+        },
+        {
+          "id": "b-expert-4",
+          "word": "debacle",
+          "definition": "a sudden and disastrous failure",
+          "fillInBlank": "The overly ambitious \"Build a Giant Sandcastle\" project ended in a spectacular _______, involving disgruntled seagulls, an unexpected tidal wave, and an impressive amount of soggy sandwiches. "
+        },
+        {
+          "id": "b-expert-5",
+          "word": "debauch",
+          "definition": "to indulge (someone) in dissipating pleasures (obsolete definition) ",
+          "fillInBlank": "Famed for his wild parties, the eccentric billionaire aimed to _______ his guests with questionable karaoke contests, an experimental jello-sculpting workshop, and a flock of flamingos trained in synchronized swimming. "
+        },
+        {
+          "id": "b-expert-6",
+          "word": "defunct",
+          "definition": "no longer existing or functioning",
+          "fillInBlank": "The floppy-eared bloodhound detective agency, once renowned for sniffing out criminal masterminds, sadly went _______ after the entire team became distracted by a mysteriously tasty-smelling sock. "
+        },
+        {
+          "id": "b-expert-7",
+          "word": "demagogue",
+          "definition": "a political leader who seeks support by appealing to the desires and prejudices of ordinary people rather than by using rational argument",
+          "fillInBlank": "The seasoned politician, unable to resist a well-timed soundbite, transformed into a full-blown ________, promising free ice cream for all and blaming the sock-stealing gnomes for any economic woes. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "b-professional-0",
+          "word": "consign",
+          "definition": "deliver (something) to a person's custody, typically for sale",
+          "fillInBlank": "The antique dealer, tired of haggling over questionable lawn ornaments, decided to simply _______ the giant porcelain gnome to the back of his shop, hoping it would disappear mysteriously. "
+        },
+        {
+          "id": "b-professional-1",
+          "word": "constituent",
+          "definition": "a member of a constituency; a voter represented by an elected official",
+          "fillInBlank": "The disgruntled ________ penned an angry letter to her senator, expressing concerns about the state of the world and her suspicion that squirrels were secretly plotting a hostile takeover."
+        },
+        {
+          "id": "b-professional-2",
+          "word": "construe",
+          "definition": "interpret (a word or action) in a particular way",
+          "fillInBlank": "Lawyers, as usual, managed to _______ the incredibly simple instructions into a legal document resembling a baffling maze, resulting in widespread confusion and several panicked calls to pizza delivery. "
+        },
+        {
+          "id": "b-professional-3",
+          "word": "contusion",
+          "definition": "an injury in which the skin is not broken; a bruise",
+          "fillInBlank": "After a fierce game of hopscotch, the competitive toddler sported an impressive ________ on his forehead and a newfound respect for the importance of good aim. "
+        },
+        {
+          "id": "b-professional-4",
+          "word": "contrite",
+          "definition": "feeling or expressing remorse or penitence; affected by guilt",
+          "fillInBlank": "The formerly mischievous puppy, after chewing through a suspiciously important-looking document, gazed up at his owner with big, _______ eyes and a wagging tail, hoping that cuteness would be an acceptable form of currency."
+        },
+        {
+          "id": "b-professional-5",
+          "word": "contentious",
+          "definition": "causing or likely to cause disagreement ",
+          "fillInBlank": "The town hall meeting quickly descended into a _________ debate on the ideal toppings for pizza, highlighting the deeply polarizing nature of pineapple and anchovies. "
+        },
+        {
+          "id": "b-professional-6",
+          "word": "contravene",
+          "definition": "conflict with (a rule, law, or agreement), or fail to comply with them",
+          "fillInBlank": "The reckless driver blithely _________ several traffic laws, treating stop signs as mere suggestions and leaving a trail of bewildered pigeons in his wake. "
+        },
+        {
+          "id": "b-professional-7",
+          "word": "convivial",
+          "definition": "(of an atmosphere or event) friendly, lively, and enjoyable",
+          "fillInBlank": "The family gathering, known for its boisterous debates and questionable fashion choices, had a surprisingly ________ atmosphere this year, perhaps due to a general consensus that they'd all run out of things to argue about. "
+        }
+      ]
+    }
+  ]
+}

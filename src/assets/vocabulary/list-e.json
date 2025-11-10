@@ -1,0 +1,336 @@
+{
+  "id": "list-e",
+  "name": "List E",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "e-basic-0",
+          "word": "interlocutor",
+          "definition": "a person who takes part in a dialogue or conversation",
+          "fillInBlank": "Tired of being his own _____, the mime hired a sock puppet to help him practice conversations and improve his questionable jokes."
+        },
+        {
+          "id": "e-basic-1",
+          "word": "intimation",
+          "definition": "to suggest or hint slyly",
+          "fillInBlank": "The fortune cookie tried to _____ a brighter future with the vague message, \"Exciting opportunities may or may not arise. Wear comfy shoes.\" "
+        },
+        {
+          "id": "e-basic-2",
+          "word": "inure",
+          "definition": "to accustom (someone) to something, especially something unpleasant",
+          "fillInBlank": "After years of working outdoors, the gardener was _____ to both sunburn and sudden downpours of bird droppings. "
+        },
+        {
+          "id": "e-basic-3",
+          "word": "invective",
+          "definition": "insulting, abusive, or highly critical language",
+          "fillInBlank": "The rival politicians unleashed a torrent of _____ upon each other, causing several audience members to consider earplugs or possibly a swift escape. "
+        },
+        {
+          "id": "e-basic-4",
+          "word": "intransigent",
+          "definition": "unwilling or refusing to change one's views or to agree about something",
+          "fillInBlank": "The _____ professor refused to budge on his position that all essays should be handwritten in calligraphy on repurposed papyrus."
+        },
+        {
+          "id": "e-basic-5",
+          "word": "inveterate",
+          "definition": "having a particular habit, activity, or interest that is long-established and unlikely to change",
+          "fillInBlank": "The _____ gambler's belief in his lucky fedora was sadly misplaced, as judging from the results, the hat appeared actively unlucky. "
+        },
+        {
+          "id": "e-basic-6",
+          "word": "irreverence",
+          "definition": "a lack of respect for people or things that are generally taken seriously",
+          "fillInBlank": "His _____ for wearing pajamas all day wasn't mere laziness; he claimed it was a carefully developed \"comfort optimization strategy\"."
+        },
+        {
+          "id": "e-basic-7",
+          "word": "knell",
+          "definition": "a sound of a bell, especially when rung solemnly for a death or funeral",
+          "fillInBlank": "A sudden _____ from the church tower signaled both the arrival of the ominous storm clouds and a possible increase in pigeon activity. "
+        },
+        {
+          "id": "e-basic-8",
+          "word": "laconic",
+          "definition": "(of a person, speech, or style of writing) using very few words",
+          "fillInBlank": "The normally chatty teenager's response to the bad news was a surprisingly _____  \"meh.\", causing his parents increased concern. "
+        },
+        {
+          "id": "e-basic-9",
+          "word": "largess",
+          "definition": "generosity in bestowing money or gifts upon others",
+          "fillInBlank": "Inspired by tales of Robin Hood, the eccentric billionaire showered the city with his _____, which unfortunately involved glitter bombs and oddly specific coupons. "
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "e-intermediate-0",
+          "word": "legerdemain",
+          "definition": "skillful use of one's hands when performing conjuring tricks; trickery or deception",
+          "fillInBlank": "The magician's impressive _____  involved disappearing rabbits, dubious card tricks, and the audience's lingering suspicion that their wallets were also missing. "
+        },
+        {
+          "id": "e-intermediate-1",
+          "word": "libertarian",
+          "definition": "an advocate or supporter of the principle of individual liberty, especially in thought and behavior",
+          "fillInBlank": "The _____ activist passionately argued for the right to wear mismatched socks and eat cereal for dinner. "
+        },
+        {
+          "id": "e-intermediate-2",
+          "word": "licentious",
+          "definition": "displaying a lack of moral or legal restraints; promiscuous or unprincipled in sexual matters",
+          "fillInBlank": "The novel's _____ protagonist was mostly interested in breaking the rules, causing general mayhem, and seducing anyone who carried a monocle. "
+        },
+        {
+          "id": "e-intermediate-3",
+          "word": "linchpin",
+          "definition": "a person or thing that plays a vital or pivotal role in an organization or system",
+          "fillInBlank": "The office gossip was the _____ of the organization, somehow always knowing everyone's secrets before they did themselves. "
+        },
+        {
+          "id": "e-intermediate-4",
+          "word": "litigant",
+          "definition": "a person involved in a lawsuit",
+          "fillInBlank": "The weary _____  faced yet another confusing legal form and wished for the simplicity of building sandcastles instead. "
+        },
+        {
+          "id": "e-intermediate-5",
+          "word": "maelstrom",
+          "definition": "a situation or state of violent confusion or great turbulence",
+          "fillInBlank": "The stock market crash caused a financial _____ , leaving investors shouting at squirrels and rethinking their life choices. "
+        },
+        {
+          "id": "e-intermediate-6",
+          "word": "maudlin",
+          "definition": "self-pityingly or tearfully sentimental",
+          "fillInBlank": "The tearjerker movie induced a wave of _____ sniffling throughout the audience and a notable spike in tissue sales."
+        },
+        {
+          "id": "e-intermediate-7",
+          "word": "maverick",
+          "definition": "an independent-minded person who doesn't follow the crowd",
+          "fillInBlank": "With his refusal to wear matching socks and his fondness for interpretive toast-based poetry, the artist was clearly a _____. "
+        },
+        {
+          "id": "e-intermediate-8",
+          "word": "mawkish",
+          "definition": "sentimental in a feeble or sickly way",
+          "fillInBlank": "The overly sentimental greeting card featured kittens,  rainbows, and a _____ message about the enduringurance of friendship (or possibly the importance of flossing)."
+        },
+        {
+          "id": "e-intermediate-9",
+          "word": "maxim",
+          "definition": "a short, pithy statement expressing a general truth or rule of conduct",
+          "fillInBlank": "The wise old hiker offered a useful _____:  \"When packing for a trip, bring half the clothes and twice the snacks.\" "
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "e-advanced-0",
+          "word": "mendacious",
+          "definition": "not telling the truth; lying",
+          "fillInBlank": "The politician's _____ promises of giant flying squirrels for every voter proved surprisingly popular. "
+        },
+        {
+          "id": "e-advanced-1",
+          "word": "modicum",
+          "definition": "a small quantity of a particular thing, especially something considered desirable or valuable",
+          "fillInBlank": "Despite his best efforts, the detective found only a _____ of actual evidence at the crime scene – a single button and a slightly suspicious sock. "
+        },
+        {
+          "id": "e-advanced-2",
+          "word": "morass",
+          "definition": "a complicated or confusing situation; a soft, wet area of ground",
+          "fillInBlank": "The team found themselves stuck in a _____ of regulations, unable to open a lemonade stand without twelve permits and a notarized letter from a llama. "
+        },
+        {
+          "id": "e-advanced-3",
+          "word": "mores",
+          "definition": "the customs, values,  and behaviors of a particular group of people",
+          "fillInBlank": "The company retreat, meant to improve teamwork, quickly devolved into arguments over the questionable _____ of freeze-dried snacks. "
+        },
+        {
+          "id": "e-advanced-4",
+          "word": "munificent",
+          "definition": "larger or more generous than is usual or necessary",
+          "fillInBlank": "The philanthropist's _____ donation led to a new library wing, much to the delight of bookworms and sleepy pigeons looking for shelter. "
+        },
+        {
+          "id": "e-advanced-5",
+          "word": "multifarious",
+          "definition": "having many and various types or aspects",
+          "fillInBlank": "The professor's lecture covered a _____ array of topics, from the mating rituals of snails to the importance of alphabetizing one's spice collection."
+        },
+        {
+          "id": "e-advanced-6",
+          "word": "nadir",
+          "definition": "the lowest or most unsuccessful point in a situation",
+          "fillInBlank": "After weeks of neglect, his attempt at cultivating a beard reached a rather sad _____, resembling more a fluffy dandelion than a symbol of rugged masculinity. "
+        },
+        {
+          "id": "e-advanced-7",
+          "word": "negligent",
+          "definition": "failing to take proper or normal care of something",
+          "fillInBlank": "The _____ house guest left a trail of half-eaten sandwiches and mysteriously damp socks throughout the apartment."
+        },
+        {
+          "id": "e-advanced-8",
+          "word": "neophyte",
+          "definition": "a person who is new to a subject, skill, or belief",
+          "fillInBlank": "As a complete _____ in the art of baking, his attempt at a cake resulted in a creation of questionable density and surprising resilience. "
+        },
+        {
+          "id": "e-advanced-9",
+          "word": "noisome",
+          "definition": "having an extremely bad or unpleasant smell",
+          "fillInBlank": "A sudden _____ odor pervaded the train compartment, leading to a frantic search for the source and several hasty window openings."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "e-expert-0",
+          "word": "lethargic",
+          "definition": "sluggish, apathetic, or lacking in energy",
+          "fillInBlank": "After the Thanksgiving feast, the family dog slipped into a distinctly _____ stupor on the couch."
+        },
+        {
+          "id": "e-expert-1",
+          "word": "lucid",
+          "definition": "expressed clearly; easy to understand",
+          "fillInBlank": "The directions were frustratingly unhelpful, providing a series of nonsensical symbols instead of a _____ explanation. "
+        },
+        {
+          "id": "e-expert-2",
+          "word": "melancholy",
+          "definition": "a feeling of pensive sadness, typically with no obvious cause",
+          "fillInBlank": "A wave of _____ washed over the poet as he stared out the window at the slightly drizzly parking lot."
+        },
+        {
+          "id": "e-expert-3",
+          "word": "misanthrope",
+          "definition": "a person who dislikes humankind and avoids human society",
+          "fillInBlank": "The grumpy recluse, a self-proclaimed _____, refused to acknowledge the holiday carolers, despite their adorable outfits and questionable pitch."
+        },
+        {
+          "id": "e-expert-4",
+          "word": "narrative",
+          "definition": " a spoken or written account of connected events; a story",
+          "fillInBlank": "The detective spun a gripping _____ involving a missing stapler, a disgruntled office clown, and an unusual number of pigeons."
+        },
+        {
+          "id": "e-expert-5",
+          "word": "nostalgic",
+          "definition": "characterized by sentimentality for the past, typically for a period or place with happy personal associations",
+          "fillInBlank": "The old photograph inspired a _____ longing for simpler times, back when phones were attached to walls and shoulder pads weren't yet a fashion faux-pas."
+        },
+        {
+          "id": "e-expert-6",
+          "word": "oxymoron",
+          "definition": "a figure of speech in which apparently contradictory terms appear in conjunction ",
+          "fillInBlank": "Their attempt at \"friendly competition\" quickly descended into what could only be described as an _____. "
+        },
+        {
+          "id": "e-expert-7",
+          "word": "paradigm",
+          "definition": "an example or pattern, especially one that is an outstanding one",
+          "fillInBlank": "The company's new advertising campaign was a strange _____ shift relying on outdated slang, polka-dot patterns, and an inexplicable talking pineapple. "
+        },
+        {
+          "id": "e-expert-8",
+          "word": "quell",
+          "definition": "to subdue or suppress; to put an end to ",
+          "fillInBlank": "The librarian was remarkably efficient at _____ any hint of whispered conversations or giggling in the stacks."
+        },
+        {
+          "id": "e-expert-9",
+          "word": "quirky",
+          "definition": "having an unusual or interesting personality or appearance",
+          "fillInBlank": "With his collection of mismatched socks and a pet rock named Bob, the new student was endearingly _____. "
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "e-professional-0",
+          "word": "noxious",
+          "definition": "harmful, poisonous, or very unpleasant",
+          "fillInBlank": "A _____ odor wafted from the abandoned house, hinting at either a failed chemistry experiment or a family of very smelly skunks."
+        },
+        {
+          "id": "e-professional-1",
+          "word": "obdurate",
+          "definition": "stubbornly refusing to change one's opinion or course of action",
+          "fillInBlank": "The customer service representative was maddeningly _____ , refusing to budge on the \"no returns on chewed shoes\" policy. "
+        },
+        {
+          "id": "e-professional-2",
+          "word": "obfuscate",
+          "definition": "to make something obscure, unclear, or unintelligible",
+          "fillInBlank": "The politician's speech was designed to _____ the issue, involving long, meandering sentences and suspiciously vague promises."
+        },
+        {
+          "id": "e-professional-3",
+          "word": "obstreperous",
+          "definition": "noisy and difficult to control",
+          "fillInBlank": "The _____ toddler refused to be silenced, bellowing his displeasure at the park's inexplicable lack of dinosaur-shaped slides."
+        },
+        {
+          "id": "e-professional-4",
+          "word": "officious",
+          "definition": "asserting authority in an excessively domineering way",
+          "fillInBlank": "The _____ committee insisted on inspecting everyone's shoes for conformity, resulting in a lengthy delay and several confused pigeons. "
+        },
+        {
+          "id": "e-professional-5",
+          "word": "onerous",
+          "definition": "involving an amount of effort and hardship that is oppressively burdensome",
+          "fillInBlank": "Reorganizing the entire library by the length of book titles proved an unexpectedly _____ task."
+        },
+        {
+          "id": "e-professional-6",
+          "word": "ostensible",
+          "definition": "stated or appearing to be true, but not necessarily so ",
+          "fillInBlank": "The advertisement claimed the new lotion was the _____ solution for hair loss, bad moods, and a lack of telekinetic powers."
+        },
+        {
+          "id": "e-professional-7",
+          "word": "ostracism",
+          "definition": "exclusion from a society or group",
+          "fillInBlank": "The ostracized mime found solace in a support group for others silenced by social convention. "
+        },
+        {
+          "id": "e-professional-8",
+          "word": "palliate",
+          "definition": "to make something less severe or unpleasant without removing the cause",
+          "fillInBlank": "The soothing cup of chamomile tea served to slightly _____ the stress of the malfunctioning printer and looming deadline."
+        },
+        {
+          "id": "e-professional-9",
+          "word": "panacea",
+          "definition": "a solution or remedy for all difficulties or diseases",
+          "fillInBlank": "The so-called \"miracle cure\" turned out to be nothing more than overpriced fizzy water, proving yet again there's no easy _____ for questionable gullibility. "
+        }
+      ]
+    }
+  ]
+}

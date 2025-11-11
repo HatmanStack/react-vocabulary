@@ -29,7 +29,7 @@ export default function QuizScreen() {
     submitAnswer,
     useHint,
     getCorrectAnswer,
-    getCurrentWordWrongCount,
+    getCurrentQuestionPresentationCount,
     getNextQuestion,
     calculateProgress,
     isQuizComplete,
@@ -207,7 +207,7 @@ export default function QuizScreen() {
           <MultipleChoiceQuestion
             options={currentQuestion.options || []}
             onSelectAnswer={handleSelectAnswer}
-            wrongCount={showFeedback ? 0 : getCurrentWordWrongCount()}
+            presentationCount={showFeedback ? 0 : getCurrentQuestionPresentationCount()}
             correctAnswer={getCorrectAnswer()}
           />
         ) : (
@@ -215,7 +215,7 @@ export default function QuizScreen() {
             sentence={currentQuestion.word.fillInBlank}
             onSubmitAnswer={handleSubmitAnswer}
             onUseHint={handleUseHint}
-            wrongCount={showFeedback ? 0 : getCurrentWordWrongCount()}
+            presentationCount={showFeedback ? 0 : getCurrentQuestionPresentationCount()}
             correctAnswer={getCorrectAnswer()}
           />
         )}

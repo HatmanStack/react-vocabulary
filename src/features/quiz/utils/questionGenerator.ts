@@ -24,32 +24,31 @@ export function generateMultipleChoiceOptions(
   correctWord: VocabularyWord,
   allWords: VocabularyWord[]
 ): string[] {
+  // Create pool of incorrect options (excluding the correct word)
+  const incorrectWords = allWords.filter((w) => w.id !== correctWord.id);
+
+  // Shuffle the incorrect words using Fisher-Yates
+  const shuffled = [...incorrectWords];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  // Take first 3 shuffled words as incorrect options
+  const incorrectOptions = shuffled.slice(0, 3).map((w) => w.word);
+
   // Randomize position of correct answer (0-3)
   const correctPosition = Math.floor(Math.random() * 4);
 
   const options: string[] = new Array(4);
   options[correctPosition] = correctWord.word;
 
-  // Fill remaining positions with random incorrect words
-  const usedIndices = new Set<number>();
-  const correctWordIndex = allWords.findIndex((w) => w.id === correctWord.id);
-
+  // Fill remaining positions with incorrect options
+  let incorrectIndex = 0;
   for (let i = 0; i < 4; i++) {
-    if (i === correctPosition) continue; // Skip correct answer position
-
-    // Find a random word that isn't used yet
-    let attempts = 0;
-    while (attempts < allWords.length * 2) {
-      const randomIndex = Math.floor(Math.random() * allWords.length);
-
-      // Check if this word is valid (not correct word, not already used)
-      if (randomIndex !== correctWordIndex && !usedIndices.has(randomIndex)) {
-        options[i] = allWords[randomIndex].word;
-        usedIndices.add(randomIndex);
-        break;
-      }
-
-      attempts++;
+    if (i !== correctPosition) {
+      options[i] = incorrectOptions[incorrectIndex] || '';
+      incorrectIndex++;
     }
   }
 

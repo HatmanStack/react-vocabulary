@@ -28,7 +28,7 @@ interface QuizState {
   sessionStats: SessionStats;
   questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (8 total)
   correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly (length 8)
-  wrongCountTracker: number[]; // Count of wrong answers for each question (length 8)
+  presentationCountTracker: number[]; // Count of how many times each question has been presented (length 8)
   currentOrderIndex: number; // Current position in questionOrder (0-based)
 
   // Actions
@@ -42,7 +42,7 @@ interface QuizState {
   incrementCorrect: () => void;
   endQuiz: () => { hints: number; wrong: number; correct: number };
   isQuizComplete: () => boolean;
-  getCurrentWordWrongCount: () => number;
+  getCurrentQuestionPresentationCount: () => number;
 }
 
 export const useQuizStore = create<QuizState>((set, get) => ({
@@ -58,7 +58,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   },
   questionOrder: [],
   correctTracker: [],
-  wrongCountTracker: [],
+  presentationCountTracker: [],
   currentOrderIndex: 0,
 
   // Start a new quiz session
@@ -103,7 +103,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
     // Initialize tracker arrays (all 0s) - 8 questions total
     const correctTracker = new Array(questionOrder.length).fill(0);
-    const wrongCountTracker = new Array(questionOrder.length).fill(0);
+    const presentationCountTracker = new Array(questionOrder.length).fill(0);
 
     set({
       currentSession: session,
@@ -112,7 +112,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       sessionStats: { hintsUsed: 0, wrongAnswers: 0, correctAnswers: 0 },
       questionOrder,
       correctTracker,
-      wrongCountTracker,
+      presentationCountTracker,
       currentOrderIndex: 0,
     });
 
@@ -122,7 +122,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // Get next question
   getNextQuestion: () => {
-    const { currentSession, questionOrder, correctTracker, currentOrderIndex } = get();
+    const { currentSession, questionOrder, correctTracker, presentationCountTracker, currentOrderIndex } = get();
 
     if (!currentSession) {
       console.error('No active quiz session');
@@ -165,16 +165,21 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     // Question number is the position in shuffled order (1-based, 1-8)
     const questionNumber = nextIndex + 1;
 
+    // Increment presentation count for this question
+    const newPresentationCounts = [...presentationCountTracker];
+    newPresentationCounts[nextIndex] = newPresentationCounts[nextIndex] + 1;
+
     set({
       currentQuestion: question,
       currentQuestionIndex: questionNumber,
       currentOrderIndex: (nextIndex + 1) % questionOrder.length,
+      presentationCountTracker: newPresentationCounts,
     });
   },
 
   // Submit answer and update tracker
   submitAnswer: (userAnswer: string) => {
-    const { currentQuestion, currentSession, questionOrder, currentOrderIndex, correctTracker, wrongCountTracker } = get();
+    const { currentQuestion, currentSession, questionOrder, currentOrderIndex, correctTracker } = get();
 
     if (!currentQuestion || !currentSession) {
       console.error('No active question');
@@ -214,11 +219,6 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       );
     } else {
       get().incrementWrong();
-
-      // Increment wrong count for this specific question
-      const newWrongCounts = [...wrongCountTracker];
-      newWrongCounts[prevIndex] = newWrongCounts[prevIndex] + 1;
-      set({ wrongCountTracker: newWrongCounts });
     }
 
     return { isCorrect, correctAnswer };
@@ -247,16 +247,16 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     return currentQuestion.word.word;
   },
 
-  // Get the wrong answer count for the current question
-  getCurrentWordWrongCount: () => {
-    const { currentOrderIndex, wrongCountTracker } = get();
+  // Get the presentation count for the current question
+  getCurrentQuestionPresentationCount: () => {
+    const { currentOrderIndex, presentationCountTracker } = get();
 
-    if (wrongCountTracker.length === 0) {
+    if (presentationCountTracker.length === 0) {
       return 0;
     }
 
-    const prevIndex = (currentOrderIndex - 1 + wrongCountTracker.length) % wrongCountTracker.length;
-    return wrongCountTracker[prevIndex] || 0;
+    const prevIndex = (currentOrderIndex - 1 + presentationCountTracker.length) % presentationCountTracker.length;
+    return presentationCountTracker[prevIndex] || 0;
   },
 
   // Increment hint count

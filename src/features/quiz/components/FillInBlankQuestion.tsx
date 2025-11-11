@@ -26,8 +26,8 @@ interface FillInBlankQuestionProps {
   onSubmitAnswer: (answer: string) => void;
   /** Callback when hint button is pressed */
   onUseHint: () => void;
-  /** Number of wrong answers for this word */
-  wrongCount?: number;
+  /** Number of times this question has been presented */
+  presentationCount?: number;
   /** The correct answer to pre-fill when Help Me Out is used */
   correctAnswer?: string;
 }
@@ -36,7 +36,7 @@ export function FillInBlankQuestion({
   sentence,
   onSubmitAnswer,
   onUseHint,
-  wrongCount = 0,
+  presentationCount = 0,
   correctAnswer,
 }: FillInBlankQuestionProps) {
   const theme = useTheme();
@@ -44,8 +44,8 @@ export function FillInBlankQuestion({
   const [hintUsed, setHintUsed] = useState(false);
   const inputRef = useRef<TextInput>(null);
 
-  // Show Help Me Out button if answered incorrectly 2+ times
-  const showHelpMeOut = wrongCount >= 2 && correctAnswer;
+  // Show Help Me Out button if question has been presented 3+ times
+  const showHelpMeOut = presentationCount >= 3 && correctAnswer;
 
   // Auto-focus input on mount
   useEffect(() => {
@@ -120,10 +120,6 @@ export function FillInBlankQuestion({
         {showHelpMeOut && (
           <>
             <View style={styles.helpMeOutContainer}>
-              <Typography variant="caption" color="secondary" style={styles.helpMeOutText}>
-                Having trouble? We can help!
-              </Typography>
-              <Spacer size="xs" />
               <Button
                 variant="secondary"
                 icon="hand-heart"

@@ -72,7 +72,7 @@ export default function HomeScreen() {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
-        <Appbar.Content title="Vocabulary Builder" />
+        <Appbar.Content title="Vocabulary" />
         <Appbar.Action
           icon="chart-bar"
           onPress={() => router.push('/stats')}

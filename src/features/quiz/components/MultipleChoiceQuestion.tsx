@@ -25,8 +25,8 @@ interface MultipleChoiceQuestionProps {
   onSelectAnswer: (answer: string) => void;
   /** Currently selected answer (controlled) */
   selectedAnswer?: string | null;
-  /** Number of wrong answers for this word */
-  wrongCount?: number;
+  /** Number of times this question has been presented */
+  presentationCount?: number;
   /** The correct answer to highlight when Help Me Out is used */
   correctAnswer?: string;
 }
@@ -35,7 +35,7 @@ export function MultipleChoiceQuestion({
   options,
   onSelectAnswer,
   selectedAnswer = null,
-  wrongCount = 0,
+  presentationCount = 0,
   correctAnswer,
 }: MultipleChoiceQuestionProps) {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -45,8 +45,8 @@ export function MultipleChoiceQuestion({
   // Use vertical layout on screens wider than 768px (tablet/desktop)
   const isLargeScreen = width > 768;
 
-  // Show Help Me Out button if answered incorrectly 2+ times
-  const showHelpMeOut = wrongCount >= 2 && correctAnswer;
+  // Show Help Me Out button if question has been presented 3+ times
+  const showHelpMeOut = presentationCount >= 3 && correctAnswer;
 
   const handleSelect = (answer: string) => {
     if (isDisabled) return;
@@ -80,10 +80,6 @@ export function MultipleChoiceQuestion({
       {showHelpMeOut && (
         <>
           <View style={styles.helpMeOutContainer}>
-            <Typography variant="caption" color="secondary" style={styles.helpMeOutText}>
-              Having trouble? We can help!
-            </Typography>
-            <Spacer size="xs" />
             <Button
               variant="secondary"
               icon="hand-heart"

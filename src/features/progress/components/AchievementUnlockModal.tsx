@@ -6,6 +6,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated, Modal, TouchableWithoutFeedback } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { Achievement } from '@/shared/types';
 import { Typography, Button, Spacer } from '@/shared/ui';
 import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
@@ -21,6 +22,7 @@ export function AchievementUnlockModal({
   visible,
   onDismiss,
 }: AchievementUnlockModalProps) {
+  const theme = useTheme();
   const reducedMotion = useReducedMotion();
   const fadeAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
   const scaleAnim = useRef(new Animated.Value(reducedMotion ? 1 : 0.5)).current;
@@ -71,6 +73,7 @@ export function AchievementUnlockModal({
             <Animated.View
               style={[
                 styles.modal,
+                { backgroundColor: theme.colors.surface },
                 {
                   transform: [{ scale: scaleAnim }],
                 },
@@ -81,7 +84,7 @@ export function AchievementUnlockModal({
                 <Typography variant="heading1" style={styles.celebrationIcon}>
                   🎉
                 </Typography>
-                <Typography variant="heading2" style={styles.title}>
+                <Typography variant="heading2" style={[styles.title, { color: theme.colors.primary }]}>
                   Achievement Unlocked!
                 </Typography>
               </View>
@@ -90,7 +93,15 @@ export function AchievementUnlockModal({
 
               {/* Achievement Display */}
               <View style={styles.achievementContainer}>
-                <View style={styles.iconContainer}>
+                <View
+                  style={[
+                    styles.iconContainer,
+                    {
+                      backgroundColor: theme.colors.primaryContainer,
+                      borderColor: theme.colors.primary,
+                    },
+                  ]}
+                >
                   <Typography variant="heading1" style={styles.icon}>
                     {achievement.icon}
                   </Typography>
@@ -132,7 +143,6 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   modal: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 16,
     padding: 24,
     width: '100%',
@@ -153,7 +163,6 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    color: '#6200EE',
   },
   achievementContainer: {
     alignItems: 'center',
@@ -163,11 +172,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#F3E5F5',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: '#6200EE',
   },
   icon: {
     fontSize: 48,

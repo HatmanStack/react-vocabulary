@@ -1,0 +1,156 @@
+{
+  "id": "meridian",
+  "name": "Meridian",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "meridian-basic-0",
+          "word": "pellucid",
+          "definition": "transparently clear; easily understandable",
+          "fillInBlank": "The lawyer's explanation of the contract was remarkably _____, causing his client to briefly consider a career in interpretive dance instead."
+        },
+        {
+          "id": "meridian-basic-1",
+          "word": "penchant",
+          "definition": "a strong or habitual liking for something or tendency to do something",
+          "fillInBlank": "The detective had a particular _____ for solving mysteries involving missing socks and questionable fashion choices."
+        },
+        {
+          "id": "meridian-basic-2",
+          "word": "penurious",
+          "definition": "extremely poor; stingy",
+          "fillInBlank": "The _____ landlord refused to fix the leaky roof, suggesting a system of strategically placed buckets instead."
+        },
+        {
+          "id": "meridian-basic-3",
+          "word": "reprieve",
+          "definition": "cancellation or postponement of a punishment",
+          "fillInBlank": "The overdue library book notice offered a temporary _____ before the late fees became truly alarming."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "meridian-intermediate-0",
+          "word": "philanthropic",
+          "definition": "seeking to promote the welfare of others, especially by donating money to good causes",
+          "fillInBlank": "The _____ billionaire donated generously to the cause of building solid gold statues of himself."
+        },
+        {
+          "id": "meridian-intermediate-1",
+          "word": "pithy",
+          "definition": "(of speech or writing) concise and forcefully expressive",
+          "fillInBlank": "The motivational speaker's _____ advice, \"Just be yourself!\", was met with skeptical eyebrow raises from the audience."
+        },
+        {
+          "id": "meridian-intermediate-2",
+          "word": "platitude",
+          "definition": "a remark or statement, especially one with a moral content, that has been used too often to be interesting or thoughtful",
+          "fillInBlank": "The self-help book was filled with inspirational _____ such as \"follow your dreams\" and \"carpe diem (but maybe check your calendar first)\"."
+        },
+        {
+          "id": "meridian-intermediate-3",
+          "word": "plaudit",
+          "definition": "an expression of praise or approval",
+          "fillInBlank": "The actor received enthusiastic _____ from the audience, despite the fact that his performance involved very little movement and questionable yodeling."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "meridian-advanced-0",
+          "word": "preponderance",
+          "definition": "the quality or fact of being greater in number, quantity, or importance",
+          "fillInBlank": "The sheer _____ of cat memes on the internet proved a significant threat to workplace productivity worldwide."
+        },
+        {
+          "id": "meridian-advanced-1",
+          "word": "presage",
+          "definition": "to be a sign or warning that something (typically bad) will happen in the future",
+          "fillInBlank": "The ominous background music in the movie clearly _____ an unfortunate encounter with a chainsaw-wielding clown."
+        },
+        {
+          "id": "meridian-advanced-2",
+          "word": "probity",
+          "definition": "the quality of having strong moral principles; honesty and decency",
+          "fillInBlank": "His reputation for _____ preceded him; his bank manager sighed wearily upon seeing his name on the appointment schedule."
+        },
+        {
+          "id": "meridian-advanced-3",
+          "word": "proclivity",
+          "definition": "a tendency to choose or do something regularly; an inclination or predisposition toward a particular thing",
+          "fillInBlank": "The chameleon had a natural _____ for blending in, though its attempts to camouflage as a plaid sofa were less successful."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "meridian-expert-0",
+          "word": "relegate",
+          "definition": "to assign an inferior rank or position to",
+          "fillInBlank": "Tired of menial tasks, the office worker felt _____ to the position of official coffee cup washer."
+        },
+        {
+          "id": "meridian-expert-1",
+          "word": "vapid",
+          "definition": "offering nothing that is stimulating or challenging",
+          "fillInBlank": "The celebrity's memoir was a surprisingly _____ read, filled with inspirational quotes and questionable grammar."
+        },
+        {
+          "id": "meridian-expert-2",
+          "word": "hornswoggle",
+          "definition": "to trick or swindle",
+          "fillInBlank": "The con man tried to _____ the farmer with a scheme involving a time-traveling chicken and a 'magic' bean."
+        },
+        {
+          "id": "meridian-expert-3",
+          "word": "sacerdotal",
+          "definition": "of or relating to priests or the priesthood",
+          "fillInBlank": "Wearing an elaborate robe and an excessive amount of glitter, he performed his _____ duties at the festival of cheese."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "meridian-professional-0",
+          "word": "palliate",
+          "definition": "to make something less severe or unpleasant without removing the cause",
+          "fillInBlank": "The soothing cup of chamomile tea served to slightly _____ the stress of the malfunctioning printer and looming deadline."
+        },
+        {
+          "id": "meridian-professional-1",
+          "word": "panacea",
+          "definition": "a solution or remedy for all difficulties or diseases",
+          "fillInBlank": "The so-called \"miracle cure\" turned out to be nothing more than overpriced fizzy water, proving yet again there's no easy _____ for questionable gullibility."
+        },
+        {
+          "id": "meridian-professional-2",
+          "word": "pert",
+          "definition": "attractive in a lively or cheeky way",
+          "fillInBlank": "The _____ puppy was adorably destructive, with a particular fondness for chewing on important documents and shoelaces."
+        },
+        {
+          "id": "meridian-professional-3",
+          "word": "pernicious",
+          "definition": "having a harmful effect, especially in a gradual or subtle way",
+          "fillInBlank": "The scientist warned that the unchecked growth of toxic algae had _____ consequences for anyone who enjoyed swimming or having functioning ecosystems."
+        }
+      ]
+    }
+  ]
+}

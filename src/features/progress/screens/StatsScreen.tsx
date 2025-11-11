@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions } from 'react-native';
-import { Appbar, SegmentedButtons } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList, Achievement } from '@/shared/types';
+import { Appbar, SegmentedButtons, useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
+import { Achievement } from '@/shared/types';
 import { loadVocabularyLists } from '@/features/vocabulary/utils/vocabularyLoader';
 import { StatCard } from '../components/StatCard';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
@@ -12,9 +12,9 @@ import { getAchievementCompletionPercentage } from '../utils/achievements';
 import { ProgressChart } from '../components/ProgressChart';
 import { WordMasteryHeatmap } from '../components/WordMasteryHeatmap';
 
-type Props = StackScreenProps<RootStackParamList, 'Stats'>;
-
-export default function StatsScreen({ navigation }: Props) {
+export default function StatsScreen() {
+  const router = useRouter();
+  const theme = useTheme();
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
@@ -42,9 +42,9 @@ export default function StatsScreen({ navigation }: Props) {
   const hasProgress = stats.wordsLearned > 0;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Your Progress" />
       </Appbar.Header>
 
@@ -241,7 +241,6 @@ export default function StatsScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   scrollView: {
     flex: 1,

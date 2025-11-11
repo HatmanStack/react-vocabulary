@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from '@/shared/ui';
+import { View, StyleSheet, useWindowDimensions } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
+import { Button, Typography, Spacer } from '@/shared/ui';
 
 /**
  * MultipleChoiceQuestion Component
  *
- * Displays 4 answer options in a 2x2 grid layout.
+ * Displays 4 answer options. On small screens: 2x2 grid. On large screens: 1x4 vertical layout.
  * Handles answer selection and shows visual feedback.
  *
  * @example
@@ -24,14 +25,28 @@ interface MultipleChoiceQuestionProps {
   onSelectAnswer: (answer: string) => void;
   /** Currently selected answer (controlled) */
   selectedAnswer?: string | null;
+  /** Number of wrong answers for this word */
+  wrongCount?: number;
+  /** The correct answer to highlight when Help Me Out is used */
+  correctAnswer?: string;
 }
 
 export function MultipleChoiceQuestion({
   options,
   onSelectAnswer,
   selectedAnswer = null,
+  wrongCount = 0,
+  correctAnswer,
 }: MultipleChoiceQuestionProps) {
   const [isDisabled, setIsDisabled] = useState(false);
+  const [highlightedAnswer, setHighlightedAnswer] = useState<string | null>(null);
+  const { width } = useWindowDimensions();
+
+  // Use vertical layout on screens wider than 768px (tablet/desktop)
+  const isLargeScreen = width > 768;
+
+  // Show Help Me Out button if answered incorrectly 2+ times
+  const showHelpMeOut = wrongCount >= 2 && correctAnswer;
 
   const handleSelect = (answer: string) => {
     if (isDisabled) return;
@@ -43,7 +58,15 @@ export function MultipleChoiceQuestion({
     // Re-enable after feedback animation (1.5s)
     setTimeout(() => {
       setIsDisabled(false);
+      setHighlightedAnswer(null); // Clear highlight after submission
     }, 1800);
+  };
+
+  const handleHelpMeOut = () => {
+    // Highlight the correct answer button
+    if (correctAnswer) {
+      setHighlightedAnswer(correctAnswer);
+    }
   };
 
   // Ensure we have exactly 4 options
@@ -54,20 +77,55 @@ export function MultipleChoiceQuestion({
 
   return (
     <View style={styles.container}>
-      <View style={styles.grid}>
-        {normalizedOptions.map((option, index) => (
-          <View key={index} style={styles.gridItem}>
+      {showHelpMeOut && (
+        <>
+          <View style={styles.helpMeOutContainer}>
+            <Typography variant="caption" color="secondary" style={styles.helpMeOutText}>
+              Having trouble? We can help!
+            </Typography>
+            <Spacer size="xs" />
             <Button
               variant="secondary"
-              onPress={() => handleSelect(option)}
-              disabled={isDisabled || !option}
-              style={[styles.optionButton, selectedAnswer === option && styles.selectedButton]}
-              accessibilityLabel={`Option ${index + 1}: ${option}`}
+              icon="hand-heart"
+              onPress={handleHelpMeOut}
+              style={styles.helpMeOutButton}
+              accessibilityLabel="Help me out - highlight the correct answer"
             >
-              {option}
+              Help Me Out
             </Button>
           </View>
-        ))}
+          <Spacer size="md" />
+        </>
+      )}
+
+      <View style={[styles.grid, isLargeScreen && styles.gridVertical]}>
+        {normalizedOptions.map((option, index) => {
+          const isHighlighted = highlightedAnswer === option;
+          return (
+            <View
+              key={index}
+              style={[
+                styles.gridItem,
+                isLargeScreen && styles.gridItemVertical
+              ]}
+            >
+              <PaperButton
+                mode={isHighlighted ? "contained" : "outlined"}
+                onPress={() => handleSelect(option)}
+                disabled={isDisabled || !option}
+                style={[
+                  styles.optionButton,
+                  isHighlighted && styles.highlightedButton
+                ]}
+                contentStyle={styles.buttonContent}
+                labelStyle={styles.buttonLabel}
+                accessibilityLabel={`Option ${index + 1}: ${option}${isHighlighted ? ' (Correct answer)' : ''}`}
+              >
+                {option}
+              </PaperButton>
+            </View>
+          );
+        })}
       </View>
     </View>
   );
@@ -77,6 +135,9 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingVertical: 8,
+    maxWidth: 600,
+    alignSelf: 'center',
+    width: '100%',
   },
   grid: {
     flexDirection: 'row',
@@ -84,15 +145,39 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 12,
   },
+  gridVertical: {
+    flexDirection: 'column',
+  },
   gridItem: {
     width: '48%',
-    aspectRatio: 2,
+  },
+  gridItemVertical: {
+    width: '100%',
   },
   optionButton: {
-    height: '100%',
-    justifyContent: 'center',
+    minHeight: 56,
   },
-  selectedButton: {
-    opacity: 0.6,
+  highlightedButton: {
+    borderWidth: 2,
+  },
+  buttonContent: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    minHeight: 56,
+  },
+  buttonLabel: {
+    fontSize: 18,
+    lineHeight: 24,
+  },
+  helpMeOutContainer: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  helpMeOutText: {
+    textAlign: 'center',
+  },
+  helpMeOutButton: {
+    width: '100%',
   },
 });

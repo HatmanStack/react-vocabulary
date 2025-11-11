@@ -1,0 +1,156 @@
+{
+  "id": "prism",
+  "name": "Prism",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "prism-basic-0",
+          "word": "inure",
+          "definition": "to accustom (someone) to something, especially something unpleasant",
+          "fillInBlank": "After years of working outdoors, the gardener was _____ to both sunburn and sudden downpours of bird droppings."
+        },
+        {
+          "id": "prism-basic-1",
+          "word": "invective",
+          "definition": "insulting, abusive, or highly critical language",
+          "fillInBlank": "The rival politicians unleashed a torrent of _____ upon each other, causing several audience members to consider earplugs or possibly a swift escape."
+        },
+        {
+          "id": "prism-basic-2",
+          "word": "intransigent",
+          "definition": "unwilling or refusing to change one's views or to agree about something",
+          "fillInBlank": "The _____ professor refused to budge on his position that all essays should be handwritten in calligraphy on repurposed papyrus."
+        },
+        {
+          "id": "prism-basic-3",
+          "word": "inveterate",
+          "definition": "having a particular habit, activity, or interest that is long-established and unlikely to change",
+          "fillInBlank": "The _____ gambler's belief in his lucky fedora was sadly misplaced, as judging from the results, the hat appeared actively unlucky."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "prism-intermediate-0",
+          "word": "legerdemain",
+          "definition": "skillful use of one's hands when performing conjuring tricks; trickery or deception",
+          "fillInBlank": "The magician's impressive _____  involved disappearing rabbits, dubious card tricks, and the audience's lingering suspicion that their wallets were also missing."
+        },
+        {
+          "id": "prism-intermediate-1",
+          "word": "licentious",
+          "definition": "displaying a lack of moral or legal restraints; promiscuous or unprincipled in sexual matters",
+          "fillInBlank": "The novel's _____ protagonist was mostly interested in breaking the rules, causing general mayhem, and seducing anyone who carried a monocle."
+        },
+        {
+          "id": "prism-intermediate-2",
+          "word": "linchpin",
+          "definition": "a person or thing that plays a vital or pivotal role in an organization or system",
+          "fillInBlank": "The office gossip was the _____ of the organization, somehow always knowing everyone's secrets before they did themselves."
+        },
+        {
+          "id": "prism-intermediate-3",
+          "word": "litigant",
+          "definition": "a person involved in a lawsuit",
+          "fillInBlank": "The weary _____  faced yet another confusing legal form and wished for the simplicity of building sandcastles instead."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "prism-advanced-0",
+          "word": "mendacious",
+          "definition": "not telling the truth; lying",
+          "fillInBlank": "The politician's _____ promises of giant flying squirrels for every voter proved surprisingly popular."
+        },
+        {
+          "id": "prism-advanced-1",
+          "word": "modicum",
+          "definition": "a small quantity of a particular thing, especially something considered desirable or valuable",
+          "fillInBlank": "Despite his best efforts, the detective found only a _____ of actual evidence at the crime scene – a single button and a slightly suspicious sock."
+        },
+        {
+          "id": "prism-advanced-2",
+          "word": "morass",
+          "definition": "a complicated or confusing situation; a soft, wet area of ground",
+          "fillInBlank": "The team found themselves stuck in a _____ of regulations, unable to open a lemonade stand without twelve permits and a notarized letter from a llama."
+        },
+        {
+          "id": "prism-advanced-3",
+          "word": "mores",
+          "definition": "the customs, values, and behaviors of a particular group of people",
+          "fillInBlank": "The company retreat, meant to improve teamwork, quickly devolved into arguments over the questionable _____ of freeze-dried snacks."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "prism-expert-0",
+          "word": "lucid",
+          "definition": "expressed clearly; easy to understand",
+          "fillInBlank": "The directions were frustratingly unhelpful, providing a series of nonsensical symbols instead of a _____ explanation."
+        },
+        {
+          "id": "prism-expert-1",
+          "word": "melancholy",
+          "definition": "a feeling of pensive sadness, typically with no obvious cause",
+          "fillInBlank": "A wave of _____ washed over the poet as he stared out the window at the slightly drizzly parking lot."
+        },
+        {
+          "id": "prism-expert-2",
+          "word": "misanthrope",
+          "definition": "a person who dislikes humankind and avoids human society",
+          "fillInBlank": "The grumpy recluse, a self-proclaimed _____, refused to acknowledge the holiday carolers, despite their adorable outfits and questionable pitch."
+        },
+        {
+          "id": "prism-expert-3",
+          "word": "narrative",
+          "definition": "a spoken or written account of connected events; a story",
+          "fillInBlank": "The detective spun a gripping _____ involving a missing stapler, a disgruntled office clown, and an unusual number of pigeons."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "prism-professional-0",
+          "word": "instigate",
+          "definition": "to bring about (an action or event); incite",
+          "fillInBlank": "Frustrated with the slow pace of change, the activist knew it was time to _____ a protest outside the surprisingly well-guarded pickle factory."
+        },
+        {
+          "id": "prism-professional-1",
+          "word": "insurgent",
+          "definition": "rising in active revolt against a constituted authority",
+          "fillInBlank": "A band of _____ squirrels, tired of being underestimated, staged a daring mutiny and seized control of the park's peanut supply."
+        },
+        {
+          "id": "prism-professional-2",
+          "word": "irreverence",
+          "definition": "a lack of respect for people or things that are generally taken seriously",
+          "fillInBlank": "His _____ for wearing pajamas all day wasn't mere laziness; he claimed it was a carefully developed \"comfort optimization strategy\"."
+        },
+        {
+          "id": "prism-professional-3",
+          "word": "knell",
+          "definition": "a sound of a bell, especially when rung solemnly for a death or funeral",
+          "fillInBlank": "A sudden _____ from the church tower signaled both the arrival of the ominous storm clouds and a possible increase in pigeon activity."
+        }
+      ]
+    }
+  ]
+}

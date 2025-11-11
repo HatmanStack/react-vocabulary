@@ -1,0 +1,156 @@
+{
+  "id": "horizon",
+  "name": "Horizon",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "horizon-basic-0",
+          "word": "abrogate",
+          "definition": "repeal or do away with (a law, right, or formal agreement)",
+          "fillInBlank": "The band was ______ from the hotel after an unfortunate incident involving a flock of pigeons, a confetti cannon, and some questionable room service choices."
+        },
+        {
+          "id": "horizon-basic-1",
+          "word": "bilk",
+          "definition": "to obtain or withhold money by deceit or without justification",
+          "fillInBlank": "Hoping to avoid paying for dinner, the shifty customer attempted to ______ the waiter with a confusing story about an escaped octopus and a sudden aversion to seafood."
+        },
+        {
+          "id": "horizon-basic-2",
+          "word": "disaffected",
+          "definition": "dissatisfied with people in authority or control",
+          "fillInBlank": "The employees grew increasingly _____  with their boss, whose ideas included mandatory kazoo practice and a \"no talking Tuesday\" policy."
+        },
+        {
+          "id": "horizon-basic-3",
+          "word": "disparate",
+          "definition": "fundamentally different; essentially dissimilar",
+          "fillInBlank": "The research team analyzed the _____ evidence: a half-eaten cheeseburger, a strangely shaped muddy footprint, and a flock of suspiciously smug pigeons."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "horizon-intermediate-0",
+          "word": "adumbrate",
+          "definition": "represent in outline or in a suggestive way",
+          "fillInBlank": "The artist's sketch seemed to ______  the deeper emotions of the subject, hinting at a hidden sorrow with a few skillfully drawn lines and a strategically placed shadow."
+        },
+        {
+          "id": "horizon-intermediate-1",
+          "word": "carp",
+          "definition": "to complain or find fault continually about trivial matters",
+          "fillInBlank": "The grumpy old man continued to ______ about everything from the weather to the excessive cheerfulness of the squirrels, proving that some people truly excel at finding the dark cloud in every silver lining."
+        },
+        {
+          "id": "horizon-intermediate-2",
+          "word": "dour",
+          "definition": "severe, stern, or gloomy in manner or appearance",
+          "fillInBlank": "The _____ art critic dismissed the exhibit with a frown, declaring it \"derivative, uninspired, and lacking in thematically appropriate snacks.\""
+        },
+        {
+          "id": "horizon-intermediate-3",
+          "word": "duplicity",
+          "definition": "deceitfulness; double-dealing",
+          "fillInBlank": "The con artist's scheme was built on a foundation of _____ , involving a fake lottery ticket, a sob story about lost penguins, and an unfortunate gullibility on the part of his victims."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "horizon-advanced-0",
+          "word": "amorphous",
+          "definition": "without a clearly defined shape or form",
+          "fillInBlank": "The swirling fog had an ______ shape, shifting and changing form in a way that was either hauntingly beautiful or a great way to make someone accidentally walk into a tree."
+        },
+        {
+          "id": "horizon-advanced-1",
+          "word": "anachronistic",
+          "definition": "belonging to a period other than that being portrayed",
+          "fillInBlank": "The knight in shining armor charging into battle on a segway seemed somewhat ______ , leading to confused looks from the dragon and a hasty rewriting of the history books."
+        },
+        {
+          "id": "horizon-advanced-2",
+          "word": "aggrandize",
+          "definition": "increase the power, status, or wealth of (someone or something)",
+          "fillInBlank": "The power-hungry politician sought to ______ his own reputation with lengthy speeches, questionable statues, and a rather impressive collection ofhats."
+        },
+        {
+          "id": "horizon-advanced-3",
+          "word": "emend",
+          "definition": "to make corrections or improvements (usually to text)",
+          "fillInBlank": "The editor carefully _____ the manuscript, removing typos (along with any references to squirrels with questionable fashion sense)."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "horizon-expert-0",
+          "word": "vituperative",
+          "definition": "filled with bitter criticism or malice",
+          "fillInBlank": "The disgruntled theater critic unleashed a torrent of _____ remarks about the play, comparing it to a confused sloth attempting interpretive dance."
+        },
+        {
+          "id": "horizon-expert-1",
+          "word": "prevaricate",
+          "definition": "to speak or act in an evasive way; to mislead",
+          "fillInBlank": "The politician, caught in a lie, began to _____ , offering vague promises of jam tomorrow and blaming the disappearance of the national cookie supply on a rogue band of squirrels."
+        },
+        {
+          "id": "horizon-expert-2",
+          "word": "antipathy",
+          "definition": "a deep-seated feeling of dislike; aversion",
+          "fillInBlank": "A deep _____ developed between the cat and the goldfish, mainly centered around differing opinions on the concept of personal space and snacking preferences."
+        },
+        {
+          "id": "horizon-expert-3",
+          "word": "desultory",
+          "definition": "lacking a plan, purpose, or enthusiasm",
+          "fillInBlank": "With a _____  sigh, he picked up the scattered papers, his attempt at writing a novel proving as focused and successful as a toddler conducting brain surgery."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "horizon-professional-0",
+          "word": "ephemeral",
+          "definition": "lasting for a very short time",
+          "fillInBlank": "The beauty of the rainbow was sadly _____, disappearing as quickly as the toddler's promise to share his candy."
+        },
+        {
+          "id": "horizon-professional-1",
+          "word": "epistolary",
+          "definition": "(of a piece of writing) in the form of letters",
+          "fillInBlank": "The old chest contained a series of _____ love letters involving passionate declarations, questionable poetry, and a surprising number of spelling errors."
+        },
+        {
+          "id": "horizon-professional-2",
+          "word": "equanimity",
+          "definition": "mental calmness, composure, and evenness of temper",
+          "fillInBlank": "With admirable _____, the seasoned gardener greeted news of yet another squirrel-inflicted crop disaster with a philosophical sigh and a renewed subscription to the hot sauce of the month club."
+        },
+        {
+          "id": "horizon-professional-3",
+          "word": "equivocal",
+          "definition": "open to more than one interpretation; ambiguous",
+          "fillInBlank": "The defendant's _____ answers frustrated the lawyer, who longed for a simple yes or no, rather than references to tap-dancing llamas and the importance of cheese."
+        }
+      ]
+    }
+  ]
+}

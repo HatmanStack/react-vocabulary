@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions, Animated } from 'react-native';
-import { Appbar } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Appbar, useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 import { loadVocabularyLists } from '../utils/vocabularyLoader';
 import { ListCard } from '../components/ListCard';
 import { Typography, Spacer } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 
-type Props = StackScreenProps<RootStackParamList, 'Home'>;
-
-export default function HomeScreen({ navigation }: Props) {
+export default function HomeScreen() {
+  console.log('[HomeScreen] Component rendering');
+  const router = useRouter();
+  const theme = useTheme();
   const vocabularyLists = loadVocabularyLists();
+  console.log('[HomeScreen] Loaded', vocabularyLists.length, 'vocabulary lists');
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
   const reducedMotion = useReducedMotion();
@@ -69,17 +70,17 @@ export default function HomeScreen({ navigation }: Props) {
   }, [reducedMotion]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
         <Appbar.Content title="Vocabulary Builder" />
         <Appbar.Action
           icon="chart-bar"
-          onPress={() => navigation.navigate('Stats')}
+          onPress={() => router.push('/stats')}
           accessibilityLabel="View Statistics"
         />
         <Appbar.Action
           icon="cog"
-          onPress={() => navigation.navigate('Settings')}
+          onPress={() => router.push('/settings')}
           accessibilityLabel="Open Settings"
         />
       </Appbar.Header>
@@ -111,7 +112,7 @@ export default function HomeScreen({ navigation }: Props) {
                   description={list.description}
                   progress={getListProgress(list.id)}
                   max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
-                  onPress={() => navigation.navigate('Difficulty', { listId: list.id })}
+                  onPress={() => router.push({ pathname: '/difficulty', params: { listId: list.id } })}
                 />
               </Animated.View>
             ))}

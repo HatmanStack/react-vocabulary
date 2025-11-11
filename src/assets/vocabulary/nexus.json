@@ -1,0 +1,156 @@
+{
+  "id": "nexus",
+  "name": "Nexus",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "nexus-basic-0",
+          "word": "extraneous",
+          "definition": "irrelevant or unrelated to the subject being dealt with",
+          "fillInBlank": "The lawyer's argument included so many _____  details that the jury began to suspect he was just trying to stall for time."
+        },
+        {
+          "id": "nexus-basic-1",
+          "word": "extol",
+          "definition": "to praise enthusiastically",
+          "fillInBlank": "The celebrity chef enthusiastically _____ the virtues of kale smoothies, despite the skeptical looks and sudden urge to flee toward the nearest pizza place."
+        },
+        {
+          "id": "nexus-basic-2",
+          "word": "fallacious",
+          "definition": "based on a mistaken belief; erroneous",
+          "fillInBlank": "His _____  theory that squirrels were secretly plotting world domination was dismissed with amused eye rolls and a gentle suggestion of less coffee."
+        },
+        {
+          "id": "nexus-basic-3",
+          "word": "fatuous",
+          "definition": "silly and pointless",
+          "fillInBlank": "The self-proclaimed fashion guru's _____  advice involved wearing mismatched socks, top hats, and strategically placed rubber ducks."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "nexus-intermediate-0",
+          "word": "foil",
+          "definition": "to prevent (someone) from accomplishing something; to frustrate or thwart",
+          "fillInBlank": "The pesky squirrel managed to _____ the bird's attempts to build a nest, stealing twigs and shiny bottle caps with equal enthusiasm."
+        },
+        {
+          "id": "nexus-intermediate-1",
+          "word": "forbearance",
+          "definition": "patient self-control; restraint and tolerance",
+          "fillInBlank": "With admirable _____, the teacher refrained from confiscating the student's 20-page essay on the social lives of dust bunnies."
+        },
+        {
+          "id": "nexus-intermediate-2",
+          "word": "fortuitous",
+          "definition": "happening by accident or chance rather than design",
+          "fillInBlank": "In a ______  turn of events, the lost hiker stumbled upon a fully-stocked cabin, complete with hot chocolate and a surprisingly well-behaved moose."
+        },
+        {
+          "id": "nexus-intermediate-3",
+          "word": "fractious",
+          "definition": "irritable and quarrelsome",
+          "fillInBlank": "The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "nexus-advanced-0",
+          "word": "heterogeneous",
+          "definition": "diverse in character or content",
+          "fillInBlank": "The professor's office contained a wonderfully _____ collection of mismatched mugs, dusty books on obscure topics, and a surprising number of rubber chickens."
+        },
+        {
+          "id": "nexus-advanced-1",
+          "word": "iconoclast",
+          "definition": "a person who attacks cherished beliefs or institutions",
+          "fillInBlank": "The outspoken writer was a true _____, fearlessly criticizing anything from pineapple on pizza to the excessive use of glitter in holiday decorations."
+        },
+        {
+          "id": "nexus-advanced-2",
+          "word": "idiosyncratic",
+          "definition": "peculiar or individual, relating to a person's distinctive character",
+          "fillInBlank": "The artist had a delightfully _____ style, creating sculptures from used chewing gum wrappers and paintings inspired by the strange stains on his carpet."
+        },
+        {
+          "id": "nexus-advanced-3",
+          "word": "impecunious",
+          "definition": "having little or no money",
+          "fillInBlank": "Despite his grand ambitions, the would-be entrepreneur was sadly _____, relying mostly on packets of ramen noodles and increasingly desperate calls to his parents."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "nexus-expert-0",
+          "word": "gallivant",
+          "definition": "go around from one place to another in the pursuit of pleasure or entertainment",
+          "fillInBlank": "Bored with normal vacations, the socialite decided to _____ about the globe, collecting stamps in her passport and the occasional startled llama."
+        },
+        {
+          "id": "nexus-expert-1",
+          "word": "guise",
+          "definition": "an external form, appearance, or manner of presentation",
+          "fillInBlank": "In a clever _____, the burglar disguised himself as a giant potted plant, which fooled absolutely no one (especially the dog)."
+        },
+        {
+          "id": "nexus-expert-2",
+          "word": "hyperbole",
+          "definition": "exaggerated statements or claims not meant to be taken literally",
+          "fillInBlank": "His _____ was legendary; he once claimed to eat ten whole pizzas in one sitting, though this might have been slightly exaggerated."
+        },
+        {
+          "id": "nexus-expert-3",
+          "word": "integrity",
+          "definition": "the quality of being honest and having strong moral principles",
+          "fillInBlank": "His unwavering _____ was evident in his refusal to cheat at board games, even when everyone else was suspiciously winning."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "nexus-professional-0",
+          "word": "inchoate",
+          "definition": "just begun; not fully formed or developed",
+          "fillInBlank": "The architect's initial design was rather _____, involving a vague sketch resembling either a spaceship or a squashed potato."
+        },
+        {
+          "id": "nexus-professional-1",
+          "word": "incontrovertible",
+          "definition": "not able to be doubted or questioned; irrefutable",
+          "fillInBlank": "To his dismay, the lawyer realized the evidence supporting his client's alibi of \"eaten by giant wombats\" was sadly not _____."
+        },
+        {
+          "id": "nexus-professional-2",
+          "word": "incumbent",
+          "definition": "currently holding a specific office or position",
+          "fillInBlank": "As the _____ mayor, she faced the daunting task of reversing the town's recent ban on polka-dot socks."
+        },
+        {
+          "id": "nexus-professional-3",
+          "word": "inexorable",
+          "definition": "impossible to stop or prevent",
+          "fillInBlank": "The relentless rain, combined with his leaky umbrella, provided an _____ reminder of the importance of checking the weather forecast."
+        }
+      ]
+    }
+  ]
+}

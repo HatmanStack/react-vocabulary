@@ -1,0 +1,156 @@
+{
+  "id": "spectrum",
+  "name": "Spectrum",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "spectrum-basic-0",
+          "word": "reprobate",
+          "definition": "a person without moral scruples",
+          "fillInBlank": "The villainous politician was a true _____ , known for tax evasion, slandering adorable puppies, and an inexplicable dislike of ice cream."
+        },
+        {
+          "id": "spectrum-basic-1",
+          "word": "rescind",
+          "definition": "to revoke, cancel, or repeal (a law, order, or agreement)",
+          "fillInBlank": "The committee voted to _____ the new rule requiring all meetings to be conducted while wearing hats shaped like fruit."
+        },
+        {
+          "id": "spectrum-basic-2",
+          "word": "requisition",
+          "definition": "an official order laying claim to the use of property or materials",
+          "fillInBlank": "The army sent an urgent _____ for more tinned sardines, a vital strategic resource."
+        },
+        {
+          "id": "spectrum-basic-3",
+          "word": "rife",
+          "definition": "of common occurrence; widespread",
+          "fillInBlank": "Rumors of scandalous behavior were _____ in the small town, spreading faster than wildfire through a stack of old newspapers."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "spectrum-intermediate-0",
+          "word": "plenitude",
+          "definition": "a state of fullness or abundance",
+          "fillInBlank": "The garden produced a _____ of tomatoes, leading to a desperate neighborhood zucchini-gifting campaign."
+        },
+        {
+          "id": "spectrum-intermediate-1",
+          "word": "plethora",
+          "definition": "a large or excessive amount",
+          "fillInBlank": "The office supply closet contained a _____ of highlighters in astonishingly similar shades of yellow."
+        },
+        {
+          "id": "spectrum-intermediate-2",
+          "word": "portent",
+          "definition": "a sign or warning that something, especially something momentous or calamitous, is likely to happen",
+          "fillInBlank": "The ominous cracking sounds from the attic served as a _____ of either impending structural collapse or the discovery of a disgruntled raccoon family."
+        },
+        {
+          "id": "spectrum-intermediate-3",
+          "word": "potentate",
+          "definition": "a monarch or ruler, especially an autocratic one",
+          "fillInBlank": "The tiny island nation was ruled by a self-proclaimed _____ with a fondness for elaborate hats and unusually long speeches."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "spectrum-advanced-0",
+          "word": "profligate",
+          "definition": "recklessly extravagant or wasteful in the use of resources",
+          "fillInBlank": "The senator's _____ spending habits quickly drained the campaign funds, leaving only enough for a few stickers and a slightly used kazoo."
+        },
+        {
+          "id": "spectrum-advanced-1",
+          "word": "promulgate",
+          "definition": "promote or make widely known (an idea or cause)",
+          "fillInBlank": "The health guru sought to _____ the benefits of an all-kale diet, conveniently ignoring the existence of pizza."
+        },
+        {
+          "id": "spectrum-advanced-2",
+          "word": "proscribe",
+          "definition": "forbid, especially by law; to denounce or condemn",
+          "fillInBlank": "The government chose to _____ the use of spoons, leading to widespread confusion and an unexpected boom in the straw industry."
+        },
+        {
+          "id": "spectrum-advanced-3",
+          "word": "protean",
+          "definition": "tending or able to change frequently or easily",
+          "fillInBlank": "The shape-shifting villain proved difficult to track down, especially after his unfortunate transformation into a pigeon."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "spectrum-expert-0",
+          "word": "fete",
+          "definition": "a celebration or festival (often a lavish one)",
+          "fillInBlank": "The castle grounds were abuzz in preparation for the grand _____ celebrating the king's exceptionally fluffy cat."
+        },
+        {
+          "id": "spectrum-expert-1",
+          "word": "hortative",
+          "definition": "giving encouragement or urging someone to do something",
+          "fillInBlank": "The motivational speaker's _____ speech involved shouting, several PowerPoint slides of waterfalls, and questionable life advice."
+        },
+        {
+          "id": "spectrum-expert-2",
+          "word": "abominous",
+          "definition": "causing moral revulsion; detestable",
+          "fillInBlank": "The food critic declared the chef's latest creation an _____ fusion of flavors that should never be repeated."
+        },
+        {
+          "id": "spectrum-expert-3",
+          "word": "billingsgate",
+          "definition": "coarsely abusive language; foul-mouthed attack",
+          "fillInBlank": "The politician's speech descended into pure _____, leaving his opponents both baffled and mildly amused."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "spectrum-professional-0",
+          "word": "prurient",
+          "definition": "having or encouraging an excessive interest in sexual matters",
+          "fillInBlank": "The tabloid magazine specialized in _____ headlines and blurry photographs of celebrities buying groceries."
+        },
+        {
+          "id": "spectrum-professional-1",
+          "word": "puerile",
+          "definition": "childishly silly and immature",
+          "fillInBlank": "The debate devolved into a _____ exchange of insults, mostly focused on questionable hair choices of historical figures."
+        },
+        {
+          "id": "spectrum-professional-2",
+          "word": "pugnacious",
+          "definition": "eager or quick to argue, quarrel, or fight",
+          "fillInBlank": "The notoriously _____ lawyer was known to start courtroom brawls in response to misspelled names or lukewarm coffee."
+        },
+        {
+          "id": "spectrum-professional-3",
+          "word": "pulchritude",
+          "definition": "physical beauty; comeliness",
+          "fillInBlank": "The beauty pageant winner was praised for her dazzling smile, impressive hairspray collection, and undeniable _____."
+        }
+      ]
+    }
+  ]
+}

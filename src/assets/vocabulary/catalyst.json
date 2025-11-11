@@ -1,0 +1,156 @@
+{
+  "id": "catalyst",
+  "name": "Catalyst",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "catalyst-basic-0",
+          "word": "extant",
+          "definition": "still in existence; surviving",
+          "fillInBlank": "Despite years of searching, no dinosaur remains were ever found, save for a few  _____ footprints and a rather suspicious-looking pebble."
+        },
+        {
+          "id": "catalyst-basic-1",
+          "word": "expurgate",
+          "definition": "to remove objectionable material from a book or account",
+          "fillInBlank": "The movie censors decided to _____ several scenes of questionable taste, including one involving interpretive dance, a giant squid, and a concerning amount of mayonnaise."
+        },
+        {
+          "id": "catalyst-basic-2",
+          "word": "interlocutor",
+          "definition": "a person who takes part in a dialogue or conversation",
+          "fillInBlank": "Tired of being his own _____, the mime hired a sock puppet to help him practice conversations and improve his questionable jokes."
+        },
+        {
+          "id": "catalyst-basic-3",
+          "word": "intimation",
+          "definition": "to suggest or hint slyly",
+          "fillInBlank": "The fortune cookie tried to _____ a brighter future with the vague message, \"Exciting opportunities may or may not arise. Wear comfy shoes.\""
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "catalyst-intermediate-0",
+          "word": "garrulous",
+          "definition": "excessively talkative, especially on trivial matters or in a rambling way",
+          "fillInBlank": "The _____ restaurant critic was known for his long, winding descriptions of meals and his tendency to fall asleep mid-bite."
+        },
+        {
+          "id": "catalyst-intermediate-1",
+          "word": "gourmand",
+          "definition": "a person who enjoys eating and often eats too much",
+          "fillInBlank": "The self-proclaimed _____  loved nothing more than feasting on elaborate meals and waxing poetic about the importance of truffle oil."
+        },
+        {
+          "id": "catalyst-intermediate-2",
+          "word": "grandiloquent",
+          "definition": "pompous or extravagant in language, style, or manner",
+          "fillInBlank": "The speaker's _____  claims of inventing the internet were met with skeptical sighs and a sudden mass exodus towards the nearest coffee machine."
+        },
+        {
+          "id": "catalyst-intermediate-3",
+          "word": "gratuitous",
+          "definition": "uncalled for; lacking good reason; unwarranted",
+          "fillInBlank": "The neighbor's _____  offer to mow the lawn at 5 AM with a rusty chainsaw and a polka band was politely declined."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "catalyst-advanced-0",
+          "word": "impetuous",
+          "definition": "acting or done quickly and without thought or care",
+          "fillInBlank": "Her _____ decision to adopt twelve puppies on a whim seemed destined to lead to chaos, chewed furniture, and a distinct lack of sleep."
+        },
+        {
+          "id": "catalyst-advanced-1",
+          "word": "impinge",
+          "definition": "to have a negative effect on something; to encroach",
+          "fillInBlank": "The intrusive pop-up ads constantly _____ on his reading experience, offering dubious hair growth remedies and questionable vacation packages."
+        },
+        {
+          "id": "catalyst-advanced-2",
+          "word": "impute",
+          "definition": "to attribute or ascribe (a fault or cause) to a person or thing",
+          "fillInBlank": "The conspiracy theorist was quick to _____  blame for his missing sock on everything from telepathic squirrels to interdimensional aliens."
+        },
+        {
+          "id": "catalyst-advanced-3",
+          "word": "inane",
+          "definition": "silly; stupid",
+          "fillInBlank": "The celebrity's memoir was filled with surprisingly _____ observations on the meaning of life, the importance of pedicures, and the ideal cheese-to-cracker ratio."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "catalyst-expert-0",
+          "word": "irony",
+          "definition": "the incongruity between what might be expected and what actually occurs",
+          "fillInBlank": "In a twist of delicious _____, the chef known for his overly spicy dishes suffered from a fear of peppercorns."
+        },
+        {
+          "id": "catalyst-expert-1",
+          "word": "jejune",
+          "definition": "dull; lacking interest; naive and simplistic",
+          "fillInBlank": "The teenager's _____ explanation for the missing cake involved time travel, talking squirrels, and strangely convenient amnesia."
+        },
+        {
+          "id": "catalyst-expert-2",
+          "word": "karma",
+          "definition": "the idea that a person's actions will determine the good or bad things that happen to them in the future",
+          "fillInBlank": "Believing in _____, she vowed revenge on the pigeon that pooped on her freshly-painted car… though revenge involving glitter may have been excessive."
+        },
+        {
+          "id": "catalyst-expert-3",
+          "word": "lethargic",
+          "definition": "sluggish, apathetic, or lacking in energy",
+          "fillInBlank": "After the Thanksgiving feast, the family dog slipped into a distinctly _____ stupor on the couch."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "catalyst-professional-0",
+          "word": "inimical",
+          "definition": "tending to harm or obstruct developments; hostile",
+          "fillInBlank": "His _____ attitude toward exercise made the idea of joining a gym seem almost as terrifying as the possibility of running into anyone he knew there."
+        },
+        {
+          "id": "catalyst-professional-1",
+          "word": "injunction",
+          "definition": "an authoritative warning or order; a court order",
+          "fillInBlank": "The judge issued a stern _____  against using the courtroom as a karaoke venue, regardless of the quality of one's Elvis impersonation."
+        },
+        {
+          "id": "catalyst-professional-2",
+          "word": "inoculate",
+          "definition": "to treat with a vaccine to produce immunity against a disease",
+          "fillInBlank": "As a precaution, the hikers decided to get _____ against mosquito bites, leading to a rather lively interpretive dance designed to ward off any potential attackers."
+        },
+        {
+          "id": "catalyst-professional-3",
+          "word": "insidious",
+          "definition": "proceeding in a gradual, subtle, way, but with harmful effects",
+          "fillInBlank": "An _____ feeling of dread spread through the office as news of the impending surprise karaoke party leaked."
+        }
+      ]
+    }
+  ]
+}

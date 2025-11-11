@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Typography, ProgressBar, Spacer } from '@/shared/ui';
-import { IconButton } from 'react-native-paper';
+import { IconButton, useTheme } from 'react-native-paper';
 
 /**
  * QuizHeader Component
@@ -49,11 +49,20 @@ export function QuizHeader({
   wrongAnswers,
   onExit,
 }: QuizHeaderProps) {
-  // Display as 1-based for user (currentIndex + 1)
-  const currentQuestion = currentIndex + 1;
+  const theme = useTheme();
+  // currentIndex is already 1-based (1-8)
+  const currentQuestion = currentIndex;
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.colors.surface,
+          borderBottomColor: theme.colors.outline,
+        },
+      ]}
+    >
       <View style={styles.topRow}>
         <View style={styles.titleSection}>
           <Typography variant="heading3">
@@ -93,9 +102,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
   },
   topRow: {
     flexDirection: 'row',

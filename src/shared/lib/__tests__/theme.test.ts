@@ -15,23 +15,23 @@ describe('Theme', () => {
     });
 
     it('has primary color', () => {
-      expect(lightTheme.colors.primary).toBe('#6200ee');
+      expect(lightTheme.colors.primary).toBe('#5E35B1');
     });
 
     it('has secondary color', () => {
-      expect(lightTheme.colors.secondary).toBe('#03dac6');
+      expect(lightTheme.colors.secondary).toBe('#00897B');
     });
 
     it('has background color', () => {
-      expect(lightTheme.colors.background).toBe('#ffffff');
+      expect(lightTheme.colors.background).toBe('#FAFAFA');
     });
 
     it('has surface color', () => {
-      expect(lightTheme.colors.surface).toBe('#ffffff');
+      expect(lightTheme.colors.surface).toBe('#FFFFFF');
     });
 
     it('has error color', () => {
-      expect(lightTheme.colors.error).toBe('#b00020');
+      expect(lightTheme.colors.error).toBe('#BA1A1A');
     });
   });
 
@@ -45,23 +45,23 @@ describe('Theme', () => {
     });
 
     it('has primary color', () => {
-      expect(darkTheme.colors.primary).toBe('#bb86fc');
+      expect(darkTheme.colors.primary).toBe('#B39DDB');
     });
 
     it('has secondary color', () => {
-      expect(darkTheme.colors.secondary).toBe('#03dac6');
+      expect(darkTheme.colors.secondary).toBe('#80CBC4');
     });
 
     it('has background color', () => {
-      expect(darkTheme.colors.background).toBe('#121212');
+      expect(darkTheme.colors.background).toBe('#1C1B1F');
     });
 
     it('has surface color', () => {
-      expect(darkTheme.colors.surface).toBe('#121212');
+      expect(darkTheme.colors.surface).toBe('#272629');
     });
 
     it('has error color', () => {
-      expect(darkTheme.colors.error).toBe('#cf6679');
+      expect(darkTheme.colors.error).toBe('#F2B8B5');
     });
   });
 

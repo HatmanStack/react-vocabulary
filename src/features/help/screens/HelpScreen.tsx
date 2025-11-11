@@ -6,12 +6,9 @@
 
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Appbar, List } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Appbar, List, useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 import { Card, Typography, Spacer } from '@/shared/ui';
-
-type Props = StackScreenProps<RootStackParamList, 'Help'>;
 
 interface FAQItem {
   id: string;
@@ -82,7 +79,9 @@ const FAQ_ITEMS: FAQItem[] = [
   },
 ];
 
-export default function HelpScreen({ navigation }: Props) {
+export default function HelpScreen() {
+  const router = useRouter();
+  const theme = useTheme();
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const handlePress = (id: string) => {
@@ -90,9 +89,9 @@ export default function HelpScreen({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Help & FAQ" />
       </Appbar.Header>
 
@@ -155,7 +154,6 @@ export default function HelpScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   scrollView: {
     flex: 1,

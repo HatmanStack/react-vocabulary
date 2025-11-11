@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { ListLevelProgress } from '@/shared/types';
 import { Typography, Spacer } from '@/shared/ui';
 
@@ -14,19 +15,29 @@ interface WordMasteryHeatmapProps {
 }
 
 export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProps) {
+  const theme = useTheme();
+
+  // Define semantic colors for mastery states
+  const stateColors = {
+    notStarted: theme.colors.outlineVariant, // Light gray
+    seen: theme.colors.primaryContainer, // Light primary
+    learning: theme.colors.primary, // Primary color
+    mastered: theme.colors.secondary, // Secondary/success color
+  };
+
   // Get color for word state
   const getStateColor = (state: number): string => {
     switch (state) {
       case 0:
-        return '#E0E0E0'; // Not started - light gray
+        return stateColors.notStarted; // Not started
       case 1:
-        return '#BBDEFB'; // Seen - light blue
+        return stateColors.seen; // Seen
       case 2:
-        return '#64B5F6'; // Learning - blue
+        return stateColors.learning; // Learning
       case 3:
-        return '#4CAF50'; // Mastered - green
+        return stateColors.mastered; // Mastered
       default:
-        return '#E0E0E0';
+        return stateColors.notStarted;
     }
   };
 
@@ -68,19 +79,19 @@ export function WordMasteryHeatmap({ listLevelProgress }: WordMasteryHeatmapProp
         {/* Legend */}
         <View style={styles.legend}>
           <View style={styles.legendItem}>
-            <View style={[styles.legendDot, { backgroundColor: '#E0E0E0' }]} />
+            <View style={[styles.legendDot, { backgroundColor: stateColors.notStarted }]} />
             <Typography variant="caption">Not Started</Typography>
           </View>
           <View style={styles.legendItem}>
-            <View style={[styles.legendDot, { backgroundColor: '#BBDEFB' }]} />
+            <View style={[styles.legendDot, { backgroundColor: stateColors.seen }]} />
             <Typography variant="caption">Seen</Typography>
           </View>
           <View style={styles.legendItem}>
-            <View style={[styles.legendDot, { backgroundColor: '#64B5F6' }]} />
+            <View style={[styles.legendDot, { backgroundColor: stateColors.learning }]} />
             <Typography variant="caption">Learning</Typography>
           </View>
           <View style={styles.legendItem}>
-            <View style={[styles.legendDot, { backgroundColor: '#4CAF50' }]} />
+            <View style={[styles.legendDot, { backgroundColor: stateColors.mastered }]} />
             <Typography variant="caption">Mastered</Typography>
           </View>
         </View>

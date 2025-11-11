@@ -31,10 +31,6 @@ export function QuestionDisplay({ questionText, type }: QuestionDisplayProps) {
     <Card elevation="low" style={styles.card} testID="question-display">
       <Card.Content>
         <View style={styles.questionContainer}>
-          <Typography variant="caption" color="secondary" align="center">
-            QUESTION
-          </Typography>
-          <Spacer size="sm" />
           <Typography variant="heading2" align={textAlign as 'left' | 'center' | 'right'}>
             {questionText}
           </Typography>

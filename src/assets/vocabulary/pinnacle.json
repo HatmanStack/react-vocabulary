@@ -1,0 +1,156 @@
+{
+  "id": "pinnacle",
+  "name": "Pinnacle",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "pinnacle-basic-0",
+          "word": "partisan",
+          "definition": "a strong supporter of a party, cause, or person",
+          "fillInBlank": "The political commentator was a known _____ , incapable of discussing the opposing party without referencing farm animals and questionable hairstyles."
+        },
+        {
+          "id": "pinnacle-basic-1",
+          "word": "paucity",
+          "definition": "the presence of something only in small or insufficient quantities or amounts; scarcity",
+          "fillInBlank": "The museum exhibit featured a notable _____ of dinosaur bones, consisting mainly of a single fossilized toe."
+        },
+        {
+          "id": "pinnacle-basic-2",
+          "word": "pejorative",
+          "definition": "expressing contempt or disapproval",
+          "fillInBlank": "The restaurant review contained several _____ remarks about the chef's creative use of ketchup and his questionable understanding of the word 'seasoning'."
+        },
+        {
+          "id": "pinnacle-basic-3",
+          "word": "remiss",
+          "definition": "neglectful in performance of one's duty or careless",
+          "fillInBlank": "The babysitter was rather _____ in her duties, allowing the children to build a blanket fort encompassing the entire kitchen."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "pinnacle-intermediate-0",
+          "word": "mawkish",
+          "definition": "sentimental in a feeble or sickly way",
+          "fillInBlank": "The overly sentimental greeting card featured kittens,  rainbows, and a _____ message about the enduringurance of friendship (or possibly the importance of flossing)."
+        },
+        {
+          "id": "pinnacle-intermediate-1",
+          "word": "maxim",
+          "definition": "a short, pithy statement expressing a general truth or rule of conduct",
+          "fillInBlank": "The wise old hiker offered a useful _____:  \"When packing for a trip, bring half the clothes and twice the snacks.\""
+        },
+        {
+          "id": "pinnacle-intermediate-2",
+          "word": "pertinacious",
+          "definition": "holding firmly to an opinion or a course of action",
+          "fillInBlank": "The _____ telemarketer refused to be discouraged, even after being told the family was on an extended llama-trekking vacation."
+        },
+        {
+          "id": "pinnacle-intermediate-3",
+          "word": "phlegmatic",
+          "definition": "(of a person) having an unemotional and stolidly calm disposition",
+          "fillInBlank": "With a _____ disposition, the accountant remained unfazed even during the surprise office mariachi band performance."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "pinnacle-advanced-0",
+          "word": "neophyte",
+          "definition": "a person who is new to a subject, skill, or belief",
+          "fillInBlank": "As a complete _____ in the art of baking, his attempt at a cake resulted in a creation of questionable density and surprising resilience."
+        },
+        {
+          "id": "pinnacle-advanced-1",
+          "word": "noisome",
+          "definition": "having an extremely bad or unpleasant smell",
+          "fillInBlank": "A sudden _____ odor pervaded the train compartment, leading to a frantic search for the source and several hasty window openings."
+        },
+        {
+          "id": "pinnacle-advanced-2",
+          "word": "preclude",
+          "definition": "to prevent something from happening; make impossible",
+          "fillInBlank": "His allergy to peanuts sadly _____ him from enjoying most trail mix varieties."
+        },
+        {
+          "id": "pinnacle-advanced-3",
+          "word": "predilection",
+          "definition": "a preference or special liking for something; a bias in favor of something",
+          "fillInBlank": "The detective had a distinct _____ for tweed jackets, obscure trivia, and solving murders in quaint villages."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "pinnacle-expert-0",
+          "word": "wonky",
+          "definition": "shaky, unsteady, or unreliable",
+          "fillInBlank": "The bookshelf, assembled after midnight and several glasses of wine, had a distinctly _____ angle."
+        },
+        {
+          "id": "pinnacle-expert-1",
+          "word": "xenophobia",
+          "definition": "dislike of or prejudice against people from other countries",
+          "fillInBlank": "His _____ led him to believe that anyone who didn't share his taste in polka-dotted socks was secretly plotting against him."
+        },
+        {
+          "id": "pinnacle-expert-2",
+          "word": "zealot",
+          "definition": "a person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals",
+          "fillInBlank": "The environmental _____ chained himself to a bulldozer and refused to budge until the tree was given a name and weekly therapy sessions."
+        },
+        {
+          "id": "pinnacle-expert-3",
+          "word": "zenith",
+          "definition": "the time or point at which something is most powerful, successful, or furthest along",
+          "fillInBlank": "Though past its _____, the aging rock band's reunion tour still involved surprising amounts of spandex."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "pinnacle-professional-0",
+          "word": "officious",
+          "definition": "asserting authority in an excessively domineering way",
+          "fillInBlank": "The _____ committee insisted on inspecting everyone's shoes for conformity, resulting in a lengthy delay and several confused pigeons."
+        },
+        {
+          "id": "pinnacle-professional-1",
+          "word": "onerous",
+          "definition": "involving an amount of effort and hardship that is oppressively burdensome",
+          "fillInBlank": "Reorganizing the entire library by the length of book titles proved an unexpectedly _____ task."
+        },
+        {
+          "id": "pinnacle-professional-2",
+          "word": "ostensible",
+          "definition": "stated or appearing to be true, but not necessarily so",
+          "fillInBlank": "The advertisement claimed the new lotion was the _____ solution for hair loss, bad moods, and a lack of telekinetic powers."
+        },
+        {
+          "id": "pinnacle-professional-3",
+          "word": "ostracism",
+          "definition": "exclusion from a society or group",
+          "fillInBlank": "The ostracized mime found solace in a support group for others silenced by social convention."
+        }
+      ]
+    }
+  ]
+}

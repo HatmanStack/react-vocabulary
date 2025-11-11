@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { Achievement } from '@/shared/types';
 import { Typography } from '@/shared/ui';
 
@@ -18,11 +19,18 @@ export const AchievementBadge = React.memo(function AchievementBadge({
   achievement,
   onPress,
 }: AchievementBadgeProps) {
+  const theme = useTheme();
   const isLocked = !achievement.isUnlocked;
 
   return (
     <TouchableOpacity
-      style={[styles.container, isLocked && styles.locked]}
+      style={[
+        styles.container,
+        {
+          backgroundColor: isLocked ? theme.colors.surfaceVariant : theme.colors.surface,
+          borderColor: isLocked ? theme.colors.outline : theme.colors.primary,
+        },
+      ]}
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityRole="button"
@@ -34,7 +42,16 @@ export const AchievementBadge = React.memo(function AchievementBadge({
       accessibilityHint={isLocked ? 'Tap to view unlock requirements' : 'Tap to view details'}
     >
       {/* Icon */}
-      <View style={[styles.iconContainer, isLocked && styles.iconLocked]}>
+      <View
+        style={[
+          styles.iconContainer,
+          {
+            backgroundColor: isLocked
+              ? theme.colors.outlineVariant
+              : theme.colors.primaryContainer,
+          },
+        ]}
+      >
         <Typography variant="heading1" style={styles.icon}>
           {achievement.icon}
         </Typography>
@@ -47,13 +64,20 @@ export const AchievementBadge = React.memo(function AchievementBadge({
 
       {/* Progress bar for progressive achievements */}
       {achievement.progress !== undefined && !achievement.isUnlocked && (
-        <View style={styles.progressContainer}>
-          <View style={[styles.progressBar, { width: `${achievement.progress}%` }]} />
+        <View style={[styles.progressContainer, { backgroundColor: theme.colors.outlineVariant }]}>
+          <View
+            style={[
+              styles.progressBar,
+              { width: `${achievement.progress}%`, backgroundColor: theme.colors.primary },
+            ]}
+          />
         </View>
       )}
 
       {/* Unlocked indicator */}
-      {achievement.isUnlocked && <View style={styles.unlockedBadge} />}
+      {achievement.isUnlocked && (
+        <View style={[styles.unlockedBadge, { backgroundColor: theme.colors.secondary }]} />
+      )}
     </TouchableOpacity>
   );
 });
@@ -64,27 +88,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 12,
     borderRadius: 12,
-    backgroundColor: '#FFFFFF',
     borderWidth: 2,
-    borderColor: '#6200EE',
     minWidth: 100,
     position: 'relative',
-  },
-  locked: {
-    borderColor: '#E0E0E0',
-    backgroundColor: '#F5F5F5',
   },
   iconContainer: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#F3E5F5',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8,
-  },
-  iconLocked: {
-    backgroundColor: '#E0E0E0',
   },
   icon: {
     fontSize: 32,
@@ -100,14 +114,12 @@ const styles = StyleSheet.create({
   progressContainer: {
     width: '100%',
     height: 4,
-    backgroundColor: '#E0E0E0',
     borderRadius: 2,
     marginTop: 8,
     overflow: 'hidden',
   },
   progressBar: {
     height: '100%',
-    backgroundColor: '#6200EE',
     borderRadius: 2,
   },
   unlockedBadge: {
@@ -117,6 +129,5 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#4CAF50',
   },
 });

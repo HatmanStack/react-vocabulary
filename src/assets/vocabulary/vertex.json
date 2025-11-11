@@ -1,0 +1,156 @@
+{
+  "id": "vertex",
+  "name": "Vertex",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "vertex-basic-0",
+          "word": "sanctimonious",
+          "definition": "making a show of being morally superior to other people",
+          "fillInBlank": "The self-proclaimed health guru was surprisingly _____ , lecturing on the benefits of kale while secretly indulging in cheesy snacks."
+        },
+        {
+          "id": "vertex-basic-1",
+          "word": "sanguine",
+          "definition": "optimistic or positive, especially in an apparently bad or difficult situation",
+          "fillInBlank": "Despite the dire situation, the team leader remained _____ , insisting they could still win with a sufficient number of rubber bands and positive thinking."
+        },
+        {
+          "id": "vertex-basic-2",
+          "word": "scurrilous",
+          "definition": "making or suggesting coarsely abusive and offensive remarks",
+          "fillInBlank": "The rival sports commentators engaged in a _____ exchange of insults, much to the amusement of the audience."
+        },
+        {
+          "id": "vertex-basic-3",
+          "word": "redoubtable",
+          "definition": "formidable; inspiring fear or awe",
+          "fillInBlank": "The _____ castle guards, with their gleaming armor and questionable haircuts, were enough to deter most would-be intruders."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "vertex-intermediate-0",
+          "word": "semaphore",
+          "definition": "a system of sending messages by holding the arms or two flags or poles in certain positions",
+          "fillInBlank": "The disgruntled mime resorted to interpretive semaphore to express his disapproval of the all-beige costume selection."
+        },
+        {
+          "id": "vertex-intermediate-1",
+          "word": "serendipity",
+          "definition": "the occurrence of fortunate events by chance",
+          "fillInBlank": "In a stroke of _____, the hungry traveler stumbled upon a food festival dedicated entirely to cheese sculptures."
+        },
+        {
+          "id": "vertex-intermediate-2",
+          "word": "sobriety",
+          "definition": "the state of being sober; refraining from alcohol",
+          "fillInBlank": "His newfound commitment to _____ led him to replace his extensive beer bottle collection with motivational posters featuring squirrels."
+        },
+        {
+          "id": "vertex-intermediate-3",
+          "word": "solicitous",
+          "definition": "showing concern or care for someone's feelings or well-being",
+          "fillInBlank": "The _____ nurse tended to the grumpy patient with excessive cheerfulness, which he found almost as unsettling as the illness itself."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "vertex-advanced-0",
+          "word": "surreptitious",
+          "definition": "done in a secret or unauthorized way",
+          "fillInBlank": "The detective's _____ surveillance involved binoculars, a long trench coat, and questionable attempts to blend in with a flock of pigeons."
+        },
+        {
+          "id": "vertex-advanced-1",
+          "word": "tangential",
+          "definition": "diverging from a previous course or line; erratic",
+          "fillInBlank": "The professor's lecture took a series of _____ turns, covering everything from taxidermy to the mating rituals of the garden snail."
+        },
+        {
+          "id": "vertex-advanced-2",
+          "word": "tirade",
+          "definition": "a long and angry speech of criticism or accusation",
+          "fillInBlank": "The disgruntled employee went on a lengthy _____ about the unfair vending machine snack selection."
+        },
+        {
+          "id": "vertex-advanced-3",
+          "word": "tome",
+          "definition": "a large, heavy book (typically on a scholarly topic)",
+          "fillInBlank": "The dusty _____ on forgotten library shelves contained wisdom from ages past and surprisingly effective cockroach eradication techniques."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "vertex-expert-0",
+          "word": "cacoethes",
+          "definition": "an irresistible urge to do something inadvisable",
+          "fillInBlank": "An inexplicable _____ compelled him to collect mismatched buttons, much to the bewilderment of his family."
+        },
+        {
+          "id": "vertex-expert-1",
+          "word": "daedal",
+          "definition": "skillful; intricate; cleverly complex",
+          "fillInBlank": "The labyrinthine bureaucracy, with its _____ forms and endless procedures, seemed designed to frustrate even the most determined individual."
+        },
+        {
+          "id": "vertex-expert-2",
+          "word": "embrangle",
+          "definition": "to confuse, entangle, or throw into disorder",
+          "fillInBlank": "The scandal quickly _____ the senator's career, leaving his reputation in tatters."
+        },
+        {
+          "id": "vertex-expert-3",
+          "word": "febrile",
+          "definition": "having or showing a feverish activity; restless",
+          "fillInBlank": "Her _____ attempts to remain focused resulted in piles of half-completed tasks and a growing sense of unease."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "vertex-professional-0",
+          "word": "punctilious",
+          "definition": "showing great attention to detail or correct behavior",
+          "fillInBlank": "The _____ editor insisted on using a typewriter, scoffed at anything written after 1920, and used the word 'egregious' at every opportunity."
+        },
+        {
+          "id": "vertex-professional-1",
+          "word": "quaint",
+          "definition": "attractively old-fashioned and unusual",
+          "fillInBlank": "The charming village, with its cobblestone streets and abundance of thatched roofs, had a delightfully _____ quality."
+        },
+        {
+          "id": "vertex-professional-2",
+          "word": "quixotic",
+          "definition": "exceedingly idealistic; unrealistic and impractical",
+          "fillInBlank": "His _____ plan involved battling windmills, befriending sheep, and pursuing a surprisingly elusive Dulcinea."
+        },
+        {
+          "id": "vertex-professional-3",
+          "word": "quandary",
+          "definition": "a state of perplexity or uncertainty over what to do in a difficult situation",
+          "fillInBlank": "The student found himself in a _____ after realizing he had accidentally submitted his English essay for his Chemistry final."
+        }
+      ]
+    }
+  ]
+}

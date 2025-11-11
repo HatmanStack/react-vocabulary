@@ -1,0 +1,156 @@
+{
+  "id": "aurora",
+  "name": "Aurora",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "aurora-basic-0",
+          "word": "laconic",
+          "definition": "(of a person, speech, or style of writing) using very few words",
+          "fillInBlank": "The normally chatty teenager's response to the bad news was a surprisingly _____  \"meh.\", causing his parents increased concern."
+        },
+        {
+          "id": "aurora-basic-1",
+          "word": "largess",
+          "definition": "generosity in bestowing money or gifts upon others",
+          "fillInBlank": "Inspired by tales of Robin Hood, the eccentric billionaire showered the city with his _____, which unfortunately involved glitter bombs and oddly specific coupons."
+        },
+        {
+          "id": "aurora-basic-2",
+          "word": "paradigm",
+          "definition": "a typical example or pattern of something; a model",
+          "fillInBlank": "The company's new business _____ involved elaborate flowcharts, excessive use of buzzwords, and a surprising number of inspirational cat posters."
+        },
+        {
+          "id": "aurora-basic-3",
+          "word": "pariah",
+          "definition": "an outcast",
+          "fillInBlank": "The fashion critic became a social _____ after declaring sweatpants to be a crime against humanity."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "aurora-intermediate-0",
+          "word": "libertarian",
+          "definition": "an advocate or supporter of the principle of individual liberty, especially in thought and behavior",
+          "fillInBlank": "The _____ activist passionately argued for the right to wear mismatched socks and eat cereal for dinner."
+        },
+        {
+          "id": "aurora-intermediate-1",
+          "word": "maelstrom",
+          "definition": "a situation or state of violent confusion or great turbulence",
+          "fillInBlank": "The stock market crash caused a financial _____ , leaving investors shouting at squirrels and rethinking their life choices."
+        },
+        {
+          "id": "aurora-intermediate-2",
+          "word": "maudlin",
+          "definition": "self-pityingly or tearfully sentimental",
+          "fillInBlank": "The tearjerker movie induced a wave of _____ sniffling throughout the audience and a notable spike in tissue sales."
+        },
+        {
+          "id": "aurora-intermediate-3",
+          "word": "maverick",
+          "definition": "an independent-minded person who doesn't follow the crowd",
+          "fillInBlank": "With his refusal to wear matching socks and his fondness for interpretive toast-based poetry, the artist was clearly a _____."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "aurora-advanced-0",
+          "word": "munificent",
+          "definition": "larger or more generous than is usual or necessary",
+          "fillInBlank": "The philanthropist's _____ donation led to a new library wing, much to the delight of bookworms and sleepy pigeons looking for shelter."
+        },
+        {
+          "id": "aurora-advanced-1",
+          "word": "multifarious",
+          "definition": "having many and various types or aspects",
+          "fillInBlank": "The professor's lecture covered a _____ array of topics, from the mating rituals of snails to the importance of alphabetizing one's spice collection."
+        },
+        {
+          "id": "aurora-advanced-2",
+          "word": "nadir",
+          "definition": "the lowest or most unsuccessful point in a situation",
+          "fillInBlank": "After weeks of neglect, his attempt at cultivating a beard reached a rather sad _____, resembling more a fluffy dandelion than a symbol of rugged masculinity."
+        },
+        {
+          "id": "aurora-advanced-3",
+          "word": "negligent",
+          "definition": "failing to take proper or normal care of something",
+          "fillInBlank": "The _____ house guest left a trail of half-eaten sandwiches and mysteriously damp socks throughout the apartment."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "aurora-expert-0",
+          "word": "nostalgic",
+          "definition": "characterized by sentimentality for the past, typically for a period or place with happy personal associations",
+          "fillInBlank": "The old photograph inspired a _____ longing for simpler times, back when phones were attached to walls and shoulder pads weren't yet a fashion faux-pas."
+        },
+        {
+          "id": "aurora-expert-1",
+          "word": "oxymoron",
+          "definition": "a figure of speech in which apparently contradictory terms appear in conjunction",
+          "fillInBlank": "Their attempt at \"friendly competition\" quickly descended into what could only be described as an _____."
+        },
+        {
+          "id": "aurora-expert-2",
+          "word": "quell",
+          "definition": "to subdue or suppress; to put an end to",
+          "fillInBlank": "The librarian was remarkably efficient at _____ any hint of whispered conversations or giggling in the stacks."
+        },
+        {
+          "id": "aurora-expert-3",
+          "word": "quirky",
+          "definition": "having an unusual or interesting personality or appearance",
+          "fillInBlank": "With his collection of mismatched socks and a pet rock named Bob, the new student was endearingly _____."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "aurora-professional-0",
+          "word": "noxious",
+          "definition": "harmful, poisonous, or very unpleasant",
+          "fillInBlank": "A _____ odor wafted from the abandoned house, hinting at either a failed chemistry experiment or a family of very smelly skunks."
+        },
+        {
+          "id": "aurora-professional-1",
+          "word": "obdurate",
+          "definition": "stubbornly refusing to change one's opinion or course of action",
+          "fillInBlank": "The customer service representative was maddeningly _____ , refusing to budge on the \"no returns on chewed shoes\" policy."
+        },
+        {
+          "id": "aurora-professional-2",
+          "word": "obfuscate",
+          "definition": "to make something obscure, unclear, or unintelligible",
+          "fillInBlank": "The politician's speech was designed to _____ the issue, involving long, meandering sentences and suspiciously vague promises."
+        },
+        {
+          "id": "aurora-professional-3",
+          "word": "obstreperous",
+          "definition": "noisy and difficult to control",
+          "fillInBlank": "The _____ toddler refused to be silenced, bellowing his displeasure at the park's inexplicable lack of dinosaur-shaped slides."
+        }
+      ]
+    }
+  ]
+}

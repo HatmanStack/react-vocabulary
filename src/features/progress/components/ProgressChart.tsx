@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View, StyleSheet, useWindowDimensions } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { LineChart } from 'react-native-chart-kit';
 import { Typography } from '@/shared/ui';
 
@@ -14,8 +15,26 @@ interface ProgressChartProps {
 }
 
 export function ProgressChart({ dailyProgress }: ProgressChartProps) {
+  const theme = useTheme();
   const { width } = useWindowDimensions();
   const chartWidth = Math.min(width - 48, 600); // Max width 600px
+
+  // Extract RGB values from theme color for use in rgba()
+  const getPrimaryRgb = () => {
+    const hex = theme.colors.primary.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `${r}, ${g}, ${b}`;
+  };
+
+  const getTextRgb = () => {
+    const hex = theme.colors.onSurface.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `${r}, ${g}, ${b}`;
+  };
 
   // Get last 30 days of data
   const getLast30Days = () => {
@@ -65,6 +84,9 @@ export function ProgressChart({ dailyProgress }: ProgressChartProps) {
     );
   }
 
+  const primaryRgb = getPrimaryRgb();
+  const textRgb = getTextRgb();
+
   return (
     <View style={styles.container}>
       <LineChart
@@ -82,23 +104,23 @@ export function ProgressChart({ dailyProgress }: ProgressChartProps) {
         yAxisSuffix=""
         yAxisInterval={1}
         chartConfig={{
-          backgroundColor: '#FFFFFF',
-          backgroundGradientFrom: '#FFFFFF',
-          backgroundGradientTo: '#FFFFFF',
+          backgroundColor: theme.colors.surface,
+          backgroundGradientFrom: theme.colors.surface,
+          backgroundGradientTo: theme.colors.surface,
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(98, 0, 238, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity * 0.6})`,
+          color: (opacity = 1) => `rgba(${primaryRgb}, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(${textRgb}, ${opacity * 0.6})`,
           style: {
             borderRadius: 16,
           },
           propsForDots: {
             r: '3',
             strokeWidth: '2',
-            stroke: '#6200EE',
+            stroke: theme.colors.primary,
           },
           propsForBackgroundLines: {
             strokeDasharray: '',
-            stroke: '#E0E0E0',
+            stroke: theme.colors.outlineVariant,
             strokeWidth: 1,
           },
         }}

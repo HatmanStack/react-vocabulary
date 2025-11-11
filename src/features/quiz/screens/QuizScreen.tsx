@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { Portal, Dialog, Button as PaperButton } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Portal, Dialog, Button as PaperButton, useTheme } from 'react-native-paper';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { getListById } from '@/features/vocabulary/utils/vocabularyLoader';
 import { useQuizStore } from '@/shared/store/quizStore';
 import { useSound } from '@/shared/hooks/useSound';
@@ -14,10 +13,10 @@ import { MultipleChoiceQuestion } from '../components/MultipleChoiceQuestion';
 import { FillInBlankQuestion } from '../components/FillInBlankQuestion';
 import { Typography, Spacer } from '@/shared/ui';
 
-type Props = StackScreenProps<RootStackParamList, 'Quiz'>;
-
-export default function QuizScreen({ navigation, route }: Props) {
-  const { listId, levelId } = route.params;
+export default function QuizScreen() {
+  const router = useRouter();
+  const theme = useTheme();
+  const { listId, levelId } = useLocalSearchParams<{ listId: string; levelId: string }>();
   const list = getListById(listId);
 
   // Quiz store
@@ -29,6 +28,8 @@ export default function QuizScreen({ navigation, route }: Props) {
     startQuiz,
     submitAnswer,
     useHint,
+    getCorrectAnswer,
+    getCurrentWordWrongCount,
     getNextQuestion,
     calculateProgress,
     isQuizComplete,
@@ -64,15 +65,16 @@ export default function QuizScreen({ navigation, route }: Props) {
 
       // Navigate to graduation screen with stats
       const finalStats = endQuiz();
-      navigation.replace('Graduation', {
-        listId,
-        levelId,
-        stats: {
-          hints: finalStats.hints,
-          wrong: finalStats.wrong,
-          bestHints: 0, // Placeholder for Phase 4
-          bestWrong: 0, // Placeholder for Phase 4
-          durationMinutes,
+      router.replace({
+        pathname: '/graduation',
+        params: {
+          listId,
+          levelId,
+          hints: finalStats.hints.toString(),
+          wrong: finalStats.wrong.toString(),
+          bestHints: '0',
+          bestWrong: '0',
+          durationMinutes: durationMinutes?.toString() || '0',
         },
       });
     }
@@ -80,7 +82,7 @@ export default function QuizScreen({ navigation, route }: Props) {
 
   if (!list || !currentQuestion) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <Typography variant="body">Loading quiz...</Typography>
       </View>
     );
@@ -93,7 +95,7 @@ export default function QuizScreen({ navigation, route }: Props) {
   const handleConfirmExit = () => {
     endQuiz();
     setShowExitDialog(false);
-    navigation.goBack();
+    router.back();
   };
 
   const handleCancelExit = () => {
@@ -143,23 +145,44 @@ export default function QuizScreen({ navigation, route }: Props) {
     // Move to next question after feedback
     setTimeout(() => {
       getNextQuestion();
+
+      // Check if quiz is complete after getting next question
+      if (isQuizComplete()) {
+        const durationMinutes = quizStartTime
+          ? (Date.now() - quizStartTime) / (1000 * 60)
+          : undefined;
+
+        const finalStats = endQuiz();
+        router.replace({
+          pathname: '/graduation',
+          params: {
+            listId,
+            levelId,
+            hints: finalStats.hints.toString(),
+            wrong: finalStats.wrong.toString(),
+            bestHints: '0',
+            bestWrong: '0',
+            durationMinutes: durationMinutes?.toString() || '0',
+          },
+        });
+      }
     }, 300);
   };
 
   const totalWords = list.levels.find((l) => l.id === levelId)?.words.length || 0;
-  const progress = totalWords > 0 ? calculateProgress() / (totalWords * 3) : 0;
+  const totalQuestions = totalWords * 2; // 2 questions per word (multiple + fillin)
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={0}
     >
       <QuizHeader
         listName={list.name}
         levelName={levelId.charAt(0).toUpperCase() + levelId.slice(1)}
-        currentIndex={currentQuestionIndex - 1} // Adjust for 0-based indexing
-        totalWords={totalWords}
+        currentIndex={currentQuestionIndex}
+        totalWords={totalQuestions}
         hintsUsed={sessionStats.hintsUsed}
         wrongAnswers={sessionStats.wrongAnswers}
         onExit={handleExit}
@@ -184,12 +207,16 @@ export default function QuizScreen({ navigation, route }: Props) {
           <MultipleChoiceQuestion
             options={currentQuestion.options || []}
             onSelectAnswer={handleSelectAnswer}
+            wrongCount={showFeedback ? 0 : getCurrentWordWrongCount()}
+            correctAnswer={getCorrectAnswer()}
           />
         ) : (
           <FillInBlankQuestion
             sentence={currentQuestion.word.fillInBlank}
             onSubmitAnswer={handleSubmitAnswer}
             onUseHint={handleUseHint}
+            wrongCount={showFeedback ? 0 : getCurrentWordWrongCount()}
+            correctAnswer={getCorrectAnswer()}
           />
         )}
 
@@ -224,12 +251,14 @@ export default function QuizScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
     paddingBottom: 24,
+    maxWidth: 600,
+    width: '100%',
+    alignSelf: 'center',
   },
 });

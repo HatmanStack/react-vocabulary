@@ -1,0 +1,156 @@
+{
+  "id": "odyssey",
+  "name": "Odyssey",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "odyssey-basic-0",
+          "word": "abjure",
+          "definition": "solemnly renounce (a belief, cause, or claim)",
+          "fillInBlank": "After months of late-night cheese binges, she decided to ______ all dairy, embracing the concept of salads and reluctantly turning her back on extra-mature cheddar."
+        },
+        {
+          "id": "odyssey-basic-1",
+          "word": "bereft",
+          "definition": "deprived of or lacking something (especially something non-material)",
+          "fillInBlank": "Losing his beloved dog left the man feeling utterly ______, the laughter and tail-wagging enthusiasm gone from his once-vibrant home."
+        },
+        {
+          "id": "odyssey-basic-2",
+          "word": "despot",
+          "definition": "a ruler with absolute power and authority",
+          "fillInBlank": "The self-proclaimed fashion _____ ruled the catwalk with an iron fist, a bedazzled scepter, and a deep loathing of anyone wearing comfortable shoes."
+        },
+        {
+          "id": "odyssey-basic-3",
+          "word": "didactic",
+          "definition": "intended to teach, particularly in having moral instruction as an ulterior motive",
+          "fillInBlank": "The _____  professor lectured for hours about the importance of correct semicolon usage, leaving his students both terrified and vaguely impressed."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "odyssey-intermediate-0",
+          "word": "accretion",
+          "definition": "the growth or increase of something by the gradual accumulation of additional layers or matter",
+          "fillInBlank": "The coral reef grows slowly due to the ______ of tiny marine organisms, a process that makes for a surprisingly soothing nature documentary but somewhat less exciting live-action adventure."
+        },
+        {
+          "id": "odyssey-intermediate-1",
+          "word": "calumny",
+          "definition": "the making of false and defamatory statements to damage someone's reputation; slander",
+          "fillInBlank": "The rumor mill churned with wild ______, involving a missing garden gnome, a conspiracy of squirrels, and an elaborate heist of suspiciously tasty birdseed."
+        },
+        {
+          "id": "odyssey-intermediate-2",
+          "word": "disrepute",
+          "definition": "the state of being held in low esteem by the public",
+          "fillInBlank": "The politician's reputation fell into _____ after the unfortunate hot mic incident involving goats, a yodeling contest, and a questionable amount of cheese."
+        },
+        {
+          "id": "odyssey-intermediate-3",
+          "word": "edict",
+          "definition": "a decree or official order issued by a person in authority",
+          "fillInBlank": "The queen's _____ about wearing hats shaped like fruit caused widespread confusion, a boom in the watermelon industry, and the resignation of several bewildered palace gardeners."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "odyssey-advanced-0",
+          "word": "alias",
+          "definition": "a false or assumed name",
+          "fillInBlank": "The master of disguise slipped into the party under the ______  of a cheese enthusiast with a questionable accent and a suspiciously large wheel of brie."
+        },
+        {
+          "id": "odyssey-advanced-1",
+          "word": "circumvent",
+          "definition": "to find a way around an obstacle",
+          "fillInBlank": "The wily detective managed to _________ the usual bureaucracy with a well-timed distraction involving a runaway donut and several easily confused officers."
+        },
+        {
+          "id": "odyssey-advanced-2",
+          "word": "conflagration",
+          "definition": "an extensive fire that destroys a great deal of land or property",
+          "fillInBlank": "The campfire, after several ill-advised attempts to roast marshmallows with a magnifying glass, erupted into a small but alarming ____________."
+        },
+        {
+          "id": "odyssey-advanced-3",
+          "word": "elicit",
+          "definition": "to draw or bring out; evoke",
+          "fillInBlank": "The detective's skillful questioning managed to _____ a confession from the parrot, who admitted a fondness for shiny objects and a dislike of opera music."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "odyssey-expert-0",
+          "word": "archetypal",
+          "definition": "very typical of a certain kind of person or thing",
+          "fillInBlank": "The detective story featured the ______ cast of characters: the gruff detective, the suspicious butler, and the enigmatic femme fatale with a tragic past and a collection of deadly hatpins."
+        },
+        {
+          "id": "odyssey-expert-1",
+          "word": "aspersion",
+          "definition": "an attack on the reputation or integrity of someone or something",
+          "fillInBlank": "The rival scientists hurled ______ at each other, disputing everything from the existence of invisible sheep to the optimal temperature for brewing tea."
+        },
+        {
+          "id": "odyssey-expert-2",
+          "word": "cupidity",
+          "definition": "extreme greed for material wealth",
+          "fillInBlank": "Driven by insatiable ________, the villain stole the world's entire supply of cheese, causing widespread panic and a resurgence in cracker-related culinary experiments."
+        },
+        {
+          "id": "odyssey-expert-3",
+          "word": "defunct",
+          "definition": "no longer existing or functioning",
+          "fillInBlank": "The floppy-eared bloodhound detective agency, once renowned for sniffing out criminal masterminds, sadly went _______ after the entire team became distracted by a mysteriously tasty-smelling sock."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "odyssey-professional-0",
+          "word": "antediluvian",
+          "definition": "of or belonging to the period before the biblical flood",
+          "fillInBlank": "The museum's fossil collection included the ______ remains of a dinosaur with a particularly grumpy expression and an unfortunate fondness for eating ferns."
+        },
+        {
+          "id": "odyssey-professional-1",
+          "word": "apathetic",
+          "definition": "showing or feeling no interest, enthusiasm, or concern",
+          "fillInBlank": "The ______ audience stared blankly at the comedian, who began to suspect his elaborate mime routine about the perils of mismatched socks might not be as funny as he'd imagined."
+        },
+        {
+          "id": "odyssey-professional-2",
+          "word": "construe",
+          "definition": "interpret (a word or action) in a particular way",
+          "fillInBlank": "Lawyers, as usual, managed to _______ the incredibly simple instructions into a legal document resembling a baffling maze, resulting in widespread confusion and several panicked calls to pizza delivery."
+        },
+        {
+          "id": "odyssey-professional-3",
+          "word": "contravene",
+          "definition": "conflict with (a rule, law, or agreement), or fail to comply with them",
+          "fillInBlank": "The reckless driver blithely _________ several traffic laws, treating stop signs as mere suggestions and leaving a trail of bewildered pigeons in his wake."
+        }
+      ]
+    }
+  ]
+}

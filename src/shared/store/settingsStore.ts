@@ -1,13 +1,11 @@
 /**
  * Settings Store
  *
- * Manages app settings including theme, sound, haptics with persistence.
+ * Manages app settings including theme, sound, haptics.
+ * NOTE: Persistence temporarily disabled for web compatibility.
  */
 
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { STORAGE_KEYS } from '@/shared/lib/storage';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -40,39 +38,22 @@ const initialState = {
   theme: 'light' as ThemeMode,
   soundEnabled: true,
   hapticsEnabled: true,
-  onboardingCompleted: false,
-  _hydrated: false,
+  onboardingCompleted: true, // Skip onboarding (no persistence on web)
+  _hydrated: true, // Always hydrated since no persistence
 };
 
-export const useSettingsStore = create<SettingsState>()(
-  persist(
-    (set) => ({
-      ...initialState,
+export const useSettingsStore = create<SettingsState>()((set) => ({
+  ...initialState,
 
-      setHydrated: () => set({ _hydrated: true }),
+  setHydrated: () => set({ _hydrated: true }),
 
-      setTheme: (theme) => set({ theme }),
+  setTheme: (theme) => set({ theme }),
 
-      setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
+  setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
 
-      setHapticsEnabled: (enabled) => set({ hapticsEnabled: enabled }),
+  setHapticsEnabled: (enabled) => set({ hapticsEnabled: enabled }),
 
-      setOnboardingCompleted: (completed) => set({ onboardingCompleted: completed }),
+  setOnboardingCompleted: (completed) => set({ onboardingCompleted: completed }),
 
-      resetSettings: () => set({ ...initialState, _hydrated: true }),
-    }),
-    {
-      name: STORAGE_KEYS.SETTINGS,
-      storage: createJSONStorage(() => AsyncStorage),
-      onRehydrateStorage: () => (state) => {
-        state?.setHydrated();
-      },
-      partialize: (state) => ({
-        theme: state.theme,
-        soundEnabled: state.soundEnabled,
-        hapticsEnabled: state.hapticsEnabled,
-        onboardingCompleted: state.onboardingCompleted,
-      }),
-    }
-  )
-);
+  resetSettings: () => set({ ...initialState, _hydrated: true }),
+}));

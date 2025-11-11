@@ -1,0 +1,156 @@
+{
+  "id": "zenith",
+  "name": "Zenith",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "zenith-basic-0",
+          "word": "aberration",
+          "definition": "a departure from what is normal, usual, or expected, typically one that is unwelcome",
+          "fillInBlank": "It wasn't an ________ they really were making her pull her hair out"
+        },
+        {
+          "id": "zenith-basic-1",
+          "word": "beguile",
+          "definition": "to charm or deceive by trickery",
+          "fillInBlank": "The charming con artist sought to ______ the wealthy widow out of her fortune with tales of lost treasure and suspiciously adorable kittens in need of diamond-encrusted collars."
+        },
+        {
+          "id": "zenith-basic-2",
+          "word": "denigrate",
+          "definition": "criticize unfairly; disparage",
+          "fillInBlank": "The rival art critics engaged in a fierce battle to _____ each other's work, using words like \"derivative\" and \"uninspired\" as their weapons of choice."
+        },
+        {
+          "id": "zenith-basic-3",
+          "word": "dirge",
+          "definition": "a lament for the dead, especially one forming part of a funeral rite",
+          "fillInBlank": "The bagpipe player's rendition of a mournful _____  caused a mass exodus from the picnic, leaving behind only one slightly deaf squirrel and a flock of confused pigeons."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "zenith-intermediate-0",
+          "word": "acumen",
+          "definition": "the ability to make good judgments and quick decisions",
+          "fillInBlank": "The seasoned detective possessed remarkable _____ , solving complex cases with an unnerving speed that involved crumpled newspapers, an old magnifying glass, and a collection of half-eaten donuts."
+        },
+        {
+          "id": "zenith-intermediate-1",
+          "word": "camaraderie",
+          "definition": "mutual trust and friendship among people who spend a lot of time together",
+          "fillInBlank": "After a grueling hike, the team collapsed at the campsite, exhausted but filled with a sense of ______ and the shared aroma of burnt marshmallows and mosquito spray."
+        },
+        {
+          "id": "zenith-intermediate-2",
+          "word": "divisive",
+          "definition": "tending to cause disagreement or hostility between people",
+          "fillInBlank": "His _____ speech about the evils of socks only served to further divide the room into the staunchly pro-sock camp and the defiantly anti-sock faction."
+        },
+        {
+          "id": "zenith-intermediate-3",
+          "word": "advocate",
+          "definition": "a person who publicly supports or recommends a particular cause or policy",
+          "fillInBlank": "She became a passionate _____ for animal rights, fiercely determined to make a difference, one rescued hedgehog and indignantly protesting squirrel at a time."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "zenith-advanced-0",
+          "word": "amenable",
+          "definition": "open and responsive to suggestion; easily persuaded or controlled",
+          "fillInBlank": "The notoriously stubborn toddler proved surprisingly ______ when bribed with the promise of extra ice cream and a new episode of his favorite cartoon involving talking dinosaurs."
+        },
+        {
+          "id": "zenith-advanced-1",
+          "word": "caucus",
+          "definition": "a meeting of the supporters or members of a specific political party or movement",
+          "fillInBlank": "The squirrel _____ convened on the park bench, their agenda presumably involving world nut domination and the strategic hoarding of acorns."
+        },
+        {
+          "id": "zenith-advanced-2",
+          "word": "circumlocution",
+          "definition": "the use of many words where fewer would do, especially in a deliberate attempt to be vague or evasive",
+          "fillInBlank": "The spokesperson's mastery of _________ was impressive: a five-minute speech somehow managed to say absolutely nothing of consequence."
+        },
+        {
+          "id": "zenith-advanced-3",
+          "word": "elegy",
+          "definition": "a poem in elegiac couplets, often expressing sorrow or a lament for the dead",
+          "fillInBlank": "His heartfelt _____ for the office plant involved a wilted daisy, a single tear, and a suspiciously empty bag of cheese puffs."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "zenith-expert-0",
+          "word": "arboreal",
+          "definition": "of, relating to, or living in trees",
+          "fillInBlank": "Those squirrels, with their bushy tails and love of heights, were clearly ______ creatures."
+        },
+        {
+          "id": "zenith-expert-1",
+          "word": "assiduous",
+          "definition": "showing great care and perseverance",
+          "fillInBlank": "The ______ student meticulously copied out her notes, color-coded her flashcards, and practiced her exam answers in front of a slightly bewildered cat."
+        },
+        {
+          "id": "zenith-expert-2",
+          "word": "covet",
+          "definition": "yearn to possess or have (something)",
+          "fillInBlank": "The dragon jealously ________ the neighboring kingdom's impressive collection of bottle caps, occasionally breathing fire in their general direction to emphasize its point."
+        },
+        {
+          "id": "zenith-expert-3",
+          "word": "debacle",
+          "definition": "a sudden and disastrous failure",
+          "fillInBlank": "The overly ambitious \"Build a Giant Sandcastle\" project ended in a spectacular _______, involving disgruntled seagulls, an unexpected tidal wave, and an impressive amount of soggy sandwiches."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "zenith-professional-0",
+          "word": "annex",
+          "definition": "to add a territory or space (typically by force)",
+          "fillInBlank": "The ambitious emperor planned to ______  the neighboring island, motivated by dreams of expanding his beach towel collection and building an empire of questionable sandcastles."
+        },
+        {
+          "id": "zenith-professional-1",
+          "word": "apocryphal",
+          "definition": "(of a story or statement) of doubtful authenticity, although widely circulated as being true",
+          "fillInBlank": "The internet was filled with ______ stories involving celebrity encounters with aliens and surprisingly well-spoken pigeons with a fondness for conspiracy theories."
+        },
+        {
+          "id": "zenith-professional-2",
+          "word": "constituent",
+          "definition": "a member of a constituency; a voter represented by an elected official",
+          "fillInBlank": "The disgruntled ________ penned an angry letter to her senator, expressing concerns about the state of the world and her suspicion that squirrels were secretly plotting a hostile takeover."
+        },
+        {
+          "id": "zenith-professional-3",
+          "word": "contentious",
+          "definition": "causing or likely to cause disagreement",
+          "fillInBlank": "The town hall meeting quickly descended into a _________ debate on the ideal toppings for pizza, highlighting the deeply polarizing nature of pineapple and anchovies."
+        }
+      ]
+    }
+  ]
+}

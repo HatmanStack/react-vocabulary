@@ -1,20 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, ScrollView, Animated, Alert } from 'react-native';
-import { Icon, Dialog, Portal } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList, Achievement } from '@/shared/types';
+import { Icon, Dialog, Portal, useTheme } from 'react-native-paper';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { Achievement } from '@/shared/types';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { useQuizStore } from '@/shared/store/quizStore';
 import { useSound } from '@/shared/hooks/useSound';
 import { useHaptics } from '@/shared/hooks/useHaptics';
 import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 import { AchievementUnlockModal } from '@/features/progress/components/AchievementUnlockModal';
 
-type Props = StackScreenProps<RootStackParamList, 'Graduation'>;
-
-export default function GraduationScreen({ navigation, route }: Props) {
-  const { listId, levelId, stats } = route.params;
+export default function GraduationScreen() {
+  const router = useRouter();
+  const theme = useTheme();
+  const params = useLocalSearchParams<{
+    listId: string;
+    levelId: string;
+    hints?: string;
+    wrong?: string;
+    durationMinutes?: string;
+  }>();
+  const { listId, levelId, hints, wrong, durationMinutes } = params;
   const progressStore = useProgressStore();
+  const quizStore = useQuizStore();
   const { playComplete } = useSound();
   const { triggerSuccess } = useHaptics();
   const reducedMotion = useReducedMotion();
@@ -53,13 +62,13 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
   // Check for achievements on mount
   useEffect(() => {
-    const sessionData = stats?.durationMinutes
+    const sessionData = durationMinutes
       ? {
-          listId,
-          levelId,
-          hints: stats.hints,
-          wrong: stats.wrong,
-          durationMinutes: stats.durationMinutes,
+          listId: listId as string,
+          levelId: levelId as string,
+          hints: parseInt(hints || '0', 10),
+          wrong: parseInt(wrong || '0', 10),
+          durationMinutes: parseFloat(durationMinutes),
         }
       : undefined;
 
@@ -70,11 +79,11 @@ export default function GraduationScreen({ navigation, route }: Props) {
   }, []);
 
   // Get current session stats
-  const hintsUsed = stats?.hints || 0;
-  const wrongAnswers = stats?.wrong || 0;
+  const hintsUsed = parseInt(hints || '0', 10);
+  const wrongAnswers = parseInt(wrong || '0', 10);
 
   // Get best scores from progressStore
-  const bestScore = progressStore.getBestScore(listId, levelId);
+  const bestScore = progressStore.getBestScore(listId as string, levelId as string);
   const bestHints = bestScore?.hints ?? 0;
   const bestWrong = bestScore?.wrong ?? 0;
 
@@ -92,10 +101,10 @@ export default function GraduationScreen({ navigation, route }: Props) {
   };
 
   const confirmResetLevel = () => {
-    progressStore.resetListLevelProgress(listId, levelId);
+    progressStore.resetListLevelProgress(listId as string, levelId as string);
     setResetDialogVisible(false);
     // Navigate to quiz screen with fresh start
-    navigation.navigate('Quiz', { listId, levelId });
+    router.push({ pathname: '/quiz', params: { listId, levelId } });
   };
 
   // Handle achievement modal dismissal
@@ -111,7 +120,10 @@ export default function GraduationScreen({ navigation, route }: Props) {
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      contentContainerStyle={styles.scrollContent}
+    >
       <Spacer size="xl" />
 
       {/* Celebration Header */}
@@ -124,11 +136,15 @@ export default function GraduationScreen({ navigation, route }: Props) {
           },
         ]}
       >
-        <View style={styles.iconContainer}>
+        <View style={[styles.iconContainer, { backgroundColor: theme.colors.surface }]}>
           <Icon source="trophy" size={80} color="#FFD700" />
         </View>
         <Spacer size="md" />
-        <Typography variant="heading1" align="center" style={styles.title}>
+        <Typography
+          variant="heading1"
+          align="center"
+          style={[styles.title, { color: theme.colors.secondary }]}
+        >
           Congratulations!
         </Typography>
         <Spacer size="xs" />
@@ -174,7 +190,11 @@ export default function GraduationScreen({ navigation, route }: Props) {
           <Spacer size="sm" />
           {isNewBest && (
             <>
-              <Typography variant="caption" style={styles.newBestText} align="center">
+              <Typography
+                variant="caption"
+                style={[styles.newBestText, { color: theme.colors.secondary }]}
+                align="center"
+              >
                 🎉 New Best Score! 🎉
               </Typography>
               <Spacer size="sm" />
@@ -222,7 +242,11 @@ export default function GraduationScreen({ navigation, route }: Props) {
       <View style={styles.actionsContainer}>
         <Button
           variant="primary"
-          onPress={() => navigation.navigate('Quiz', { listId, levelId })}
+          onPress={() => {
+            // End current quiz session before starting new one
+            quizStore.endQuiz();
+            router.push({ pathname: '/quiz', params: { listId, levelId } });
+          }}
           fullWidth
         >
           Try Again
@@ -232,7 +256,7 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
         <Button
           variant="secondary"
-          onPress={() => navigation.navigate('Difficulty', { listId })}
+          onPress={() => router.push({ pathname: '/difficulty', params: { listId } })}
           fullWidth
         >
           Choose Another Level
@@ -246,7 +270,7 @@ export default function GraduationScreen({ navigation, route }: Props) {
 
         <Spacer size="xs" />
 
-        <Button variant="text" onPress={() => navigation.navigate('Home')} fullWidth>
+        <Button variant="text" onPress={() => router.push('/')} fullWidth>
           Back to Home
         </Button>
       </View>
@@ -287,10 +311,12 @@ export default function GraduationScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   scrollContent: {
     paddingHorizontal: 16,
+    maxWidth: 600,
+    width: '100%',
+    alignSelf: 'center',
   },
   headerContainer: {
     alignItems: 'center',
@@ -300,7 +326,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 4,
@@ -309,22 +334,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
-  title: {
-    color: '#4CAF50',
-  },
+  title: {},
   card: {
     marginHorizontal: 0,
   },
   statRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   actionsContainer: {
     width: '100%',
-    paddingHorizontal: 16,
   },
   newBestText: {
-    color: '#4CAF50',
     fontWeight: 'bold',
   },
 });

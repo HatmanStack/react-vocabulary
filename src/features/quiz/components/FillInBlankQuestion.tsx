@@ -26,17 +26,26 @@ interface FillInBlankQuestionProps {
   onSubmitAnswer: (answer: string) => void;
   /** Callback when hint button is pressed */
   onUseHint: () => void;
+  /** Number of wrong answers for this word */
+  wrongCount?: number;
+  /** The correct answer to pre-fill when Help Me Out is used */
+  correctAnswer?: string;
 }
 
 export function FillInBlankQuestion({
   sentence,
   onSubmitAnswer,
   onUseHint,
+  wrongCount = 0,
+  correctAnswer,
 }: FillInBlankQuestionProps) {
   const theme = useTheme();
   const [answer, setAnswer] = useState('');
   const [hintUsed, setHintUsed] = useState(false);
   const inputRef = useRef<TextInput>(null);
+
+  // Show Help Me Out button if answered incorrectly 2+ times
+  const showHelpMeOut = wrongCount >= 2 && correctAnswer;
 
   // Auto-focus input on mount
   useEffect(() => {
@@ -67,18 +76,21 @@ export function FillInBlankQuestion({
     onUseHint();
   };
 
+  const handleHelpMeOut = () => {
+    // Pre-fill the answer in the text field
+    if (correctAnswer) {
+      setAnswer(correctAnswer);
+      // Focus the input so user can see the pre-filled answer
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  };
+
   const isSubmitDisabled = !answer.trim();
 
   return (
     <View style={styles.container}>
-      <View style={styles.sentenceContainer}>
-        <Typography variant="body" align="center">
-          {sentence}
-        </Typography>
-      </View>
-
-      <Spacer size="lg" />
-
       <View style={styles.inputContainer}>
         <TextInput
           ref={inputRef}
@@ -105,6 +117,27 @@ export function FillInBlankQuestion({
       <Spacer size="md" />
 
       <View style={styles.buttonsContainer}>
+        {showHelpMeOut && (
+          <>
+            <View style={styles.helpMeOutContainer}>
+              <Typography variant="caption" color="secondary" style={styles.helpMeOutText}>
+                Having trouble? We can help!
+              </Typography>
+              <Spacer size="xs" />
+              <Button
+                variant="secondary"
+                icon="hand-heart"
+                onPress={handleHelpMeOut}
+                style={styles.helpMeOutButton}
+                accessibilityLabel="Help me out - fill in the correct answer"
+              >
+                Help Me Out
+              </Button>
+            </View>
+            <Spacer size="md" />
+          </>
+        )}
+
         <View style={styles.buttonRow}>
           <View style={styles.hintButtonContainer}>
             <Button
@@ -139,9 +172,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 16,
   },
-  sentenceContainer: {
-    paddingVertical: 8,
-  },
   inputContainer: {
     width: '100%',
   },
@@ -173,5 +203,16 @@ const styles = StyleSheet.create({
   },
   hintButtonUsed: {
     opacity: 0.5,
+  },
+  helpMeOutContainer: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  helpMeOutText: {
+    textAlign: 'center',
+  },
+  helpMeOutButton: {
+    width: '100%',
   },
 });

@@ -23,25 +23,26 @@ interface QuizState {
   // Session data
   currentSession: QuizSession | null;
   currentQuestion: QuizQuestion | null;
-  currentQuestionIndex: number;
+  currentQuestionIndex: number; // 1-based question number for display (1-8)
   isQuizActive: boolean;
   sessionStats: SessionStats;
-  answered: WordState[]; // Word states: 0, 1, 2, or 3
-  lastWordIndex: number; // Track to avoid repeating same word consecutively
+  questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (8 total)
+  correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly (length 8)
+  wrongCountTracker: number[]; // Count of wrong answers for each question (length 8)
+  currentOrderIndex: number; // Current position in questionOrder (0-based)
 
   // Actions
   startQuiz: (listId: string, levelId: string) => void;
   getNextQuestion: () => void;
-  determineQuestionType: (wordState: WordState) => QuestionType;
   submitAnswer: (userAnswer: string) => { isCorrect: boolean; correctAnswer: string };
   useHint: () => string;
-  calculateProgress: () => number;
+  getCorrectAnswer: () => string;
   incrementHints: () => void;
   incrementWrong: () => void;
   incrementCorrect: () => void;
-  resetStats: () => void;
   endQuiz: () => { hints: number; wrong: number; correct: number };
   isQuizComplete: () => boolean;
+  getCurrentWordWrongCount: () => number;
 }
 
 export const useQuizStore = create<QuizState>((set, get) => ({
@@ -55,8 +56,10 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     wrongAnswers: 0,
     correctAnswers: 0,
   },
-  answered: [],
-  lastWordIndex: -1,
+  questionOrder: [],
+  correctTracker: [],
+  wrongCountTracker: [],
+  currentOrderIndex: 0,
 
   // Start a new quiz session
   startQuiz: (listId: string, levelId: string) => {
@@ -68,15 +71,6 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       console.error(`No words found for list ${listId}, level ${levelId}`);
       return;
     }
-
-    // Load existing progress from progressStore
-    const answered = new Array(words.length).fill(0) as WordState[];
-    words.forEach((word, index) => {
-      const wordProgress = progressStore.getWordProgress(word.id);
-      if (wordProgress) {
-        answered[index] = wordProgress.state;
-      }
-    });
 
     const session: QuizSession = {
       listId,
@@ -94,13 +88,32 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     // Start session in progress store
     progressStore.startSession(listId, levelId);
 
+    // Create question order: 2 questions per word (multiple + fillin)
+    const questionOrder: { wordIndex: number; type: QuestionType }[] = [];
+    words.forEach((_, wordIndex) => {
+      questionOrder.push({ wordIndex, type: 'multiple' });
+      questionOrder.push({ wordIndex, type: 'fillin' });
+    });
+
+    // Shuffle using Fisher-Yates
+    for (let i = questionOrder.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questionOrder[i], questionOrder[j]] = [questionOrder[j], questionOrder[i]];
+    }
+
+    // Initialize tracker arrays (all 0s) - 8 questions total
+    const correctTracker = new Array(questionOrder.length).fill(0);
+    const wrongCountTracker = new Array(questionOrder.length).fill(0);
+
     set({
       currentSession: session,
       currentQuestionIndex: 0,
       isQuizActive: true,
       sessionStats: { hintsUsed: 0, wrongAnswers: 0, correctAnswers: 0 },
-      answered,
-      lastWordIndex: -1,
+      questionOrder,
+      correctTracker,
+      wrongCountTracker,
+      currentOrderIndex: 0,
     });
 
     // Get first question
@@ -109,55 +122,35 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // Get next question
   getNextQuestion: () => {
-    const { currentSession, answered, lastWordIndex } = get();
+    const { currentSession, questionOrder, correctTracker, currentOrderIndex } = get();
 
     if (!currentSession) {
       console.error('No active quiz session');
       return;
     }
 
-    // Check if quiz is complete (all words mastered)
+    // Check if quiz is complete
     if (get().isQuizComplete()) {
-      console.log('Quiz complete! All words mastered.');
+      console.log('Quiz complete! All questions answered correctly.');
       return;
     }
 
     const { words } = currentSession;
-    const totalWords = words.length;
+    let nextIndex = currentOrderIndex;
 
-    // Find a random word that is not mastered (state < 3)
-    let attempts = 0;
-    let wordIndex = -1;
+    // Find next unanswered question
+    for (let i = 0; i < questionOrder.length; i++) {
+      const checkIndex = (currentOrderIndex + i) % questionOrder.length;
 
-    while (attempts < totalWords * 2) {
-      // Try random selection
-      const randomIndex = Math.floor(Math.random() * totalWords);
-
-      // Check if word is not mastered and not the last word
-      if (answered[randomIndex] < 3 && randomIndex !== lastWordIndex) {
-        wordIndex = randomIndex;
+      if (correctTracker[checkIndex] === 0) {
+        nextIndex = checkIndex;
         break;
       }
-
-      attempts++;
     }
 
-    // Fallback: find first non-mastered word
-    if (wordIndex === -1) {
-      wordIndex = answered.findIndex((state) => state < 3);
-    }
-
-    // If still not found, quiz is complete
-    if (wordIndex === -1) {
-      console.log('All words mastered!');
-      return;
-    }
-
-    const word = words[wordIndex];
-    const wordState = answered[wordIndex];
-
-    // Determine question type based on word state
-    const questionType = get().determineQuestionType(wordState);
+    const questionInfo = questionOrder[nextIndex];
+    const word = words[questionInfo.wordIndex];
+    const questionType = questionInfo.type;
 
     // Generate options for multiple choice questions
     const options =
@@ -169,27 +162,21 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       options,
     };
 
+    // Question number is the position in shuffled order (1-based, 1-8)
+    const questionNumber = nextIndex + 1;
+
     set({
       currentQuestion: question,
-      currentQuestionIndex: get().currentQuestionIndex + 1,
-      lastWordIndex: wordIndex,
+      currentQuestionIndex: questionNumber,
+      currentOrderIndex: (nextIndex + 1) % questionOrder.length,
     });
   },
 
-  // Determine question type based on word state and adaptive difficulty
-  // Word state 1: fill-in-blank only
-  // Word state 2: multiple choice only
-  // Word state 0 or 3: use adaptive difficulty algorithm
-  determineQuestionType: (wordState: WordState): QuestionType => {
-    const adaptiveStore = useAdaptiveDifficultyStore.getState();
-    return adaptiveStore.getOptimalQuestionType(wordState);
-  },
-
-  // Submit answer and update word state
+  // Submit answer and update tracker
   submitAnswer: (userAnswer: string) => {
-    const { currentQuestion, currentSession, lastWordIndex, answered, sessionStats } = get();
+    const { currentQuestion, currentSession, questionOrder, currentOrderIndex, correctTracker, wrongCountTracker } = get();
 
-    if (!currentQuestion || !currentSession || lastWordIndex === -1) {
+    if (!currentQuestion || !currentSession) {
       console.error('No active question');
       return { isCorrect: false, correctAnswer: '' };
     }
@@ -203,57 +190,35 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         ? validateMultipleChoice(userAnswer, correctAnswer)
         : validateFillInBlank(userAnswer, correctAnswer);
 
-    // Track if hint was used in this question (check if hints increased since last question)
-    const hintUsedInThisQuestion = false; // Hint tracking is separate via useHint()
+    // Get the current question index in the order
+    const prevIndex = (currentOrderIndex - 1 + questionOrder.length) % questionOrder.length;
 
     // Update stats
     if (isCorrect) {
       get().incrementCorrect();
-    } else {
-      get().incrementWrong();
-    }
 
-    // Update adaptive difficulty performance
-    const adaptiveStore = useAdaptiveDifficultyStore.getState();
-    adaptiveStore.updatePerformance(type, isCorrect);
+      // Mark this specific question as answered correctly
+      const newTracker = [...correctTracker];
+      newTracker[prevIndex] = 1;
+      set({ correctTracker: newTracker });
 
-    // Update word state progression (only if correct)
-    if (isCorrect) {
-      const currentWordState = answered[lastWordIndex];
-      let newWordState: WordState = currentWordState;
-
-      // Word state progression logic (from Android app)
-      if (type === 'multiple') {
-        // Multiple choice correct: state 0→1, state 2→3
-        if (currentWordState === 0) {
-          newWordState = 1;
-        } else if (currentWordState === 2) {
-          newWordState = 3;
-        }
-      } else if (type === 'fillin') {
-        // Fill-in-blank correct: state 0→2, state 1→3
-        if (currentWordState === 0) {
-          newWordState = 2;
-        } else if (currentWordState === 1) {
-          newWordState = 3;
-        }
-      }
-
-      // Update answered array
-      const newAnswered = [...answered];
-      newAnswered[lastWordIndex] = newWordState;
-      set({ answered: newAnswered });
-
-      // Save progress to progressStore
+      // Save progress to progressStore (mark as mastered)
       const progressStore = useProgressStore.getState();
       progressStore.updateWordProgress(
         word.id,
         currentSession.listId,
         currentSession.levelId,
-        newWordState,
+        3, // Mark as mastered
         isCorrect,
-        hintUsedInThisQuestion
+        false
       );
+    } else {
+      get().incrementWrong();
+
+      // Increment wrong count for this specific question
+      const newWrongCounts = [...wrongCountTracker];
+      newWrongCounts[prevIndex] = newWrongCounts[prevIndex] + 1;
+      set({ wrongCountTracker: newWrongCounts });
     }
 
     return { isCorrect, correctAnswer };
@@ -271,10 +236,27 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     return currentQuestion.word.definition;
   },
 
-  // Calculate quiz progress (sum of all word states)
-  calculateProgress: () => {
-    const { answered } = get();
-    return answered.reduce((sum, state) => sum + state, 0 as number) as number;
+  // Get the correct answer for "Help Me Out" feature
+  getCorrectAnswer: () => {
+    const { currentQuestion } = get();
+
+    if (!currentQuestion) {
+      return '';
+    }
+
+    return currentQuestion.word.word;
+  },
+
+  // Get the wrong answer count for the current question
+  getCurrentWordWrongCount: () => {
+    const { currentOrderIndex, wrongCountTracker } = get();
+
+    if (wrongCountTracker.length === 0) {
+      return 0;
+    }
+
+    const prevIndex = (currentOrderIndex - 1 + wrongCountTracker.length) % wrongCountTracker.length;
+    return wrongCountTracker[prevIndex] || 0;
   },
 
   // Increment hint count
@@ -343,9 +325,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     };
   },
 
-  // Check if quiz is complete (all words at state 3)
+  // Check if quiz is complete (all tracker values are 1)
   isQuizComplete: () => {
-    const { answered } = get();
-    return answered.every((state) => state === 3);
+    const { correctTracker } = get();
+    return correctTracker.length > 0 && correctTracker.every((val) => val === 1);
   },
 }));

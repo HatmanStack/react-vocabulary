@@ -1,0 +1,156 @@
+{
+  "id": "quantum",
+  "name": "Quantum",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "quantum-basic-0",
+          "word": "gliddery",
+          "definition": "slippery, difficult to hold firm",
+          "fillInBlank": "The _____ path through the icy forest proved treacherous, making for a less-than-pleasant hike."
+        },
+        {
+          "id": "quantum-basic-1",
+          "word": "horripilation",
+          "definition": "the act or sensation of having one's hair stand on end (goosebumps)",
+          "fillInBlank": "The horror movie's chilling soundtrack induced a distinct sense of _____ in the audience."
+        },
+        {
+          "id": "quantum-basic-2",
+          "word": "idoneous",
+          "definition": "appropriate; fitting; suitable",
+          "fillInBlank": "The candidate's impressive resume deemed him _____ for the position, despite his questionable hairstyle."
+        },
+        {
+          "id": "quantum-basic-3",
+          "word": "jactance",
+          "definition": "boasting, bragging",
+          "fillInBlank": "His habit of  _____ about his accomplishments made him rather tedious company at dinner parties."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "quantum-intermediate-0",
+          "word": "solipsism",
+          "definition": "the philosophical theory that only one's own mind is sure to exist",
+          "fillInBlank": "The philosopher's argument for _____ collapsed when he absentmindedly bumped into a chair, acknowledging the existence of the external world."
+        },
+        {
+          "id": "quantum-intermediate-1",
+          "word": "staid",
+          "definition": "sedate, respectable, and unadventurous",
+          "fillInBlank": "The couple's _____ lifestyle involved meticulously planned outfits, tasteful home decor, and a shared calendar app."
+        },
+        {
+          "id": "quantum-intermediate-2",
+          "word": "stolid",
+          "definition": "calm, dependable, and showing little emotion or animation",
+          "fillInBlank": "With a _____ expression, the security guard watched the teenager suspiciously eyeing the cookie display."
+        },
+        {
+          "id": "quantum-intermediate-3",
+          "word": "subjugate",
+          "definition": "to bring a person or country under control, especially by military force",
+          "fillInBlank": "The invading army sought to _____ the neighboring country, primarily to gain access to their superior pastry selection."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "quantum-advanced-0",
+          "word": "toady",
+          "definition": "a person who behaves obsequiously to someone important",
+          "fillInBlank": "The aspiring politician transformed into a shameless _____ in the presence of wealthy donors, eagerly agreeing with any opinion that might result in a campaign contribution."
+        },
+        {
+          "id": "quantum-advanced-1",
+          "word": "torpid",
+          "definition": "mentally or physically inactive; lethargic",
+          "fillInBlank": "After a large Thanksgiving meal, the family dog lay _____ on the rug, barely able to lift an eyelid."
+        },
+        {
+          "id": "quantum-advanced-2",
+          "word": "travesty",
+          "definition": "a false, absurd, or distorted representation of something",
+          "fillInBlank": "The school play was an unintentional _____ of Shakespeare, featuring a lightsaber duel and a tap-dancing chorus line."
+        },
+        {
+          "id": "quantum-advanced-3",
+          "word": "trenchant",
+          "definition": "(of language) vigorous or incisive in expression or style",
+          "fillInBlank": "The politician delivered a _____ speech against corruption, conveniently ignoring questions about his own questionable donations."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "quantum-expert-0",
+          "word": "kenspeckle",
+          "definition": "easily recognizable; conspicuous",
+          "fillInBlank": "His unusually bright tie made him rather _____ in the otherwise somber boardroom."
+        },
+        {
+          "id": "quantum-expert-1",
+          "word": "laodicean",
+          "definition": "lukewarm or indifferent, especially in religion or politics",
+          "fillInBlank": "The politician's _____ response to the crisis statement left the public both uninformed and mildly concerned."
+        },
+        {
+          "id": "quantum-expert-2",
+          "word": "mephitic",
+          "definition": "offensive to the smell; foul-smelling",
+          "fillInBlank": "A faint _____ odor lingered in the old library, hinting at forgotten lunches and decaying paperbacks."
+        },
+        {
+          "id": "quantum-expert-3",
+          "word": "nipcheese",
+          "definition": "a parsimonious person; a miser",
+          "fillInBlank": "The _____ meticulously tracked his bus fare expenses in a leather-bound ledger."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "quantum-professional-0",
+          "word": "recalcitrant",
+          "definition": "having an obstinately uncooperative attitude toward authority or discipline",
+          "fillInBlank": "The _____ toddler refused to eat, nap, or wear anything that wasn't covered in glitter."
+        },
+        {
+          "id": "quantum-professional-1",
+          "word": "swarthy",
+          "definition": "dark-skinned",
+          "fillInBlank": "The actor's naturally _____ complexion made his beach vacation photos rather alarming after a weekend out of the sun."
+        },
+        {
+          "id": "quantum-professional-2",
+          "word": "trundle",
+          "definition": "to move slowly and heavily, typically in a noisy or uneven way",
+          "fillInBlank": "The overloaded cart _____ noisily through the grocery aisles, leaving a trail of dislodged cereal boxes in its wake."
+        },
+        {
+          "id": "quantum-professional-3",
+          "word": "zoilism",
+          "definition": "harsh literary criticism; captious or ill-tempered criticism",
+          "fillInBlank": "The critic's review contained a touch of _____, suggesting the novel's potential was overshadowed by its overuse of adverbs."
+        }
+      ]
+    }
+  ]
+}

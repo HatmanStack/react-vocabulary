@@ -9,12 +9,13 @@ import { useEffect, useRef } from 'react';
 import { Audio, AVPlaybackStatus } from 'expo-av';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 
-// Sound file paths - these files should be added to src/assets/sounds/
-// See src/assets/sounds/README.md for requirements
+// Sound file paths
+// Note: These files need to be added to src/assets/sounds/
+// The app will work without them and log a warning
 const SOUND_FILES = {
-  correct: null, // Will be: require('@/assets/sounds/correct.mp3')
-  wrong: null, // Will be: require('@/assets/sounds/wrong.mp3')
-  complete: null, // Will be: require('@/assets/sounds/complete.mp3')
+  correct: require('@/assets/sounds/correct.mp3'),
+  wrong: require('@/assets/sounds/wrong.mp3'),
+  complete: require('@/assets/sounds/complete.mp3'),
 } as const;
 
 export function useSound() {
@@ -31,12 +32,6 @@ export function useSound() {
 
     async function loadSounds() {
       try {
-        // Check if sound files are available
-        if (!SOUND_FILES.correct || !SOUND_FILES.wrong || !SOUND_FILES.complete) {
-          console.log('Sound files not available. Add MP3 files to src/assets/sounds/');
-          return;
-        }
-
         // Set audio mode for playback
         await Audio.setAudioModeAsync({
           playsInSilentModeIOS: true,

@@ -1,0 +1,96 @@
+{
+  "id": "summit",
+  "name": "Summit",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "summit-basic-0",
+          "word": "umbrage",
+          "definition": "offense or annoyance",
+          "fillInBlank": "He took _____ at the slightest criticism, interpreting a raised eyebrow as a declaration of war."
+        },
+        {
+          "id": "summit-basic-1",
+          "word": "upbraid",
+          "definition": "to find fault with or reproach severely; to scold",
+          "fillInBlank": "The teacher had to _____ the student for attempting to build a potato-powered time machine in chemistry class."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "summit-intermediate-0",
+          "word": "utilitarian",
+          "definition": "designed to be useful or practical rather than attractive",
+          "fillInBlank": "The office building had a strictly _____ design, favoring gray carpets and flickering fluorescent lights."
+        },
+        {
+          "id": "summit-intermediate-1",
+          "word": "veracity",
+          "definition": "conformity to truth in statement; accuracy",
+          "fillInBlank": "His reputation for _____ preceded him, though occasionally he just happened to be telling the truth."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "summit-advanced-0",
+          "word": "vestige",
+          "definition": "a trace of something that is disappearing or no longer exists",
+          "fillInBlank": "The old photograph was the only _____ of a bustling town square, now replaced by a strip mall."
+        },
+        {
+          "id": "summit-advanced-1",
+          "word": "vicissitude",
+          "definition": "a change of circumstances or fortune, typically one that is unwelcome or unpleasant",
+          "fillInBlank": "The stock market's unpredictable _____ left investors feeling both exhilarated and vaguely nauseous."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "summit-expert-0",
+          "word": "hypnosis",
+          "definition": "a trancelike state that resembles sleep but is induced by another person whose suggestions are readily accepted by the subject",
+          "fillInBlank": "Under _____, the witness admitted his story of being abducted by tap-dancing aliens may have been slightly embellished for dramatic effect."
+        },
+        {
+          "id": "summit-expert-1",
+          "word": "spurious",
+          "definition": "not genuine in nature, authenticity, or origin; false",
+          "fillInBlank": "The art critic dismissed the forgery as a _____ imitation, noting the imposter's unfortunate overuse of glitter."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "summit-professional-0",
+          "word": "redoubtable",
+          "definition": "formidable; inspiring fear or awe",
+          "fillInBlank": "The _____ fortress overlooked the valley, though it was rumored to be haunted by the ghost of a disgruntled interior decorator."
+        },
+        {
+          "id": "summit-professional-1",
+          "word": "libertarian",
+          "definition": "an advocate or supporter of the principle of individual liberty, especially in thought and behavior",
+          "fillInBlank": "The _____ activist passionately argued for the right to wear mismatched socks and eat cereal for dinner."
+        }
+      ]
+    }
+  ]
+}

@@ -37,8 +37,30 @@ interface ListCardProps {
   onPress: () => void;
 }
 
+// Emoji mapping for each themed list
+const LIST_EMOJIS: Record<string, string> = {
+  phoenix: '🔥',
+  zenith: '⭐',
+  odyssey: '🚀',
+  cascade: '💧',
+  horizon: '🌅',
+  eclipse: '🌙',
+  mosaic: '🎨',
+  nexus: '🔗',
+  catalyst: '⚡',
+  prism: '🌈',
+  aurora: '✨',
+  pinnacle: '🏔️',
+  meridian: '🧭',
+  spectrum: '🎭',
+  vertex: '💎',
+  quantum: '⚛️',
+  nebula: '🌌',
+  summit: '🏆',
+};
+
 export const ListCard = React.memo(function ListCard({
-  id: _id,
+  id,
   name,
   description,
   progress = 0,
@@ -47,8 +69,8 @@ export const ListCard = React.memo(function ListCard({
 }: ListCardProps) {
   const theme = useTheme();
 
-  // Extract letter from name (e.g., "List A" → "A")
-  const letter = name.match(/[A-H]/i)?.[0]?.toUpperCase() || '?';
+  // Get emoji for this list
+  const emoji = LIST_EMOJIS[id] || '📚';
 
   return (
     <Pressable
@@ -60,26 +82,28 @@ export const ListCard = React.memo(function ListCard({
       <Card elevation="medium" style={styles.card}>
         <Card.Content>
           <View style={styles.cardHeader}>
-            <View style={[styles.letterBadge, { backgroundColor: theme.colors.primaryContainer }]}>
-              <Typography variant="heading2" style={{ color: theme.colors.onPrimaryContainer }}>
-                {letter}
-              </Typography>
-            </View>
-
-            <View style={styles.cardInfo}>
-              <Typography variant="heading3">{name}</Typography>
-              {description && (
-                <>
-                  <Spacer size="xs" />
-                  <Typography variant="caption" color="secondary">
-                    {description}
-                  </Typography>
-                </>
-              )}
-            </View>
+            <Typography variant="heading1" style={styles.emoji}>
+              {emoji}
+            </Typography>
           </View>
 
           <Spacer size="md" />
+
+          <View style={styles.cardInfo}>
+            <Typography variant="heading2" style={styles.centeredText}>
+              {name}
+            </Typography>
+            {description && (
+              <>
+                <Spacer size="xs" />
+                <Typography variant="caption" color="secondary" style={styles.centeredText}>
+                  {description}
+                </Typography>
+              </>
+            )}
+          </View>
+
+          <Spacer size="lg" />
 
           <ProgressBar
             progress={progress}
@@ -100,18 +124,18 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  letterBadge: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 16,
+    paddingTop: 8,
+  },
+  emoji: {
+    fontSize: 56,
+    textAlign: 'center',
   },
   cardInfo: {
-    flex: 1,
+    alignItems: 'center',
+  },
+  centeredText: {
+    textAlign: 'center',
   },
 });

@@ -1,0 +1,156 @@
+{
+  "id": "mosaic",
+  "name": "Mosaic",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "mosaic-basic-0",
+          "word": "accede",
+          "definition": "assent or agree to a demand, request, or treaty",
+          "fillInBlank": "Later, in the ditch, he ______ they did have the right of way"
+        },
+        {
+          "id": "mosaic-basic-1",
+          "word": "derivative",
+          "definition": "imitative of the work of another person or artist and lacking originality",
+          "fillInBlank": "The pop song, with its predictable lyrics and catchy-yet-annoying tune, was painfully _____  of countless other pop songs."
+        },
+        {
+          "id": "mosaic-basic-2",
+          "word": "exigent",
+          "definition": "pressing; demanding",
+          "fillInBlank": "The _____  leak in the roof demanded immediate attention, especially as the weather report involved suspiciously large rain clouds and a possible frognado."
+        },
+        {
+          "id": "mosaic-basic-3",
+          "word": "expedient",
+          "definition": "convenient for a particular purpose (although perhaps improper or immoral)",
+          "fillInBlank": "Though morally questionable, bribing the pigeons with stale popcorn proved an _____ way to reclaim the park bench."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "mosaic-intermediate-0",
+          "word": "eclectic",
+          "definition": "deriving ideas, styles, or tastes from a broad and diverse range of sources",
+          "fillInBlank": "The artist had an _____ style, with her paintings featuring everything from dancing hot dogs to philosophical cacti sporting tiny spectacles."
+        },
+        {
+          "id": "mosaic-intermediate-1",
+          "word": "egregious",
+          "definition": "outstandingly bad; shocking",
+          "fillInBlank": "The restaurant's attempt at fusion cuisine was an _____ disaster, featuring sushi pizza, spaghetti tacos, and a dessert resembling a pineapple wearing a beret."
+        },
+        {
+          "id": "mosaic-intermediate-2",
+          "word": "fetter",
+          "definition": "a chain or shackle placed on the feet (often used in plural); anything that confines or restrains",
+          "fillInBlank": "The prisoner desperately rattled his _____ , but the sound was lost in the wind and the guard's questionable humming."
+        },
+        {
+          "id": "mosaic-intermediate-3",
+          "word": "flagrant",
+          "definition": "conspicuously or obviously offensive",
+          "fillInBlank": "The politician's _____ disregard for the truth was as obvious as his blindingly orange hairpiece."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "mosaic-advanced-0",
+          "word": "enfranchise",
+          "definition": "give the right to vote to",
+          "fillInBlank": "The determined activists worked tirelessly to _____ underrepresented groups, ensuring their voices would be heard in the upcoming election."
+        },
+        {
+          "id": "mosaic-advanced-1",
+          "word": "engender",
+          "definition": "cause or give rise to (a feeling, situation, or condition)",
+          "fillInBlank": "His disastrous cooking attempts tended to _____ feelings of horror, a frantic search for takeout menus, and the suspicion that he could somehow burn water."
+        },
+        {
+          "id": "mosaic-advanced-2",
+          "word": "hapless",
+          "definition": "unfortunate; unlucky",
+          "fillInBlank": "The _____ burglar tripped over his own shoelaces, landed face-first in a pie, and was then promptly apprehended by a confused basset hound."
+        },
+        {
+          "id": "mosaic-advanced-3",
+          "word": "hegemony",
+          "definition": "leadership or dominance, especially by one country or social group over others",
+          "fillInBlank": "The fashion designer sought sartorial _____ over the city, aiming to establish the dominance of neon yellow and questionable animal prints."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "mosaic-expert-0",
+          "word": "erudite",
+          "definition": "having or showing great knowledge or learning",
+          "fillInBlank": "The _____ scholar could quote obscure 12th-century poetry, identify the mating calls of extinct birds, yet remained utterly baffled by the concept of self-checkout machines."
+        },
+        {
+          "id": "mosaic-expert-1",
+          "word": "resplendent",
+          "definition": "attractive and impressive through being richly colorful or sumptuous",
+          "fillInBlank": "Dressed in a golden gown, a tiara, and enough glitter to blind a satellite, the princess was positively _____ for her visit to the local turnip-carving festival."
+        },
+        {
+          "id": "mosaic-expert-2",
+          "word": "fervent",
+          "definition": "having or displaying a passionate intensity",
+          "fillInBlank": "He was a _____ believer in the healing power of cheese, leading to a rather pungent refrigerator and a notable lack of mice."
+        },
+        {
+          "id": "mosaic-expert-3",
+          "word": "fortitude",
+          "definition": "courage in pain or adversity",
+          "fillInBlank": "With remarkable _____, the lost hiker faced down a startled chipmunk, two suspicious squirrels, and a persistent mosquito."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "mosaic-professional-0",
+          "word": "exhort",
+          "definition": "to strongly urge (someone) to do something",
+          "fillInBlank": "The motivational speaker enthusiastically _____ the virtues of waking up at 4 AM, even on those days that involved rain, grumpy cats, and a distinct lack of coffee."
+        },
+        {
+          "id": "mosaic-professional-1",
+          "word": "execrable",
+          "definition": "extremely bad or unpleasant",
+          "fillInBlank": "The comedian's attempt at stand-up was so _____  that the audience resorted to throwing vegetables and attempting to communicate their displeasure through mime."
+        },
+        {
+          "id": "mosaic-professional-2",
+          "word": "expiate",
+          "definition": "to make amends or reparation for",
+          "fillInBlank": "To _____  his guilt for eating all the cookies, he offered to do the dishes (though his track record on that front wasn't exactly stellar)."
+        },
+        {
+          "id": "mosaic-professional-3",
+          "word": "expunge",
+          "definition": "to erase or obliterate completely",
+          "fillInBlank": "The frustrated editor tried to _____  several misspelled words, a questionable yodeling reference, and a strangely detailed ode to cheese from the manuscript."
+        }
+      ]
+    }
+  ]
+}

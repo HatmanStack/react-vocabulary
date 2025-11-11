@@ -6,14 +6,11 @@
 
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, FlatList, useWindowDimensions } from 'react-native';
-import { Button, IconButton } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Button, IconButton, useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 import { OnboardingSlide } from '../components/OnboardingSlide';
 import { Spacer } from '@/shared/ui';
-
-type Props = StackScreenProps<RootStackParamList, 'Onboarding'>;
 
 interface Slide {
   id: string;
@@ -58,7 +55,9 @@ const SLIDES: Slide[] = [
   },
 ];
 
-export default function OnboardingScreen({ navigation }: Props) {
+export default function OnboardingScreen() {
+  const router = useRouter();
+  const theme = useTheme();
   const { width } = useWindowDimensions();
   const settingsStore = useSettingsStore();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -70,7 +69,7 @@ export default function OnboardingScreen({ navigation }: Props) {
     if (isLastSlide) {
       // Mark onboarding as completed and navigate to Home
       settingsStore.setOnboardingCompleted(true);
-      navigation.replace('Home');
+      router.replace('/');
     } else {
       // Scroll to next slide
       const nextIndex = currentIndex + 1;
@@ -81,7 +80,7 @@ export default function OnboardingScreen({ navigation }: Props) {
 
   const handleSkip = () => {
     settingsStore.setOnboardingCompleted(true);
-    navigation.replace('Home');
+    router.replace('/');
   };
 
   const handleScroll = (event: any) => {
@@ -91,7 +90,7 @@ export default function OnboardingScreen({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {/* Skip Button */}
       {!isLastSlide && (
         <View style={styles.skipContainer}>
@@ -125,7 +124,17 @@ export default function OnboardingScreen({ navigation }: Props) {
         {/* Progress Dots */}
         <View style={styles.dotsContainer}>
           {SLIDES.map((_, index) => (
-            <View key={index} style={[styles.dot, index === currentIndex && styles.activeDot]} />
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                { backgroundColor: theme.colors.outlineVariant },
+                index === currentIndex && [
+                  styles.activeDot,
+                  { backgroundColor: theme.colors.primary },
+                ],
+              ]}
+            />
           ))}
         </View>
 
@@ -147,7 +156,6 @@ export default function OnboardingScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
   },
   skipContainer: {
     position: 'absolute',
@@ -168,11 +176,9 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#E0E0E0',
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: '#6200EE',
     width: 24,
   },
   buttonContainer: {

@@ -1,12 +1,12 @@
 /**
  * Progress Store
  *
- * Manages user progress tracking with AsyncStorage persistence.
+ * Manages user progress tracking.
  * Tracks word states, best scores, and all-time statistics.
+ * Progress is persisted to AsyncStorage directly (without Zustand persist middleware).
  */
 
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   WordProgress,
@@ -15,8 +15,9 @@ import {
   WordState,
   Achievement,
 } from '@/shared/types';
-import { STORAGE_KEYS } from '@/shared/lib/storage';
 import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
+
+const STORAGE_KEY = 'vocabulary-progress';
 
 interface ProgressState extends UserProgress {
   // Loading state
@@ -85,6 +86,8 @@ interface ProgressState extends UserProgress {
   // Utility
   _hydrated: boolean;
   setHydrated: () => void;
+  loadFromStorage: () => Promise<void>;
+  saveToStorage: () => Promise<void>;
 }
 
 const initialState: Omit<
@@ -127,13 +130,53 @@ const initialState: Omit<
   lastSyncedAt: null,
 };
 
-export const useProgressStore = create<ProgressState>()(
-  persist(
-    (set, get) => ({
-      ...initialState,
-      _hydrated: false,
+// Helper to save state to AsyncStorage
+const saveStateToStorage = async (state: ProgressState) => {
+  try {
+    const dataToSave = {
+      currentListId: state.currentListId,
+      currentLevelId: state.currentLevelId,
+      listLevelProgress: state.listLevelProgress,
+      globalStats: state.globalStats,
+      achievements: state.achievements,
+      dailyProgress: state.dailyProgress,
+      lastSyncedAt: state.lastSyncedAt,
+    };
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+  } catch (error) {
+    console.error('Failed to save progress to storage:', error);
+  }
+};
 
-      setHydrated: () => set({ _hydrated: true }),
+export const useProgressStore = create<ProgressState>()((set, get) => ({
+  ...initialState,
+  _hydrated: false,
+
+  setHydrated: () => set({ _hydrated: true }),
+
+  // Load progress from AsyncStorage
+  loadFromStorage: async () => {
+    try {
+      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const data = JSON.parse(stored);
+        set({
+          ...data,
+          _hydrated: true,
+        });
+      } else {
+        set({ _hydrated: true });
+      }
+    } catch (error) {
+      console.error('Failed to load progress from storage:', error);
+      set({ _hydrated: true });
+    }
+  },
+
+  // Save progress to AsyncStorage
+  saveToStorage: async () => {
+    await saveStateToStorage(get());
+  },
 
       // Update word progress
       updateWordProgress: (wordId, listId, levelId, newState, isCorrect, hintUsed) => {
@@ -195,6 +238,9 @@ export const useProgressStore = create<ProgressState>()(
           dailyProgress: updatedDailyProgress,
           lastSyncedAt: now,
         });
+
+        // Save to storage after update
+        saveStateToStorage(get());
       },
 
       // Get word progress
@@ -265,6 +311,9 @@ export const useProgressStore = create<ProgressState>()(
               },
             },
           });
+
+          // Save to storage after update
+          saveStateToStorage(get());
         }
       },
 
@@ -286,6 +335,9 @@ export const useProgressStore = create<ProgressState>()(
             totalWordsLearned: get().getTotalWordsLearned(),
           },
         });
+
+        // Save to storage after update
+        saveStateToStorage(get());
       },
 
       // Get global stats
@@ -367,6 +419,9 @@ export const useProgressStore = create<ProgressState>()(
         set({
           listLevelProgress: newListLevelProgress,
         });
+
+        // Save to storage after reset
+        saveStateToStorage(get());
       },
 
       // Reset all progress
@@ -375,6 +430,11 @@ export const useProgressStore = create<ProgressState>()(
           ...initialState,
           _hydrated: true,
         });
+
+        // Clear storage
+        AsyncStorage.removeItem(STORAGE_KEY).catch((error) =>
+          console.error('Failed to clear storage:', error)
+        );
       },
 
       // Check and unlock achievements
@@ -399,6 +459,9 @@ export const useProgressStore = create<ProgressState>()(
           set({
             achievements: [...currentAchievements, ...newlyUnlocked],
           });
+
+          // Save to storage after unlocking achievements
+          saveStateToStorage(get());
         }
 
         return newlyUnlocked;
@@ -423,22 +486,4 @@ export const useProgressStore = create<ProgressState>()(
         const state = get();
         return (state.achievements || []).filter((a) => a.isUnlocked);
       },
-    }),
-    {
-      name: STORAGE_KEYS.USER_PROGRESS,
-      storage: createJSONStorage(() => AsyncStorage),
-      onRehydrateStorage: () => (state) => {
-        state?.setHydrated();
-      },
-      partialize: (state) => ({
-        currentListId: state.currentListId,
-        currentLevelId: state.currentLevelId,
-        listLevelProgress: state.listLevelProgress,
-        globalStats: state.globalStats,
-        achievements: state.achievements,
-        dailyProgress: state.dailyProgress,
-        lastSyncedAt: state.lastSyncedAt,
-      }),
-    }
-  )
-);
+}));

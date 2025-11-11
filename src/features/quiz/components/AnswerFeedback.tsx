@@ -108,6 +108,8 @@ export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerF
           transform: [{ scale: scaleAnim }],
         },
       ]}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
     >
       <Icon source={iconName} size={40} color="#FFFFFF" />
       <Typography variant="heading2" style={styles.text}>
@@ -120,9 +122,8 @@ export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerF
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: '40%',
+    top: '50%',
     left: '50%',
-    transform: [{ translateX: -100 }, { translateY: -50 }],
     width: 200,
     paddingVertical: 24,
     paddingHorizontal: 32,
@@ -135,6 +136,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     zIndex: 1000,
+    // Center using marginLeft/marginTop instead of transform
+    // to avoid conflicts with animated transform
+    marginLeft: -100, // Half of width (200/2)
+    marginTop: -60,   // Approximate half of height
   },
   text: {
     color: '#FFFFFF',

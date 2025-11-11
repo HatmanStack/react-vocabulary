@@ -1,14 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, ScrollView, Animated } from 'react-native';
-import { Appbar } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Appbar, useTheme } from 'react-native-paper';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { getListById } from '../utils/vocabularyLoader';
 import { LevelButton } from '../components/LevelButton';
 import { Typography, Spacer } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
-
-type Props = StackScreenProps<RootStackParamList, 'Difficulty'>;
 
 // Map level IDs to difficulty ratings
 const LEVEL_DIFFICULTY_MAP: Record<string, 1 | 2 | 3 | 4 | 5> = {
@@ -19,8 +16,10 @@ const LEVEL_DIFFICULTY_MAP: Record<string, 1 | 2 | 3 | 4 | 5> = {
   professional: 5,
 };
 
-export default function DifficultyScreen({ navigation, route }: Props) {
-  const { listId } = route.params;
+export default function DifficultyScreen() {
+  const router = useRouter();
+  const theme = useTheme();
+  const { listId } = useLocalSearchParams<{ listId: string }>();
   const list = getListById(listId);
   const progressStore = useProgressStore();
 
@@ -53,9 +52,9 @@ export default function DifficultyScreen({ navigation, route }: Props) {
 
   if (!list) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <Appbar.Header>
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
+          <Appbar.BackAction onPress={() => router.back()} />
           <Appbar.Content title="List Not Found" />
         </Appbar.Header>
         <View style={styles.errorContainer}>
@@ -66,9 +65,9 @@ export default function DifficultyScreen({ navigation, route }: Props) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title={list.name} />
       </Appbar.Header>
 
@@ -105,7 +104,7 @@ export default function DifficultyScreen({ navigation, route }: Props) {
                   wordCount={wordCount}
                   difficulty={difficulty}
                   completionStatus={`${masteredCount} / ${wordCount} mastered`}
-                  onPress={() => navigation.navigate('Quiz', { listId, levelId: level.id })}
+                  onPress={() => router.push({ pathname: '/quiz', params: { listId, levelId: level.id } })}
                 />
               </Animated.View>
             );

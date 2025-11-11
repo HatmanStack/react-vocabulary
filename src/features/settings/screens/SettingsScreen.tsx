@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Platform, Alert, TextInput } from 'react-native';
-import { Appbar, Dialog, Portal, Menu } from 'react-native-paper';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '@/shared/types';
+import { Appbar, Dialog, Portal, Menu, useTheme } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 import { SettingItem } from '../components/SettingItem';
 import { Card, Typography, Spacer, Button } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 import { exportProgress, importProgress, applyImportedProgress } from '../utils/progressExport';
 
-type Props = StackScreenProps<RootStackParamList, 'Settings'>;
-
-export default function SettingsScreen({ navigation }: Props) {
+export default function SettingsScreen() {
+  const router = useRouter();
   const progressStore = useProgressStore();
   const settingsStore = useSettingsStore();
+  const theme = useTheme();
 
   // Local state for dialogs
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
@@ -23,7 +22,7 @@ export default function SettingsScreen({ navigation }: Props) {
   const [themeMenuVisible, setThemeMenuVisible] = useState(false);
 
   // Get settings from store
-  const theme = settingsStore.theme;
+  const themeMode = settingsStore.theme;
   const soundEnabled = settingsStore.soundEnabled;
   const hapticsEnabled = settingsStore.hapticsEnabled;
 
@@ -46,7 +45,7 @@ export default function SettingsScreen({ navigation }: Props) {
   const confirmResetAllProgress = () => {
     progressStore.resetAllProgress();
     setResetDialogVisible(false);
-    navigation.navigate('Home');
+    router.push('/');
   };
 
   const handleExportProgress = async () => {
@@ -82,16 +81,16 @@ export default function SettingsScreen({ navigation }: Props) {
       setImportData('');
       setImportPreview(null);
       Alert.alert('Success', 'Progress imported successfully!');
-      navigation.navigate('Home');
+      router.push('/');
     } else {
       Alert.alert('Error', 'Failed to import progress');
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Settings" />
       </Appbar.Header>
 
@@ -111,7 +110,7 @@ export default function SettingsScreen({ navigation }: Props) {
                 <SettingItem
                   label="Theme"
                   type="select"
-                  value={theme.charAt(0).toUpperCase() + theme.slice(1)}
+                  value={themeMode.charAt(0).toUpperCase() + themeMode.slice(1)}
                   onChange={handleThemeChange}
                   showDivider={false}
                 />
@@ -227,7 +226,7 @@ export default function SettingsScreen({ navigation }: Props) {
           <Card elevation="low" style={styles.card}>
             <View style={styles.infoRow}>
               <Typography variant="body">Help & FAQ</Typography>
-              <Button variant="text" onPress={() => navigation.navigate('Help')}>
+              <Button variant="text" onPress={() => router.push('/help')}>
                 View
               </Button>
             </View>
@@ -314,7 +313,15 @@ export default function SettingsScreen({ navigation }: Props) {
             <Typography variant="body">Paste your exported progress data below:</Typography>
             <Spacer size="md" />
             <TextInput
-              style={styles.importInput}
+              style={[
+                styles.importInput,
+                {
+                  borderColor: theme.colors.outline,
+                  backgroundColor: theme.colors.surface,
+                  color: theme.colors.onSurface,
+                },
+              ]}
+              placeholderTextColor={theme.colors.onSurfaceVariant}
               multiline
               numberOfLines={6}
               placeholder='{"version": "1.0.0", ...}'
@@ -353,7 +360,6 @@ export default function SettingsScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   scrollView: {
     flex: 1,
@@ -395,7 +401,6 @@ const styles = StyleSheet.create({
   },
   importInput: {
     borderWidth: 1,
-    borderColor: '#E0E0E0',
     borderRadius: 8,
     padding: 12,
     fontFamily: 'monospace',

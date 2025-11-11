@@ -1,0 +1,156 @@
+{
+  "id": "nebula",
+  "name": "Nebula",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "nebula-basic-0",
+          "word": "pauciloquent",
+          "definition": "using few words; reserved",
+          "fillInBlank": "The notoriously _____ witness offered only \"yes\" or \"no\" answers, leaving the courtroom buzzing with speculation."
+        },
+        {
+          "id": "nebula-basic-1",
+          "word": "quiddity",
+          "definition": "the essence of something; what makes something the kind of thing it is",
+          "fillInBlank": "The philosopher pondered the _____ of a table, questioning whether it was truly a table if no one was there to dine upon it."
+        },
+        {
+          "id": "nebula-basic-2",
+          "word": "riant",
+          "definition": "cheerful and merry",
+          "fillInBlank": "The hostess's _____ smile seemed a bit strained after hours of forced cheerfulness."
+        },
+        {
+          "id": "nebula-basic-3",
+          "word": "saccadic",
+          "definition": "relating to the rapid movement of the eyes in short jerks",
+          "fillInBlank": "The patient's _____ eye movements made the optometrist's examination surprisingly difficult."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "nebula-intermediate-0",
+          "word": "surfeit",
+          "definition": "an excessive amount of something, especially food or drink",
+          "fillInBlank": "After a Thanksgiving _____ featuring three kinds of pie, a deep sense of regret settled upon the guests."
+        },
+        {
+          "id": "nebula-intermediate-1",
+          "word": "vaticinate",
+          "definition": "to prophesy or foretell the future",
+          "fillInBlank": "The psychic laid out her tarot cards, preparing to _____ a future filled with unexpected parking tickets and questionable haircuts."
+        },
+        {
+          "id": "nebula-intermediate-2",
+          "word": "vilify",
+          "definition": "to speak ill of; defame; slander",
+          "fillInBlank": "The rival politician sought to _____ his opponent with a series of thinly-veiled accusations about her questionable taste in hats."
+        },
+        {
+          "id": "nebula-intermediate-3",
+          "word": "virtuoso",
+          "definition": "a person highly skilled in music or another artistic pursuit",
+          "fillInBlank": "The child _____ displayed a talent for both the violin and breaking windows with a poorly-aimed slingshot."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "nebula-advanced-0",
+          "word": "vitriolic",
+          "definition": "filled with bitter criticism or malice",
+          "fillInBlank": "The disgruntled theater critic penned a _____ review, comparing the play to a root canal without anesthesia."
+        },
+        {
+          "id": "nebula-advanced-1",
+          "word": "vituperate",
+          "definition": "to scold or criticize with harsh language",
+          "fillInBlank": "The coach _____ the team after their dismal performance, his words echoing unpleasantly off the locker room walls."
+        },
+        {
+          "id": "nebula-advanced-2",
+          "word": "vociferous",
+          "definition": "loud and forceful in speech or expression",
+          "fillInBlank": "The protesters were undeniably _____, their chants reverberating through the city streets."
+        },
+        {
+          "id": "nebula-advanced-3",
+          "word": "wanton",
+          "definition": "done deliberately for no good reason; reckless",
+          "fillInBlank": "The teenagers' _____ act of spray-painting a mustache on the school statue was met with less amusement than they anticipated."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "nebula-expert-0",
+          "word": "wily",
+          "definition": "skilled at gaining an advantage, especially deceitfully",
+          "fillInBlank": "The _____ con artist charmed his way into the hearts (and wallets) of unsuspecting victims."
+        },
+        {
+          "id": "nebula-expert-1",
+          "word": "winsome",
+          "definition": "attractive or appealing in appearance or character",
+          "fillInBlank": "The puppy's _____ expression quickly melted the hearts of even the most committed cat-lovers."
+        },
+        {
+          "id": "nebula-expert-2",
+          "word": "yoke",
+          "definition": "a wooden crosspiece fastened over the necks of two animals; a symbol of oppression or servitude",
+          "fillInBlank": "The revolution sought to throw off the _____ of the oppressive regime, yearning for freedom."
+        },
+        {
+          "id": "nebula-expert-3",
+          "word": "zephyr",
+          "definition": "a soft gentle breeze",
+          "fillInBlank": "A gentle _____ rustled the leaves, offering a momentary respite from the summer heat."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "nebula-professional-0",
+          "word": "trite",
+          "definition": "overused and consequently of little import; lacking originality or freshness",
+          "fillInBlank": "The motivational speaker's speech relied on _____ clichés, leaving the audience feeling uninspired and slightly sleepy."
+        },
+        {
+          "id": "nebula-professional-1",
+          "word": "truculent",
+          "definition": "eager or quick to argue or fight; aggressively defiant",
+          "fillInBlank": "The customer service representative faced a _____ customer who insisted that his pet parrot qualified for a frequent flyer card."
+        },
+        {
+          "id": "nebula-professional-2",
+          "word": "turpitude",
+          "definition": "depravity, wickedness",
+          "fillInBlank": "The politician's history of scandals hinted at a deep moral _____, making his promises of honesty ring rather hollow."
+        },
+        {
+          "id": "nebula-professional-3",
+          "word": "ubiquitous",
+          "definition": "present, appearing, or found everywhere",
+          "fillInBlank": "The internet meme spread with _____ speed, appearing on every social media platform and even inexplicably on Aunt Ethel's embroidered pillows."
+        }
+      ]
+    }
+  ]
+}

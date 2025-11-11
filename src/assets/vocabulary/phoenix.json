@@ -1,0 +1,156 @@
+{
+  "id": "phoenix",
+  "name": "Phoenix",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "phoenix-basic-0",
+          "word": "bane",
+          "definition": "a cause of great distress or annoyance",
+          "fillInBlank": "Mosquitoes, with their annoying buzz and itchy bites, were the ______ of every delightful summer evening."
+        },
+        {
+          "id": "phoenix-basic-1",
+          "word": "bashful",
+          "definition": "shy, reticent, or easily embarrassed",
+          "fillInBlank": "The ______ puppy hid behind the sofa, peeking out only occasionally with big, nervous eyes and a hesitantly wagging tail."
+        },
+        {
+          "id": "phoenix-basic-2",
+          "word": "abject",
+          "definition": "(of something bad) experienced or present to the maximum degree",
+          "fillInBlank": "Timmy was _____ after falling off the jungle gym and into the lava"
+        },
+        {
+          "id": "phoenix-basic-3",
+          "word": "abscond",
+          "definition": "leave hurriedly and secretly, typically to avoid detection of or arrest for an unlawful action",
+          "fillInBlank": "Seeking sun over spreadsheets, the overworked employee simply _______, leaving behind nothing but a lingering whiff of rebellion."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "phoenix-intermediate-0",
+          "word": "cajole",
+          "definition": "to persuade someone to do something by sustained coaxing or flattery",
+          "fillInBlank": "With promises of extra treats and endless belly rubs, the dog walker attempted to ______ the stubborn basset hound out from under the sofa."
+        },
+        {
+          "id": "phoenix-intermediate-1",
+          "word": "accost",
+          "definition": "approach and address (someone) boldly or aggressively",
+          "fillInBlank": "The charity worker tried to _____  passersby on the street for donations, but after the third failed attempt, had to revise her strategy to involve less eye contact and a faster walking pace."
+        },
+        {
+          "id": "phoenix-intermediate-2",
+          "word": "adamant",
+          "definition": "refusing to be persuaded or to change one's mind",
+          "fillInBlank": "The toddler stood with ______ resolve, arms crossed, refusing to eat broccoli even when it was disguised as a tiny tree, a landing pad for superheroes, or a dinosaur snack."
+        },
+        {
+          "id": "phoenix-intermediate-3",
+          "word": "candor",
+          "definition": "the quality of being open and honest in expression",
+          "fillInBlank": "Disdaining deception, the CEO opted for brutal ______, informing the board that their latest business venture shared a striking resemblance to a dumpster fire fueled by questionable hair gels."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "phoenix-advanced-0",
+          "word": "affluent",
+          "definition": "having a great deal of money or wealth",
+          "fillInBlank": "The ______ neighborhood was filled with sprawling mansions, suspiciously well-groomed poodles, and a distinct lack of anyone willing to admit to ever having eaten instant noodles."
+        },
+        {
+          "id": "phoenix-advanced-1",
+          "word": "cavort",
+          "definition": "to jump or dance around excitedly",
+          "fillInBlank": "The enthusiastic puppy continued to ______ around the house, blissfully unaware of the potential damage caused by its wagging tail and questionable understanding of valuable vases."
+        },
+        {
+          "id": "phoenix-advanced-2",
+          "word": "alacrity",
+          "definition": "brisk and cheerful readiness",
+          "fillInBlank": "The enthusiastic puppy greeted his returning owner with remarkable ______, bouncing around the room with enough energy to power a small village and a rather slobbery tennis ball."
+        },
+        {
+          "id": "phoenix-advanced-3",
+          "word": "circumscribe",
+          "definition": "to restrict something within limits",
+          "fillInBlank": "The ambitious toddler, determined to reach the cookie jar, found his explorations ________ by the kitchen gate and his lack of opposable thumbs."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "phoenix-expert-0",
+          "word": "arbitrary",
+          "definition": "based on random choice or personal whim, rather than any reason or system",
+          "fillInBlank": "The art critic's choices seemed entirely ______, declaring a piece of crumpled paper a masterpiece and dismissing an actual sculpture as \"too representational of reality.\""
+        },
+        {
+          "id": "phoenix-expert-1",
+          "word": "corpulence",
+          "definition": "the state of being fat; obesity",
+          "fillInBlank": "After a month-long voyage with the ship's chef and his questionable culinary inventions, the sailor's newfound _________ made getting back into his uniform a daunting challenge."
+        },
+        {
+          "id": "phoenix-expert-2",
+          "word": "arcane",
+          "definition": "understood by few; mysterious or secret",
+          "fillInBlank": "The ancient spell was shrouded in ______ language, its meaning decipherable only by those with a fondness for dusty books, questionable potions, and long naps."
+        },
+        {
+          "id": "phoenix-expert-3",
+          "word": "dearth",
+          "definition": "a scarcity or lack of something",
+          "fillInBlank": "A sudden _______ of hair ties caused the hero's impeccably styled mane to collapse into disarray just before the ball, leading to a desperate quest involving a lint brush and a suspiciously hairy squirrel."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "phoenix-professional-0",
+          "word": "anathema",
+          "definition": "something or someone that one vehemently dislikes",
+          "fillInBlank": "To the rebellious teenager, chores and the mere concept of mornings were an absolute ______, to be avoided at all costs."
+        },
+        {
+          "id": "phoenix-professional-1",
+          "word": "consign",
+          "definition": "deliver (something) to a person's custody, typically for sale",
+          "fillInBlank": "The antique dealer, tired of haggling over questionable lawn ornaments, decided to simply _______ the giant porcelain gnome to the back of his shop, hoping it would disappear mysteriously."
+        },
+        {
+          "id": "phoenix-professional-2",
+          "word": "antiseptic",
+          "definition": "substances that act against infection by inhibiting the growth of microorganisms",
+          "fillInBlank": "With its potent smell and suspicious ability to make even the tiniest paper cut sting, the old-fashioned ______ did its job, though perhaps with excessive enthusiasm."
+        },
+        {
+          "id": "phoenix-professional-3",
+          "word": "contrite",
+          "definition": "feeling or expressing remorse or penitence; affected by guilt",
+          "fillInBlank": "The formerly mischievous puppy, after chewing through a suspiciously important-looking document, gazed up at his owner with big, _______ eyes and a wagging tail, hoping that cuteness would be an acceptable form of currency."
+        }
+      ]
+    }
+  ]
+}

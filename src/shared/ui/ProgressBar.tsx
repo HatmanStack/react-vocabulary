@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   label: {
-    marginTop: 4,
+    marginBottom: 8,
     textAlign: 'center',
   },
 });

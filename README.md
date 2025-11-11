@@ -1,76 +1,96 @@
-# Vocabulary (React Native)
-
+<div align="center">
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![React Native](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Expo](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-This project is a complete React Native (Expo) migration of the original [Android Vocabulary application](https://github.com/HatmanStack/android-vocabulary).
+# Vocabulary Learning App
 
-The Vocabulary app helps users improve their vocabulary by presenting over 300 words in groups of 10 with multiple-choice and fill-in-the-blank options. It tracks performance by recording incorrect answers and hints used, helping users monitor their progress.
+A comprehensive cross-platform vocabulary learning application built with React Native and Expo. This is a migration of the original [Android Vocabulary application](https://github.com/HatmanStack/android-vocabulary), expanded with new features.
+
+Master 360+ curated words through interactive quizzes, track your progress with detailed statistics, and earn achievements as you expand your vocabulary.
+
+<p align="center">
+  <img width="600" src="assets/banner.png" alt="Vocabulary App Banner">
+</p>
+</div>
+---
 
 ## ✨ Features
 
-* **Cross-Platform:** Runs on both iOS and Android from a single codebase.
-* **300+ Words:** A curated list of over 300 words to grow your vocabulary.
-* **Bite-Sized Learning:** Words are presented in groups of 10 to facilitate retention.
-* **Multiple Question Types:** Includes both multiple-choice and fill-in-the-blank formats.
-* **Performance Tracking:** Monitors progress over time by tracking incorrect answers and hints used.
+* **Comprehensive Content:** 360+ words across 18 themed lists, from Basic to Professional.
+* **Dual Question Formats:** Master words with both multiple-choice and fill-in-the-blank quizzes.
+* **Contextual Learning:** Each word includes a definition and a unique, memorable example sentence.
+* **Progress Tracking:** Detailed statistics on correct/incorrect answers, hints used, and time spent.
+* **Achievement System:** Unlock badges and celebrate your learning milestones.
+* **Premium Experience:** Includes light & dark themes, haptic feedback, and smooth animations.
+* **Analytics:** Visualize your learning journey with charts and progress data.
+* **Cross-Platform:** Single codebase for iOS, Android, and Web via Expo.
 
-## 📸 Screenshots
-
-*(Add new screenshots of the React Native app here)*
-
-| Home Screen | Multiple Choice | Fill in the Blank | Progress |
-|:---:|:---:|:---:|:---:|
-| 
-
-[Image of App Home]
- |  |  |  |
+---
 
 ## 💻 Tech Stack
 
 * **Framework:** [React Native](https://reactnative.dev/)
 * **Platform:** [Expo](https://expo.dev/)
-* **Language:** JavaScript (or TypeScript)
-* **Navigation:** [React Navigation](https://reactnavigation.org/)
-* **Local Storage:** [Expo SQLite](https://docs.expo.dev/versions/latest/sdk/sqlite/) (for performance/data)
-* **State Management:** [React Context](https://react.dev/learn/passing-data-deeply-with-context) (or Zustand/Redux)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Navigation:** [Expo Router](https://docs.expo.dev/router/introduction/)
+* **UI Library:** [React Native Paper](https://reactnativepaper.com/)
+* **State Management:** [Zustand](https://github.com/pmndrs/zustand)
+* **Storage:** [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+* **Charts:** [React Native Chart Kit](https://github.com/indiespirit/react-native-chart-kit)
+* **Audio/Haptics:** [Expo AV](https://docs.expo.dev/versions/latest/sdk/av/) & [Expo Haptics](https://docs.expo.dev/versions/latest/sdk/haptics/)
+* **Testing:** Jest & React Native Testing Library
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-* [Node.js](https://nodejs.org/) (LTS version recommended)
-* [Yarn](https://classic.yarnpkg.com/en/docs/install) (or npm)
-* [Expo Go](https://expo.dev/go) (app on your iOS or Android device)
+* [Node.js](https://nodejs.org/) v20.x or higher
+* npm (comes with Node.js) or [Yarn](https://classic.yarnpkg.com/en/docs/install)
+* [Expo Go](https://expo.dev/go) app on your iOS or Android device
 
 ### Installation & Running
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
-    cd vocabulary-react-native
+    git clone [https://github.com/yourusername/react-vocabulary.git](https://github.com/yourusername/react-vocabulary.git)
+    cd react-vocabulary
     ```
 
 2.  **Install dependencies:**
     ```bash
-    # If you are in the Migration/expo-project directory
     npm install
-    # or
-    yarn install
     ```
 
 3.  **Run the development server:**
     ```bash
+    # Start the Expo dev server
     npm start
-    # or
-    yarn start
+    
+    # Or run directly on a specific platform
+    npm run android
+    npm run ios
     ```
 
 4.  **Open the app:**
-    * Scan the QR code from the terminal using the **Expo Go** app on your phone.
-    * Or, press `a` in the terminal to run on an Android Emulator, or `i` to run on an iOS Simulator.
+    * Scan the QR code from the terminal using **Expo Go**.
+    * Or, press `a` for an Android Emulator / `i` for an iOS Simulator in the terminal.
 
+### Development Commands
+
+```bash
+# Run all tests
+npm test
+
+# Run linting to check code style
+npm run lint
+
+# Check for TypeScript errors
+npm run type-check
+```
 ## 📜 License
 
-This project is licensed under the terms of the **MIT** license.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.

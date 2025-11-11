@@ -1,0 +1,156 @@
+{
+  "id": "cascade",
+  "name": "Cascade",
+  "levels": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "words": [
+        {
+          "id": "cascade-basic-0",
+          "word": "abnegate",
+          "definition": "renounce or reject (something desired or valuable)",
+          "fillInBlank": "The monk chose to _______ worldly pleasures, seeking enlightenment through meditation and a surprisingly competitive board game collection."
+        },
+        {
+          "id": "cascade-basic-1",
+          "word": "atrophy",
+          "definition": "to gradually decline or waste away due to disease or disuse",
+          "fillInBlank": "After months stuck on the couch with a broken leg, the adventurer feared his hiking muscles might ______, leaving him only able to conquer the daunting staircase to the snack pantry."
+        },
+        {
+          "id": "cascade-basic-2",
+          "word": "diaphanous",
+          "definition": "(especially of fabric) light, delicate, and translucent",
+          "fillInBlank": "A delicate, _____  gown seemed a questionable choice for attempting to wrestle a bear, but the princess was determined to look fabulous while doing it."
+        },
+        {
+          "id": "cascade-basic-3",
+          "word": "discomfit",
+          "definition": "to make (someone) feel uneasy or embarrassed",
+          "fillInBlank": "The speaker's awkward joke and mistimed pratfall managed to thoroughly _____ both himself and the audience."
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "words": [
+        {
+          "id": "cascade-intermediate-0",
+          "word": "admonish",
+          "definition": "warn or reprimand someone firmly",
+          "fillInBlank": "After repeatedly misplacing her keys, the teacher had to ______ herself, developing an elaborate system of brightly colored keychains, jangling bracelets, and increasingly frantic morning searches."
+        },
+        {
+          "id": "cascade-intermediate-1",
+          "word": "capitulate",
+          "definition": "to cease to resist an opponent or an unwelcome demand; surrender",
+          "fillInBlank": "After weeks of heroic resistance, the sleep-deprived student finally ______ to the lure of her inviting bed and the pile of unread textbooks."
+        },
+        {
+          "id": "cascade-intermediate-2",
+          "word": "dogmatic",
+          "definition": "opinionated in an arrogant way; stubbornly asserting unproven or incorrect beliefs",
+          "fillInBlank": "The _____ professor refused to entertain any theories that didn't involve 15th-century poetry, suspicious hand gestures, and a belief in talking squirrels."
+        },
+        {
+          "id": "cascade-intermediate-3",
+          "word": "duress",
+          "definition": "threats or violence used to make someone do something",
+          "fillInBlank": "The confession obtained under _____ was deemed inadmissible in court, much to the relief of the parrot and its surprisingly proficient lawyer."
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "words": [
+        {
+          "id": "cascade-advanced-0",
+          "word": "ambivalent",
+          "definition": "having or showing mixed feelings or contradictory ideas about something or someone",
+          "fillInBlank": "The student felt strangely ______  about the final exam, a mix of quiet confidence and the lingering suspicion that she might have forgotten what a \"noun\" was."
+        },
+        {
+          "id": "cascade-advanced-1",
+          "word": "connive",
+          "definition": "to secretly allow (something considered immoral or illegal) to occur",
+          "fillInBlank": "The museum guards seemed to be suspiciously turning a blind eye, subtly ________ the daring heist of the world's largest cheese sculpture by a team of particularly motivated mice."
+        },
+        {
+          "id": "cascade-advanced-2",
+          "word": "congruity",
+          "definition": "the quality of being in agreement or harmony",
+          "fillInBlank": "The odd _______ between the polka-dotted wallpaper, the classical music, and the suspicious collection of rubber chickens gave the detective pause."
+        },
+        {
+          "id": "cascade-advanced-3",
+          "word": "embezzlement",
+          "definition": "theft or misappropriation of funds placed in one's trust (especially by a public official)",
+          "fillInBlank": "The scandal-plagued politician was accused of _____, leaving him with a depleted bank account, a sudden interest in obscure hobbies, and a one-way ticket to a remote island."
+        }
+      ]
+    },
+    {
+      "id": "expert",
+      "name": "Expert",
+      "words": [
+        {
+          "id": "cascade-expert-0",
+          "word": "arrogate",
+          "definition": "to take or claim (something) without justification",
+          "fillInBlank": "The power-hungry villain sought to ______ control of the kingdom, based mainly on his impressive cape collection and rather loud declarations of his own brilliance."
+        },
+        {
+          "id": "cascade-expert-1",
+          "word": "ascetic",
+          "definition": "characterized by severe self-discipline and abstention from all forms of indulgence",
+          "fillInBlank": "The ______ monk lived in a tiny hut, subsisting on a diet of water, contemplation, and the occasional stale rice cracker."
+        },
+        {
+          "id": "cascade-expert-2",
+          "word": "debauch",
+          "definition": "to indulge (someone) in dissipating pleasures (obsolete definition)",
+          "fillInBlank": "Famed for his wild parties, the eccentric billionaire aimed to _______ his guests with questionable karaoke contests, an experimental jello-sculpting workshop, and a flock of flamingos trained in synchronized swimming."
+        },
+        {
+          "id": "cascade-expert-3",
+          "word": "demagogue",
+          "definition": "a political leader who seeks support by appealing to the desires and prejudices of ordinary people rather than by using rational argument",
+          "fillInBlank": "The seasoned politician, unable to resist a well-timed soundbite, transformed into a full-blown ________, promising free ice cream for all and blaming the sock-stealing gnomes for any economic woes."
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "words": [
+        {
+          "id": "cascade-professional-0",
+          "word": "antithesis",
+          "definition": "a person or thing that is the direct opposite of someone or something else",
+          "fillInBlank": "In a world obsessed with speed and instant gratification, the slow-moving sloth was the ______ of modern life, proving the enduring appeal of naps and a relaxed philosophy."
+        },
+        {
+          "id": "cascade-professional-1",
+          "word": "approbation",
+          "definition": "approval or praise",
+          "fillInBlank": "Earning the dreaded \"Most Improved Handwriting\" award did little to raise the student's spirits, as he considered it rather faint ______ considering his previous penmanship resembled spiderwebs dipped in ink."
+        },
+        {
+          "id": "cascade-professional-2",
+          "word": "contusion",
+          "definition": "an injury in which the skin is not broken; a bruise",
+          "fillInBlank": "After a fierce game of hopscotch, the competitive toddler sported an impressive ________ on his forehead and a newfound respect for the importance of good aim."
+        },
+        {
+          "id": "cascade-professional-3",
+          "word": "convivial",
+          "definition": "(of an atmosphere or event) friendly, lively, and enjoyable",
+          "fillInBlank": "The family gathering, known for its boisterous debates and questionable fashion choices, had a surprisingly ________ atmosphere this year, perhaps due to a general consensus that they'd all run out of things to argue about."
+        }
+      ]
+    }
+  ]
+}

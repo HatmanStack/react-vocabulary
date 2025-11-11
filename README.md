@@ -9,6 +9,8 @@
 
 A comprehensive cross-platform vocabulary learning application built with React Native and Expo.  Master 360+ curated words through interactive quizzes, track your progress with detailed statistics, and earn achievements as you expand your vocabulary.
 
+![Try It](https://vocabulary.hatstack.fun)
+
 ---
 
 ![Vocabulary App Banner](assets/banner.png)

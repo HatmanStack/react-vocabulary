@@ -1,20 +1,21 @@
 <div align="center">
+
+# Vocabulary Learning App
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![React Native](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Expo](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-# Vocabulary Learning App
+A comprehensive cross-platform vocabulary learning application built with React Native and Expo.  Master 360+ curated words through interactive quizzes, track your progress with detailed statistics, and earn achievements as you expand your vocabulary.
 
-A comprehensive cross-platform vocabulary learning application built with React Native and Expo. This is a migration of the original [Android Vocabulary application](https://github.com/HatmanStack/android-vocabulary), expanded with new features.
-
-Master 360+ curated words through interactive quizzes, track your progress with detailed statistics, and earn achievements as you expand your vocabulary.
-
-<p align="center">
-  <img width="600" src="assets/banner.png" alt="Vocabulary App Banner">
-</p>
-</div>
 ---
+
+![Vocabulary App Banner](assets/banner.png)
+
+---
+
+</div>
 
 ## ✨ Features
 

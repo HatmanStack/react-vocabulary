@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, ScrollView, Platform, Alert, TextInput } from 'react-native';
-import { Appbar, Dialog, Portal, Menu, useTheme } from 'react-native-paper';
+import { Appbar, Dialog, Portal, Menu, useTheme, ActivityIndicator } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { SettingItem } from '../components/SettingItem';
-import { Card, Typography, Spacer, Button } from '@/shared/ui';
+import { Card, Typography, Spacer, Button, LoginPrompt } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 import { exportProgress, importProgress, applyImportedProgress } from '../utils/progressExport';
@@ -20,11 +20,18 @@ export default function SettingsScreen() {
   const [importData, setImportData] = useState('');
   const [importPreview, setImportPreview] = useState<any>(null);
   const [themeMenuVisible, setThemeMenuVisible] = useState(false);
+  const [loginDialogVisible, setLoginDialogVisible] = useState(false);
+  const [logoutDialogVisible, setLogoutDialogVisible] = useState(false);
 
   // Get settings from store
   const themeMode = settingsStore.theme;
   const soundEnabled = settingsStore.soundEnabled;
   const hapticsEnabled = settingsStore.hapticsEnabled;
+
+  // Get sync state from progress store
+  const username = progressStore.username;
+  const syncStatus = progressStore.syncStatus;
+  const lastCloudSyncAt = progressStore.lastCloudSyncAt;
 
   const handleThemeChange = () => {
     setThemeMenuVisible(true);
@@ -87,6 +94,37 @@ export default function SettingsScreen() {
     }
   };
 
+  // Account/Sync handlers
+  const handleSetupSync = useCallback(() => {
+    setLoginDialogVisible(true);
+  }, []);
+
+  const handleLoginComplete = useCallback(() => {
+    setLoginDialogVisible(false);
+    Alert.alert('Success', 'Cloud sync is now enabled!');
+  }, []);
+
+  const handleSyncNow = useCallback(async () => {
+    await progressStore.fullSync();
+  }, [progressStore]);
+
+  const handleLogout = useCallback(() => {
+    setLogoutDialogVisible(true);
+  }, []);
+
+  const confirmLogout = useCallback(async () => {
+    await progressStore.setUsername(null);
+    setLogoutDialogVisible(false);
+    Alert.alert('Success', 'Cloud sync has been disabled. Your local progress is still saved.');
+  }, [progressStore]);
+
+  // Format last sync time
+  const getLastSyncText = () => {
+    if (!lastCloudSyncAt) return 'Never';
+    const date = new Date(lastCloudSyncAt);
+    return date.toLocaleString();
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
@@ -96,6 +134,71 @@ export default function SettingsScreen() {
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         <Spacer size="md" />
+
+        {/* Account/Cloud Sync Section */}
+        <View style={styles.section}>
+          <Typography variant="heading3">Cloud Sync</Typography>
+          <Spacer size="sm" />
+
+          {username ? (
+            // Logged in state
+            <Card elevation="low" style={styles.card}>
+              <View style={styles.accountCard}>
+                <View style={styles.accountInfo}>
+                  <Typography variant="body">Username</Typography>
+                  <Typography variant="body" style={{ fontWeight: 'bold' }}>
+                    {username}
+                  </Typography>
+                </View>
+                <Spacer size="sm" />
+                <View style={styles.accountInfo}>
+                  <Typography variant="body">Last Synced</Typography>
+                  <Typography variant="body" color="secondary">
+                    {getLastSyncText()}
+                  </Typography>
+                </View>
+                <Spacer size="md" />
+                <View style={styles.syncActions}>
+                  <Button
+                    variant="secondary"
+                    onPress={handleSyncNow}
+                    disabled={syncStatus === 'syncing'}
+                    loading={syncStatus === 'syncing'}
+                  >
+                    {syncStatus === 'syncing' ? 'Syncing...' : 'Sync Now'}
+                  </Button>
+                  <Spacer size="sm" direction="horizontal" />
+                  <Button variant="text" onPress={handleLogout} disabled={syncStatus === 'syncing'}>
+                    Disconnect
+                  </Button>
+                </View>
+                {syncStatus === 'error' && (
+                  <>
+                    <Spacer size="sm" />
+                    <Typography variant="caption" style={{ color: theme.colors.error }}>
+                      Sync failed. Please try again.
+                    </Typography>
+                  </>
+                )}
+              </View>
+            </Card>
+          ) : (
+            // Not logged in state
+            <Card elevation="low" style={styles.card}>
+              <View style={styles.accountCard}>
+                <Typography variant="body">
+                  Sync your progress across devices with cloud backup.
+                </Typography>
+                <Spacer size="md" />
+                <Button variant="primary" onPress={handleSetupSync}>
+                  Set Up Cloud Sync
+                </Button>
+              </View>
+            </Card>
+          )}
+        </View>
+
+        <Spacer size="lg" />
 
         {/* Appearance Section */}
         <View style={styles.section}>
@@ -352,6 +455,43 @@ export default function SettingsScreen() {
             </Button>
           </Dialog.Actions>
         </Dialog>
+
+        {/* Login Dialog */}
+        <Dialog
+          visible={loginDialogVisible}
+          onDismiss={() => setLoginDialogVisible(false)}
+          style={styles.loginDialog}
+        >
+          <Dialog.Content>
+            <LoginPrompt
+              onComplete={handleLoginComplete}
+              onSkip={() => setLoginDialogVisible(false)}
+            />
+          </Dialog.Content>
+        </Dialog>
+
+        {/* Logout Confirmation Dialog */}
+        <Dialog visible={logoutDialogVisible} onDismiss={() => setLogoutDialogVisible(false)}>
+          <Dialog.Title>Disconnect Cloud Sync?</Dialog.Title>
+          <Dialog.Content>
+            <Typography variant="body">
+              This will disconnect cloud sync from your device. Your local progress will be kept,
+              but changes won't be synced to the cloud.
+            </Typography>
+            <Spacer size="sm" />
+            <Typography variant="body">
+              You can reconnect later using the same username to restore your synced progress.
+            </Typography>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button variant="text" onPress={() => setLogoutDialogVisible(false)}>
+              Cancel
+            </Button>
+            <Button variant="text" onPress={confirmLogout}>
+              Disconnect
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
       </Portal>
     </View>
   );
@@ -407,5 +547,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     minHeight: 150,
     textAlignVertical: 'top',
+  },
+  accountCard: {
+    padding: 16,
+  },
+  accountInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  syncActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  loginDialog: {
+    maxHeight: '80%',
   },
 });

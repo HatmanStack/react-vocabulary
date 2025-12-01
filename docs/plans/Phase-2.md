@@ -401,13 +401,13 @@ Account
 ```
 
 **Verification Checklist:**
-- [ ] Username displayed when set
-- [ ] "Not set up" shown when no username
-- [ ] Switch Account opens LoginPrompt
-- [ ] Set Up Sync opens LoginPrompt with skip
-- [ ] Sync Now triggers fullSync
-- [ ] Sync status/errors displayed
-- [ ] Last sync time shown
+- [x] Username displayed when set
+- [x] "Not set up" shown when no username
+- [x] Switch Account opens LoginPrompt
+- [x] Set Up Sync opens LoginPrompt with skip
+- [x] Sync Now triggers fullSync
+- [x] Sync status/errors displayed
+- [x] Last sync time shown
 
 **Testing Instructions:**
 - Test Settings with username set

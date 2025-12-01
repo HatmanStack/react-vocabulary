@@ -497,6 +497,8 @@ export default function SettingsScreen() {
   );
 }
 
+const MAX_CONTENT_WIDTH = 600;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -507,6 +509,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 16,
     paddingBottom: 24,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
   },
   section: {
     width: '100%',

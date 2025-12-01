@@ -529,11 +529,11 @@ feat(frontend): implement automatic sync triggers
 - Optionally add to app header for global visibility
 
 **Verification Checklist:**
-- [ ] Indicator shows syncing state
-- [ ] Success state shows briefly
-- [ ] Error state is tappable for details
-- [ ] Idle state is unobtrusive
-- [ ] Indicator updates reactively from store
+- [x] Indicator shows syncing state
+- [x] Success state shows briefly
+- [x] Error state is tappable for details
+- [x] Idle state is unobtrusive
+- [x] Indicator updates reactively from store
 
 **Testing Instructions:**
 - Test each sync status renders correctly

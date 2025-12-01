@@ -4,7 +4,7 @@ import { Appbar, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { loadVocabularyLists } from '../utils/vocabularyLoader';
 import { ListCard } from '../components/ListCard';
-import { Typography, Spacer } from '@/shared/ui';
+import { Typography, Spacer, SyncStatusIndicator } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
 
@@ -73,6 +73,7 @@ export default function HomeScreen() {
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Appbar.Header>
         <Appbar.Content title="Vocabulary" />
+        <SyncStatusIndicator />
         <Appbar.Action
           icon="chart-bar"
           onPress={() => router.push('/stats')}

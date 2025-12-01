@@ -13,3 +13,4 @@ export { LoadingIndicator } from './LoadingIndicator';
 export { ErrorBoundary } from './ErrorBoundary';
 export { Spacer } from './Spacer';
 export { LoginPrompt } from './LoginPrompt';
+export { SyncStatusIndicator } from './SyncStatusIndicator';

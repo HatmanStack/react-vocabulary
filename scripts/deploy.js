@@ -68,10 +68,12 @@ STACK_NAME=${config.STACK_NAME}
 # AWS Region
 AWS_REGION=${config.AWS_REGION}
 
-# Allowed Origins for CORS
-# Use * for development, or comma-separated list of origins for production
+# Include Dev Origins (allows all origins for local development)
+INCLUDE_DEV_ORIGINS=${config.INCLUDE_DEV_ORIGINS}
+
+# Production Origins (comma-separated list of allowed origins for CORS)
 # Example: https://vocabulary.example.com,https://www.vocabulary.example.com
-ALLOWED_ORIGINS=${config.ALLOWED_ORIGINS}
+PRODUCTION_ORIGINS=${config.PRODUCTION_ORIGINS}
 
 # Lambda Configuration
 LAMBDA_MEMORY=${config.LAMBDA_MEMORY}
@@ -82,7 +84,7 @@ LAMBDA_TIMEOUT=${config.LAMBDA_TIMEOUT}
   console.log('✓ Configuration saved to backend/.env.deploy\n');
 }
 
-// Generate samconfig.toml
+// Generate samconfig.toml (secrets passed at deploy time via CLI)
 function generateSamConfig(config) {
   const deployBucket = `sam-deploy-${config.STACK_NAME}-${config.AWS_REGION}`;
 
@@ -102,7 +104,6 @@ s3_prefix = "${config.STACK_NAME}"
 region = "${config.AWS_REGION}"
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = false
-parameter_overrides = "AllowedOrigins=\\"${config.ALLOWED_ORIGINS}\\" LambdaMemory=${config.LAMBDA_MEMORY} LambdaTimeout=${config.LAMBDA_TIMEOUT}"
 `;
 
   fs.writeFileSync(SAMCONFIG_PATH, samconfig);
@@ -202,7 +203,8 @@ async function deploy() {
   const defaults = {
     STACK_NAME: config.STACK_NAME || 'vocabulary-sync',
     AWS_REGION: config.AWS_REGION || 'us-west-2',
-    ALLOWED_ORIGINS: config.ALLOWED_ORIGINS || '*',
+    INCLUDE_DEV_ORIGINS: config.INCLUDE_DEV_ORIGINS || 'true',
+    PRODUCTION_ORIGINS: config.PRODUCTION_ORIGINS || '',
     LAMBDA_MEMORY: config.LAMBDA_MEMORY || '256',
     LAMBDA_TIMEOUT: config.LAMBDA_TIMEOUT || '10',
   };
@@ -224,11 +226,23 @@ async function deploy() {
   const regionInput = await ask(`AWS Region [${defaults.AWS_REGION}]: `);
   config.AWS_REGION = regionInput.trim() || defaults.AWS_REGION;
 
-  // Prompt for allowed origins
-  console.log('\nAllowed Origins: Use * for development, or comma-separated origins for production');
+  // Prompt for dev origins (allows * for local development)
+  const devOriginsInput = await ask(`Include Dev Origins - allows all origins (true/false) [${defaults.INCLUDE_DEV_ORIGINS}]: `);
+  config.INCLUDE_DEV_ORIGINS = devOriginsInput.trim() || defaults.INCLUDE_DEV_ORIGINS;
+
+  // Validate dev origins
+  if (!['true', 'false'].includes(config.INCLUDE_DEV_ORIGINS)) {
+    console.error('✗ Include Dev Origins must be "true" or "false"');
+    rl.close();
+    process.exit(1);
+  }
+
+  // Prompt for production origins
+  const prodOriginsDisplay = defaults.PRODUCTION_ORIGINS || '(none)';
+  console.log('\nProduction Origins: Comma-separated list of allowed origins for CORS');
   console.log('Example: https://vocabulary.example.com,https://www.vocabulary.example.com');
-  const originsInput = await ask(`Allowed Origins [${defaults.ALLOWED_ORIGINS}]: `);
-  config.ALLOWED_ORIGINS = originsInput.trim() || defaults.ALLOWED_ORIGINS;
+  const prodOriginsInput = await ask(`Production Origins [${prodOriginsDisplay}]: `);
+  config.PRODUCTION_ORIGINS = prodOriginsInput.trim() || defaults.PRODUCTION_ORIGINS;
 
   // Prompt for Lambda memory
   const memoryInput = await ask(`Lambda Memory MB (128-10240) [${defaults.LAMBDA_MEMORY}]: `);
@@ -258,11 +272,12 @@ async function deploy() {
 
   // Display configuration
   console.log('\n--- Configuration ---');
-  console.log(`  Stack Name:      ${config.STACK_NAME}`);
-  console.log(`  AWS Region:      ${config.AWS_REGION}`);
-  console.log(`  Allowed Origins: ${config.ALLOWED_ORIGINS}`);
-  console.log(`  Lambda Memory:   ${config.LAMBDA_MEMORY} MB`);
-  console.log(`  Lambda Timeout:  ${config.LAMBDA_TIMEOUT} seconds`);
+  console.log(`  Stack Name:         ${config.STACK_NAME}`);
+  console.log(`  AWS Region:         ${config.AWS_REGION}`);
+  console.log(`  Include Dev Origins: ${config.INCLUDE_DEV_ORIGINS}`);
+  console.log(`  Production Origins:  ${config.PRODUCTION_ORIGINS || '(none)'}`);
+  console.log(`  Lambda Memory:       ${config.LAMBDA_MEMORY} MB`);
+  console.log(`  Lambda Timeout:      ${config.LAMBDA_TIMEOUT} seconds`);
   console.log('---------------------\n');
 
   // Save configuration
@@ -290,9 +305,11 @@ async function deploy() {
   console.log('\nBuilding with SAM...\n');
   execCommand('sam build');
 
-  // Deploy to AWS
+  // Deploy to AWS (pass parameters via CLI)
   console.log('\nDeploying to AWS...\n');
-  execCommand('sam deploy');
+  const productionOrigins = config.PRODUCTION_ORIGINS || '';
+  const paramOverrides = `IncludeDevOrigins="${config.INCLUDE_DEV_ORIGINS}" ProductionOrigins="${productionOrigins}" LambdaMemory=${config.LAMBDA_MEMORY} LambdaTimeout=${config.LAMBDA_TIMEOUT}`;
+  execCommand(`sam deploy --parameter-overrides ${paramOverrides}`);
 
   // Get stack outputs
   console.log('\nRetrieving stack outputs...\n');

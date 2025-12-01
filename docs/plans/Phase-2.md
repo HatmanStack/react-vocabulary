@@ -61,12 +61,12 @@ if (!API_URL) {
 ```
 
 **Verification Checklist:**
-- [ ] API URL read from environment variable
-- [ ] All three actions implemented
-- [ ] 404 response returns null (not throw)
-- [ ] Other HTTP errors throw SyncError
-- [ ] Network timeout handled
-- [ ] Missing API URL doesn't crash app
+- [x] API URL read from environment variable
+- [x] All three actions implemented
+- [x] 404 response returns null (not throw)
+- [x] Other HTTP errors throw SyncError
+- [x] Network timeout handled
+- [x] Missing API URL doesn't crash app
 
 **Testing Instructions:**
 - Write unit tests with mocked fetch

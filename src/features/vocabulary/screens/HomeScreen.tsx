@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { View, StyleSheet, ScrollView, useWindowDimensions, Animated } from 'react-native';
 import { Appbar, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
@@ -7,6 +7,17 @@ import { ListCard } from '../components/ListCard';
 import { Typography, Spacer, SyncStatusIndicator } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useReducedMotion } from '@/shared/hooks/useReducedMotion';
+
+// Responsive breakpoints
+const BREAKPOINTS = {
+  sm: 480,   // 1 column
+  md: 768,   // 2 columns
+  lg: 1024,  // 3 columns
+  xl: 1280,  // 4 columns
+};
+
+// Gap between grid items
+const GRID_GAP = 16;
 
 export default function HomeScreen() {
   console.log('[HomeScreen] Component rendering');
@@ -18,11 +29,22 @@ export default function HomeScreen() {
   const progressStore = useProgressStore();
   const reducedMotion = useReducedMotion();
 
-  // Determine number of columns based on screen width
-  // Breakpoint: 600px (common tablet breakpoint)
-  const numColumns = width >= 600 ? 2 : 1;
+  // Calculate number of columns based on screen width
+  const numColumns = useMemo(() => {
+    if (width >= BREAKPOINTS.xl) return 4;
+    if (width >= BREAKPOINTS.lg) return 3;
+    if (width >= BREAKPOINTS.md) return 2;
+    return 1;
+  }, [width]);
 
-  // Calculate progress for each list (memoized to prevent unnecessary recalculations)
+  // Calculate item width based on columns and gap
+  const itemWidth = useMemo(() => {
+    const totalGapWidth = GRID_GAP * (numColumns - 1);
+    const availableWidth = width - 32 - totalGapWidth; // 32 = padding (16 * 2)
+    return availableWidth / numColumns;
+  }, [width, numColumns]);
+
+  // Calculate progress for each list
   const getListProgress = useCallback(
     (listId: string) => {
       const listLevelProgress = Object.values(progressStore.listLevelProgress).filter(
@@ -52,7 +74,6 @@ export default function HomeScreen() {
 
   // Fade-in animation on mount
   useEffect(() => {
-    // Skip animations if reduced motion is enabled
     if (reducedMotion) {
       return;
     }
@@ -61,7 +82,7 @@ export default function HomeScreen() {
       Animated.timing(anim, {
         toValue: 1,
         duration: 300,
-        delay: index * 100, // Stagger animations
+        delay: index * 100,
         useNativeDriver: true,
       })
     );
@@ -97,27 +118,24 @@ export default function HomeScreen() {
 
         <Spacer size="lg" />
 
-        <View style={styles.listsContainer}>
-          <View style={styles.grid}>
-            {vocabularyLists.map((list, index) => (
-              <Animated.View
-                key={list.id}
-                style={[
-                  numColumns === 2 ? styles.gridItemTwoColumn : styles.gridItemOneColumn,
-                  { opacity: fadeAnims[index] },
-                ]}
-              >
-                <ListCard
-                  id={list.id}
-                  name={list.name}
-                  description={list.description}
-                  progress={getListProgress(list.id)}
-                  max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
-                  onPress={() => router.push({ pathname: '/difficulty', params: { listId: list.id } })}
-                />
-              </Animated.View>
-            ))}
-          </View>
+        <View style={[styles.grid, { gap: GRID_GAP }]}>
+          {vocabularyLists.map((list, index) => (
+            <Animated.View
+              key={list.id}
+              style={[
+                { width: itemWidth, opacity: fadeAnims[index] },
+              ]}
+            >
+              <ListCard
+                id={list.id}
+                name={list.name}
+                description={list.description}
+                progress={getListProgress(list.id)}
+                max={list.levels.reduce((sum, level) => sum + level.words.length, 0)}
+                onPress={() => router.push({ pathname: '/difficulty', params: { listId: list.id } })}
+              />
+            </Animated.View>
+          ))}
         </View>
 
         <Spacer size="xl" />
@@ -140,20 +158,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
   },
-  listsContainer: {
-    width: '100%',
-  },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  gridItemOneColumn: {
-    width: '100%',
-    marginBottom: 16,
-  },
-  gridItemTwoColumn: {
-    width: '48%',
-    marginBottom: 16,
   },
 });

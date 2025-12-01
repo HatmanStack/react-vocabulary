@@ -18,7 +18,8 @@
     "migrate-data": "ts-node scripts/parseXmlToJson.ts",
     "validate-data": "ts-node scripts/validateVocabulary.ts",
     "migrate-and-validate": "npm run migrate-data && npm run validate-data",
-    "check": "npm run type-check && npm run lint && npm run test"
+    "check": "npm run type-check && npm run lint && npm run test",
+    "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",

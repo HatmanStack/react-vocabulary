@@ -6,6 +6,7 @@ dist/
 
 # Deployment config (contains region/stack preferences)
 .deploy-config.json
+.env.deploy
 
 # SAM build artifacts
 .aws-sam/

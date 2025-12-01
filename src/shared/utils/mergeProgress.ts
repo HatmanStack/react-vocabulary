@@ -10,6 +10,7 @@ import type {
   WordProgress,
   ListLevelProgress,
   Achievement,
+  WordState,
 } from '@/shared/types';
 
 /**
@@ -20,7 +21,7 @@ export function mergeWordProgress(
   cloud: WordProgress
 ): WordProgress {
   return {
-    state: Math.max(local.state, cloud.state),
+    state: Math.max(local.state, cloud.state) as WordState,
     hintsUsed: Math.max(local.hintsUsed, cloud.hintsUsed),
     wrongAttempts: Math.max(local.wrongAttempts, cloud.wrongAttempts),
     correctAttempts: Math.max(local.correctAttempts, cloud.correctAttempts),

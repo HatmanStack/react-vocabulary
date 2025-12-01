@@ -211,13 +211,13 @@ if (username) {
 ```
 
 **Verification Checklist:**
-- [ ] New state fields added (username, syncStatus, etc.)
-- [ ] setUsername persists to AsyncStorage
-- [ ] syncToCloud sends current progress to API
-- [ ] syncFromCloud merges cloud data with local
-- [ ] fullSync does pull-then-push
-- [ ] syncStatus reflects current operation state
-- [ ] Errors captured in lastSyncError
+- [x] New state fields added (username, syncStatus, etc.)
+- [x] setUsername persists to AsyncStorage
+- [x] syncToCloud sends current progress to API
+- [x] syncFromCloud merges cloud data with local
+- [x] fullSync does pull-then-push
+- [x] syncStatus reflects current operation state
+- [x] Errors captured in lastSyncError
 
 **Testing Instructions:**
 - Mock syncService functions

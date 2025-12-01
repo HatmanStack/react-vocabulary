@@ -640,10 +640,10 @@ EXPO_PUBLIC_SYNC_API_URL=
 ```
 
 **Verification Checklist:**
-- [ ] .env.example created with documented variable
-- [ ] Variable accessible in app via process.env.EXPO_PUBLIC_SYNC_API_URL
-- [ ] App works without the variable (local-only mode)
-- [ ] Backend deploy script updates .env correctly
+- [x] .env.example created with documented variable
+- [x] Variable accessible in app via process.env.EXPO_PUBLIC_SYNC_API_URL
+- [x] App works without the variable (local-only mode)
+- [x] Backend deploy script updates .env correctly
 
 **Testing Instructions:**
 - Remove EXPO_PUBLIC_SYNC_API_URL from .env

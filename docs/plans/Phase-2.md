@@ -343,11 +343,11 @@ Welcome → Feature Intro → [Username Entry (skippable)] → Complete
 ```
 
 **Verification Checklist:**
-- [ ] Login step appears in onboarding
-- [ ] Can complete onboarding with username
-- [ ] Can skip and complete without username
-- [ ] Username persists after onboarding complete
-- [ ] Sync works immediately after login
+- [x] Login step appears in onboarding
+- [x] Can complete onboarding with username
+- [x] Can skip and complete without username
+- [x] Username persists after onboarding complete
+- [x] Sync works immediately after login
 
 **Testing Instructions:**
 - Test full onboarding flow with login

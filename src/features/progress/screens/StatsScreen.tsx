@@ -18,6 +18,7 @@ export default function StatsScreen() {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [chartView, setChartView] = useState<'progress' | 'heatmap'>('progress');
 

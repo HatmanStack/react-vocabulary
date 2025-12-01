@@ -4,7 +4,7 @@
  * Defines all achievements and logic for checking/unlocking them.
  */
 
-import { UserProgress, ListLevelProgress } from '@/shared/types';
+import { UserProgress } from '@/shared/types';
 
 export interface Achievement {
   id: string;
@@ -262,7 +262,7 @@ export function checkAllAchievements(
     if (existing?.isUnlocked) return;
 
     // Check if should unlock
-    const { shouldUnlock, currentProgress } = checkAchievement(id, progress, sessionData);
+    const { shouldUnlock } = checkAchievement(id, progress, sessionData);
 
     if (shouldUnlock) {
       newlyUnlocked.push({

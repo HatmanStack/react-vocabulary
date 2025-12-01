@@ -63,7 +63,7 @@ async function parseXmlFile(): Promise<Map<string, string[]>> {
   const xmlContent = fs.readFileSync(XML_SOURCE, 'utf-8');
 
   return new Promise((resolve, reject) => {
-    parseString(xmlContent, (err, result: ParsedXml) => {
+    parseString(xmlContent, (err: Error | null, result: ParsedXml) => {
       if (err) {
         reject(err);
         return;

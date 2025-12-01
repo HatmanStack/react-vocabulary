@@ -5,7 +5,6 @@
 import { useVocabularyStore } from '../vocabularyStore';
 import {
   loadVocabularyLists,
-  getListById,
   getLevelWords,
   getAllWords,
 } from '@/features/vocabulary/utils/vocabularyLoader';
@@ -13,7 +12,6 @@ import {
 // Mock the vocabulary loader
 jest.mock('@/features/vocabulary/utils/vocabularyLoader', () => ({
   loadVocabularyLists: jest.fn(),
-  getListById: jest.fn(),
   getLevelWords: jest.fn(),
   getAllWords: jest.fn(),
 }));
@@ -26,16 +24,14 @@ describe('vocabularyStore', () => {
       description: 'Basic words',
       levels: [
         {
-          id: 'basic',
+          id: 'basic' as const,
           name: 'Basic',
-          description: 'Easy words',
-          wordCount: 10,
+          words: [],
         },
         {
-          id: 'advanced',
+          id: 'advanced' as const,
           name: 'Advanced',
-          description: 'Hard words',
-          wordCount: 15,
+          words: [],
         },
       ],
     },
@@ -45,10 +41,9 @@ describe('vocabularyStore', () => {
       description: 'Advanced words',
       levels: [
         {
-          id: 'expert',
+          id: 'expert' as const,
           name: 'Expert',
-          description: 'Expert level words',
-          wordCount: 20,
+          words: [],
         },
       ],
     },

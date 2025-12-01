@@ -286,14 +286,14 @@ feat(frontend): add sync state and actions to progressStore
 - Show validation error inline
 
 **Verification Checklist:**
-- [ ] Username input with validation
-- [ ] Loading state during API calls
-- [ ] New username flow works (create + sync)
-- [ ] Existing username shows confirmation dialog
-- [ ] Confirmation "Yes" triggers fullSync
-- [ ] Confirmation "No" clears and shows error
-- [ ] Skip option works (if provided)
-- [ ] Error states displayed clearly
+- [x] Username input with validation
+- [x] Loading state during API calls
+- [x] New username flow works (create + sync)
+- [x] Existing username shows confirmation dialog
+- [x] Confirmation "Yes" triggers fullSync
+- [x] Confirmation "No" clears and shows error
+- [x] Skip option works (if provided)
+- [x] Error states displayed clearly
 
 **Testing Instructions:**
 - Test rendering with/without onSkip

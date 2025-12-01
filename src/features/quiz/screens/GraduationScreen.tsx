@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, ScrollView, Animated, Alert } from 'react-native';
+import { View, StyleSheet, ScrollView, Animated } from 'react-native';
 import { Icon, Dialog, Portal, useTheme } from 'react-native-paper';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Achievement } from '@/shared/types';
@@ -75,6 +75,11 @@ export default function GraduationScreen() {
     const newAchievements = progressStore.checkAndUnlockAchievements(sessionData);
     if (newAchievements.length > 0) {
       setUnlockedAchievements(newAchievements);
+    }
+
+    // Trigger cloud sync after quiz completion (fire and forget)
+    if (progressStore.username) {
+      progressStore.syncToCloud();
     }
   }, []);
 

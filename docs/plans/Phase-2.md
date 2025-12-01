@@ -469,12 +469,12 @@ feat(frontend): add account management to Settings
 - Debounce to prevent rapid syncs
 
 **Verification Checklist:**
-- [ ] Hook sets up periodic sync interval
-- [ ] App foreground triggers sync
-- [ ] Quiz completion triggers sync
-- [ ] No sync when username not set
-- [ ] Interval cleaned up on unmount
-- [ ] Debouncing prevents rapid consecutive syncs
+- [x] Hook sets up periodic sync interval
+- [x] App foreground triggers sync
+- [x] Quiz completion triggers sync
+- [x] No sync when username not set
+- [x] Interval cleaned up on unmount
+- [x] Debouncing prevents rapid consecutive syncs
 
 **Testing Instructions:**
 - Mock AppState and timers

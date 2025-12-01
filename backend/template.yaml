@@ -68,12 +68,13 @@ Resources:
       StageName: $default
       CorsConfiguration:
         AllowOrigins:
-          - !Ref AllowedOrigins
+          - "*"
         AllowMethods:
           - POST
           - OPTIONS
         AllowHeaders:
           - Content-Type
+        AllowCredentials: false
         MaxAge: 86400
       DefaultRouteSettings:
         ThrottlingBurstLimit: 100
@@ -82,7 +83,7 @@ Resources:
 Outputs:
   VocabularySyncApiUrl:
     Description: API Gateway endpoint URL
-    Value: !Sub https://${ProgressApi}.execute-api.${AWS::Region}.amazonaws.com
+    Value: !Sub https://${ProgressApi}.execute-api.${AWS::Region}.amazonaws.com/progress
 
   UserProgressTableName:
     Description: DynamoDB table name

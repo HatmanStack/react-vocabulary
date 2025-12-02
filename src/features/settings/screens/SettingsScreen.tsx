@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, ScrollView, Platform, Alert, TextInput } from 'react-native';
-import { Appbar, Dialog, Portal, Menu, useTheme, ActivityIndicator } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Appbar, Dialog, Portal, Menu, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { SettingItem } from '../components/SettingItem';
 import { Card, Typography, Spacer, Button, LoginPrompt } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { useSettingsStore } from '@/shared/store/settingsStore';
-import { exportProgress, importProgress, applyImportedProgress } from '../utils/progressExport';
 
 export default function SettingsScreen() {
   const router = useRouter();
@@ -16,9 +15,6 @@ export default function SettingsScreen() {
 
   // Local state for dialogs
   const [resetDialogVisible, setResetDialogVisible] = useState(false);
-  const [importDialogVisible, setImportDialogVisible] = useState(false);
-  const [importData, setImportData] = useState('');
-  const [importPreview, setImportPreview] = useState<any>(null);
   const [themeMenuVisible, setThemeMenuVisible] = useState(false);
   const [loginDialogVisible, setLoginDialogVisible] = useState(false);
   const [logoutDialogVisible, setLogoutDialogVisible] = useState(false);
@@ -26,7 +22,6 @@ export default function SettingsScreen() {
   // Get settings from store
   const themeMode = settingsStore.theme;
   const soundEnabled = settingsStore.soundEnabled;
-  const hapticsEnabled = settingsStore.hapticsEnabled;
 
   // Get sync state from progress store
   const username = progressStore.username;
@@ -41,10 +36,6 @@ export default function SettingsScreen() {
     settingsStore.setSoundEnabled(value as boolean);
   };
 
-  const handleHapticsToggle = (value: boolean | string) => {
-    settingsStore.setHapticsEnabled(value as boolean);
-  };
-
   const handleResetAllProgress = () => {
     setResetDialogVisible(true);
   };
@@ -53,45 +44,6 @@ export default function SettingsScreen() {
     progressStore.resetAllProgress();
     setResetDialogVisible(false);
     router.push('/');
-  };
-
-  const handleExportProgress = async () => {
-    const result = await exportProgress();
-    if (result.success) {
-      Alert.alert('Success', 'Progress exported successfully!');
-    } else {
-      Alert.alert('Error', result.error || 'Failed to export progress');
-    }
-  };
-
-  const handleImportProgress = () => {
-    setImportDialogVisible(true);
-    setImportData('');
-    setImportPreview(null);
-  };
-
-  const handleImportDataChange = async (text: string) => {
-    setImportData(text);
-    if (text.trim()) {
-      const result = await importProgress(text);
-      if (result.success && result.preview) {
-        setImportPreview(result.preview);
-      } else {
-        setImportPreview(null);
-      }
-    }
-  };
-
-  const confirmImportProgress = () => {
-    if (applyImportedProgress(importData)) {
-      setImportDialogVisible(false);
-      setImportData('');
-      setImportPreview(null);
-      Alert.alert('Success', 'Progress imported successfully!');
-      router.push('/');
-    } else {
-      Alert.alert('Error', 'Failed to import progress');
-    }
   };
 
   // Account/Sync handlers
@@ -246,9 +198,9 @@ export default function SettingsScreen() {
 
         <Spacer size="lg" />
 
-        {/* Audio & Haptics Section */}
+        {/* Audio Section */}
         <View style={styles.section}>
-          <Typography variant="heading3">Audio & Haptics</Typography>
+          <Typography variant="heading3">Audio</Typography>
           <Spacer size="sm" />
 
           <Card elevation="low" style={styles.card}>
@@ -257,18 +209,8 @@ export default function SettingsScreen() {
               type="toggle"
               value={soundEnabled}
               onChange={handleSoundToggle}
-              showDivider={Platform.OS !== 'web'}
+              showDivider={false}
             />
-
-            {Platform.OS !== 'web' && (
-              <SettingItem
-                label="Haptic Feedback"
-                type="toggle"
-                value={hapticsEnabled}
-                onChange={handleHapticsToggle}
-                showDivider={false}
-              />
-            )}
           </Card>
         </View>
 
@@ -278,28 +220,6 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Typography variant="heading3">Data</Typography>
           <Spacer size="sm" />
-
-          <Card elevation="low" style={styles.card}>
-            <View style={styles.infoRow}>
-              <Typography variant="body">Export Progress</Typography>
-              <Button variant="text" onPress={handleExportProgress}>
-                Export
-              </Button>
-            </View>
-          </Card>
-
-          <Spacer size="sm" />
-
-          <Card elevation="low" style={styles.card}>
-            <View style={styles.infoRow}>
-              <Typography variant="body">Import Progress</Typography>
-              <Button variant="text" onPress={handleImportProgress}>
-                Import
-              </Button>
-            </View>
-          </Card>
-
-          <Spacer size="md" />
 
           <Card elevation="low" style={styles.card}>
             <View style={styles.dangerZone}>
@@ -321,11 +241,8 @@ export default function SettingsScreen() {
 
         <Spacer size="lg" />
 
-        {/* About Section */}
+        {/* Help Section */}
         <View style={styles.section}>
-          <Typography variant="heading3">About</Typography>
-          <Spacer size="sm" />
-
           <Card elevation="low" style={styles.card}>
             <View style={styles.infoRow}>
               <Typography variant="body">Help & FAQ</Typography>
@@ -333,49 +250,6 @@ export default function SettingsScreen() {
                 View
               </Button>
             </View>
-          </Card>
-
-          <Spacer size="sm" />
-
-          <Card elevation="low" style={styles.card}>
-            <View style={styles.infoRow}>
-              <Typography variant="body">App Version</Typography>
-              <Typography variant="body" color="secondary">
-                2.0.0
-              </Typography>
-            </View>
-          </Card>
-
-          <Spacer size="sm" />
-
-          <Card elevation="low" style={styles.card}>
-            <SettingItem
-              label="Privacy Policy"
-              type="button"
-              value=""
-              onChange={() => console.log('Privacy policy tapped')}
-              showDivider
-            />
-            <SettingItem
-              label="Terms of Service"
-              type="button"
-              value=""
-              onChange={() => console.log('Terms of service tapped')}
-              showDivider
-            />
-            <SettingItem
-              label="Reset Onboarding"
-              type="button"
-              value=""
-              onChange={() => {
-                settingsStore.setOnboardingCompleted(false);
-                Alert.alert(
-                  'Success',
-                  'Onboarding has been reset. Restart the app to see it again.'
-                );
-              }}
-              showDivider={false}
-            />
           </Card>
         </View>
 
@@ -405,53 +279,6 @@ export default function SettingsScreen() {
             </Button>
             <Button variant="text" onPress={confirmResetAllProgress}>
               Yes, Reset Everything
-            </Button>
-          </Dialog.Actions>
-        </Dialog>
-
-        {/* Import Progress Dialog */}
-        <Dialog visible={importDialogVisible} onDismiss={() => setImportDialogVisible(false)}>
-          <Dialog.Title>Import Progress</Dialog.Title>
-          <Dialog.Content>
-            <Typography variant="body">Paste your exported progress data below:</Typography>
-            <Spacer size="md" />
-            <TextInput
-              style={[
-                styles.importInput,
-                {
-                  borderColor: theme.colors.outline,
-                  backgroundColor: theme.colors.surface,
-                  color: theme.colors.onSurface,
-                },
-              ]}
-              placeholderTextColor={theme.colors.onSurfaceVariant}
-              multiline
-              numberOfLines={6}
-              placeholder='{"version": "1.0.0", ...}'
-              value={importData}
-              onChangeText={handleImportDataChange}
-            />
-            {importPreview && (
-              <>
-                <Spacer size="md" />
-                <Typography variant="heading3">Preview:</Typography>
-                <Spacer size="sm" />
-                <Typography variant="body">Words Learned: {importPreview.wordsLearned}</Typography>
-                <Typography variant="body">
-                  Lists Completed: {importPreview.listsCompleted}
-                </Typography>
-                <Typography variant="caption" color="secondary">
-                  Exported: {new Date(importPreview.exportDate).toLocaleDateString()}
-                </Typography>
-              </>
-            )}
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button variant="text" onPress={() => setImportDialogVisible(false)}>
-              Cancel
-            </Button>
-            <Button variant="text" onPress={confirmImportProgress} disabled={!importPreview}>
-              Import
             </Button>
           </Dialog.Actions>
         </Dialog>
@@ -519,10 +346,6 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 0,
   },
-  hint: {
-    paddingHorizontal: 16,
-    fontStyle: 'italic',
-  },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -543,15 +366,6 @@ const styles = StyleSheet.create({
   warningText: {
     color: '#F44336',
     fontWeight: 'bold' as const,
-  },
-  importInput: {
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 12,
-    fontFamily: 'monospace',
-    fontSize: 12,
-    minHeight: 150,
-    textAlignVertical: 'top',
   },
   accountCard: {
     padding: 16,

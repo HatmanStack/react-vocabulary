@@ -1,5 +1,9 @@
 # Vocabulary Sync Backend
 
+[← Back to Docs](./README.md) · [Deployment Guide](./DEPLOYMENT.md)
+
+---
+
 AWS SAM backend for vocabulary progress synchronization.
 
 ## Prerequisites

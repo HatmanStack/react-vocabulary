@@ -1,6 +1,10 @@
 # Sound Assets
 
-This directory contains sound effects for the vocabulary app.
+[← Back to Docs](./README.md)
+
+---
+
+Sound effects for the vocabulary app. Files located in `src/assets/sounds/`.
 
 ## Required Sound Files
 

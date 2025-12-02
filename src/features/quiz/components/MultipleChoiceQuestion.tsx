@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { Button as PaperButton } from 'react-native-paper';
-import { Button, Typography, Spacer } from '@/shared/ui';
+import { Button, Spacer } from '@/shared/ui';
 
 /**
  * MultipleChoiceQuestion Component

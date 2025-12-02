@@ -67,6 +67,7 @@ export const ListCard = React.memo(function ListCard({
   max = 40,
   onPress,
 }: ListCardProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const theme = useTheme();
 
   // Get emoji for this list

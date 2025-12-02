@@ -4,19 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 import SettingsScreen from '../SettingsScreen';
 
-const mockNavigation = {
-  navigate: jest.fn(),
-  goBack: jest.fn(),
-  setOptions: jest.fn(),
-  addListener: jest.fn(() => jest.fn()),
-  removeListener: jest.fn(),
-};
-
-const mockRoute = {
-  key: 'test',
-  name: 'Settings' as const,
-};
-
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <PaperProvider>
@@ -32,14 +19,14 @@ describe('SettingsScreen', () => {
 
   it('renders screen title', () => {
     const { getByText } = renderWithProviders(
-      <SettingsScreen navigation={mockNavigation as any} route={mockRoute as any} />
+      <SettingsScreen />
     );
     expect(getByText('Appearance')).toBeTruthy();
   });
 
   it('renders theme setting', () => {
     const { getByText } = renderWithProviders(
-      <SettingsScreen navigation={mockNavigation as any} route={mockRoute as any} />
+      <SettingsScreen />
     );
     expect(getByText('Theme')).toBeTruthy();
     expect(getByText('Light')).toBeTruthy();
@@ -47,22 +34,21 @@ describe('SettingsScreen', () => {
 
   it('renders sound effects toggle', () => {
     const { getByText } = renderWithProviders(
-      <SettingsScreen navigation={mockNavigation as any} route={mockRoute as any} />
+      <SettingsScreen />
     );
     expect(getByText('Sound Effects')).toBeTruthy();
   });
 
-  it('renders app version', () => {
+  it('renders cloud sync section', () => {
     const { getByText } = renderWithProviders(
-      <SettingsScreen navigation={mockNavigation as any} route={mockRoute as any} />
+      <SettingsScreen />
     );
-    expect(getByText('App Version')).toBeTruthy();
-    expect(getByText('2.0.0')).toBeTruthy();
+    expect(getByText('Cloud Sync')).toBeTruthy();
   });
 
   it('toggles sound effects', () => {
     const { getByLabelText } = renderWithProviders(
-      <SettingsScreen navigation={mockNavigation as any} route={mockRoute as any} />
+      <SettingsScreen />
     );
     const soundToggle = getByLabelText('Toggle Sound Effects');
     fireEvent(soundToggle, 'onValueChange', false);

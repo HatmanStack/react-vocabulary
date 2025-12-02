@@ -1,0 +1,111 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Vocabulary Progress Sync API
+
+Parameters:
+  IncludeDevOrigins:
+    Type: String
+    Description: Whether to include wildcard (*) origins in CORS for local development
+    Default: 'true'
+    AllowedValues: ['true', 'false']
+
+  ProductionOrigins:
+    Type: CommaDelimitedList
+    Description: Comma-separated list of production origins for CORS
+    Default: ''
+
+  LambdaMemory:
+    Type: Number
+    Default: 256
+    MinValue: 128
+    MaxValue: 10240
+    Description: Lambda function memory in MB
+
+  LambdaTimeout:
+    Type: Number
+    Default: 10
+    MinValue: 1
+    MaxValue: 900
+    Description: Lambda function timeout in seconds
+
+Conditions:
+  IsDevMode: !Equals [!Ref IncludeDevOrigins, 'true']
+  HasProductionOrigins: !Not [!Equals [!Select [0, !Ref ProductionOrigins], '']]
+
+Globals:
+  Function:
+    Timeout: !Ref LambdaTimeout
+    Runtime: nodejs20.x
+    MemorySize: !Ref LambdaMemory
+
+Resources:
+  UserProgressTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-UserProgress
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  ProgressFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-ProgressHandler
+      Handler: index.handler
+      CodeUri: dist/
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref UserProgressTable
+          ALLOWED_ORIGINS: !If
+            - IsDevMode
+            - '*'
+            - !If
+              - HasProductionOrigins
+              - !Join [',', !Ref ProductionOrigins]
+              - 'https://localhost'
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UserProgressTable
+      Events:
+        ProgressApi:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ProgressApi
+            Path: /progress
+            Method: POST
+
+  ProgressApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: $default
+      CorsConfiguration:
+        AllowOrigins: !If
+          - IsDevMode
+          - ['*']
+          - !If
+            - HasProductionOrigins
+            - !Ref ProductionOrigins
+            - ['https://localhost']
+        AllowMethods:
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+        AllowCredentials: false
+        MaxAge: 86400
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 100
+        ThrottlingRateLimit: 50
+
+Outputs:
+  VocabularySyncApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub https://${ProgressApi}.execute-api.${AWS::Region}.amazonaws.com/progress
+
+  UserProgressTableName:
+    Description: DynamoDB table name
+    Value: !Ref UserProgressTable

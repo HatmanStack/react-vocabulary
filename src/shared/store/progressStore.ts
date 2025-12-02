@@ -4,6 +4,7 @@
  * Manages user progress tracking.
  * Tracks word states, best scores, and all-time statistics.
  * Progress is persisted to AsyncStorage directly (without Zustand persist middleware).
+ * Supports cloud sync via the sync service.
  */
 
 import { create } from 'zustand';
@@ -16,13 +17,30 @@ import {
   Achievement,
 } from '@/shared/types';
 import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
+import {
+  checkUsername as apiCheckUsername,
+  getProgress as apiGetProgress,
+  saveProgress as apiSaveProgress,
+  isApiConfigured,
+  SyncError,
+} from '@/shared/services/syncService';
+import { mergeProgress } from '@/shared/utils/mergeProgress';
 
 const STORAGE_KEY = 'vocabulary-progress';
+const USERNAME_KEY = 'vocabulary-username';
+
+export type SyncStatus = 'idle' | 'syncing' | 'success' | 'error';
 
 interface ProgressState extends UserProgress {
   // Loading state
   isLoading: boolean;
   lastSyncedAt: string | null;
+
+  // Cloud sync state
+  username: string | null;
+  syncStatus: SyncStatus;
+  lastSyncError: string | null;
+  lastCloudSyncAt: string | null;
 
   // Word progress actions
   updateWordProgress: (
@@ -83,6 +101,14 @@ interface ProgressState extends UserProgress {
   getAchievements: () => Achievement[];
   getUnlockedAchievements: () => Achievement[];
 
+  // Cloud sync actions
+  setUsername: (username: string | null) => Promise<void>;
+  setSyncStatus: (status: SyncStatus) => void;
+  syncToCloud: () => Promise<void>;
+  syncFromCloud: () => Promise<void>;
+  fullSync: () => Promise<void>;
+  checkUsernameExists: (username: string) => Promise<boolean>;
+
   // Utility
   _hydrated: boolean;
   setHydrated: () => void;
@@ -111,8 +137,16 @@ const initialState: Omit<
   | 'checkAndUnlockAchievements'
   | 'getAchievements'
   | 'getUnlockedAchievements'
+  | 'setUsername'
+  | 'setSyncStatus'
+  | 'syncToCloud'
+  | 'syncFromCloud'
+  | 'fullSync'
+  | 'checkUsernameExists'
   | '_hydrated'
   | 'setHydrated'
+  | 'loadFromStorage'
+  | 'saveToStorage'
 > = {
   currentListId: undefined,
   currentLevelId: undefined,
@@ -128,6 +162,10 @@ const initialState: Omit<
   dailyProgress: {},
   isLoading: false,
   lastSyncedAt: null,
+  username: null,
+  syncStatus: 'idle',
+  lastSyncError: null,
+  lastCloudSyncAt: null,
 };
 
 // Helper to save state to AsyncStorage
@@ -157,15 +195,24 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
   // Load progress from AsyncStorage
   loadFromStorage: async () => {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      // Load progress and username in parallel
+      const [stored, storedUsername] = await Promise.all([
+        AsyncStorage.getItem(STORAGE_KEY),
+        AsyncStorage.getItem(USERNAME_KEY),
+      ]);
+
       if (stored) {
         const data = JSON.parse(stored);
         set({
           ...data,
+          username: storedUsername || null,
           _hydrated: true,
         });
       } else {
-        set({ _hydrated: true });
+        set({
+          username: storedUsername || null,
+          _hydrated: true,
+        });
       }
     } catch (error) {
       console.error('Failed to load progress from storage:', error);
@@ -485,5 +532,193 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       getUnlockedAchievements: () => {
         const state = get();
         return (state.achievements || []).filter((a) => a.isUnlocked);
+      },
+
+      // Cloud sync: Set username
+      setUsername: async (username: string | null) => {
+        try {
+          if (username) {
+            await AsyncStorage.setItem(USERNAME_KEY, username);
+          } else {
+            await AsyncStorage.removeItem(USERNAME_KEY);
+          }
+          set({ username, lastSyncError: null });
+        } catch (error) {
+          console.error('Failed to save username:', error);
+        }
+      },
+
+      // Cloud sync: Set sync status
+      setSyncStatus: (status: SyncStatus) => {
+        set({ syncStatus: status });
+      },
+
+      // Cloud sync: Check if username exists
+      checkUsernameExists: async (username: string) => {
+        if (!isApiConfigured()) {
+          return false;
+        }
+        try {
+          const result = await apiCheckUsername(username);
+          return result.exists;
+        } catch (error) {
+          console.error('Failed to check username:', error);
+          return false;
+        }
+      },
+
+      // Cloud sync: Push current progress to cloud
+      syncToCloud: async () => {
+        const state = get();
+
+        // Skip if no username or API not configured
+        if (!state.username || !isApiConfigured()) {
+          return;
+        }
+
+        // Skip if already syncing
+        if (state.syncStatus === 'syncing') {
+          return;
+        }
+
+        set({ syncStatus: 'syncing', lastSyncError: null });
+
+        try {
+          // Extract UserProgress from state
+          const progressData: UserProgress = {
+            currentListId: state.currentListId,
+            currentLevelId: state.currentLevelId,
+            listLevelProgress: state.listLevelProgress,
+            globalStats: state.globalStats,
+            achievements: state.achievements,
+            dailyProgress: state.dailyProgress,
+          };
+
+          const result = await apiSaveProgress(state.username, progressData);
+
+          if (result.success) {
+            set({
+              syncStatus: 'success',
+              lastCloudSyncAt: result.lastSyncedAt,
+            });
+
+            // Reset to idle after a brief success display
+            setTimeout(() => {
+              set((current) =>
+                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
+              );
+            }, 2000);
+          } else {
+            set({
+              syncStatus: 'error',
+              lastSyncError: 'Failed to save progress',
+            });
+          }
+        } catch (error) {
+          const errorMessage =
+            error instanceof SyncError
+              ? error.message
+              : 'Failed to sync to cloud';
+          set({
+            syncStatus: 'error',
+            lastSyncError: errorMessage,
+          });
+        }
+      },
+
+      // Cloud sync: Pull progress from cloud and merge
+      syncFromCloud: async () => {
+        const state = get();
+
+        // Skip if no username or API not configured
+        if (!state.username || !isApiConfigured()) {
+          return;
+        }
+
+        // Skip if already syncing
+        if (state.syncStatus === 'syncing') {
+          return;
+        }
+
+        set({ syncStatus: 'syncing', lastSyncError: null });
+
+        try {
+          const cloudData = await apiGetProgress(state.username);
+
+          if (cloudData) {
+            // Extract current progress
+            const localProgress: UserProgress = {
+              currentListId: state.currentListId,
+              currentLevelId: state.currentLevelId,
+              listLevelProgress: state.listLevelProgress,
+              globalStats: state.globalStats,
+              achievements: state.achievements,
+              dailyProgress: state.dailyProgress,
+            };
+
+            // Merge cloud data with local data
+            const mergedProgress = mergeProgress(localProgress, cloudData.progressData);
+
+            // Update state with merged data
+            set({
+              currentListId: mergedProgress.currentListId,
+              currentLevelId: mergedProgress.currentLevelId,
+              listLevelProgress: mergedProgress.listLevelProgress,
+              globalStats: mergedProgress.globalStats,
+              achievements: mergedProgress.achievements,
+              dailyProgress: mergedProgress.dailyProgress,
+              syncStatus: 'success',
+              lastCloudSyncAt: cloudData.lastSyncedAt,
+            });
+
+            // Save merged state to local storage
+            await saveStateToStorage(get());
+
+            // Reset to idle after a brief success display
+            setTimeout(() => {
+              set((current) =>
+                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
+              );
+            }, 2000);
+          } else {
+            // User doesn't exist in cloud yet, set to success
+            set({ syncStatus: 'success' });
+            setTimeout(() => {
+              set((current) =>
+                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
+              );
+            }, 2000);
+          }
+        } catch (error) {
+          const errorMessage =
+            error instanceof SyncError
+              ? error.message
+              : 'Failed to sync from cloud';
+          set({
+            syncStatus: 'error',
+            lastSyncError: errorMessage,
+          });
+        }
+      },
+
+      // Cloud sync: Full sync (pull then push)
+      fullSync: async () => {
+        const state = get();
+
+        // Skip if no username or API not configured
+        if (!state.username || !isApiConfigured()) {
+          return;
+        }
+
+        // First pull from cloud (which merges)
+        await get().syncFromCloud();
+
+        // Check if pull failed
+        if (get().syncStatus === 'error') {
+          return;
+        }
+
+        // Then push the merged result back to cloud
+        await get().syncToCloud();
       },
 }));

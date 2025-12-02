@@ -118,13 +118,13 @@ export default function HelpScreen() {
                   onPress={() => handlePress(item.id)}
                   titleStyle={styles.questionText}
                 >
-                  <View style={styles.answerContainer}>
+                  <View style={[styles.answerContainer, { backgroundColor: theme.colors.surfaceVariant }]}>
                     <Typography variant="body" style={styles.answerText}>
                       {item.answer}
                     </Typography>
                   </View>
                 </List.Accordion>
-                {index < FAQ_ITEMS.length - 1 && <List.Item title="" style={styles.divider} />}
+                {index < FAQ_ITEMS.length - 1 && <View style={[styles.divider, { backgroundColor: theme.colors.outlineVariant }]} />}
               </React.Fragment>
             ))}
           </List.Section>
@@ -151,6 +151,8 @@ export default function HelpScreen() {
   );
 }
 
+const MAX_CONTENT_WIDTH = 600;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -161,6 +163,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 16,
     paddingBottom: 24,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
   },
   header: {
     alignItems: 'center',
@@ -175,14 +180,12 @@ const styles = StyleSheet.create({
   answerContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#F9F9F9',
   },
   answerText: {
     lineHeight: 22,
   },
   divider: {
     height: 1,
-    backgroundColor: '#E0E0E0',
   },
   section: {
     width: '100%',

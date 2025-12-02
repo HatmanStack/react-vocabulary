@@ -107,7 +107,7 @@ describe('ErrorBoundary', () => {
 
   it('displays error details in development mode', () => {
     // Mock __DEV__ to true
-    const originalDev = global.__DEV__;
+    const originalDev = (global as any).__DEV__;
     (global as any).__DEV__ = true;
 
     const { getByText } = render(

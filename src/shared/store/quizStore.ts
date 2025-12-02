@@ -6,9 +6,8 @@
  */
 
 import { create } from 'zustand';
-import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/types';
+import { QuizQuestion, QuizSession, QuestionType } from '@/shared/types';
 import { useVocabularyStore } from './vocabularyStore';
-import { useAdaptiveDifficultyStore } from './adaptiveDifficultyStore';
 import { useProgressStore } from './progressStore';
 import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
 import { generateMultipleChoiceOptions } from '@/features/quiz/utils/questionGenerator';

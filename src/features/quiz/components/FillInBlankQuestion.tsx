@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, TextInput, Keyboard, Platform } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { Button, Typography, Spacer } from '@/shared/ui';
+import { Button, Spacer } from '@/shared/ui';
 
 /**
  * FillInBlankQuestion Component

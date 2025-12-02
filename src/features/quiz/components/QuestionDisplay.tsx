@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Card, Typography, Spacer } from '@/shared/ui';
+import { Card, Typography } from '@/shared/ui';
 
 /**
  * QuestionDisplay Component

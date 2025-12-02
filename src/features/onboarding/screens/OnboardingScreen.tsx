@@ -2,15 +2,16 @@
  * Onboarding Screen
  *
  * First-time user onboarding explaining app features.
+ * Includes optional login step for cloud sync.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { View, StyleSheet, FlatList, useWindowDimensions } from 'react-native';
 import { Button, IconButton, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 import { OnboardingSlide } from '../components/OnboardingSlide';
-import { Spacer } from '@/shared/ui';
+import { Spacer, LoginPrompt } from '@/shared/ui';
 
 interface Slide {
   id: string;
@@ -55,40 +56,71 @@ const SLIDES: Slide[] = [
   },
 ];
 
+type OnboardingStep = 'slides' | 'login';
+
 export default function OnboardingScreen() {
   const router = useRouter();
   const theme = useTheme();
   const { width } = useWindowDimensions();
   const settingsStore = useSettingsStore();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [step, setStep] = useState<OnboardingStep>('slides');
   const flatListRef = useRef<FlatList>(null);
 
   const isLastSlide = currentIndex === SLIDES.length - 1;
 
-  const handleNext = () => {
+  const completeOnboarding = useCallback(() => {
+    settingsStore.setOnboardingCompleted(true);
+    router.replace('/');
+  }, [settingsStore, router]);
+
+  const handleNext = useCallback(() => {
     if (isLastSlide) {
-      // Mark onboarding as completed and navigate to Home
-      settingsStore.setOnboardingCompleted(true);
-      router.replace('/');
+      // Move to login step after slides
+      setStep('login');
     } else {
       // Scroll to next slide
       const nextIndex = currentIndex + 1;
       flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
       setCurrentIndex(nextIndex);
     }
-  };
+  }, [isLastSlide, currentIndex]);
 
-  const handleSkip = () => {
-    settingsStore.setOnboardingCompleted(true);
-    router.replace('/');
-  };
+  const handleSkip = useCallback(() => {
+    // Skip directly to login step
+    setStep('login');
+  }, []);
 
-  const handleScroll = (event: any) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / width);
-    setCurrentIndex(index);
-  };
+  const handleScroll = useCallback(
+    (event: any) => {
+      const scrollPosition = event.nativeEvent.contentOffset.x;
+      const index = Math.round(scrollPosition / width);
+      setCurrentIndex(index);
+    },
+    [width]
+  );
 
+  const handleLoginComplete = useCallback(() => {
+    completeOnboarding();
+  }, [completeOnboarding]);
+
+  const handleLoginSkip = useCallback(() => {
+    completeOnboarding();
+  }, [completeOnboarding]);
+
+  // Render login step
+  if (step === 'login') {
+    return (
+      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+        <View style={styles.skipContainer}>
+          <IconButton icon="close" size={24} onPress={handleLoginSkip} />
+        </View>
+        <LoginPrompt onComplete={handleLoginComplete} onSkip={handleLoginSkip} />
+      </View>
+    );
+  }
+
+  // Render slides step
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {/* Skip Button */}

@@ -9,7 +9,6 @@ import { create } from 'zustand';
 import { VocabularyList, VocabularyWord, VocabularyLevel } from '@/shared/types';
 import {
   loadVocabularyLists,
-  getListById,
   getLevelWords,
   getAllWords,
 } from '@/features/vocabulary/utils/vocabularyLoader';

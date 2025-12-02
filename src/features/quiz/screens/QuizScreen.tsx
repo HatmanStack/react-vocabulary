@@ -27,11 +27,10 @@ export default function QuizScreen() {
     isQuizActive,
     startQuiz,
     submitAnswer,
-    useHint,
+    useHint: getHint,
     getCorrectAnswer,
     getCurrentQuestionPresentationCount,
     getNextQuestion,
-    calculateProgress,
     isQuizComplete,
     endQuiz,
   } = useQuizStore();
@@ -40,12 +39,13 @@ export default function QuizScreen() {
   const { playCorrect, playWrong } = useSound();
 
   // Haptic feedback
-  const { triggerLight, triggerMedium, triggerHeavy } = useHaptics();
+  const { triggerMedium, triggerHeavy } = useHaptics();
 
   // Local state
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
 
@@ -135,7 +135,7 @@ export default function QuizScreen() {
   };
 
   const handleUseHint = () => {
-    const definition = useHint();
+    const definition = getHint();
     // Show hint in an alert or dialog
     alert(`Hint: ${definition}`);
   };

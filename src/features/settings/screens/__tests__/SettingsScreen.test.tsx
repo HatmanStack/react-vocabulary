@@ -39,12 +39,11 @@ describe('SettingsScreen', () => {
     expect(getByText('Sound Effects')).toBeTruthy();
   });
 
-  it('renders app version', () => {
+  it('renders cloud sync section', () => {
     const { getByText } = renderWithProviders(
       <SettingsScreen />
     );
-    expect(getByText('App Version')).toBeTruthy();
-    expect(getByText('2.0.0')).toBeTruthy();
+    expect(getByText('Cloud Sync')).toBeTruthy();
   });
 
   it('toggles sound effects', () => {

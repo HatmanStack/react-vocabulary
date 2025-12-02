@@ -17,6 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
+// eslint-disable-next-line no-undef
 const PROJECT_ROOT = path.join(__dirname, '..');
 const BACKEND_DIR = path.join(PROJECT_ROOT, 'backend');
 const ENV_DEPLOY_PATH = path.join(BACKEND_DIR, '.env.deploy');

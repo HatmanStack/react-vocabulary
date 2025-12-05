@@ -28,6 +28,10 @@ import { mergeProgress } from '@/shared/utils/mergeProgress';
 
 const STORAGE_KEY = 'vocabulary-progress';
 const USERNAME_KEY = 'vocabulary-username';
+const SAVE_DEBOUNCE_MS = 500;
+
+// Debounce timer for storage saves
+let saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 export type SyncStatus = 'idle' | 'syncing' | 'success' | 'error';
 
@@ -168,22 +172,30 @@ const initialState: Omit<
   lastCloudSyncAt: null,
 };
 
-// Helper to save state to AsyncStorage
-const saveStateToStorage = async (state: ProgressState) => {
-  try {
-    const dataToSave = {
-      currentListId: state.currentListId,
-      currentLevelId: state.currentLevelId,
-      listLevelProgress: state.listLevelProgress,
-      globalStats: state.globalStats,
-      achievements: state.achievements,
-      dailyProgress: state.dailyProgress,
-      lastSyncedAt: state.lastSyncedAt,
-    };
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-  } catch (error) {
-    console.error('Failed to save progress to storage:', error);
+// Helper to save state to AsyncStorage (debounced)
+const saveStateToStorage = (state: ProgressState) => {
+  // Clear any pending save
+  if (saveDebounceTimer) {
+    clearTimeout(saveDebounceTimer);
   }
+
+  // Schedule a new save
+  saveDebounceTimer = setTimeout(async () => {
+    try {
+      const dataToSave = {
+        currentListId: state.currentListId,
+        currentLevelId: state.currentLevelId,
+        listLevelProgress: state.listLevelProgress,
+        globalStats: state.globalStats,
+        achievements: state.achievements,
+        dailyProgress: state.dailyProgress,
+        lastSyncedAt: state.lastSyncedAt,
+      };
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    } catch (error) {
+      console.error('Failed to save progress to storage:', error);
+    }
+  }, SAVE_DEBOUNCE_MS);
 };
 
 export const useProgressStore = create<ProgressState>()((set, get) => ({
@@ -472,16 +484,18 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       },
 
       // Reset all progress
-      resetAllProgress: () => {
+      resetAllProgress: async () => {
         set({
           ...initialState,
           _hydrated: true,
         });
 
         // Clear storage
-        AsyncStorage.removeItem(STORAGE_KEY).catch((error) =>
-          console.error('Failed to clear storage:', error)
-        );
+        try {
+          await AsyncStorage.removeItem(STORAGE_KEY);
+        } catch (error) {
+          console.error('Failed to clear storage:', error);
+        }
       },
 
       // Check and unlock achievements

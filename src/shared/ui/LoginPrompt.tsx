@@ -7,7 +7,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
-import { Dialog, Portal, useTheme, ActivityIndicator } from 'react-native-paper';
+import { Dialog, Portal, useTheme } from 'react-native-paper';
 import { Button, Typography, Spacer, Card } from '@/shared/ui';
 import { useProgressStore } from '@/shared/store/progressStore';
 

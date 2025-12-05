@@ -6,12 +6,17 @@
  */
 
 import type { UserProgress } from '@/shared/types';
+import NetInfo from '@react-native-community/netinfo';
 
 // API URL from environment variable
 const API_URL = process.env.EXPO_PUBLIC_SYNC_API_URL;
 
 // Request timeout in milliseconds
 const REQUEST_TIMEOUT = 10000;
+
+// Retry configuration
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000;
 
 /**
  * Custom error class for sync-related errors
@@ -34,9 +39,29 @@ export function isApiConfigured(): boolean {
 }
 
 /**
- * Make a request to the sync API with timeout handling
+ * Check if the device is online
  */
-async function makeRequest<T>(body: Record<string, unknown>): Promise<T> {
+export async function isOnline(): Promise<boolean> {
+  try {
+    const state = await NetInfo.fetch();
+    return state.isConnected === true;
+  } catch {
+    // Assume online if we can't check
+    return true;
+  }
+}
+
+/**
+ * Sleep for a given number of milliseconds
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Make a single request to the sync API with timeout handling
+ */
+async function makeSingleRequest<T>(body: Record<string, unknown>): Promise<T> {
   if (!API_URL) {
     throw new SyncError('Sync API not configured', 'NOT_CONFIGURED');
   }
@@ -90,6 +115,47 @@ async function makeRequest<T>(body: Record<string, unknown>): Promise<T> {
 }
 
 /**
+ * Make a request with retry logic for transient failures
+ */
+async function makeRequest<T>(body: Record<string, unknown>): Promise<T> {
+  // Check if online before attempting request
+  const online = await isOnline();
+  if (!online) {
+    throw new SyncError('No internet connection', 'OFFLINE');
+  }
+
+  let lastError: SyncError | null = null;
+
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+    try {
+      return await makeSingleRequest<T>(body);
+    } catch (error) {
+      if (error instanceof SyncError) {
+        lastError = error;
+
+        // Don't retry for non-transient errors
+        if (
+          error.code === 'NOT_CONFIGURED' ||
+          error.code === 'USER_NOT_FOUND' ||
+          error.code.startsWith('HTTP_4') // 4xx client errors
+        ) {
+          throw error;
+        }
+
+        // Retry for transient errors (network, timeout, 5xx)
+        if (attempt < MAX_RETRIES - 1) {
+          await sleep(RETRY_DELAY_MS * (attempt + 1)); // Exponential backoff
+          continue;
+        }
+      }
+      throw error;
+    }
+  }
+
+  throw lastError || new SyncError('Max retries exceeded', 'MAX_RETRIES');
+}
+
+/**
  * Check if a username exists in the system
  */
 export async function checkUsername(
@@ -107,6 +173,38 @@ export async function checkUsername(
 }
 
 /**
+ * Validate that progress data has the expected structure
+ */
+function validateProgressData(data: unknown): data is UserProgress {
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
+
+  const progress = data as Record<string, unknown>;
+
+  // Check required fields
+  if (typeof progress.listLevelProgress !== 'object' || progress.listLevelProgress === null) {
+    return false;
+  }
+
+  if (typeof progress.globalStats !== 'object' || progress.globalStats === null) {
+    return false;
+  }
+
+  const stats = progress.globalStats as Record<string, unknown>;
+  if (
+    typeof stats.allTimeHints !== 'number' ||
+    typeof stats.allTimeWrong !== 'number' ||
+    typeof stats.allTimeCorrect !== 'number' ||
+    typeof stats.totalWordsLearned !== 'number'
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Get progress data for a user
  * Returns null if user doesn't exist (404)
  */
@@ -119,13 +217,20 @@ export async function getProgress(
   }
 
   try {
-    return await makeRequest<{
+    const result = await makeRequest<{
       progressData: UserProgress;
       lastSyncedAt: string;
     }>({
       action: 'get',
       username,
     });
+
+    // Validate the response data
+    if (!validateProgressData(result.progressData)) {
+      throw new SyncError('Invalid progress data received from server', 'INVALID_DATA');
+    }
+
+    return result;
   } catch (error) {
     if (error instanceof SyncError && error.code === 'USER_NOT_FOUND') {
       return null;

@@ -147,7 +147,7 @@ function execCommand(command, cwd = BACKEND_DIR) {
       stdio: 'inherit',
       env: process.env
     });
-  } catch (error) {
+  } catch (_error) {
     console.error(`\n✗ Command failed: ${command}`);
     process.exit(1);
   }

@@ -58,7 +58,8 @@ export default function GraduationScreen() {
         useNativeDriver: true,
       }),
     ]).start();
-  }, [fadeAnim, scaleAnim, reducedMotion]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Check for achievements on mount
   useEffect(() => {
@@ -81,7 +82,8 @@ export default function GraduationScreen() {
     if (progressStore.username) {
       progressStore.syncToCloud();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listId, levelId, hints, wrong, durationMinutes]);
 
   // Get current session stats
   const hintsUsed = parseInt(hints || '0', 10);

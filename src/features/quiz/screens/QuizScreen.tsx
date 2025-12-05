@@ -45,14 +45,15 @@ export default function QuizScreen() {
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [correctAnswer, setCorrectAnswer] = useState('');
+  const [hintDialogVisible, setHintDialogVisible] = useState(false);
+  const [hintText, setHintText] = useState('');
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
 
   // Start quiz on mount
   useEffect(() => {
     startQuiz(listId, levelId);
     setQuizStartTime(Date.now());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listId, levelId]);
 
   // Check for quiz completion
@@ -78,6 +79,7 @@ export default function QuizScreen() {
         },
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestionIndex, quizStartTime]);
 
   if (!list || !currentQuestion) {
@@ -102,26 +104,9 @@ export default function QuizScreen() {
     setShowExitDialog(false);
   };
 
-  const handleSelectAnswer = (answer: string) => {
+  const handleAnswer = (answer: string) => {
     const result = submitAnswer(answer);
     setIsCorrect(result.isCorrect);
-    setCorrectAnswer(result.correctAnswer);
-    setShowFeedback(true);
-
-    // Play sound and haptic feedback based on answer correctness
-    if (result.isCorrect) {
-      playCorrect();
-      triggerMedium();
-    } else {
-      playWrong();
-      triggerHeavy();
-    }
-  };
-
-  const handleSubmitAnswer = (answer: string) => {
-    const result = submitAnswer(answer);
-    setIsCorrect(result.isCorrect);
-    setCorrectAnswer(result.correctAnswer);
     setShowFeedback(true);
 
     // Play sound and haptic feedback based on answer correctness
@@ -136,8 +121,8 @@ export default function QuizScreen() {
 
   const handleUseHint = () => {
     const definition = getHint();
-    // Show hint in an alert or dialog
-    alert(`Hint: ${definition}`);
+    setHintText(definition);
+    setHintDialogVisible(true);
   };
 
   const handleFeedbackEnd = () => {
@@ -206,14 +191,14 @@ export default function QuizScreen() {
         {currentQuestion.type === 'multiple' ? (
           <MultipleChoiceQuestion
             options={currentQuestion.options || []}
-            onSelectAnswer={handleSelectAnswer}
+            onSelectAnswer={handleAnswer}
             presentationCount={showFeedback ? 0 : getCurrentQuestionPresentationCount()}
             correctAnswer={getCorrectAnswer()}
           />
         ) : (
           <FillInBlankQuestion
             sentence={currentQuestion.word.fillInBlank}
-            onSubmitAnswer={handleSubmitAnswer}
+            onSubmitAnswer={handleAnswer}
             onUseHint={handleUseHint}
             presentationCount={showFeedback ? 0 : getCurrentQuestionPresentationCount()}
             correctAnswer={getCorrectAnswer()}
@@ -241,6 +226,19 @@ export default function QuizScreen() {
           <Dialog.Actions>
             <PaperButton onPress={handleCancelExit}>Cancel</PaperButton>
             <PaperButton onPress={handleConfirmExit}>Exit</PaperButton>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+
+      {/* Hint dialog */}
+      <Portal>
+        <Dialog visible={hintDialogVisible} onDismiss={() => setHintDialogVisible(false)}>
+          <Dialog.Title>Hint</Dialog.Title>
+          <Dialog.Content>
+            <Typography variant="body">{hintText}</Typography>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <PaperButton onPress={() => setHintDialogVisible(false)}>Got it</PaperButton>
           </Dialog.Actions>
         </Dialog>
       </Portal>

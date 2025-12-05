@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Icon, ActivityIndicator, useTheme, Tooltip } from 'react-native-paper';
-import { useProgressStore, SyncStatus } from '@/shared/store/progressStore';
+import { Icon, ActivityIndicator, useTheme } from 'react-native-paper';
+import { useProgressStore } from '@/shared/store/progressStore';
 
 interface SyncStatusIndicatorProps {
   size?: number;

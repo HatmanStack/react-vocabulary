@@ -52,7 +52,7 @@ describe('SyncStatusIndicator', () => {
   describe('when not logged in', () => {
     it('does not render indicator content when username is null', () => {
       setupStoreMock({ username: null });
-      const { queryByTestId, root } = renderComponent();
+      const { root } = renderComponent();
       // The component returns null, so there should be no container View
       const views = root.findAllByType(require('react-native').View);
       // Should only have wrapper views from PaperProvider, not our container

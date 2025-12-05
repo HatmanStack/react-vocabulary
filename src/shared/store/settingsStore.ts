@@ -2,10 +2,13 @@
  * Settings Store
  *
  * Manages app settings including theme, sound, haptics.
- * NOTE: Persistence temporarily disabled for web compatibility.
+ * Settings are persisted to AsyncStorage.
  */
 
 import { create } from 'zustand';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const SETTINGS_STORAGE_KEY = 'vocabulary-settings';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -31,29 +34,82 @@ interface SettingsState {
 
   // Utility
   _hydrated: boolean;
-  setHydrated: () => void;
+  loadFromStorage: () => Promise<void>;
 }
 
 const initialState = {
   theme: 'light' as ThemeMode,
   soundEnabled: true,
   hapticsEnabled: true,
-  onboardingCompleted: true, // Skip onboarding (no persistence on web)
-  _hydrated: true, // Always hydrated since no persistence
+  onboardingCompleted: false,
+  _hydrated: false,
 };
 
-export const useSettingsStore = create<SettingsState>()((set) => ({
+// Helper to save settings to AsyncStorage
+const saveSettingsToStorage = async (state: Partial<SettingsState>) => {
+  try {
+    const dataToSave = {
+      theme: state.theme,
+      soundEnabled: state.soundEnabled,
+      hapticsEnabled: state.hapticsEnabled,
+      onboardingCompleted: state.onboardingCompleted,
+    };
+    await AsyncStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(dataToSave));
+  } catch (error) {
+    console.error('Failed to save settings to storage:', error);
+  }
+};
+
+export const useSettingsStore = create<SettingsState>()((set, get) => ({
   ...initialState,
 
-  setHydrated: () => set({ _hydrated: true }),
+  loadFromStorage: async () => {
+    try {
+      const stored = await AsyncStorage.getItem(SETTINGS_STORAGE_KEY);
+      if (stored) {
+        const data = JSON.parse(stored);
+        set({
+          theme: data.theme ?? initialState.theme,
+          soundEnabled: data.soundEnabled ?? initialState.soundEnabled,
+          hapticsEnabled: data.hapticsEnabled ?? initialState.hapticsEnabled,
+          onboardingCompleted: data.onboardingCompleted ?? initialState.onboardingCompleted,
+          _hydrated: true,
+        });
+      } else {
+        set({ _hydrated: true });
+      }
+    } catch (error) {
+      console.error('Failed to load settings from storage:', error);
+      set({ _hydrated: true });
+    }
+  },
 
-  setTheme: (theme) => set({ theme }),
+  setTheme: (theme) => {
+    set({ theme });
+    saveSettingsToStorage(get());
+  },
 
-  setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
+  setSoundEnabled: (enabled) => {
+    set({ soundEnabled: enabled });
+    saveSettingsToStorage(get());
+  },
 
-  setHapticsEnabled: (enabled) => set({ hapticsEnabled: enabled }),
+  setHapticsEnabled: (enabled) => {
+    set({ hapticsEnabled: enabled });
+    saveSettingsToStorage(get());
+  },
 
-  setOnboardingCompleted: (completed) => set({ onboardingCompleted: completed }),
+  setOnboardingCompleted: (completed) => {
+    set({ onboardingCompleted: completed });
+    saveSettingsToStorage(get());
+  },
 
-  resetSettings: () => set({ ...initialState, _hydrated: true }),
+  resetSettings: async () => {
+    set({ ...initialState, _hydrated: true });
+    try {
+      await AsyncStorage.removeItem(SETTINGS_STORAGE_KEY);
+    } catch (error) {
+      console.error('Failed to clear settings storage:', error);
+    }
+  },
 }));

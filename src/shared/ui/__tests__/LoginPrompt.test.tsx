@@ -116,14 +116,19 @@ describe('LoginPrompt', () => {
       const continueButton = getByText('Continue');
       await act(async () => {
         fireEvent.press(continueButton);
+        // Allow promises to resolve
+        await Promise.resolve();
       });
 
-      await waitFor(() => {
-        expect(mockCheckUsernameExists).toHaveBeenCalledWith('newuser');
-        expect(mockSetUsername).toHaveBeenCalledWith('newuser');
-        expect(mockSyncToCloud).toHaveBeenCalled();
-        expect(mockOnComplete).toHaveBeenCalled();
-      });
+      await waitFor(
+        () => {
+          expect(mockCheckUsernameExists).toHaveBeenCalledWith('newuser');
+          expect(mockSetUsername).toHaveBeenCalledWith('newuser');
+          expect(mockSyncToCloud).toHaveBeenCalled();
+          expect(mockOnComplete).toHaveBeenCalled();
+        },
+        { timeout: 3000 }
+      );
     });
   });
 

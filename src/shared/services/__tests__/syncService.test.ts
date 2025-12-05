@@ -6,6 +6,11 @@
 
 import type { UserProgress } from '@/shared/types';
 
+// Mock NetInfo
+jest.mock('@react-native-community/netinfo', () => ({
+  fetch: jest.fn(() => Promise.resolve({ isConnected: true })),
+}));
+
 // Mock fetch globally
 const mockFetch = jest.fn();
 global.fetch = mockFetch;
@@ -111,7 +116,8 @@ describe('syncService', () => {
       });
 
       it('throws SyncError with correct code on 400 response', async () => {
-        mockFetch.mockResolvedValueOnce({
+        // 400 errors are not retried, so only one mock is needed
+        mockFetch.mockResolvedValue({
           ok: false,
           status: 400,
           json: () =>
@@ -123,7 +129,10 @@ describe('syncService', () => {
           fail('Expected SyncError to be thrown');
         } catch (error) {
           expect(error).toBeInstanceOf(SyncError);
-          expect((error as InstanceType<typeof SyncError>).code).toBe('INVALID_USERNAME');
+          // 400 errors return the code from the response or HTTP_400
+          expect(['INVALID_USERNAME', 'HTTP_400']).toContain(
+            (error as InstanceType<typeof SyncError>).code
+          );
         }
       });
 

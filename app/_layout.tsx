@@ -1,41 +1,65 @@
 import { Stack } from 'expo-router';
 import { useColorScheme, AppState, AppStateStatus } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider, Snackbar } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { lightTheme, darkTheme } from '@/shared/lib/theme';
 import { useSettingsStore } from '@/shared/store/settingsStore';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { initializeStorage } from '@/shared/lib/storage';
+import { ErrorBoundary } from '@/shared/ui';
 
 // Minimum time between app resume syncs (5 minutes)
 const SYNC_THROTTLE_MS = 5 * 60 * 1000;
 
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const systemColorScheme = useColorScheme();
   const theme = useSettingsStore((state) => state.theme);
+  const syncStatus = useProgressStore((state) => state.syncStatus);
+  const lastSyncError = useProgressStore((state) => state.lastSyncError);
   const lastSyncTimeRef = useRef<number>(0);
+  const previousSyncStatusRef = useRef(syncStatus);
 
-  console.log('[RootLayout] Component mounted');
+  // Show snackbar when sync error occurs
+  useEffect(() => {
+    if (
+      syncStatus === 'error' &&
+      previousSyncStatusRef.current !== 'error' &&
+      lastSyncError
+    ) {
+      setSnackbarMessage(lastSyncError);
+      setSnackbarVisible(true);
+    }
+    previousSyncStatusRef.current = syncStatus;
+  }, [syncStatus, lastSyncError]);
+
+  const handleDismissSnackbar = useCallback(() => {
+    setSnackbarVisible(false);
+  }, []);
+
+  const handleRetrySync = useCallback(() => {
+    setSnackbarVisible(false);
+    useProgressStore.getState().fullSync();
+  }, []);
 
   // Initialize app
   useEffect(() => {
-    console.log('[RootLayout] useEffect running');
     async function prepare() {
       try {
-        console.log('[RootLayout] Initializing storage...');
         await initializeStorage();
-        console.log('[RootLayout] Loading progress from storage...');
-        await useProgressStore.getState().loadFromStorage();
-        console.log('[RootLayout] Progress loaded, setting isReady to true');
+        await Promise.all([
+          useProgressStore.getState().loadFromStorage(),
+          useSettingsStore.getState().loadFromStorage(),
+        ]);
         setIsReady(true);
 
         // Attempt initial sync if user is logged in
         const progressStore = useProgressStore.getState();
         if (progressStore.username) {
-          console.log('[RootLayout] User logged in, triggering initial sync');
           progressStore.syncFromCloud();
           lastSyncTimeRef.current = Date.now();
         }
@@ -62,7 +86,6 @@ export default function RootLayout() {
           progressStore.syncStatus !== 'syncing' &&
           Date.now() - lastSyncTimeRef.current > SYNC_THROTTLE_MS
         ) {
-          console.log('[RootLayout] App resumed, triggering sync');
           progressStore.fullSync();
           lastSyncTimeRef.current = Date.now();
         }
@@ -85,10 +108,7 @@ export default function RootLayout() {
 
   const activeTheme = getActiveTheme();
 
-  console.log('[RootLayout] isReady:', isReady, 'theme:', theme);
-
   if (!isReady) {
-    console.log('[RootLayout] Showing loading screen');
     const loadingTheme = getActiveTheme();
     return (
       <View style={[styles.loadingContainer, { backgroundColor: loadingTheme.colors.background }]}>
@@ -97,52 +117,63 @@ export default function RootLayout() {
     );
   }
 
-  console.log('[RootLayout] Rendering app with Stack navigator');
-
   return (
     <SafeAreaProvider>
       <PaperProvider theme={activeTheme}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right',
-            gestureEnabled: true,
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="onboarding" />
-          <Stack.Screen name="home" />
-          <Stack.Screen name="difficulty" />
-          <Stack.Screen name="quiz" />
-          <Stack.Screen
-            name="graduation"
-            options={{
-              animation: 'fade',
-              gestureEnabled: false,
+        <ErrorBoundary>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_right',
+              gestureEnabled: true,
             }}
-          />
-          <Stack.Screen
-            name="stats"
-            options={{
-              presentation: 'modal',
-              animation: 'slide_from_bottom',
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="onboarding" />
+            <Stack.Screen name="home" />
+            <Stack.Screen name="difficulty" />
+            <Stack.Screen name="quiz" />
+            <Stack.Screen
+              name="graduation"
+              options={{
+                animation: 'fade',
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="stats"
+              options={{
+                presentation: 'modal',
+                animation: 'slide_from_bottom',
+              }}
+            />
+            <Stack.Screen
+              name="settings"
+              options={{
+                presentation: 'modal',
+                animation: 'slide_from_bottom',
+              }}
+            />
+            <Stack.Screen
+              name="help"
+              options={{
+                presentation: 'modal',
+                animation: 'slide_from_bottom',
+              }}
+            />
+          </Stack>
+          <Snackbar
+            visible={snackbarVisible}
+            onDismiss={handleDismissSnackbar}
+            duration={5000}
+            action={{
+              label: 'Retry',
+              onPress: handleRetrySync,
             }}
-          />
-          <Stack.Screen
-            name="settings"
-            options={{
-              presentation: 'modal',
-              animation: 'slide_from_bottom',
-            }}
-          />
-          <Stack.Screen
-            name="help"
-            options={{
-              presentation: 'modal',
-              animation: 'slide_from_bottom',
-            }}
-          />
-        </Stack>
+          >
+            {snackbarMessage}
+          </Snackbar>
+        </ErrorBoundary>
       </PaperProvider>
     </SafeAreaProvider>
   );

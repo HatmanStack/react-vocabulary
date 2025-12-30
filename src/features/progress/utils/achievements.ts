@@ -121,6 +121,75 @@ export const ACHIEVEMENT_DEFINITIONS: Record<
 };
 
 /**
+ * Get today's date as YYYY-MM-DD string in local timezone
+ */
+function getLocalDateString(date: Date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Calculate the difference in days between two YYYY-MM-DD date strings
+ */
+function daysDifference(dateStr1: string, dateStr2: string): number {
+  const date1 = new Date(dateStr1 + 'T00:00:00');
+  const date2 = new Date(dateStr2 + 'T00:00:00');
+  return Math.round((date1.getTime() - date2.getTime()) / (1000 * 60 * 60 * 24));
+}
+
+/**
+ * Calculate current learning streak from daily progress
+ *
+ * @param dailyProgress - Record of date (YYYY-MM-DD) to words learned
+ * @returns Number of consecutive days with activity (including today or yesterday)
+ */
+export function calculateCurrentStreak(dailyProgress?: Record<string, number>): number {
+  if (!dailyProgress || Object.keys(dailyProgress).length === 0) {
+    return 0;
+  }
+
+  // Get today's date in local timezone YYYY-MM-DD format
+  const todayStr = getLocalDateString();
+
+  // Sort dates in descending order (most recent first)
+  const dates = Object.keys(dailyProgress)
+    .filter((date) => dailyProgress[date] > 0)
+    .sort((a, b) => b.localeCompare(a));
+
+  if (dates.length === 0) {
+    return 0;
+  }
+
+  const mostRecentDateStr = dates[0];
+  const diffFromToday = daysDifference(todayStr, mostRecentDateStr);
+
+  // Streak must start from today or yesterday to be valid
+  if (diffFromToday > 1) {
+    return 0;
+  }
+
+  // Count consecutive days
+  let streak = 1;
+  let currentDateStr = mostRecentDateStr;
+
+  for (let i = 1; i < dates.length; i++) {
+    const prevDateStr = dates[i];
+    const diff = daysDifference(currentDateStr, prevDateStr);
+
+    if (diff === 1) {
+      streak++;
+      currentDateStr = prevDateStr;
+    } else {
+      break; // Streak broken
+    }
+  }
+
+  return streak;
+}
+
+/**
  * Check if a specific achievement should be unlocked
  */
 export function checkAchievement(
@@ -156,9 +225,12 @@ export function checkAchievement(
     }
 
     case 'consistent-learner': {
-      // Check 7-day streak (simplified - would need daily activity tracking)
-      // For now, return false - will be implemented with activity tracking
-      return { shouldUnlock: false, currentProgress: 0 };
+      // Check 7-day streak using dailyProgress
+      const streak = calculateCurrentStreak(progress.dailyProgress);
+      return {
+        shouldUnlock: streak >= 7,
+        currentProgress: Math.min((streak / 7) * 100, 100),
+      };
     }
 
     case 'word-master-50': {

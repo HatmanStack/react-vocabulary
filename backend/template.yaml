@@ -9,10 +9,10 @@ Parameters:
     Default: 'true'
     AllowedValues: ['true', 'false']
 
-  ProductionOrigins:
-    Type: CommaDelimitedList
-    Description: Comma-separated list of production origins for CORS
-    Default: ''
+  ProductionOrigin:
+    Type: String
+    Description: Production origin for CORS (e.g., https://example.com)
+    Default: 'https://localhost'
 
   LambdaMemory:
     Type: Number
@@ -30,7 +30,6 @@ Parameters:
 
 Conditions:
   IsDevMode: !Equals [!Ref IncludeDevOrigins, 'true']
-  HasProductionOrigins: !Not [!Equals [!Select [0, !Ref ProductionOrigins], '']]
 
 Globals:
   Function:
@@ -63,10 +62,7 @@ Resources:
           ALLOWED_ORIGINS: !If
             - IsDevMode
             - '*'
-            - !If
-              - HasProductionOrigins
-              - !Join [',', !Ref ProductionOrigins]
-              - 'https://localhost'
+            - !Ref ProductionOrigin
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref UserProgressTable
@@ -86,10 +82,7 @@ Resources:
         AllowOrigins: !If
           - IsDevMode
           - ['*']
-          - !If
-            - HasProductionOrigins
-            - !Ref ProductionOrigins
-            - ['https://localhost']
+          - [!Ref ProductionOrigin]
         AllowMethods:
           - POST
           - OPTIONS

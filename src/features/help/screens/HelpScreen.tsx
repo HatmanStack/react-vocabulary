@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Linking, Pressable } from 'react-native';
 import { Appbar, List, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { Card, Typography, Spacer } from '@/shared/ui';
@@ -138,9 +138,17 @@ export default function HelpScreen() {
           <Card elevation="low" style={styles.card}>
             <Card.Content>
               <Typography variant="body">
-                If you have questions not covered here, check out the app settings for more options
-                or visit the about section for additional information.
+                If you have questions not covered here, check out the app settings for more options.
               </Typography>
+              <Spacer size="md" />
+              <Pressable
+                style={[styles.contactButton, { backgroundColor: theme.colors.primaryContainer }]}
+                onPress={() => Linking.openURL('https://gemenielabs.hatstack.fun')}
+              >
+                <Typography variant="body" style={{ color: theme.colors.onPrimaryContainer, fontWeight: '600' }}>
+                  Contact the Makers
+                </Typography>
+              </Pressable>
             </Card.Content>
           </Card>
         </View>
@@ -189,5 +197,11 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '100%',
+  },
+  contactButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
   },
 });

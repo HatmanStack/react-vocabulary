@@ -15,6 +15,17 @@ import {
 } from '../achievements';
 import { UserProgress } from '@/shared/types';
 
+/**
+ * Format a date as YYYY-MM-DD in local timezone.
+ * Matches the format used by getLocalDateString() in achievements.ts
+ */
+function toLocalDateString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 describe('Achievement System', () => {
   const createEmptyProgress = (): UserProgress => ({
     currentListId: undefined,
@@ -398,8 +409,7 @@ describe('Achievement System', () => {
         for (let i = 0; i < 7; i++) {
           const date = new Date(today);
           date.setDate(date.getDate() - i);
-          const dateStr = date.toISOString().split('T')[0];
-          dailyProgress[dateStr] = 1;
+          dailyProgress[toLocalDateString(date)] = 1;
         }
 
         const progress: UserProgress = {
@@ -420,8 +430,7 @@ describe('Achievement System', () => {
         for (let i = 0; i < 3; i++) {
           const date = new Date(today);
           date.setDate(date.getDate() - i);
-          const dateStr = date.toISOString().split('T')[0];
-          dailyProgress[dateStr] = 1;
+          dailyProgress[toLocalDateString(date)] = 1;
         }
 
         const progress: UserProgress = {
@@ -439,12 +448,12 @@ describe('Achievement System', () => {
         const dailyProgress: Record<string, number> = {};
 
         // Today
-        dailyProgress[today.toISOString().split('T')[0]] = 1;
+        dailyProgress[toLocalDateString(today)] = 1;
 
         // Skip a day, then add more
         const threeDaysAgo = new Date(today);
         threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
-        dailyProgress[threeDaysAgo.toISOString().split('T')[0]] = 1;
+        dailyProgress[toLocalDateString(threeDaysAgo)] = 1;
 
         const progress: UserProgress = {
           ...createEmptyProgress(),
@@ -477,36 +486,28 @@ describe('Achievement System', () => {
     });
 
     it('returns 0 if only days with 0 words learned', () => {
-      const today = new Date().toISOString().split('T')[0];
+      const today = toLocalDateString(new Date());
       const streak = calculateCurrentStreak({ [today]: 0 });
       expect(streak).toBe(0);
     });
 
     it('returns 1 for activity today only', () => {
-      const today = new Date().toISOString().split('T')[0];
+      const today = toLocalDateString(new Date());
       const streak = calculateCurrentStreak({ [today]: 5 });
       expect(streak).toBe(1);
     });
 
     it('returns 1 for activity yesterday only', () => {
-      // Use local date formatting to match the implementation
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      const year = yesterday.getFullYear();
-      const month = String(yesterday.getMonth() + 1).padStart(2, '0');
-      const day = String(yesterday.getDate()).padStart(2, '0');
-      const yesterdayStr = `${year}-${month}-${day}`;
-
-      const streak = calculateCurrentStreak({ [yesterdayStr]: 3 });
+      const streak = calculateCurrentStreak({ [toLocalDateString(yesterday)]: 3 });
       expect(streak).toBe(1);
     });
 
     it('returns 0 if last activity was 2+ days ago', () => {
       const twoDaysAgo = new Date();
       twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-      const twoDaysAgoStr = twoDaysAgo.toISOString().split('T')[0];
-
-      const streak = calculateCurrentStreak({ [twoDaysAgoStr]: 3 });
+      const streak = calculateCurrentStreak({ [toLocalDateString(twoDaysAgo)]: 3 });
       expect(streak).toBe(0);
     });
 
@@ -518,7 +519,7 @@ describe('Achievement System', () => {
       for (let i = 0; i < 5; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        dailyProgress[date.toISOString().split('T')[0]] = i + 1;
+        dailyProgress[toLocalDateString(date)] = i + 1;
       }
 
       const streak = calculateCurrentStreak(dailyProgress);
@@ -530,16 +531,16 @@ describe('Achievement System', () => {
       const dailyProgress: Record<string, number> = {};
 
       // Today and yesterday
-      dailyProgress[today.toISOString().split('T')[0]] = 1;
+      dailyProgress[toLocalDateString(today)] = 1;
       const yesterday = new Date(today);
       yesterday.setDate(yesterday.getDate() - 1);
-      dailyProgress[yesterday.toISOString().split('T')[0]] = 1;
+      dailyProgress[toLocalDateString(yesterday)] = 1;
 
       // Skip a day, then 3 more days
       for (let i = 3; i <= 5; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        dailyProgress[date.toISOString().split('T')[0]] = 1;
+        dailyProgress[toLocalDateString(date)] = 1;
       }
 
       const streak = calculateCurrentStreak(dailyProgress);
@@ -551,14 +552,10 @@ describe('Achievement System', () => {
       const dailyProgress: Record<string, number> = {};
 
       // Add dates in random order
-      const dates = [0, 2, 1, 3].map(i => {
+      [0, 2, 1, 3].forEach(i => {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        return date.toISOString().split('T')[0];
-      });
-
-      dates.forEach(d => {
-        dailyProgress[d] = 1;
+        dailyProgress[toLocalDateString(date)] = 1;
       });
 
       const streak = calculateCurrentStreak(dailyProgress);

@@ -63,46 +63,55 @@ export function QuizHeader({
         },
       ]}
     >
-      <View style={styles.topRow}>
-        <View style={styles.titleSection}>
-          <Typography variant="heading3">
-            {listName} - {levelName}
-          </Typography>
+      <View style={styles.innerContainer}>
+        <View style={styles.topRow}>
+          <View style={styles.titleSection}>
+            <Typography variant="heading3">
+              {listName} - {levelName}
+            </Typography>
+          </View>
+          <IconButton icon="close" size={24} onPress={onExit} accessibilityLabel="Exit quiz" />
         </View>
-        <IconButton icon="close" size={24} onPress={onExit} accessibilityLabel="Exit quiz" />
-      </View>
 
-      <Spacer size="sm" />
+        <Spacer size="sm" />
 
-      <ProgressBar
-        progress={currentQuestion}
-        max={totalWords}
-        label={`Question ${currentQuestion} of ${totalWords}`}
-      />
+        <ProgressBar
+          progress={currentQuestion}
+          max={totalWords}
+          label={`Question ${currentQuestion} of ${totalWords}`}
+        />
 
-      <Spacer size="sm" />
+        <Spacer size="sm" />
 
-      <View style={styles.statsRow}>
-        <View style={styles.stat}>
-          <Typography variant="caption" color="secondary">
-            Hints: {hintsUsed}
-          </Typography>
-        </View>
-        <View style={styles.stat}>
-          <Typography variant="caption" color="secondary">
-            Wrong: {wrongAnswers}
-          </Typography>
+        <View style={styles.statsRow}>
+          <View style={styles.stat}>
+            <Typography variant="caption" color="secondary">
+              Hints: {hintsUsed}
+            </Typography>
+          </View>
+          <View style={styles.stat}>
+            <Typography variant="caption" color="secondary">
+              Wrong: {wrongAnswers}
+            </Typography>
+          </View>
         </View>
       </View>
     </View>
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
+  },
+  innerContainer: {
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
   },
   topRow: {
     flexDirection: 'row',

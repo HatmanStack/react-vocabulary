@@ -159,7 +159,7 @@ export default function HelpScreen() {
   );
 }
 
-const MAX_CONTENT_WIDTH = 600;
+const MAX_CONTENT_WIDTH = 800;
 
 const styles = StyleSheet.create({
   container: {

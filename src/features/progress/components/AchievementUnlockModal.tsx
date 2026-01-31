@@ -135,6 +135,8 @@ export function AchievementUnlockModal({
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 24,
     width: '100%',
-    maxWidth: 400,
+    maxWidth: MAX_CONTENT_WIDTH,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

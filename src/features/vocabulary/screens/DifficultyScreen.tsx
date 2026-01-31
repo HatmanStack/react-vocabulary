@@ -117,6 +117,8 @@ export default function DifficultyScreen() {
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -126,6 +128,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
   },
   header: {
     alignItems: 'center',

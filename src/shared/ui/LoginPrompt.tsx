@@ -197,7 +197,7 @@ export function LoginPrompt({ onComplete, onSkip }: LoginPromptProps) {
 
       {/* Username Exists Confirmation Dialog */}
       <Portal>
-        <Dialog visible={confirmDialogVisible} onDismiss={handleConfirmNo}>
+        <Dialog visible={confirmDialogVisible} onDismiss={handleConfirmNo} style={styles.dialog}>
           <Dialog.Title>Username Taken</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">
@@ -222,6 +222,8 @@ export function LoginPrompt({ onComplete, onSkip }: LoginPromptProps) {
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -229,7 +231,12 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 24,
-    maxWidth: 400,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  dialog: {
+    maxWidth: MAX_CONTENT_WIDTH,
     width: '100%',
     alignSelf: 'center',
   },

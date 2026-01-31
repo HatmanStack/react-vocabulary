@@ -286,7 +286,7 @@ export default function GraduationScreen() {
 
       {/* Reset Confirmation Dialog */}
       <Portal>
-        <Dialog visible={resetDialogVisible} onDismiss={() => setResetDialogVisible(false)}>
+        <Dialog visible={resetDialogVisible} onDismiss={() => setResetDialogVisible(false)} style={styles.dialog}>
           <Dialog.Title>Reset Level Progress?</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">
@@ -315,13 +315,20 @@ export default function GraduationScreen() {
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   scrollContent: {
     paddingHorizontal: 16,
-    maxWidth: 600,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  dialog: {
+    maxWidth: MAX_CONTENT_WIDTH,
     width: '100%',
     alignSelf: 'center',
   },

@@ -258,7 +258,7 @@ export default function SettingsScreen() {
 
       {/* Reset Confirmation Dialog */}
       <Portal>
-        <Dialog visible={resetDialogVisible} onDismiss={() => setResetDialogVisible(false)}>
+        <Dialog visible={resetDialogVisible} onDismiss={() => setResetDialogVisible(false)} style={styles.dialog}>
           <Dialog.Title>Reset All Progress?</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">
@@ -287,7 +287,7 @@ export default function SettingsScreen() {
         <Dialog
           visible={loginDialogVisible}
           onDismiss={() => setLoginDialogVisible(false)}
-          style={styles.loginDialog}
+          style={styles.dialog}
         >
           <Dialog.Content>
             <LoginPrompt
@@ -298,7 +298,7 @@ export default function SettingsScreen() {
         </Dialog>
 
         {/* Logout Confirmation Dialog */}
-        <Dialog visible={logoutDialogVisible} onDismiss={() => setLogoutDialogVisible(false)}>
+        <Dialog visible={logoutDialogVisible} onDismiss={() => setLogoutDialogVisible(false)} style={styles.dialog}>
           <Dialog.Title>Disconnect Cloud Sync?</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">
@@ -324,7 +324,7 @@ export default function SettingsScreen() {
   );
 }
 
-const MAX_CONTENT_WIDTH = 600;
+const MAX_CONTENT_WIDTH = 800;
 
 const styles = StyleSheet.create({
   container: {
@@ -380,7 +380,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  loginDialog: {
-    maxHeight: '80%',
+  dialog: {
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
   },
 });

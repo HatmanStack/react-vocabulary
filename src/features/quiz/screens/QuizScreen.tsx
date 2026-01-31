@@ -216,7 +216,7 @@ export default function QuizScreen() {
 
       {/* Exit confirmation dialog */}
       <Portal>
-        <Dialog visible={showExitDialog} onDismiss={handleCancelExit}>
+        <Dialog visible={showExitDialog} onDismiss={handleCancelExit} style={styles.dialog}>
           <Dialog.Title>Exit Quiz?</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">
@@ -232,7 +232,7 @@ export default function QuizScreen() {
 
       {/* Hint dialog */}
       <Portal>
-        <Dialog visible={hintDialogVisible} onDismiss={() => setHintDialogVisible(false)}>
+        <Dialog visible={hintDialogVisible} onDismiss={() => setHintDialogVisible(false)} style={styles.dialog}>
           <Dialog.Title>Hint</Dialog.Title>
           <Dialog.Content>
             <Typography variant="body">{hintText}</Typography>
@@ -246,6 +246,8 @@ export default function QuizScreen() {
   );
 }
 
+const MAX_CONTENT_WIDTH = 800;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -255,7 +257,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 24,
-    maxWidth: 600,
+    maxWidth: MAX_CONTENT_WIDTH,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  dialog: {
+    maxWidth: MAX_CONTENT_WIDTH,
     width: '100%',
     alignSelf: 'center',
   },

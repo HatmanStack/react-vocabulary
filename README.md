@@ -1,6 +1,6 @@
 <div align="center">
 
-# Vocabulary Learning App
+![Vocabulary App Banner](public/og-image.jpg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![React Native](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -10,10 +10,6 @@
 Master 360+ words through interactive quizzes. Track progress, earn achievements, sync across devices.
 
 [Try It](https://vocabulary.hatstack.fun) · [Documentation](./docs/README.md)
-
----
-
-![Vocabulary App Banner](assets/banner.png)
 
 ---
 

@@ -2,7 +2,7 @@
 
 ![Vocabulary App Banner](public/og-image.jpg)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![React Native](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Expo](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -56,4 +56,4 @@ npm run deploy   # Deploy backend (from backend/)
 
 ## License
 
-[MIT](LICENSE)
+[Apache 2.0](LICENSE)

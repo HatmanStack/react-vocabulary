@@ -79,5 +79,6 @@
       "!src/**/__tests__/**"
     ]
   },
-  "private": true
+  "private": true,
+  "license": "Apache-2.0"
 }

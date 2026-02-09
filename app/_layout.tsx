@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router';
+import Head from 'expo-router/head';
 import { useColorScheme, AppState, AppStateStatus } from 'react-native';
 import { PaperProvider, Snackbar } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -120,6 +121,11 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <PaperProvider theme={activeTheme}>
+        <Head>
+          <title>Vocabulary Learning App - Master 360+ Words with Interactive Quizzes</title>
+          <meta name="description" content="Build your vocabulary with 360+ words across 18 themed lists. Interactive quizzes, progress tracking, achievements, and cloud sync. Free vocabulary builder for all ages." />
+          <link rel="canonical" href="https://vocabulary.hatstack.fun" />
+        </Head>
         <ErrorBoundary>
           <Stack
             screenOptions={{

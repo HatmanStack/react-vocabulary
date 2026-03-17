@@ -24,10 +24,12 @@ Add pre-commit hooks, CI hardening, and configuration fixes that prevent regress
 **Findings addressed:** Eval Reproducibility (7/10), Eval Red Flag "No pre-commit hooks"
 
 **Files to Create:**
+
 - `.husky/pre-commit` — Hook script
 - `.lintstagedrc.json` (or equivalent config in `package.json`) — lint-staged configuration
 
 **Files to Modify:**
+
 - `package.json` — Add husky and lint-staged as dev dependencies; add `prepare` script
 
 **Prerequisites:** None
@@ -35,22 +37,27 @@ Add pre-commit hooks, CI hardening, and configuration fixes that prevent regress
 **Implementation Steps:**
 
 1. Install Husky and lint-staged:
+
    ```bash
    npm install --save-dev husky lint-staged
    ```
 
 2. Initialize Husky:
+
    ```bash
    npx husky init
    ```
+
    This creates `.husky/` directory and adds a `prepare` script to `package.json`.
 
 3. Configure the pre-commit hook. Edit `.husky/pre-commit` to contain:
+
    ```bash
    npx lint-staged
    ```
 
 4. Add lint-staged configuration to `package.json` (or create `.lintstagedrc.json`):
+
    ```json
    "lint-staged": {
      "*.{ts,tsx}": [
@@ -74,18 +81,21 @@ Add pre-commit hooks, CI hardening, and configuration fixes that prevent regress
    (Then amend or reset if this was just a test.)
 
 **Verification Checklist:**
-- [ ] `.husky/pre-commit` exists and runs `lint-staged`
-- [ ] `lint-staged` configuration exists (in `package.json` or `.lintstagedrc.json`)
-- [ ] `husky` and `lint-staged` are in `devDependencies`
-- [ ] `prepare` script exists in `package.json`: `"prepare": "husky"`
-- [ ] A test commit triggers the hook successfully
-- [ ] `npm run check` passes
+
+- [x] `.husky/pre-commit` exists and runs `lint-staged`
+- [x] `lint-staged` configuration exists (in `package.json` or `.lintstagedrc.json`)
+- [x] `husky` and `lint-staged` are in `devDependencies`
+- [x] `prepare` script exists in `package.json`: `"prepare": "husky"`
+- [x] A test commit triggers the hook successfully
+- [x] `npm run check` passes
 
 **Testing Instructions:**
+
 - Make a deliberate lint error in a `.ts` file, stage it, and try to commit. The hook should catch and fix it (or block the commit).
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 ci: add husky and lint-staged pre-commit hooks
 ```
@@ -99,6 +109,7 @@ ci: add husky and lint-staged pre-commit hooks
 **Findings addressed:** Eval Red Flag "`--passWithNoTests` in `package.json:11`"
 
 **Files to Modify:**
+
 - `package.json` — Remove `--passWithNoTests` from the test script
 
 **Prerequisites:** Phase 1 complete (unused files removed, so no orphaned test references)
@@ -106,10 +117,13 @@ ci: add husky and lint-staged pre-commit hooks
 **Implementation Steps:**
 
 1. In `package.json`, change:
+
    ```json
    "test": "jest --passWithNoTests"
    ```
+
    To:
+
    ```json
    "test": "jest"
    ```
@@ -119,18 +133,21 @@ ci: add husky and lint-staged pre-commit hooks
 3. If any test run fails because a test pattern matches no files, investigate:
    - Is there a test file that was renamed or deleted?
    - Is there a Jest `testMatch` or `testPathPattern` configuration that no longer matches files?
-   Fix the root cause rather than restoring the flag.
+     Fix the root cause rather than restoring the flag.
 
 **Verification Checklist:**
-- [ ] `--passWithNoTests` is not in `package.json`
-- [ ] `npm test` passes
-- [ ] `npm run check` passes
+
+- [x] `--passWithNoTests` is not in `package.json`
+- [x] `npm test` passes
+- [x] `npm run check` passes
 
 **Testing Instructions:**
+
 - Run: `npm test`
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 ci: remove --passWithNoTests flag from jest config
 ```
@@ -144,6 +161,7 @@ ci: remove --passWithNoTests flag from jest config
 **Findings addressed:** Eval Reproducibility (7/10)
 
 **Files to Create:**
+
 - `.devcontainer/devcontainer.json`
 
 **Prerequisites:** None
@@ -151,6 +169,7 @@ ci: remove --passWithNoTests flag from jest config
 **Implementation Steps:**
 
 1. Create `.devcontainer/devcontainer.json`:
+
    ```json
    {
      "name": "react-vocabulary",
@@ -177,6 +196,7 @@ ci: remove --passWithNoTests flag from jest config
    ```
 
 2. Remove the Tailwind CSS extension from the list above (this project doesn't use Tailwind). Use only relevant extensions. The correct list:
+
    ```json
    "extensions": [
      "dbaeumer.vscode-eslint",
@@ -187,16 +207,19 @@ ci: remove --passWithNoTests flag from jest config
 3. Port 8081 is the default Expo dev server port. Adjust if different.
 
 **Verification Checklist:**
+
 - [ ] `.devcontainer/devcontainer.json` exists
 - [ ] Node version in the image matches what CI uses (Node 24)
 - [ ] `postCreateCommand` runs `npm ci`
 - [ ] No irrelevant VS Code extensions are listed
 
 **Testing Instructions:**
+
 - Validate the JSON is well-formed: `node -e "require('./.devcontainer/devcontainer.json')"`
 - If VS Code is available, open the project in a devcontainer to verify
 
 **Commit Message Template:**
+
 ```text
 ci: add devcontainer configuration for reproducible dev environment
 ```
@@ -210,6 +233,7 @@ ci: add devcontainer configuration for reproducible dev environment
 **Findings addressed:** Prevents regression of Health #10 (console.log removal from Phase 1)
 
 **Files to Modify:**
+
 - ESLint config file (`.eslintrc.js`, `.eslintrc.json`, or `eslint.config.js` — check which format the project uses)
 
 **Prerequisites:** Phase 1 Task 1 complete (console.log already removed)
@@ -217,11 +241,13 @@ ci: add devcontainer configuration for reproducible dev environment
 **Implementation Steps:**
 
 1. Find the ESLint config file:
+
    ```bash
    ls -la .eslintrc* eslint.config.*
    ```
 
 2. Add the `no-console` rule configured to warn on `console.log` but allow `console.warn` and `console.error`:
+
    ```json
    "rules": {
      "no-console": ["warn", { "allow": ["warn", "error"] }]
@@ -233,16 +259,19 @@ ci: add devcontainer configuration for reproducible dev environment
 4. If there are `console.log` calls in test files or setup files that are legitimate, add an eslint-disable comment for those specific lines.
 
 **Verification Checklist:**
+
 - [ ] `no-console` rule is configured in ESLint config
 - [ ] `npm run lint` passes with no new warnings from the rule
 - [ ] `console.warn` and `console.error` are still allowed
 - [ ] `npm run check` passes
 
 **Testing Instructions:**
+
 - Run: `npm run lint`
 - Temporarily add a `console.log` to a `.ts` file and verify lint catches it, then remove it
 
 **Commit Message Template:**
+
 ```text
 ci: add no-console eslint rule to prevent debug log regression
 ```

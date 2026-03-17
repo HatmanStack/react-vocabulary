@@ -56,7 +56,7 @@ describe('SyncStatusIndicator', () => {
       // The component returns null, so there should be no container View
       const views = root.findAllByType(require('react-native').View);
       // Should only have wrapper views from PaperProvider, not our container
-      expect(views.some((v) => v.props.testID === 'sync-indicator')).toBe(false);
+      expect(views.some((v: { props: { testID?: string } }) => v.props.testID === 'sync-indicator')).toBe(false);
     });
   });
 
@@ -65,7 +65,7 @@ describe('SyncStatusIndicator', () => {
       setupStoreMock({ username: 'testuser', syncStatus: 'idle' });
       const { root } = renderComponent({ showWhenIdle: false });
       const views = root.findAllByType(require('react-native').View);
-      expect(views.some((v) => v.props.testID === 'sync-indicator')).toBe(false);
+      expect(views.some((v: { props: { testID?: string } }) => v.props.testID === 'sync-indicator')).toBe(false);
     });
 
     it('renders indicator when idle and showWhenIdle is true', () => {

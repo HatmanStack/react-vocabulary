@@ -28,7 +28,7 @@ Scan QR with Expo Go, or press `a` (Android) / `i` (iOS) / `w` (Web).
 
 ## Project Structure
 
-```
+```text
 react-vocabulary/
 ├── app/           # Expo Router pages (home, quiz, stats, settings)
 ├── src/

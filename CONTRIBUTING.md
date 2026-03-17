@@ -25,7 +25,7 @@ Use the format `<type>/<short-description>`:
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 type(scope): brief description
 ```
 
@@ -35,7 +35,7 @@ type(scope): brief description
 
 Examples:
 
-```
+```text
 fix(quiz): prevent duplicate completion events
 feat(store): add adaptive difficulty biasing
 docs: update project structure tree

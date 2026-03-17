@@ -64,7 +64,7 @@ npm start
 
 ## Project Structure
 
-```
+```text
 react-vocabulary/
 ├── app/                    # Expo Router pages
 │   ├── _layout.tsx        # Root layout (theme, sync)

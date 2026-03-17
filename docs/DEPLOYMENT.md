@@ -39,7 +39,7 @@ SAM prompts for:
 
 2. Copy the API URL from SAM output:
 
-   ```
+   ```text
    Outputs
    -------------------------------------------------
    Key         ApiUrl
@@ -47,6 +47,7 @@ SAM prompts for:
    ```
 
 3. Update `.env` in project root:
+
    ```bash
    EXPO_PUBLIC_SYNC_API_URL=https://xxx.execute-api.us-west-2.amazonaws.com/progress
    ```
@@ -207,7 +208,7 @@ Both must pass for merge.
 
 ### AWS Resources Created
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                    API Gateway                       │
 │              (HTTP API + CORS)                       │

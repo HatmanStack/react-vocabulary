@@ -198,10 +198,10 @@ chore(deps): fix npm audit vulnerabilities
 4. Run `npm run check` after each change.
 
 **Verification Checklist:**
-- [ ] Unused barrel files are deleted
-- [ ] `isOnline` is no longer exported (if only used internally)
-- [ ] Duplicate `lightTheme` export is resolved
-- [ ] `npm run check` passes
+- [x] Unused barrel files are deleted
+- [x] `isOnline` is no longer exported (if only used internally)
+- [x] Duplicate `lightTheme` export is resolved
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -230,8 +230,8 @@ chore: remove unused exports and empty barrel files
 3. Run `npm run type-check` to confirm no code uses this alias
 
 **Verification Checklist:**
-- [ ] `@/app/*` alias is removed from `tsconfig.json`
-- [ ] `npm run type-check` passes
+- [x] `@/app/*` alias is removed from `tsconfig.json`
+- [x] `npm run type-check` passes
 
 **Testing Instructions:**
 - Run: `npm run type-check`

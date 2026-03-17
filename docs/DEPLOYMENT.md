@@ -16,12 +16,13 @@
 ### Quick Start
 
 ```bash
-cd backend
-npm install
-npm run deploy
+cd backend && npm install   # install backend dependencies
+cd ..
+npm run deploy              # deploy via root-level script
 ```
 
 SAM prompts for:
+
 - **Stack name**: `vocabulary-sync` (or your choice)
 - **Region**: `us-west-2` (or your preference)
 - **Confirm changeset**: `y`
@@ -29,13 +30,15 @@ SAM prompts for:
 ### First-Time Setup
 
 1. Deploy the backend:
+
    ```bash
-   cd backend
-   npm install
-   npm run deploy
+   cd backend && npm install   # install backend dependencies
+   cd ..
+   npm run deploy              # deploy via root-level script
    ```
 
 2. Copy the API URL from SAM output:
+
    ```
    Outputs
    -------------------------------------------------
@@ -68,9 +71,9 @@ EXPO_PUBLIC_SYNC_API_URL=https://xxx.execute-api.us-west-2.amazonaws.com/progres
 
 ### Backend (set by SAM)
 
-| Variable | Purpose |
-|----------|---------|
-| `TABLE_NAME` | DynamoDB table name (auto-created) |
+| Variable          | Purpose                             |
+| ----------------- | ----------------------------------- |
+| `TABLE_NAME`      | DynamoDB table name (auto-created)  |
 | `ALLOWED_ORIGINS` | CORS origins (set in template.yaml) |
 
 ## Web Deployment
@@ -127,10 +130,10 @@ eas build --platform android
 
 GitHub Actions runs on push/PR:
 
-| Job | Checks |
-|-----|--------|
-| Main | type-check, lint, test |
-| Backend | backend tests |
+| Job     | Checks                 |
+| ------- | ---------------------- |
+| Main    | type-check, lint, test |
+| Backend | backend tests          |
 
 Both must pass for merge.
 
@@ -139,52 +142,63 @@ Both must pass for merge.
 ### Backend Issues
 
 **SAM deploy fails with "No changes to deploy"**
+
 - Stack is already up-to-date
 - Force redeploy: `sam deploy --force-upload`
 
 **CORS errors in browser**
+
 - Check `ALLOWED_ORIGINS` in `backend/template.yaml`
 - Add your domain to the list
 - Redeploy: `npm run deploy`
 
 **Lambda timeout**
+
 - Default is 10s, increase in `template.yaml` if needed
 - Check CloudWatch logs: `aws logs tail /aws/lambda/vocabulary-sync --follow`
 
 **DynamoDB throttling**
+
 - Table uses on-demand capacity by default
 - Check AWS console for throttled requests
 
 ### Frontend Issues
 
 **Sync not working**
+
 - Verify `.env` has correct `EXPO_PUBLIC_SYNC_API_URL`
 - Restart Expo server after changing `.env`
 - Check network tab for API errors
 
 **Tests failing**
+
 - Clear Jest cache: `npm test -- --clearCache`
 - Check Node version: `node -v` (should be 20+)
 
 **TypeScript errors**
+
 - Run `npm run type-check` for details
 - Check for missing types: `npm install`
 
 **Web build fails**
+
 - Clear Metro cache: `npx expo start --clear`
 - Check for web-incompatible packages
 
 ### Cloud Sync Issues
 
 **"Username already exists"**
+
 - Choose a different username
 - Usernames are globally unique
 
 **Sync conflict**
+
 - App uses timestamp-based merge
 - Most recent changes win per word
 
 **Progress not syncing**
+
 - Check network connectivity
 - Verify username is set in Settings
 - App syncs on foreground (5-min throttle)
@@ -215,6 +229,7 @@ Both must pass for merge.
 ### Cost Estimate
 
 For typical personal use (~100 syncs/month):
+
 - Lambda: Free tier covers it
 - DynamoDB: Free tier covers it
 - API Gateway: Free tier covers it

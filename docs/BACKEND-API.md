@@ -15,17 +15,18 @@ AWS SAM backend for vocabulary progress synchronization.
 ## Quick Start
 
 ```bash
-npm install
-npm run deploy
+cd backend && npm install   # install backend dependencies
+cd ..
+npm run deploy              # deploy via root-level script
 ```
 
 ## Available Scripts
 
-- `npm run build` - Bundle TypeScript for Lambda
-- `npm run type-check` - Check TypeScript types
-- `npm test` - Run tests
-- `npm run check` - Run type-check and tests
-- `npm run deploy` - Deploy to AWS (interactive)
+- `npm run build` - Bundle TypeScript for Lambda (run from `backend/`)
+- `npm run type-check` - Check TypeScript types (run from `backend/`)
+- `npm test` - Run tests (run from `backend/`)
+- `npm run check` - Run type-check and tests (run from `backend/`)
+- `npm run deploy` - Deploy to AWS via SAM (run from project root)
 
 ## API Endpoint
 
@@ -43,6 +44,7 @@ All operations use `POST /progress` with an action in the request body.
 ```
 
 Response:
+
 ```json
 { "exists": true | false }
 ```
@@ -57,6 +59,7 @@ Response:
 ```
 
 Response (200):
+
 ```json
 {
   "progressData": { ... },
@@ -65,6 +68,7 @@ Response (200):
 ```
 
 Response (404):
+
 ```json
 {
   "error": "User not found",
@@ -83,6 +87,7 @@ Response (404):
 ```
 
 Response:
+
 ```json
 {
   "success": true,

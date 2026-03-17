@@ -47,7 +47,7 @@ npm start
 
 1. **Select a List** – Choose from 18 themed vocabulary lists (Aurora, Cascade, Catalyst, etc.)
 2. **Pick Difficulty** – Basic, Intermediate, Advanced, Expert, or Professional
-3. **Take the Quiz** – 8 questions per session (4 multiple-choice + 4 fill-in-blank)
+3. **Take the Quiz** – 2 questions per word (1 multiple-choice + 1 fill-in-blank)
 4. **Review Results** – See your score and track word mastery
 
 ### Cloud Sync (Optional)

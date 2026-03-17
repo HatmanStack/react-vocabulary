@@ -17,6 +17,7 @@ import {
   Achievement,
 } from '@/shared/types';
 import { makeListLevelKey } from '@/shared/utils/listLevelKey';
+import { isValidProgressData } from '@/shared/utils/validateState';
 import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
 import {
   checkUsername as apiCheckUsername,
@@ -216,11 +217,16 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       if (stored) {
         const data = JSON.parse(stored);
-        set({
-          ...data,
-          username: storedUsername || null,
-          _hydrated: true,
-        });
+        if (isValidProgressData(data)) {
+          set({
+            ...data,
+            username: storedUsername || null,
+            _hydrated: true,
+          });
+        } else {
+          console.warn('Invalid progress data in storage, using defaults');
+          set({ username: storedUsername || null, _hydrated: true });
+        }
       } else {
         set({
           username: storedUsername || null,

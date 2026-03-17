@@ -7,6 +7,7 @@
 import { Platform, Share } from 'react-native';
 import { useProgressStore } from '@/shared/store/progressStore';
 import { ListLevelProgress } from '@/shared/types';
+import { isValidProgressExportData } from '@/shared/utils/validateState';
 
 const EXPORT_VERSION = '1.0.0';
 
@@ -128,7 +129,12 @@ export async function importProgress(jsonString: string): Promise<{
  */
 export function applyImportedProgress(jsonString: string): boolean {
   try {
-    const importData: ProgressExportData = JSON.parse(jsonString);
+    const parsed = JSON.parse(jsonString);
+    if (!isValidProgressExportData(parsed)) {
+      console.error('Failed to apply imported progress: invalid data structure');
+      return false;
+    }
+    const importData = parsed as ProgressExportData;
     const progressStore = useProgressStore.getState();
 
     // Reset and apply imported data

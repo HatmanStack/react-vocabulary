@@ -7,6 +7,7 @@
 
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isValidSettingsData } from '@/shared/utils/validateState';
 
 const SETTINGS_STORAGE_KEY = 'vocabulary-settings';
 
@@ -68,13 +69,18 @@ export const useSettingsStore = create<SettingsState>()((set, get) => ({
       const stored = await AsyncStorage.getItem(SETTINGS_STORAGE_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        set({
-          theme: data.theme ?? initialState.theme,
-          soundEnabled: data.soundEnabled ?? initialState.soundEnabled,
-          hapticsEnabled: data.hapticsEnabled ?? initialState.hapticsEnabled,
-          onboardingCompleted: data.onboardingCompleted ?? initialState.onboardingCompleted,
-          _hydrated: true,
-        });
+        if (isValidSettingsData(data)) {
+          set({
+            theme: data.theme ?? initialState.theme,
+            soundEnabled: data.soundEnabled ?? initialState.soundEnabled,
+            hapticsEnabled: data.hapticsEnabled ?? initialState.hapticsEnabled,
+            onboardingCompleted: data.onboardingCompleted ?? initialState.onboardingCompleted,
+            _hydrated: true,
+          });
+        } else {
+          console.warn('Invalid settings data in storage, using defaults');
+          set({ _hydrated: true });
+        }
       } else {
         set({ _hydrated: true });
       }

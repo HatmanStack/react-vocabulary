@@ -2,7 +2,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
   GetCommand,
-  PutCommand,
+  UpdateCommand,
 } from '@aws-sdk/lib-dynamodb';
 import { UserProgress, UserProgressItem } from './types.js';
 
@@ -54,8 +54,9 @@ export async function getProgress(
 
 /**
  * Save progress data for a user
- * Creates or updates the item
- * Returns the lastSyncedAt timestamp
+ * Creates or updates the item atomically using UpdateCommand.
+ * Uses if_not_exists for createdAt to preserve original creation time.
+ * Returns the lastSyncedAt timestamp.
  */
 export async function saveProgress(
   username: string,
@@ -63,26 +64,16 @@ export async function saveProgress(
 ): Promise<string> {
   const now = new Date().toISOString();
 
-  // Get existing item to preserve createdAt if it exists
-  const existing = await docClient.send(
-    new GetCommand({
+  await docClient.send(
+    new UpdateCommand({
       TableName: TABLE_NAME,
       Key: { username },
-      ProjectionExpression: 'createdAt',
-    })
-  );
-
-  const item: UserProgressItem = {
-    username,
-    progressData,
-    lastSyncedAt: now,
-    createdAt: existing.Item?.createdAt || now,
-  };
-
-  await docClient.send(
-    new PutCommand({
-      TableName: TABLE_NAME,
-      Item: item,
+      UpdateExpression:
+        'SET progressData = :pd, lastSyncedAt = :now, createdAt = if_not_exists(createdAt, :now)',
+      ExpressionAttributeValues: {
+        ':pd': progressData,
+        ':now': now,
+      },
     })
   );
 

@@ -14,6 +14,7 @@ Comprehensive cross-platform vocabulary learning application. Master 350 curated
 - **Progress Tracking**: Statistics on correct/wrong answers, hints, and learning streaks
 - **Achievement System**: Unlock badges for milestones, performance, and consistency
 - **Cloud Sync**: Optional account-based progress synchronization
+- **Progress Export/Import**: Backup and restore progress data via JSON export
 - **Cross-Platform**: Single codebase for iOS, Android, and Web
 
 ## Tech Stack
@@ -129,10 +130,21 @@ Words progress through 4 states as users learn:
 
 ### Quiz Question Generation
 
-- 4 words selected per quiz session
+- All words from the selected level are quizzed
 - Each word gets 2 questions (1 multiple-choice + 1 fill-in-blank)
 - Multiple-choice: 1 correct + 3 random options from same difficulty
 - Fill-in-blank: Fuzzy matching using Levenshtein distance
+
+### Cloud Sync Merge Strategy
+
+When syncing progress between devices, conflicts are resolved by `src/shared/utils/mergeProgress.ts` using a deterministic "higher wins" strategy:
+
+- Word state: keeps the higher state value
+- First attempt date: keeps the earliest
+- Last attempt date: keeps the latest
+- Mastered date: keeps the earliest
+- Best score: fewer hints wins, then fewer wrong answers
+- Achievements: union by ID, preferring unlocked versions with earliest unlock date
 
 ## Testing
 

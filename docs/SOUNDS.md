@@ -39,6 +39,6 @@ Place the following MP3 files in this directory:
 
 If using Creative Commons licensed sounds, add attribution here:
 
-- correct.mp3: [Source and License]
-- wrong.mp3: [Source and License]
-- complete.mp3: [Source and License]
+- correct.mp3: Source unknown — needs attribution research
+- wrong.mp3: Source unknown — needs attribution research
+- complete.mp3: Source unknown — needs attribution research

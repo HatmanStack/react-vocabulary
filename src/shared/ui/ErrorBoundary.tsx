@@ -146,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorBoundary = withTheme(ErrorBoundaryBase) as React.ComponentType<Omit<ErrorBoundaryProps, 'theme'>>;
+export const ErrorBoundary = withTheme(ErrorBoundaryBase) as unknown as React.ComponentType<Omit<ErrorBoundaryProps, 'theme'>>;

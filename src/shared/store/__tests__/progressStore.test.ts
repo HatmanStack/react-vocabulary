@@ -4,6 +4,7 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useProgressStore } from '../progressStore';
+import { makeListLevelKey } from '@/shared/utils/listLevelKey';
 
 // Mock AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -75,7 +76,7 @@ describe('progressStore', () => {
     it('loads progress from AsyncStorage', async () => {
       const storedData = {
         listLevelProgress: {
-          'list1-basic': {
+          [makeListLevelKey('list1', 'basic')]: {
             listId: 'list1',
             levelId: 'basic',
             wordProgress: {
@@ -130,7 +131,7 @@ describe('progressStore', () => {
       store.updateWordProgress('word1', 'list1', 'basic', 1, true, false);
 
       const state = useProgressStore.getState();
-      const wordProgress = state.listLevelProgress['list1-basic']?.wordProgress['word1'];
+      const wordProgress = state.listLevelProgress[makeListLevelKey('list1', 'basic')]?.wordProgress['word1'];
 
       expect(wordProgress).toBeDefined();
       expect(wordProgress?.state).toBe(1);
@@ -144,7 +145,7 @@ describe('progressStore', () => {
       store.updateWordProgress('word1', 'list1', 'basic', 1, true, true);
 
       const state = useProgressStore.getState();
-      const wordProgress = state.listLevelProgress['list1-basic']?.wordProgress['word1'];
+      const wordProgress = state.listLevelProgress[makeListLevelKey('list1', 'basic')]?.wordProgress['word1'];
 
       expect(wordProgress?.hintsUsed).toBe(1);
     });
@@ -154,7 +155,7 @@ describe('progressStore', () => {
       store.updateWordProgress('word1', 'list1', 'basic', 1, false, false);
 
       const state = useProgressStore.getState();
-      const wordProgress = state.listLevelProgress['list1-basic']?.wordProgress['word1'];
+      const wordProgress = state.listLevelProgress[makeListLevelKey('list1', 'basic')]?.wordProgress['word1'];
 
       expect(wordProgress?.wrongAttempts).toBe(1);
       expect(wordProgress?.correctAttempts).toBe(0);
@@ -165,7 +166,7 @@ describe('progressStore', () => {
       store.updateWordProgress('word1', 'list1', 'basic', 3, true, false);
 
       const state = useProgressStore.getState();
-      const wordProgress = state.listLevelProgress['list1-basic']?.wordProgress['word1'];
+      const wordProgress = state.listLevelProgress[makeListLevelKey('list1', 'basic')]?.wordProgress['word1'];
 
       expect(wordProgress?.masteredDate).toBeDefined();
     });
@@ -195,7 +196,7 @@ describe('progressStore', () => {
     it('returns word progress when exists', () => {
       useProgressStore.setState({
         listLevelProgress: {
-          'list1-basic': {
+          [makeListLevelKey('list1', 'basic')]: {
             listId: 'list1',
             levelId: 'basic',
             wordProgress: {
@@ -284,7 +285,7 @@ describe('progressStore', () => {
     beforeEach(() => {
       useProgressStore.setState({
         listLevelProgress: {
-          'list1-basic': {
+          [makeListLevelKey('list1', 'basic')]: {
             listId: 'list1',
             levelId: 'basic',
             wordProgress: {
@@ -333,7 +334,7 @@ describe('progressStore', () => {
     it('resets list level progress', () => {
       useProgressStore.setState({
         listLevelProgress: {
-          'list1-basic': {
+          [makeListLevelKey('list1', 'basic')]: {
             listId: 'list1',
             levelId: 'basic',
             wordProgress: { word1: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 1, lastAttemptDate: '', firstAttemptDate: '' } },
@@ -345,13 +346,13 @@ describe('progressStore', () => {
       store.resetListLevelProgress('list1', 'basic');
 
       const state = useProgressStore.getState();
-      expect(state.listLevelProgress['list1-basic']).toBeUndefined();
+      expect(state.listLevelProgress[makeListLevelKey('list1', 'basic')]).toBeUndefined();
     });
 
     it('resets all progress', async () => {
       useProgressStore.setState({
         listLevelProgress: {
-          'list1-basic': {
+          [makeListLevelKey('list1', 'basic')]: {
             listId: 'list1',
             levelId: 'basic',
             wordProgress: {},

@@ -75,9 +75,11 @@ Add pre-commit hooks, CI hardening, and configuration fixes that prevent regress
    ```
 
 5. Test the hook by making a small change and committing:
+
    ```bash
    git add -A && git commit -m "test: verify pre-commit hook"
    ```
+
    (Then amend or reset if this was just a test.)
 
 **Verification Checklist:**

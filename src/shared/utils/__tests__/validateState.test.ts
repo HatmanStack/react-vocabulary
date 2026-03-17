@@ -30,6 +30,19 @@ describe('isValidProgressData', () => {
     expect(isValidProgressData(undefined)).toBe(false);
   });
 
+  it('rejects arrays', () => {
+    expect(isValidProgressData([])).toBe(false);
+    expect(isValidProgressData([1, 2, 3])).toBe(false);
+  });
+
+  it('rejects array listLevelProgress', () => {
+    expect(isValidProgressData({ listLevelProgress: [] })).toBe(false);
+  });
+
+  it('rejects array globalStats', () => {
+    expect(isValidProgressData({ globalStats: [] })).toBe(false);
+  });
+
   it('rejects invalid listLevelProgress', () => {
     expect(isValidProgressData({ listLevelProgress: 'invalid' })).toBe(false);
   });
@@ -44,6 +57,10 @@ describe('isValidProgressData', () => {
 });
 
 describe('isValidSettingsData', () => {
+  it('rejects arrays', () => {
+    expect(isValidSettingsData([])).toBe(false);
+  });
+
   it('accepts valid settings data', () => {
     expect(
       isValidSettingsData({
@@ -83,6 +100,10 @@ describe('isValidSettingsData', () => {
 });
 
 describe('isValidProgressExportData', () => {
+  it('rejects arrays', () => {
+    expect(isValidProgressExportData([])).toBe(false);
+  });
+
   it('accepts valid export data', () => {
     expect(
       isValidProgressExportData({

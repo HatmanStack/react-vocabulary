@@ -12,8 +12,8 @@ import {
   QuestionType,
   WordState,
 } from "@/shared/types";
-import { useVocabularyStore } from "./vocabularyStore";
-import { useProgressStore } from "./progressStore";
+import { useVocabularyStore } from "@/shared/store/vocabularyStore";
+import { useProgressStore } from "@/shared/store/progressStore";
 import { makeListLevelKey } from "@/shared/utils/listLevelKey";
 import {
   validateMultipleChoice,

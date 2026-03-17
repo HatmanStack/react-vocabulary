@@ -18,7 +18,8 @@ export default function StatsScreen() {
   const vocabularyLists = loadVocabularyLists();
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
-  const [_selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+  // TODO: implement achievement detail modal
+  const [, setSelectedAchievement] = useState<Achievement | null>(null);
   const [chartView, setChartView] = useState<'progress' | 'heatmap'>('progress');
 
   // Determine number of columns for stat cards

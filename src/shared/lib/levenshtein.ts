@@ -4,7 +4,7 @@
  * Calculates the minimum number of single-character edits (insertions,
  * deletions, or substitutions) needed to change one string into another.
  *
- * Uses a single-row DP approach for O(min(n,m)) space instead of O(n*m).
+ * Uses a rolling two-row DP approach (prevRow/currRow) for O(min(n,m)) space instead of O(n*m).
  *
  * Used for typo tolerance in fill-in-blank answer validation.
  */

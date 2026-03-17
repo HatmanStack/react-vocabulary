@@ -194,8 +194,8 @@ Both must pass for merge.
 
 **Sync conflict**
 
-- App uses timestamp-based merge
-- Most recent changes win per word
+- App uses the deterministic `mergeProgress` algorithm (see docs/README.md)
+- Rule order: higher word state wins, then earliest first-attempt date, then best score (fewer hints, then fewer wrong answers)
 
 **Progress not syncing**
 

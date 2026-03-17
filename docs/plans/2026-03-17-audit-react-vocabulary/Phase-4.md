@@ -98,7 +98,7 @@ docs: fix word count from 360+ to actual count of 350
    The doc says "8 questions per session (4 multiple-choice + 4 fill-in-blank)".
    After Phase 2, check the actual quiz behavior. The code generates 2 questions per word (1 MC + 1 fill-in-blank) for all words in the selected level. Update to match actual behavior:
 
-   ```
+   ```md
    3. **Take the Quiz** – 2 questions per word (1 multiple-choice + 1 fill-in-blank)
    ```
 
@@ -180,17 +180,19 @@ docs: fix quiz flow description and stale deploy commands
 4. **Update the store table (Drift #3):**
    Add the missing store:
 
-   ```
+   ```text
    | `adaptiveDifficultyStore` | Adaptive difficulty biasing |
    ```
 
 5. **Verify against actual directory listing:**
+
    ```bash
    ls app/
    ls src/features/
    ls src/shared/
    ls src/shared/store/
    ```
+
    Make sure the tree matches reality after all Phase 1-3 changes.
 
 **Verification Checklist:**

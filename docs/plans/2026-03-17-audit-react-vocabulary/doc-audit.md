@@ -9,12 +9,14 @@ language_stack: JS/TS and Python
 # Documentation Audit: react-vocabulary
 
 ## Configuration
+
 - **Prevention Scope:** Markdown linting (markdownlint) + link checking (lychee)
 - **CI Platform:** GitHub Actions
 - **Language Stack:** JS/TS and Python (both)
 - **Constraints:** None — all docs audited
 
 ## Summary
+
 - Docs scanned: 7 files (README.md, CLAUDE.md, CHANGELOG.md, docs/README.md, docs/BACKEND-API.md, docs/DEPLOYMENT.md, docs/SOUNDS.md)
 - Code modules scanned: 6 features, 7 shared subdirectories, 1 backend module
 - Findings: 6 drift, 3 gaps, 0 stale, 0 broken links

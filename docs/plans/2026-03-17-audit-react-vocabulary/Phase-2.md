@@ -33,6 +33,7 @@ Fix structural, architectural, and operational issues across the codebase: type 
 **Implementation Steps:**
 
 1. **progressExport.ts (line 16):** Replace `listLevelProgress: Record<string, any>` with:
+
    ```typescript
    listLevelProgress: Record<string, {
      listId: string;
@@ -53,6 +54,7 @@ Fix structural, architectural, and operational issues across the codebase: type 
      };
    }>;
    ```
+
    Alternatively, import `ListLevelProgress` from `@/shared/types` and use `Record<string, ListLevelProgress>`.
 
 2. **progressExport.ts (lines 104, 106):** Replace `any` casts with proper type assertions or remove them by structuring the code to not need them. Review the context of each cast — they likely involve accessing properties from parsed JSON. Since Task 4 adds validation to the import flow, the casts can be replaced with validated types.
@@ -60,9 +62,11 @@ Fix structural, architectural, and operational issues across the codebase: type 
 3. **Typography.tsx (line 82):** The `VARIANT_MAP[variant] as any` cast exists because the custom variant names don't match react-native-paper's `TextProps['variant']` type. Fix by:
    - Defining the return type of `VARIANT_MAP` lookup as `React.ComponentProps<typeof PaperText>['variant']`
    - Or using a type assertion to the specific union type instead of `any`:
+
      ```typescript
      variant={VARIANT_MAP[variant] as React.ComponentProps<typeof PaperText>['variant']}
      ```
+
    - Remove the `eslint-disable-next-line` comment above it
 
 4. **ErrorBoundary.tsx (lines 112-118):** The hardcoded colors (`#f5f5f5`, `#fee`, `#c00`) ignore the theme system. Since `ErrorBoundary` is a class component and cannot use hooks, the fix is:
@@ -82,6 +86,7 @@ Fix structural, architectural, and operational issues across the codebase: type 
 - If ErrorBoundary has existing tests, verify they still pass (they may need a theme provider wrapper)
 
 **Commit Message Template:**
+
 ```text
 fix(types): eliminate any types and unsafe casts from production code
 ```
@@ -108,6 +113,7 @@ fix(types): eliminate any types and unsafe casts from production code
 **Implementation Steps:**
 
 1. **Create `src/shared/utils/listLevelKey.ts`:**
+
    ```typescript
    /**
     * Constructs the composite key for listLevelProgress lookups.
@@ -128,6 +134,7 @@ fix(types): eliminate any types and unsafe casts from production code
    - Verify the imported type matches what was there (it should — both have the same fields)
 
 5. **Backend types:** The backend has its own `types.ts` with duplicated types. Since the backend is separately deployed and has its own `tsconfig.json`, creating a shared types package would be over-engineering. Instead, add a comment at the top of `backend/src/types.ts`:
+
    ```typescript
    // NOTE: These types mirror src/shared/types/progress.ts in the frontend.
    // If you change types here, update the frontend types to match.
@@ -146,6 +153,7 @@ fix(types): eliminate any types and unsafe casts from production code
   - Test: `makeListLevelKey('list1', 'level2')` returns `'list1-level2'`
 
 **Commit Message Template:**
+
 ```text
 refactor(types): consolidate duplicate types and extract listLevelKey helper
 ```
@@ -196,6 +204,7 @@ For each suppression:
 - Manually verify that remaining suppressions have comments explaining the intent
 
 **Commit Message Template:**
+
 ```text
 fix(hooks): review and fix eslint-disable exhaustive-deps suppressions
 ```
@@ -218,6 +227,7 @@ fix(hooks): review and fix eslint-disable exhaustive-deps suppressions
 **Implementation Steps:**
 
 1. **Define a validation helper.** Create a small validation function (not a full library — YAGNI). Add it inline or in a shared util:
+
    ```typescript
    // In each store file or in a shared util like src/shared/utils/validateState.ts
    function isValidProgressData(data: unknown): data is Partial<UserProgress> {
@@ -231,6 +241,7 @@ fix(hooks): review and fix eslint-disable exhaustive-deps suppressions
    ```
 
 2. **progressStore.ts `loadFromStorage` (line ~217):**
+
    ```typescript
    if (stored) {
      try {
@@ -269,6 +280,7 @@ fix(hooks): review and fix eslint-disable exhaustive-deps suppressions
 - Run: `npm test`
 
 **Commit Message Template:**
+
 ```text
 fix(store): add schema validation to JSON.parse deserialization paths
 ```
@@ -292,6 +304,7 @@ fix(store): add schema validation to JSON.parse deserialization paths
 
 1. **Encapsulate the debounce timer (progressStore.ts line ~34):**
    Move the module-level `let saveDebounceTimer` inside the store's closure or into an object. The simplest approach: keep it module-level but add a `flushPendingSave` function that clears the timer and immediately executes the save:
+
    ```typescript
    export const flushPendingSave = async () => {
      if (saveDebounceTimer) {
@@ -304,9 +317,11 @@ fix(store): add schema validation to JSON.parse deserialization paths
      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
    };
    ```
+
    Extract the save logic into a named helper to avoid duplication between the debounced path and the flush path.
 
 2. **Register AppState listener in `app/_layout.tsx`:**
+
    ```typescript
    import { AppState } from 'react-native';
    import { flushPendingSave } from '@/shared/store/progressStore';
@@ -323,6 +338,7 @@ fix(store): add schema validation to JSON.parse deserialization paths
 
 3. **Fix stale sync status timers (progressStore.ts lines ~620 and ~693):**
    Store the timer ID and clear it before setting a new one:
+
    ```typescript
    // At module level or in a closure:
    let syncStatusTimer: ReturnType<typeof setTimeout> | null = null;
@@ -337,6 +353,7 @@ fix(store): add schema validation to JSON.parse deserialization paths
 
 4. **Fix non-atomic import (progressExport.ts lines ~128-148):**
    The issue: `resetAllProgress()` is async but the code doesn't await it properly before setting new state. Fix by awaiting the reset, then applying the import:
+
    ```typescript
    export async function applyImportedProgress(data: ProgressExportData): Promise<void> {
      const store = useProgressStore.getState();
@@ -346,6 +363,7 @@ fix(store): add schema validation to JSON.parse deserialization paths
      // ... set state with imported data
    }
    ```
+
    Verify that `resetAllProgress` actually returns a promise. If it doesn't, make it return one by awaiting its internal `AsyncStorage.removeItem`.
 
 **Verification Checklist:**
@@ -361,6 +379,7 @@ fix(store): add schema validation to JSON.parse deserialization paths
 - Run: `npm test`
 
 **Commit Message Template:**
+
 ```text
 fix(store): fix debounce flush, stale timers, and non-atomic import
 ```
@@ -389,9 +408,11 @@ fix(store): fix debounce flush, stale timers, and non-atomic import
    The store should have `isLoaded: boolean` in its state so consumers know when data is ready.
 
 3. **Call loading from `_layout.tsx`:** In the root layout's initialization logic (which already loads progress and settings), add:
+
    ```typescript
    useVocabularyStore.getState().loadVocabularyLists();
    ```
+
    This ensures loading happens once during app startup, but within the React lifecycle rather than at module import time.
 
 4. **Guard HomeScreen:** The `HomeScreen` already calls `loadVocabularyLists()` directly (line 26). Verify that after removing the module-level call, the HomeScreen still gets data. If `loadVocabularyLists` is synchronous (returns from a module-level cache), this should work. If it becomes async, add a loading state check.
@@ -407,6 +428,7 @@ fix(store): fix debounce flush, stale timers, and non-atomic import
 - Existing vocabulary store tests should still pass
 
 **Commit Message Template:**
+
 ```text
 refactor(store): convert vocabulary store to lazy initialization
 ```
@@ -429,6 +451,7 @@ refactor(store): convert vocabulary store to lazy initialization
 
 1. **Add payload size check in `validation.ts`:**
    Before the existing `progressData` check (line ~70), add:
+
    ```typescript
    // Check payload size (DynamoDB limit is 400KB, leave margin)
    const payloadSize = JSON.stringify(data.progressData).length;
@@ -443,6 +466,7 @@ refactor(store): convert vocabulary store to lazy initialization
 
 2. **Add basic schema validation in `validation.ts`:**
    After confirming `progressData` is an object, validate its shape:
+
    ```typescript
    const pd = data.progressData;
    if (typeof pd.listLevelProgress !== 'undefined' && typeof pd.listLevelProgress !== 'object') {
@@ -455,13 +479,17 @@ refactor(store): convert vocabulary store to lazy initialization
 
 3. **Fix ALLOWED_ORIGINS default (index.ts line 6):**
    Change from:
+
    ```typescript
    const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '*';
    ```
+
    To:
+
    ```typescript
    const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '';
    ```
+
    And update the CORS logic to deny requests when no origin is configured, or at minimum log a warning if `ALLOWED_ORIGINS` is empty. This forces explicit configuration in deployment.
 
 **Verification Checklist:**
@@ -478,6 +506,7 @@ refactor(store): convert vocabulary store to lazy initialization
 - Run: `cd backend && npm test`
 
 **Commit Message Template:**
+
 ```text
 fix(backend): add payload validation, size limits, and secure CORS default
 ```
@@ -498,6 +527,7 @@ fix(backend): add payload validation, size limits, and secure CORS default
 **Implementation Steps:**
 
 1. Replace the current `saveProgress` function (lines ~60-90) with:
+
    ```typescript
    export async function saveProgress(username: string, progressData: UserProgress): Promise<string> {
      const now = new Date().toISOString();
@@ -521,6 +551,7 @@ fix(backend): add payload validation, size limits, and secure CORS default
    ```
 
    The best DynamoDB approach:
+
    ```typescript
    import { UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
@@ -557,6 +588,7 @@ fix(backend): add payload validation, size limits, and secure CORS default
 - Run: `cd backend && npm test`
 
 **Commit Message Template:**
+
 ```text
 fix(backend): replace read-then-write with atomic conditional write
 ```
@@ -613,6 +645,7 @@ fix(backend): replace read-then-write with atomic conditional write
 - Run: `npm test`
 
 **Commit Message Template:**
+
 ```text
 refactor(store): extract cloud sync orchestration from progressStore
 ```
@@ -635,6 +668,7 @@ refactor(store): extract cloud sync orchestration from progressStore
 
 1. **Deduplicate quiz completion (QuizScreen.tsx):**
    The completion check exists in both the `useEffect` (line ~60) and `handleFeedbackEnd` (line ~128). Extract into a single function:
+
    ```typescript
    const navigateToGraduation = useCallback(() => {
      const durationMinutes = quizStartTime
@@ -655,10 +689,12 @@ refactor(store): extract cloud sync orchestration from progressStore
      });
    }, [quizStartTime, endQuiz, router, listId, levelId]);
    ```
+
    Then call `navigateToGraduation()` from both the useEffect and handleFeedbackEnd.
 
 2. **Clean up the setTimeout in handleFeedbackEnd (line ~131):**
    Store the timer reference and clear it on unmount:
+
    ```typescript
    const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -676,6 +712,7 @@ refactor(store): extract cloud sync orchestration from progressStore
 3. **Fix word state progression (quizStore.ts line ~215):**
    Currently: `3, // Mark as mastered` — always sets state to 3 regardless of current state.
    Fix to implement progressive states:
+
    ```typescript
    // Get current word state
    const progressStore = useProgressStore.getState();
@@ -711,6 +748,7 @@ refactor(store): extract cloud sync orchestration from progressStore
 - Run: `npm test`
 
 **Commit Message Template:**
+
 ```text
 fix(quiz): deduplicate completion logic and enforce word state progression
 ```
@@ -733,6 +771,7 @@ fix(quiz): deduplicate completion logic and enforce word state progression
 
 1. **Cache `getAllWords()` (vocabularyLoader.ts lines ~90-99):**
    The function rebuilds the array on every call. Add a module-level cache:
+
    ```typescript
    let cachedAllWords: VocabularyWord[] | null = null;
 
@@ -753,6 +792,7 @@ fix(quiz): deduplicate completion logic and enforce word state progression
 
 2. **Optimize Levenshtein (levenshtein.ts):**
    Replace the full O(n*m) matrix with a single-row (two-row) DP approach that uses O(min(n,m)) space:
+
    ```typescript
    export function levenshteinDistance(str1: string, str2: string): number {
      const len1 = str1.length;
@@ -794,6 +834,7 @@ fix(quiz): deduplicate completion logic and enforce word state progression
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 perf: cache getAllWords and optimize Levenshtein to single-row DP
 ```
@@ -835,6 +876,7 @@ perf: cache getAllWords and optimize Levenshtein to single-row DP
 - Run: `npm test -- --testPathPattern='quizFlow'`
 
 **Commit Message Template:**
+
 ```text
 test(quiz): add integration test for quiz flow with word state progression
 ```

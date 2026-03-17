@@ -92,7 +92,7 @@ let cachedAllWords: VocabularyWord[] | null = null;
  * @returns Array of all vocabulary words across all lists
  */
 export function getAllWords(): VocabularyWord[] {
-  if (cachedAllWords) return cachedAllWords;
+  if (cachedAllWords) return [...cachedAllWords];
 
   const allWords: VocabularyWord[] = [];
 
@@ -103,7 +103,7 @@ export function getAllWords(): VocabularyWord[] {
   });
 
   cachedAllWords = allWords;
-  return cachedAllWords;
+  return [...cachedAllWords];
 }
 
 /**

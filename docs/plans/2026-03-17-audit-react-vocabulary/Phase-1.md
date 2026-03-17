@@ -43,6 +43,7 @@ Remove dead code, unused dependencies, unused files, unused exports, and debug s
 - Run: `npm test`
 
 **Commit Message Template:**
+
 ```text
 chore(ui): remove debug console.log statements from HomeScreen
 ```
@@ -88,6 +89,7 @@ chore(ui): remove debug console.log statements from HomeScreen
 - If any test file imported `testUtils.tsx`, that test will fail — fix by removing the import or inlining what it provided
 
 **Commit Message Template:**
+
 ```text
 chore: remove unused files and dead scripts
 ```
@@ -137,6 +139,7 @@ chore: remove unused files and dead scripts
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 chore(deps): remove unused dependencies
 ```
@@ -169,6 +172,7 @@ chore(deps): remove unused dependencies
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 chore(deps): fix npm audit vulnerabilities
 ```
@@ -207,6 +211,7 @@ chore(deps): fix npm audit vulnerabilities
 - Run: `npm run check`
 
 **Commit Message Template:**
+
 ```text
 chore: remove unused exports and empty barrel files
 ```
@@ -237,6 +242,7 @@ chore: remove unused exports and empty barrel files
 - Run: `npm run type-check`
 
 **Commit Message Template:**
+
 ```text
 chore: remove dead @/app/* path alias from tsconfig
 ```

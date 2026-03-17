@@ -36,7 +36,6 @@ function createEvent(body: unknown): APIGatewayProxyEventV2 {
 
 beforeEach(() => {
   jest.clearAllMocks();
-  process.env.ALLOWED_ORIGINS = '*';
 });
 
 describe('handler', () => {

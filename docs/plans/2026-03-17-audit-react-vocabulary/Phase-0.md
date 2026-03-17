@@ -34,7 +34,7 @@ The backend (`backend/`) has active findings (validation gaps, race conditions, 
 
 All commits use conventional commit format:
 
-```
+```text
 type(scope): brief description
 ```
 

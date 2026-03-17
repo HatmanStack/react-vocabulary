@@ -110,7 +110,9 @@ describe('saveProgress', () => {
     const updateInput = calls[0].args[0].input;
     expect(updateInput.Key).toEqual({ username: 'newuser' });
     expect(updateInput.UpdateExpression).toContain('if_not_exists(createdAt');
+    expect(updateInput.TableName).toBe('test-table');
     expect(updateInput.ExpressionAttributeValues[':pd']).toEqual(mockProgress);
+    expect(updateInput.ExpressionAttributeValues[':now']).toBe(timestamp);
   });
 
   it('should use if_not_exists for createdAt to preserve existing value', async () => {

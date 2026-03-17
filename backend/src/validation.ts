@@ -77,7 +77,7 @@ export function validateRequest(body: unknown): ProgressRequest {
 
     // Check payload size (DynamoDB limit is 400KB, leave margin)
     const MAX_PAYLOAD_SIZE = 350_000; // 350KB
-    const payloadSize = JSON.stringify(data.progressData).length;
+    const payloadSize = Buffer.byteLength(JSON.stringify(data.progressData), 'utf8');
     if (payloadSize > MAX_PAYLOAD_SIZE) {
       throw new ValidationError(
         'Progress data exceeds maximum size',
@@ -87,13 +87,15 @@ export function validateRequest(body: unknown): ProgressRequest {
 
     // Validate progressData shape
     const pd = data.progressData as Record<string, unknown>;
-    if (pd.listLevelProgress !== undefined && typeof pd.listLevelProgress !== 'object') {
+    if (pd.listLevelProgress !== undefined &&
+        (typeof pd.listLevelProgress !== 'object' || pd.listLevelProgress === null || Array.isArray(pd.listLevelProgress))) {
       throw new ValidationError(
         'Invalid listLevelProgress format',
         ErrorCodes.INVALID_PROGRESS_DATA
       );
     }
-    if (pd.globalStats !== undefined && typeof pd.globalStats !== 'object') {
+    if (pd.globalStats !== undefined &&
+        (typeof pd.globalStats !== 'object' || pd.globalStats === null || Array.isArray(pd.globalStats))) {
       throw new ValidationError(
         'Invalid globalStats format',
         ErrorCodes.INVALID_PROGRESS_DATA

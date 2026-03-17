@@ -629,7 +629,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
         // Save merged state to local storage if we got new data
         if (updates.listLevelProgress) {
-          await saveStateToStorage(get());
+          await persistToStorage(get());
         }
 
         if (scheduleIdleReset) {

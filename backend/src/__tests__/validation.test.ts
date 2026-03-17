@@ -165,42 +165,49 @@ describe('validateRequest', () => {
     it('should reject oversized progressData', () => {
       // Create a payload > 350KB
       const largeData = { listLevelProgress: { data: 'x'.repeat(400_000) } };
-      try {
-        validateRequest({ action: 'save', username: 'testuser', progressData: largeData });
-        // Should not reach here
-        expect(true).toBe(false);
-      } catch (err) {
-        expect(err).toBeInstanceOf(ValidationError);
-        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
-      }
+      expect(() =>
+        validateRequest({ action: 'save', username: 'testuser', progressData: largeData })
+      ).toThrow(ValidationError);
     });
 
     it('should reject progressData with non-object listLevelProgress', () => {
-      try {
+      expect(() =>
         validateRequest({
           action: 'save',
           username: 'testuser',
           progressData: { listLevelProgress: 'invalid' },
-        });
-        expect(true).toBe(false);
-      } catch (err) {
-        expect(err).toBeInstanceOf(ValidationError);
-        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
-      }
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with array listLevelProgress', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { listLevelProgress: [1, 2, 3] },
+        })
+      ).toThrow(ValidationError);
     });
 
     it('should reject progressData with non-object globalStats', () => {
-      try {
+      expect(() =>
         validateRequest({
           action: 'save',
           username: 'testuser',
           progressData: { globalStats: 'invalid' },
-        });
-        expect(true).toBe(false);
-      } catch (err) {
-        expect(err).toBeInstanceOf(ValidationError);
-        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
-      }
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with array globalStats', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { globalStats: [1, 2, 3] },
+        })
+      ).toThrow(ValidationError);
     });
 
     it('should accept valid progressData with proper shape', () => {

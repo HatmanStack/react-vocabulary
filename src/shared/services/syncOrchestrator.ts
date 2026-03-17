@@ -81,6 +81,10 @@ export async function syncToCloud(
     return { updates: {}, scheduleIdleReset: false };
   }
 
+  // NOTE: The store-level guard in progressStore (syncToCloud/syncFromCloud)
+  // prevents concurrent entry. This check sees the pre-set() snapshot so
+  // state.syncStatus is always 'idle' here. Kept as a defensive fallback
+  // in case the orchestrator is ever called outside the store.
   if (state.syncStatus === 'syncing') {
     return { updates: {}, scheduleIdleReset: false };
   }
@@ -130,6 +134,7 @@ export async function syncFromCloud(
     return { updates: {}, scheduleIdleReset: false };
   }
 
+  // See syncToCloud comment — same defensive fallback reasoning.
   if (state.syncStatus === 'syncing') {
     return { updates: {}, scheduleIdleReset: false };
   }

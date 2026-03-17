@@ -344,6 +344,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
     set({
       isQuizActive: false,
+      currentSession: null,
     });
 
     return {

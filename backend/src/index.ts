@@ -4,6 +4,9 @@ import { checkUsernameExists, getProgress, saveProgress } from './db.js';
 import { ErrorCodes, ErrorResponse } from './types.js';
 
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '';
+if (!ALLOWED_ORIGINS) {
+  console.warn('ALLOWED_ORIGINS is not set — cross-origin requests will be blocked. Set this env var to your app origin for cloud sync to work.');
+}
 
 function createResponse(
   statusCode: number,

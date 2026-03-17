@@ -119,6 +119,3 @@ export const useVocabularyStore = create<VocabularyState>((set, get) => ({
     return getAllWords();
   },
 }));
-
-// Initialize store with vocabulary data on creation
-useVocabularyStore.getState().loadVocabularyLists();

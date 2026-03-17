@@ -8,6 +8,7 @@ import { useSettingsStore } from '@/shared/store/settingsStore';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { useProgressStore, flushPendingSave } from '@/shared/store/progressStore';
+import { useVocabularyStore } from '@/shared/store/vocabularyStore';
 import { ErrorBoundary } from '@/shared/ui';
 
 // Minimum time between app resume syncs (5 minutes)
@@ -50,6 +51,8 @@ export default function RootLayout() {
   useEffect(() => {
     async function prepare() {
       try {
+        // Load vocabulary data and hydrate stores in parallel
+        useVocabularyStore.getState().loadVocabularyLists();
         await Promise.all([
           useProgressStore.getState().loadFromStorage(),
           useSettingsStore.getState().loadFromStorage(),

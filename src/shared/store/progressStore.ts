@@ -35,6 +35,9 @@ const SAVE_DEBOUNCE_MS = 500;
 // Debounce timer for storage saves
 let saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
 
+// Timer for resetting sync status back to idle
+let syncStatusTimer: ReturnType<typeof setTimeout> | null = null;
+
 export type SyncStatus = 'idle' | 'syncing' | 'success' | 'error';
 
 interface ProgressState extends UserProgress {
@@ -94,7 +97,7 @@ interface ProgressState extends UserProgress {
 
   // Reset functionality
   resetListLevelProgress: (listId: string, levelId: string) => void;
-  resetAllProgress: () => void;
+  resetAllProgress: () => Promise<void>;
 
   // Achievement tracking
   checkAndUnlockAchievements: (sessionData?: {
@@ -174,6 +177,26 @@ const initialState: Omit<
   lastCloudSyncAt: null,
 };
 
+// Extract serializable state fields for persistence
+const getDataToSave = (state: ProgressState) => ({
+  currentListId: state.currentListId,
+  currentLevelId: state.currentLevelId,
+  listLevelProgress: state.listLevelProgress,
+  globalStats: state.globalStats,
+  achievements: state.achievements,
+  dailyProgress: state.dailyProgress,
+  lastSyncedAt: state.lastSyncedAt,
+});
+
+// Immediately persist current state to AsyncStorage
+const persistToStorage = async (state: ProgressState) => {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(getDataToSave(state)));
+  } catch (error) {
+    console.error('Failed to save progress to storage:', error);
+  }
+};
+
 // Helper to save state to AsyncStorage (debounced)
 const saveStateToStorage = (state: ProgressState) => {
   // Clear any pending save
@@ -182,22 +205,22 @@ const saveStateToStorage = (state: ProgressState) => {
   }
 
   // Schedule a new save
-  saveDebounceTimer = setTimeout(async () => {
-    try {
-      const dataToSave = {
-        currentListId: state.currentListId,
-        currentLevelId: state.currentLevelId,
-        listLevelProgress: state.listLevelProgress,
-        globalStats: state.globalStats,
-        achievements: state.achievements,
-        dailyProgress: state.dailyProgress,
-        lastSyncedAt: state.lastSyncedAt,
-      };
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-    } catch (error) {
-      console.error('Failed to save progress to storage:', error);
-    }
+  saveDebounceTimer = setTimeout(() => {
+    saveDebounceTimer = null;
+    persistToStorage(state);
   }, SAVE_DEBOUNCE_MS);
+};
+
+/**
+ * Flush any pending debounced save immediately.
+ * Call this when the app is going to background to prevent data loss.
+ */
+export const flushPendingSave = async () => {
+  if (saveDebounceTimer) {
+    clearTimeout(saveDebounceTimer);
+    saveDebounceTimer = null;
+  }
+  await persistToStorage(useProgressStore.getState());
 };
 
 export const useProgressStore = create<ProgressState>()((set, get) => ({
@@ -624,10 +647,12 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
             });
 
             // Reset to idle after a brief success display
-            setTimeout(() => {
+            if (syncStatusTimer) clearTimeout(syncStatusTimer);
+            syncStatusTimer = setTimeout(() => {
               set((current) =>
                 current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
               );
+              syncStatusTimer = null;
             }, 2000);
           } else {
             set({
@@ -696,18 +721,22 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
             await saveStateToStorage(get());
 
             // Reset to idle after a brief success display
-            setTimeout(() => {
+            if (syncStatusTimer) clearTimeout(syncStatusTimer);
+            syncStatusTimer = setTimeout(() => {
               set((current) =>
                 current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
               );
+              syncStatusTimer = null;
             }, 2000);
           } else {
             // User doesn't exist in cloud yet, set to success
             set({ syncStatus: 'success' });
-            setTimeout(() => {
+            if (syncStatusTimer) clearTimeout(syncStatusTimer);
+            syncStatusTimer = setTimeout(() => {
               set((current) =>
                 current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
               );
+              syncStatusTimer = null;
             }, 2000);
           }
         } catch (error) {

@@ -127,7 +127,7 @@ export async function importProgress(jsonString: string): Promise<{
 /**
  * Apply imported progress data to store
  */
-export function applyImportedProgress(jsonString: string): boolean {
+export async function applyImportedProgress(jsonString: string): Promise<boolean> {
   try {
     const parsed = JSON.parse(jsonString);
     if (!isValidProgressExportData(parsed)) {
@@ -137,8 +137,8 @@ export function applyImportedProgress(jsonString: string): boolean {
     const importData = parsed as ProgressExportData;
     const progressStore = useProgressStore.getState();
 
-    // Reset and apply imported data
-    progressStore.resetAllProgress();
+    // Reset and wait for storage clear to complete before applying new data
+    await progressStore.resetAllProgress();
 
     // Manually set the state (bypassing normal actions to avoid conflicts)
     useProgressStore.setState({

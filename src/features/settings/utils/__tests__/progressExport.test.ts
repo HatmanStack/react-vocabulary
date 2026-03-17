@@ -329,8 +329,8 @@ describe('progressExport', () => {
   });
 
   describe('applyImportedProgress', () => {
-    it('applies imported progress to store', () => {
-      const mockResetAllProgress = jest.fn();
+    it('applies imported progress to store', async () => {
+      const mockResetAllProgress = jest.fn().mockResolvedValue(undefined);
       (useProgressStore.getState as jest.Mock).mockReturnValue({
         resetAllProgress: mockResetAllProgress,
       });
@@ -344,7 +344,7 @@ describe('progressExport', () => {
         },
       };
 
-      const result = applyImportedProgress(JSON.stringify(validExport));
+      const result = await applyImportedProgress(JSON.stringify(validExport));
 
       expect(result).toBe(true);
       expect(mockResetAllProgress).toHaveBeenCalled();
@@ -355,8 +355,8 @@ describe('progressExport', () => {
       });
     });
 
-    it('sets lastSyncedAt to current time', () => {
-      const mockResetAllProgress = jest.fn();
+    it('sets lastSyncedAt to current time', async () => {
+      const mockResetAllProgress = jest.fn().mockResolvedValue(undefined);
       (useProgressStore.getState as jest.Mock).mockReturnValue({
         resetAllProgress: mockResetAllProgress,
       });
@@ -377,7 +377,7 @@ describe('progressExport', () => {
       };
 
       const beforeTime = Date.now();
-      applyImportedProgress(JSON.stringify(validExport));
+      await applyImportedProgress(JSON.stringify(validExport));
       const afterTime = Date.now();
 
       const setStateCall = (useProgressStore.setState as jest.Mock).mock.calls[0][0];
@@ -386,8 +386,8 @@ describe('progressExport', () => {
       expect(syncedAtTime).toBeLessThanOrEqual(afterTime);
     });
 
-    it('handles invalid JSON gracefully', () => {
-      const result = applyImportedProgress('invalid json');
+    it('handles invalid JSON gracefully', async () => {
+      const result = await applyImportedProgress('invalid json');
 
       expect(result).toBe(false);
       expect(console.error).toHaveBeenCalledWith(
@@ -396,7 +396,7 @@ describe('progressExport', () => {
       );
     });
 
-    it('handles store errors gracefully', () => {
+    it('handles store errors gracefully', async () => {
       (useProgressStore.getState as jest.Mock).mockImplementation(() => {
         throw new Error('Store error');
       });
@@ -416,7 +416,7 @@ describe('progressExport', () => {
         },
       };
 
-      const result = applyImportedProgress(JSON.stringify(validExport));
+      const result = await applyImportedProgress(JSON.stringify(validExport));
 
       expect(result).toBe(false);
       expect(console.error).toHaveBeenCalled();

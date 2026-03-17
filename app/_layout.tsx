@@ -7,7 +7,7 @@ import { lightTheme, darkTheme } from '@/shared/lib/theme';
 import { useSettingsStore } from '@/shared/store/settingsStore';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
-import { useProgressStore } from '@/shared/store/progressStore';
+import { useProgressStore, flushPendingSave } from '@/shared/store/progressStore';
 import { ErrorBoundary } from '@/shared/ui';
 
 // Minimum time between app resume syncs (5 minutes)
@@ -73,6 +73,11 @@ export default function RootLayout() {
   // App state change handler for background->foreground sync
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      // Flush pending saves when app goes to background to prevent data loss
+      if (nextAppState === 'background' || nextAppState === 'inactive') {
+        flushPendingSave();
+      }
+
       if (nextAppState === 'active') {
         const progressStore = useProgressStore.getState();
 

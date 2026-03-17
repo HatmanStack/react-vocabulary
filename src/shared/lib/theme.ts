@@ -96,5 +96,3 @@ export const darkTheme = {
   },
 };
 
-// Default export for convenience
-export default lightTheme;

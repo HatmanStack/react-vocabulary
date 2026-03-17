@@ -78,10 +78,10 @@ chore(ui): remove debug console.log statements from HomeScreen
 **Important:** Do NOT delete `scripts/deploy.js` — it is referenced by the `deploy` script in `package.json` and may be used for deployments even if knip doesn't detect runtime usage.
 
 **Verification Checklist:**
-- [ ] All 5 files listed above are deleted
-- [ ] The 3 package.json scripts are removed
-- [ ] `npm run check` passes (no broken imports)
-- [ ] `scripts/deploy.js` still exists
+- [x] All 5 files listed above are deleted
+- [x] The 3 package.json scripts are removed
+- [x] `npm run check` passes (no broken imports)
+- [x] `scripts/deploy.js` still exists
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -128,10 +128,10 @@ chore: remove unused files and dead scripts
 4. After all removals, run `npm install` to update `package-lock.json`
 
 **Verification Checklist:**
-- [ ] Removed dependencies are gone from `package.json`
-- [ ] `npm install` completes without errors
-- [ ] `npm run check` passes
-- [ ] `react-dom`, `react-native-web`, `react-native-gesture-handler`, `react-native-reanimated`, `react-native-screens`, `react-native-svg` are still present
+- [x] Removed dependencies are gone from `package.json`
+- [x] `npm install` completes without errors
+- [x] `npm run check` passes
+- [x] `react-dom`, `react-native-web`, `react-native-gesture-handler`, `react-native-reanimated`, `react-native-screens`, `react-native-svg` are still present
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -161,9 +161,9 @@ chore(deps): remove unused dependencies
 4. If vulnerabilities remain, note them but do NOT run `npm audit fix --force` as it may introduce breaking changes
 
 **Verification Checklist:**
-- [ ] `npm audit fix` ran successfully
-- [ ] `npm run check` passes
-- [ ] Remaining vulnerabilities (if any) are documented in the commit message body
+- [x] `npm audit fix` ran successfully
+- [x] `npm run check` passes
+- [x] Remaining vulnerabilities (if any) are documented in the commit message body
 
 **Testing Instructions:**
 - Run: `npm run check`

@@ -41,7 +41,7 @@ export function isApiConfigured(): boolean {
 /**
  * Check if the device is online
  */
-export async function isOnline(): Promise<boolean> {
+async function isOnline(): Promise<boolean> {
   try {
     const state = await NetInfo.fetch();
     return state.isConnected === true;

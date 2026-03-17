@@ -67,13 +67,16 @@ npm start
 react-vocabulary/
 ├── app/                    # Expo Router pages
 │   ├── _layout.tsx        # Root layout (theme, sync)
+│   ├── index.tsx          # Entry/splash screen
+│   ├── onboarding.tsx     # Onboarding flow
 │   ├── home.tsx           # Vocabulary list browser
 │   ├── difficulty.tsx     # Level selection
 │   ├── quiz.tsx           # Quiz session
 │   ├── graduation.tsx     # Completion screen
 │   ├── stats.tsx          # Progress analytics
 │   ├── settings.tsx       # App settings
-│   └── help.tsx           # FAQ
+│   ├── help.tsx           # FAQ
+│   └── +html.tsx          # HTML template for web
 │
 ├── src/
 │   ├── features/          # Feature modules
@@ -81,6 +84,7 @@ react-vocabulary/
 │   │   ├── quiz/          # Question generation, validation
 │   │   ├── progress/      # Stats, charts, achievements
 │   │   ├── settings/      # Preferences, export
+│   │   ├── onboarding/    # Onboarding flow screens
 │   │   └── help/          # FAQ content
 │   │
 │   ├── shared/
@@ -88,7 +92,9 @@ react-vocabulary/
 │   │   ├── types/         # TypeScript definitions
 │   │   ├── ui/            # Reusable components
 │   │   ├── hooks/         # Custom hooks (sound, haptics)
-│   │   └── services/      # Cloud sync client
+│   │   ├── services/      # Cloud sync client
+│   │   ├── lib/           # Theme, Levenshtein distance
+│   │   └── utils/         # mergeProgress, listLevelKey
 │   │
 │   └── assets/
 │       ├── vocabulary/    # 18 JSON word lists
@@ -102,12 +108,13 @@ react-vocabulary/
 
 ### State Management (Zustand)
 
-| Store             | Purpose                                  |
-| ----------------- | ---------------------------------------- |
-| `vocabularyStore` | Word lists, selected list/level          |
-| `quizStore`       | Current quiz session, questions, scoring |
-| `progressStore`   | Word progress, achievements, cloud sync  |
-| `settingsStore`   | Theme, sound, haptics preferences        |
+| Store                     | Purpose                                  |
+| ------------------------- | ---------------------------------------- |
+| `vocabularyStore`         | Word lists, selected list/level          |
+| `quizStore`               | Current quiz session, questions, scoring |
+| `progressStore`           | Word progress, achievements, cloud sync  |
+| `settingsStore`           | Theme, sound, haptics preferences        |
+| `adaptiveDifficultyStore` | Adaptive difficulty biasing              |
 
 ### Word Progress States
 

@@ -74,6 +74,31 @@ export function validateRequest(body: unknown): ProgressRequest {
         ErrorCodes.MISSING_PROGRESS_DATA
       );
     }
+
+    // Check payload size (DynamoDB limit is 400KB, leave margin)
+    const MAX_PAYLOAD_SIZE = 350_000; // 350KB
+    const payloadSize = JSON.stringify(data.progressData).length;
+    if (payloadSize > MAX_PAYLOAD_SIZE) {
+      throw new ValidationError(
+        'Progress data exceeds maximum size',
+        ErrorCodes.INVALID_PROGRESS_DATA
+      );
+    }
+
+    // Validate progressData shape
+    const pd = data.progressData as Record<string, unknown>;
+    if (pd.listLevelProgress !== undefined && typeof pd.listLevelProgress !== 'object') {
+      throw new ValidationError(
+        'Invalid listLevelProgress format',
+        ErrorCodes.INVALID_PROGRESS_DATA
+      );
+    }
+    if (pd.globalStats !== undefined && typeof pd.globalStats !== 'object') {
+      throw new ValidationError(
+        'Invalid globalStats format',
+        ErrorCodes.INVALID_PROGRESS_DATA
+      );
+    }
   }
 
   return {

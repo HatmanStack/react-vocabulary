@@ -3,7 +3,7 @@ import { validateRequest, ValidationError } from './validation.js';
 import { checkUsernameExists, getProgress, saveProgress } from './db.js';
 import { ErrorCodes, ErrorResponse } from './types.js';
 
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '*';
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '';
 
 function createResponse(
   statusCode: number,

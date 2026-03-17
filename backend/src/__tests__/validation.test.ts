@@ -161,6 +161,59 @@ describe('validateRequest', () => {
 
       expect(result.progressData).toEqual({});
     });
+
+    it('should reject oversized progressData', () => {
+      // Create a payload > 350KB
+      const largeData = { listLevelProgress: { data: 'x'.repeat(400_000) } };
+      try {
+        validateRequest({ action: 'save', username: 'testuser', progressData: largeData });
+        // Should not reach here
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err).toBeInstanceOf(ValidationError);
+        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
+      }
+    });
+
+    it('should reject progressData with non-object listLevelProgress', () => {
+      try {
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { listLevelProgress: 'invalid' },
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err).toBeInstanceOf(ValidationError);
+        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
+      }
+    });
+
+    it('should reject progressData with non-object globalStats', () => {
+      try {
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { globalStats: 'invalid' },
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err).toBeInstanceOf(ValidationError);
+        expect((err as ValidationError).code).toBe(ErrorCodes.INVALID_PROGRESS_DATA);
+      }
+    });
+
+    it('should accept valid progressData with proper shape', () => {
+      const result = validateRequest({
+        action: 'save',
+        username: 'testuser',
+        progressData: {
+          listLevelProgress: { 'list-a-basic': {} },
+          globalStats: { allTimeCorrect: 10 },
+        },
+      });
+      expect(result.progressData).toBeDefined();
+    });
   });
 
   describe('body validation', () => {

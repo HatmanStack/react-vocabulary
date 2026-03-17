@@ -228,7 +228,7 @@ describe('handler', () => {
       });
       const result = await handler(event);
 
-      expect(result.headers?.['Access-Control-Allow-Origin']).toBe('*');
+      expect(result.headers?.['Access-Control-Allow-Origin']).toBe('');
       expect(result.headers?.['Content-Type']).toBe('application/json');
     });
   });

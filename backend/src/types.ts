@@ -45,6 +45,7 @@ export const ErrorCodes = {
   USER_NOT_FOUND: 'USER_NOT_FOUND',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
   INVALID_JSON: 'INVALID_JSON',
+  INVALID_PROGRESS_DATA: 'INVALID_PROGRESS_DATA',
 } as const;
 
 export type ErrorCode = (typeof ErrorCodes)[keyof typeof ErrorCodes];

@@ -37,7 +37,7 @@ interface ErrorBoundaryState {
   errorInfo: ErrorInfo | null;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundaryBase extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f5f5f5',
   },
   surface: {
     padding: 24,
@@ -135,16 +134,16 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   errorDetails: {
-    backgroundColor: '#fee',
     padding: 12,
     borderRadius: 4,
     marginBottom: 16,
   },
   errorText: {
     fontFamily: 'monospace',
-    color: '#c00',
   },
   button: {
     marginTop: 8,
   },
 });
+
+export const ErrorBoundary = withTheme(ErrorBoundaryBase) as React.ComponentType<Omit<ErrorBoundaryProps, 'theme'>>;

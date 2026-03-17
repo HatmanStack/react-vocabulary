@@ -5,7 +5,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Text, View } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
 import { ErrorBoundary } from '../ErrorBoundary';
+import { lightTheme } from '@/shared/lib/theme';
 
 // Component that throws an error
 const ThrowError = ({ shouldThrow }: { shouldThrow?: boolean }) => {
@@ -14,6 +16,10 @@ const ThrowError = ({ shouldThrow }: { shouldThrow?: boolean }) => {
   }
   return <Text>No error</Text>;
 };
+
+function renderWithTheme(ui: React.ReactElement) {
+  return render(<PaperProvider theme={lightTheme}>{ui}</PaperProvider>);
+}
 
 describe('ErrorBoundary', () => {
   // Suppress console errors in tests
@@ -31,7 +37,7 @@ describe('ErrorBoundary', () => {
   });
 
   it('renders children when there is no error', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <Text>Child component</Text>
       </ErrorBoundary>
@@ -41,7 +47,7 @@ describe('ErrorBoundary', () => {
   });
 
   it('catches errors and displays default error UI', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
@@ -59,7 +65,7 @@ describe('ErrorBoundary', () => {
       </View>
     );
 
-    const { getByText, queryByText } = render(
+    const { getByText, queryByText } = renderWithTheme(
       <ErrorBoundary fallback={customFallback}>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
@@ -72,7 +78,7 @@ describe('ErrorBoundary', () => {
   it('calls onError callback when error occurs', () => {
     const onError = jest.fn();
 
-    render(
+    renderWithTheme(
       <ErrorBoundary onError={onError}>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
@@ -88,7 +94,7 @@ describe('ErrorBoundary', () => {
   });
 
   it('has a Try Again button that can be pressed', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
@@ -107,10 +113,10 @@ describe('ErrorBoundary', () => {
 
   it('displays error details in development mode', () => {
     // Mock __DEV__ to true
-    const originalDev = (global as any).__DEV__;
-    (global as any).__DEV__ = true;
+    const originalDev = (global as Record<string, unknown>).__DEV__;
+    (global as Record<string, unknown>).__DEV__ = true;
 
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
       </ErrorBoundary>
@@ -119,11 +125,11 @@ describe('ErrorBoundary', () => {
     expect(getByText(/Error: Test error/)).toBeTruthy();
 
     // Restore __DEV__
-    (global as any).__DEV__ = originalDev;
+    (global as Record<string, unknown>).__DEV__ = originalDev;
   });
 
   it('handles multiple children', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <Text>Child 1</Text>
         <Text>Child 2</Text>
@@ -137,7 +143,7 @@ describe('ErrorBoundary', () => {
   });
 
   it('handles nested ErrorBoundaries', () => {
-    const { getByText } = render(
+    const { getByText } = renderWithTheme(
       <ErrorBoundary>
         <ErrorBoundary>
           <ThrowError shouldThrow={true} />

@@ -31,14 +31,14 @@ jest.mock('@/shared/store/progressStore', () => ({
 }));
 
 describe('progressExport', () => {
-  const mockProgressData = {
+  const mockProgressData: Pick<ProgressExportData['data'], 'listLevelProgress' | 'globalStats'> = {
     listLevelProgress: {
       'list-a-basic': {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          word1: { state: 3, correctCount: 5, wrongCount: 0 },
-          word2: { state: 2, correctCount: 2, wrongCount: 1 },
+          word1: { state: 3 as const, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+          word2: { state: 2 as const, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
         },
       },
     },
@@ -177,9 +177,9 @@ describe('progressExport', () => {
               listId: 'list-a',
               levelId: 'basic',
               wordProgress: {
-                word1: { state: 3, correctCount: 5, wrongCount: 0 },
-                word2: { state: 3, correctCount: 4, wrongCount: 0 },
-                word3: { state: 2, correctCount: 2, wrongCount: 1 },
+                word1: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word2: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 4, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word3: { state: 2, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
           },
@@ -269,16 +269,16 @@ describe('progressExport', () => {
               listId: 'list-a',
               levelId: 'basic',
               wordProgress: {
-                word1: { state: 3, correctCount: 5, wrongCount: 0 },
-                word2: { state: 3, correctCount: 4, wrongCount: 0 },
-                word3: { state: 2, correctCount: 2, wrongCount: 1 },
+                word1: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word2: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 4, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word3: { state: 2, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
             'list-b-advanced': {
               listId: 'list-b',
               levelId: 'advanced',
               wordProgress: {
-                word4: { state: 3, correctCount: 3, wrongCount: 0 },
+                word4: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 3, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
           },

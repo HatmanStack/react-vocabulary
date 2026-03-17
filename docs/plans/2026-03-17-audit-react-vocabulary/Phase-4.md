@@ -24,6 +24,7 @@ Fix all documentation drift findings, fill documentation gaps, correct stale cod
 **Findings addressed:** Doc Drift #1
 
 **Files to Modify:**
+
 - `README.md` — Line ~10: Change "360+" to "350"
 - `docs/README.md` — Lines ~7 and ~10: Change "360+" to "350"
 - `CHANGELOG.md` — Line ~13: Change "360+" to "350"
@@ -34,6 +35,7 @@ Fix all documentation drift findings, fill documentation gaps, correct stale cod
 **Implementation Steps:**
 
 1. Verify the current word count:
+
    ```bash
    node -e "
    const fs = require('fs');
@@ -49,6 +51,7 @@ Fix all documentation drift findings, fill documentation gaps, correct stale cod
    ```
 
 2. Search for "360" across all docs and code:
+
    ```bash
    grep -rn "360" README.md docs/ CHANGELOG.md app/ src/ --include="*.md" --include="*.tsx" --include="*.ts"
    ```
@@ -56,15 +59,18 @@ Fix all documentation drift findings, fill documentation gaps, correct stale cod
 3. Replace every instance of "360+" with the actual count (e.g., "350").
 
 **Verification Checklist:**
-- [ ] No instance of "360+" remains in documentation or code
-- [ ] Word count matches actual vocabulary data count
-- [ ] `npm run check` passes
+
+- [x] No instance of "360+" remains in documentation or code
+- [x] Word count matches actual vocabulary data count
+- [x] `npm run check` passes
 
 **Testing Instructions:**
+
 - Run: `grep -rn "360" . --include="*.md" --include="*.tsx" --include="*.ts" | grep -v node_modules | grep -v docs/plans`
 - Should return zero results
 
 **Commit Message Template:**
+
 ```text
 docs: fix word count from 360+ to actual count of 350
 ```
@@ -78,6 +84,7 @@ docs: fix word count from 360+ to actual count of 350
 **Findings addressed:** Doc Drift #2, Doc Stale Examples #1-2
 
 **Files to Modify:**
+
 - `docs/README.md` — Line ~50: Fix quiz flow description
 - `docs/BACKEND-API.md` — Lines ~17-20: Fix quick start command
 - `docs/DEPLOYMENT.md` — Lines ~18-20 and ~32-36: Fix deploy commands
@@ -90,6 +97,7 @@ docs: fix word count from 360+ to actual count of 350
 1. **Fix quiz flow description (docs/README.md line ~50):**
    The doc says "8 questions per session (4 multiple-choice + 4 fill-in-blank)".
    After Phase 2, check the actual quiz behavior. The code generates 2 questions per word (1 MC + 1 fill-in-blank) for all words in the selected level. Update to match actual behavior:
+
    ```
    3. **Take the Quiz** – 2 questions per word (1 multiple-choice + 1 fill-in-blank)
    ```
@@ -100,33 +108,40 @@ docs: fix word count from 360+ to actual count of 350
 3. **Fix deploy commands in docs/BACKEND-API.md (lines ~17-20):**
    The doc shows `npm install && npm run deploy` which implies running from the backend directory, but the backend `package.json` has no `deploy` script — deploy is at the root level.
    Fix to:
+
    ```bash
    cd backend
    npm install
    cd ..
    npm run deploy
    ```
+
    Or if deploy can be run from root:
+
    ```bash
    npm run deploy
    ```
+
    Check `scripts/deploy.js` to understand the correct invocation.
 
 4. **Fix deploy commands in docs/DEPLOYMENT.md (lines ~18-20 and ~32-36):**
    Same issue — `cd backend && npm run deploy` is incorrect. Fix to match the actual deploy process.
 
 **Verification Checklist:**
-- [ ] Quiz flow description matches actual code behavior
-- [ ] Deploy commands in BACKEND-API.md are correct
-- [ ] Deploy commands in DEPLOYMENT.md are correct
-- [ ] CLAUDE.md quiz description is accurate
-- [ ] `npm run check` passes
+
+- [x] Quiz flow description matches actual code behavior
+- [x] Deploy commands in BACKEND-API.md are correct
+- [x] Deploy commands in DEPLOYMENT.md are correct
+- [x] CLAUDE.md quiz description is accurate
+- [x] `npm run check` passes
 
 **Testing Instructions:**
+
 - Manually verify the deploy script path: `cat scripts/deploy.js | head -5`
 - Verify the backend package.json scripts: `cat backend/package.json | grep deploy`
 
 **Commit Message Template:**
+
 ```text
 docs: fix quiz flow description and stale deploy commands
 ```
@@ -140,6 +155,7 @@ docs: fix quiz flow description and stale deploy commands
 **Findings addressed:** Doc Drift #3, #4, #5, #6
 
 **Files to Modify:**
+
 - `docs/README.md` — Update the project structure tree (lines ~67-98) and store table (line ~111)
 
 **Prerequisites:** Phases 1-3 complete (file deletions and additions are finalized)
@@ -163,6 +179,7 @@ docs: fix quiz flow description and stale deploy commands
 
 4. **Update the store table (Drift #3):**
    Add the missing store:
+
    ```
    | `adaptiveDifficultyStore` | Adaptive difficulty biasing |
    ```
@@ -177,16 +194,19 @@ docs: fix quiz flow description and stale deploy commands
    Make sure the tree matches reality after all Phase 1-3 changes.
 
 **Verification Checklist:**
-- [ ] `app/` tree includes `index.tsx`, `onboarding.tsx`, `+html.tsx`
-- [ ] Features list includes `onboarding/`
-- [ ] Shared list includes `lib/` and `utils/`
-- [ ] Store table includes `adaptiveDifficultyStore`
-- [ ] Tree matches actual `ls` output
+
+- [x] `app/` tree includes `index.tsx`, `onboarding.tsx`, `+html.tsx`
+- [x] Features list includes `onboarding/`
+- [x] Shared list includes `lib/` and `utils/`
+- [x] Store table includes `adaptiveDifficultyStore`
+- [x] Tree matches actual `ls` output
 
 **Testing Instructions:**
+
 - Compare the documented tree against `find app/ -name "*.tsx" | sort` and `find src/ -type d | sort`
 
 **Commit Message Template:**
+
 ```text
 docs: update project structure tree and store table to match codebase
 ```
@@ -200,6 +220,7 @@ docs: update project structure tree and store table to match codebase
 **Findings addressed:** Doc Gaps #1, #3, Doc Stale #3 (sound attribution)
 
 **Files to Modify:**
+
 - `docs/README.md` — Add mention of progress export/import feature, document mergeProgress utility
 - `docs/SOUNDS.md` — Fix placeholder attribution (or document that attribution is unknown)
 
@@ -209,10 +230,12 @@ docs: update project structure tree and store table to match codebase
 
 1. **Document mergeProgress (Gap #1):**
    Add a subsection under the Architecture section in `docs/README.md`:
+
    ```markdown
    ### Cloud Sync Merge Strategy
 
    When syncing progress between devices, conflicts are resolved by `src/shared/utils/mergeProgress.ts` using a deterministic "higher wins" strategy:
+
    - Word state: keeps the higher state value
    - First attempt date: keeps the earliest
    - Last attempt date: keeps the latest
@@ -221,18 +244,22 @@ docs: update project structure tree and store table to match codebase
 
 2. **Document export/import (Gap #3):**
    Add to the Features section in `docs/README.md`:
+
    ```markdown
    - **Progress Export/Import**: Backup and restore progress data via JSON export
    ```
 
 3. **Fix sound attribution placeholders (docs/SOUNDS.md lines ~42-44):**
    The attribution section has `[Source and License]` placeholders. If the actual sources are unknown, replace with:
+
    ```markdown
    - correct.mp3: Source unknown — needs attribution research
    - wrong.mp3: Source unknown — needs attribution research
    - complete.mp3: Source unknown — needs attribution research
    ```
+
    Or if the sounds were created for this project:
+
    ```markdown
    - correct.mp3: Custom sound effect, no attribution required
    ```
@@ -240,16 +267,19 @@ docs: update project structure tree and store table to match codebase
 4. **Doc Gap #2 (`src/shared/lib/constants.ts`):** This file was deleted in Phase 1, so the gap no longer applies.
 
 **Verification Checklist:**
-- [ ] mergeProgress strategy is documented in docs/README.md
-- [ ] Export/import feature is mentioned in docs/README.md
-- [ ] Sound attribution placeholders are resolved in docs/SOUNDS.md
-- [ ] No `[Source and License]` placeholders remain
+
+- [x] mergeProgress strategy is documented in docs/README.md
+- [x] Export/import feature is mentioned in docs/README.md
+- [x] Sound attribution placeholders are resolved in docs/SOUNDS.md
+- [x] No `[Source and License]` placeholders remain
 
 **Testing Instructions:**
+
 - Read through the updated docs to verify accuracy
 - `grep -rn "\[Source and License\]" docs/` should return zero results
 
 **Commit Message Template:**
+
 ```text
 docs: document mergeProgress strategy, export/import feature, and sound attribution
 ```
@@ -263,6 +293,7 @@ docs: document mergeProgress strategy, export/import feature, and sound attribut
 **Findings addressed:** Eval Onboarding (8/10)
 
 **Files to Create:**
+
 - `CONTRIBUTING.md`
 - `.github/pull_request_template.md`
 
@@ -282,6 +313,7 @@ docs: document mergeProgress strategy, export/import feature, and sound attribut
    - State management: note that the project uses Zustand (not Redux/Context) for its flat API and minimal boilerplate — this was a deliberate choice for a small-to-medium app
 
 2. **Create `.github/pull_request_template.md`:**
+
    ```markdown
    ## What
 
@@ -307,16 +339,19 @@ docs: document mergeProgress strategy, export/import feature, and sound attribut
    ```
 
 **Verification Checklist:**
-- [ ] `CONTRIBUTING.md` exists at repo root
-- [ ] `.github/pull_request_template.md` exists
-- [ ] Contributing guide mentions conventional commits, Husky, and `npm run check`
-- [ ] Zustand decision is documented
-- [ ] PR template has testing checklist
+
+- [x] `CONTRIBUTING.md` exists at repo root
+- [x] `.github/pull_request_template.md` exists
+- [x] Contributing guide mentions conventional commits, Husky, and `npm run check`
+- [x] Zustand decision is documented
+- [x] PR template has testing checklist
 
 **Testing Instructions:**
+
 - Verify markdown renders correctly: open in a markdown viewer
 
 **Commit Message Template:**
+
 ```text
 docs: add CONTRIBUTING.md and pull request template
 ```
@@ -330,9 +365,11 @@ docs: add CONTRIBUTING.md and pull request template
 **Findings addressed:** Doc Audit prevention scope (markdownlint)
 
 **Files to Create:**
+
 - `.markdownlint.json` (or `.markdownlint-cli2.jsonc`) — Configuration file
 
 **Files to Modify:**
+
 - `package.json` — Add `markdownlint-cli2` as dev dependency and script
 - `.github/workflows/ci.yml` — Add markdown lint step (or include in existing `check` job)
 
@@ -341,11 +378,13 @@ docs: add CONTRIBUTING.md and pull request template
 **Implementation Steps:**
 
 1. Install markdownlint:
+
    ```bash
    npm install --save-dev markdownlint-cli2
    ```
 
 2. Create `.markdownlint.json` with sensible defaults:
+
    ```json
    {
      "default": true,
@@ -354,11 +393,13 @@ docs: add CONTRIBUTING.md and pull request template
      "MD041": false
    }
    ```
+
    - `MD013: false` — Disable line length (too noisy for existing docs)
    - `MD033: false` — Allow inline HTML (README uses HTML for badges)
    - `MD041: false` — Don't require first line to be H1 (some docs start with badges or front matter)
 
 3. Add script to `package.json`:
+
    ```json
    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules' '#backend'"
    ```
@@ -370,17 +411,20 @@ docs: add CONTRIBUTING.md and pull request template
    - Or add it as a separate step in `.github/workflows/ci.yml` after `npm run check`
 
 **Verification Checklist:**
-- [ ] `markdownlint-cli2` is in devDependencies
-- [ ] `.markdownlint.json` configuration exists
-- [ ] `npm run lint:md` passes on all markdown files
-- [ ] CI runs markdown linting
-- [ ] `npm run check` passes
+
+- [x] `markdownlint-cli2` is in devDependencies
+- [x] `.markdownlint.json` configuration exists
+- [x] `npm run lint:md` passes on all markdown files
+- [x] CI runs markdown linting
+- [x] `npm run check` passes
 
 **Testing Instructions:**
+
 - Run: `npm run lint:md`
 - Verify CI config includes the markdown lint step
 
 **Commit Message Template:**
+
 ```text
 ci(docs): add markdownlint to CI pipeline for documentation quality
 ```

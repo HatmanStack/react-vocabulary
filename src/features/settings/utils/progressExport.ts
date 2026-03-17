@@ -5,7 +5,7 @@
  */
 
 import { Platform, Share } from 'react-native';
-import { useProgressStore } from '@/shared/store/progressStore';
+import { useProgressStore, flushPendingSave } from '@/shared/store/progressStore';
 import { ListLevelProgress } from '@/shared/types';
 import { isValidProgressExportData } from '@/shared/utils/validateState';
 
@@ -86,15 +86,16 @@ export async function importProgress(jsonString: string): Promise<{
   };
 }> {
   try {
-    const importData: ProgressExportData = JSON.parse(jsonString);
+    const parsed = JSON.parse(jsonString);
 
-    // Validate version
-    if (!importData.version || !importData.data) {
+    if (!isValidProgressExportData(parsed)) {
       return {
         success: false,
         error: 'Invalid export file format',
       };
     }
+
+    const importData = parsed as ProgressExportData;
 
     // Version compatibility check
     if (importData.version !== EXPORT_VERSION) {
@@ -146,6 +147,9 @@ export async function applyImportedProgress(jsonString: string): Promise<boolean
       globalStats: importData.data.globalStats,
       lastSyncedAt: new Date().toISOString(),
     });
+
+    // Persist to storage immediately — setState bypasses debounced save
+    await flushPendingSave();
 
     return true;
   } catch (error) {

@@ -28,6 +28,7 @@ jest.mock('@/shared/store/progressStore', () => ({
     getState: jest.fn(),
     setState: jest.fn(),
   },
+  flushPendingSave: jest.fn().mockResolvedValue(undefined),
 }));
 
 describe('progressExport', () => {

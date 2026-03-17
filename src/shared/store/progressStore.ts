@@ -330,7 +330,8 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
         saveStateToStorage(get());
       },
 
-      // Get word progress
+      // Get word progress (returns first match across all lists — use
+      // getListLevelProgress for list-specific lookups)
       getWordProgress: (wordId) => {
         const state = get();
         // Search through all list-level progress
@@ -602,11 +603,17 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Cloud sync: Push current progress to cloud
       syncToCloud: async () => {
+        if (get().syncStatus === 'syncing') return;
         const state = get();
         set({ syncStatus: 'syncing', lastSyncError: null });
 
         const { updates, scheduleIdleReset } = await orchestrateSyncToCloud(state);
         set(updates);
+
+        // Persist updated lastCloudSyncAt immediately to avoid re-sync on crash
+        if (updates.lastCloudSyncAt) {
+          await persistToStorage(get());
+        }
 
         if (scheduleIdleReset) {
           if (syncStatusTimer) clearTimeout(syncStatusTimer);
@@ -621,6 +628,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Cloud sync: Pull progress from cloud and merge
       syncFromCloud: async () => {
+        if (get().syncStatus === 'syncing') return;
         const state = get();
         set({ syncStatus: 'syncing', lastSyncError: null });
 

@@ -31,12 +31,12 @@ interface QuizState {
   // Session data
   currentSession: QuizSession | null;
   currentQuestion: QuizQuestion | null;
-  currentQuestionIndex: number; // 1-based question number for display (1-8)
+  currentQuestionIndex: number; // 1-based question number for display
   isQuizActive: boolean;
   sessionStats: SessionStats;
-  questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (8 total)
-  correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly (length 8)
-  presentationCountTracker: number[]; // Count of how many times each question has been presented (length 8)
+  questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (words.length * 2)
+  correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly
+  presentationCountTracker: number[]; // Count of how many times each question has been presented
   currentOrderIndex: number; // Current position in questionOrder (0-based)
 
   // Actions
@@ -115,7 +115,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       ];
     }
 
-    // Initialize tracker arrays (all 0s) - 8 questions total
+    // Initialize tracker arrays (all 0s)
     const correctTracker = new Array(questionOrder.length).fill(0);
     const presentationCountTracker = new Array(questionOrder.length).fill(0);
 
@@ -183,7 +183,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       options,
     };
 
-    // Question number is the position in shuffled order (1-based, 1-8)
+    // Question number is the position in shuffled order (1-based)
     const questionNumber = nextIndex + 1;
 
     // Increment presentation count for this question
@@ -326,17 +326,6 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         correctAnswers: state.sessionStats.correctAnswers + 1,
       },
     }));
-  },
-
-  // Reset session stats
-  resetStats: () => {
-    set({
-      sessionStats: {
-        hintsUsed: 0,
-        wrongAnswers: 0,
-        correctAnswers: 0,
-      },
-    });
   },
 
   // End quiz and return final stats

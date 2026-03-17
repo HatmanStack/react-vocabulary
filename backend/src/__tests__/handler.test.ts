@@ -218,7 +218,10 @@ describe('handler', () => {
   });
 
   describe('CORS headers', () => {
-    it('should include CORS headers in response', async () => {
+    it('should default to empty origin when ALLOWED_ORIGINS is unset', async () => {
+      // ALLOWED_ORIGINS is captured at module load time (not per-request),
+      // so the default empty string blocks cross-origin requests unless
+      // the env var is explicitly set before the module loads.
       mockDb.checkUsernameExists.mockResolvedValue(false);
 
       const event = createEvent({

@@ -4,6 +4,7 @@ import { Portal, Dialog, Button as PaperButton, useTheme } from 'react-native-pa
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { getListById } from '@/features/vocabulary/utils/vocabularyLoader';
 import { useQuizStore } from '@/shared/store/quizStore';
+import { useProgressStore } from '@/shared/store/progressStore';
 import { useSound } from '@/shared/hooks/useSound';
 import { useHaptics } from '@/shared/hooks/useHaptics';
 import { QuizHeader } from '../components/QuizHeader';
@@ -55,6 +56,8 @@ export default function QuizScreen() {
     const durationMinutes = quizStartTime
       ? (Date.now() - quizStartTime) / (1000 * 60)
       : undefined;
+    // Read previous best BEFORE endQuiz updates it
+    const prevBest = useProgressStore.getState().getBestScore(listId, levelId);
     const finalStats = endQuiz();
     router.replace({
       pathname: '/graduation',
@@ -63,8 +66,8 @@ export default function QuizScreen() {
         levelId,
         hints: finalStats.hints.toString(),
         wrong: finalStats.wrong.toString(),
-        bestHints: '0',
-        bestWrong: '0',
+        bestHints: (prevBest?.hints ?? -1).toString(),
+        bestWrong: (prevBest?.wrong ?? -1).toString(),
         durationMinutes: durationMinutes?.toString() || '0',
       },
     });

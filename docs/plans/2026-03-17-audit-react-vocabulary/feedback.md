@@ -3,6 +3,7 @@
 ## Active Feedback
 
 ### [CODE_REVIEW] FB-003: progressStore.ts exceeds 500-line target after sync extraction
+
 - **Phase:** Phase-2
 - **Task:** Task 9
 - **Severity:** MINOR
@@ -10,6 +11,7 @@
 - **Suggested Fix:** This is a non-blocking observation. The extraction achieved its architectural goal of separating concerns. A future phase could further decompose the store (e.g., extract achievement logic), but this is not required for Phase 2 approval.
 
 ### [CODE_REVIEW] FB-004: Residual console.log in quizStore.ts
+
 - **Phase:** Phase-2
 - **Task:** General
 - **Severity:** MINOR
@@ -17,6 +19,7 @@
 - **Suggested Fix:** Remove the console.log statement. This is non-blocking for Phase 2 approval since it predates Phase 2 changes.
 
 ### [PLAN_REVIEW] FB-002: Cross-reference table in Phase-0 has incorrect task numbers
+
 - **Phase:** Phase-0
 - **Task:** Cross-Reference Table (lines 103, 106, 118, 121)
 - **Severity:** MINOR
@@ -38,7 +41,24 @@
 - **Date:** YYYY-MM-DD
 -->
 
+### [CODE_REVIEW] FB-005: DEPLOYMENT.md "Subsequent Deployments" has incorrect deploy command
+
+- **Phase:** Phase-4
+- **Task:** Task 2
+- **Resolution:** Removed `cd backend` from the "Subsequent Deployments" code block in `docs/DEPLOYMENT.md`. The section now shows `npm run deploy` from the project root, consistent with the Quick Start and First-Time Setup sections.
+- **Resolved By:** Documentation Engineer
+- **Date:** 2026-03-17
+
+### [CODE_REVIEW] FB-006: CHANGELOG.md still says "4 words per session"
+
+- **Phase:** Phase-4
+- **Task:** Task 2
+- **Resolution:** Updated `CHANGELOG.md` line 14 from "Quiz sessions: 4 words per session, multiple-choice and fill-in-the-blank questions" to "Quiz sessions with multiple-choice and fill-in-the-blank questions", removing the inaccurate fixed word count claim.
+- **Resolved By:** Documentation Engineer
+- **Date:** 2026-03-17
+
 ### [PLAN_REVIEW] FB-001: Wrong file path for AchievementUnlockModal in Phase 2 Task 3
+
 - **Phase:** Phase-2
 - **Task:** Task 3
 - **Resolution:** Changed `src/features/quiz/components/AchievementUnlockModal.tsx — line 58` to `src/features/progress/components/AchievementUnlockModal.tsx — line 58` in the "Files to Modify" list of Phase-2 Task 3 (line 166 of Phase-2.md). Verified the correct path exists in the codebase.

@@ -70,12 +70,12 @@ Fix structural, architectural, and operational issues across the codebase: type 
    - Use react-native-paper's semantic color tokens via a wrapper. The simplest approach: replace the hardcoded colors with react-native-paper's theme-compatible defaults. Since ErrorBoundary is a class component, wrap it with `withTheme` from `react-native-paper` to inject the theme as a prop, then use `this.props.theme.colors.background`, `this.props.theme.colors.error`, `this.props.theme.colors.errorContainer` etc.
 
 **Verification Checklist:**
-- [ ] No `any` type annotations remain in `progressExport.ts`
-- [ ] No `as any` cast remains in `Typography.tsx`
-- [ ] No `eslint-disable @typescript-eslint/no-explicit-any` remains in `Typography.tsx`
-- [ ] ErrorBoundary uses theme colors instead of hardcoded hex values
-- [ ] `npm run type-check` passes
-- [ ] `npm run check` passes
+- [x] No `any` type annotations remain in `progressExport.ts`
+- [x] No `as any` cast remains in `Typography.tsx`
+- [x] No `eslint-disable @typescript-eslint/no-explicit-any` remains in `Typography.tsx`
+- [x] ErrorBoundary uses theme colors instead of hardcoded hex values
+- [x] `npm run type-check` passes
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -134,10 +134,10 @@ fix(types): eliminate any types and unsafe casts from production code
    ```
 
 **Verification Checklist:**
-- [ ] `makeListLevelKey` is used everywhere a composite key is constructed
-- [ ] No local `Achievement` interface in `achievements.ts`
-- [ ] `backend/src/types.ts` has a sync-note comment
-- [ ] `npm run check` passes
+- [x] `makeListLevelKey` is used everywhere a composite key is constructed
+- [x] No local `Achievement` interface in `achievements.ts`
+- [x] `backend/src/types.ts` has a sync-note comment
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -186,10 +186,10 @@ For each suppression:
 4. For each file, document in a code comment what you decided and why.
 
 **Verification Checklist:**
-- [ ] Each of the 12 suppressions has been reviewed
-- [ ] Suppressions that remain have an explanatory comment
-- [ ] No stale closure bugs remain
-- [ ] `npm run check` passes
+- [x] Each of the 12 suppressions has been reviewed
+- [x] Suppressions that remain have an explanatory comment
+- [x] No stale closure bugs remain
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -255,11 +255,11 @@ fix(hooks): review and fix eslint-disable exhaustive-deps suppressions
    Validate the imported data structure matches `ProgressExportData` before applying. Check `version`, `data.listLevelProgress`, `data.globalStats` shapes.
 
 **Verification Checklist:**
-- [ ] `progressStore.ts` validates `JSON.parse` output before `set()`
-- [ ] `settingsStore.ts` validates `JSON.parse` output before `set()`
-- [ ] `progressExport.ts` validates imported data before applying to store
-- [ ] Corrupted data falls back to defaults rather than crashing
-- [ ] `npm run check` passes
+- [x] `progressStore.ts` validates `JSON.parse` output before `set()`
+- [x] `settingsStore.ts` validates `JSON.parse` output before `set()`
+- [x] `progressExport.ts` validates imported data before applying to store
+- [x] Corrupted data falls back to defaults rather than crashing
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Add tests for the validation:
@@ -349,11 +349,11 @@ fix(store): add schema validation to JSON.parse deserialization paths
    Verify that `resetAllProgress` actually returns a promise. If it doesn't, make it return one by awaiting its internal `AsyncStorage.removeItem`.
 
 **Verification Checklist:**
-- [ ] `flushPendingSave` function exists and is exported
-- [ ] `_layout.tsx` registers an AppState listener that calls `flushPendingSave`
-- [ ] Sync status timers are properly cleared before new ones are set
-- [ ] `applyImportedProgress` properly awaits `resetAllProgress` before setting new state
-- [ ] `npm run check` passes
+- [x] `flushPendingSave` function exists and is exported
+- [x] `_layout.tsx` registers an AppState listener that calls `flushPendingSave`
+- [x] Sync status timers are properly cleared before new ones are set
+- [x] `applyImportedProgress` properly awaits `resetAllProgress` before setting new state
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Test `flushPendingSave` by verifying it calls `AsyncStorage.setItem`
@@ -397,10 +397,10 @@ fix(store): fix debounce flush, stale timers, and non-atomic import
 4. **Guard HomeScreen:** The `HomeScreen` already calls `loadVocabularyLists()` directly (line 26). Verify that after removing the module-level call, the HomeScreen still gets data. If `loadVocabularyLists` is synchronous (returns from a module-level cache), this should work. If it becomes async, add a loading state check.
 
 **Verification Checklist:**
-- [ ] No module-level side effect in `vocabularyStore.ts`
-- [ ] Vocabulary data loads during app initialization in `_layout.tsx`
-- [ ] HomeScreen still displays vocabulary lists
-- [ ] `npm run check` passes
+- [x] No module-level side effect in `vocabularyStore.ts`
+- [x] Vocabulary data loads during app initialization in `_layout.tsx`
+- [x] HomeScreen still displays vocabulary lists
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Run: `npm run check`
@@ -465,10 +465,10 @@ refactor(store): convert vocabulary store to lazy initialization
    And update the CORS logic to deny requests when no origin is configured, or at minimum log a warning if `ALLOWED_ORIGINS` is empty. This forces explicit configuration in deployment.
 
 **Verification Checklist:**
-- [ ] Oversized payloads are rejected with an appropriate error
-- [ ] Malformed `progressData` objects are rejected
-- [ ] `ALLOWED_ORIGINS` no longer defaults to `'*'`
-- [ ] Backend `npm run check` passes: `cd backend && npm run check`
+- [x] Oversized payloads are rejected with an appropriate error
+- [x] Malformed `progressData` objects are rejected
+- [x] `ALLOWED_ORIGINS` no longer defaults to `'*'`
+- [x] Backend `npm run check` passes: `cd backend && npm run check`
 
 **Testing Instructions:**
 - Add tests in `backend/src/__tests__/validation.test.ts` (or wherever backend tests live):
@@ -548,9 +548,9 @@ fix(backend): add payload validation, size limits, and secure CORS default
 2. Remove the `GetCommand` import if it's no longer used elsewhere in the file.
 
 **Verification Checklist:**
-- [ ] `saveProgress` uses a single DynamoDB operation (no `GetCommand` before `PutCommand`)
-- [ ] `createdAt` is preserved for existing items via `if_not_exists`
-- [ ] Backend `npm run check` passes: `cd backend && npm run check`
+- [x] `saveProgress` uses a single DynamoDB operation (no `GetCommand` before `PutCommand`)
+- [x] `createdAt` is preserved for existing items via `if_not_exists`
+- [x] Backend `npm run check` passes: `cd backend && npm run check`
 
 **Testing Instructions:**
 - Update backend tests for `saveProgress` if they exist
@@ -602,10 +602,10 @@ fix(backend): replace read-then-write with atomic conditional write
 4. **This is a refactor — no behavior changes.** The sync flow should work identically before and after.
 
 **Verification Checklist:**
-- [ ] `syncOrchestrator.ts` exists with extracted sync logic
-- [ ] `progressStore.ts` is measurably shorter (target: under 500 lines)
-- [ ] Cloud sync still works (existing sync tests pass)
-- [ ] `npm run check` passes
+- [x] `syncOrchestrator.ts` exists with extracted sync logic
+- [x] `progressStore.ts` is measurably shorter (target: under 500 lines)
+- [x] Cloud sync still works (existing sync tests pass)
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Existing `syncService.test.ts` and `progressStore` tests should continue to pass
@@ -697,10 +697,10 @@ refactor(store): extract cloud sync orchestration from progressStore
    ```
 
 **Verification Checklist:**
-- [ ] Quiz completion logic exists in only one place (shared function)
-- [ ] `handleFeedbackEnd` timeout is cleaned up on unmount
-- [ ] Word state increments by 1 per correct answer (not jumping to 3)
-- [ ] `npm run check` passes
+- [x] Quiz completion logic exists in only one place (shared function)
+- [x] `handleFeedbackEnd` timeout is cleaned up on unmount
+- [x] Word state increments by 1 per correct answer (not jumping to 3)
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Update `quizStore.test.ts` to verify word state progression:
@@ -784,10 +784,10 @@ fix(quiz): deduplicate completion logic and enforce word state progression
    ```
 
 **Verification Checklist:**
-- [ ] `getAllWords()` returns cached result on subsequent calls
-- [ ] Levenshtein uses O(min(n,m)) space instead of O(n*m)
-- [ ] Existing Levenshtein tests still pass
-- [ ] `npm run check` passes
+- [x] `getAllWords()` returns cached result on subsequent calls
+- [x] Levenshtein uses O(min(n,m)) space instead of O(n*m)
+- [x] Existing Levenshtein tests still pass
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - Levenshtein has existing tests — verify they still pass: `npm test -- --testPathPattern='levenshtein'`
@@ -826,10 +826,10 @@ perf: cache getAllWords and optimize Levenshtein to single-row DP
 3. Follow the pattern in `mergeProgress.test.ts` which is cited as exemplary in the eval.
 
 **Verification Checklist:**
-- [ ] Integration test file exists
-- [ ] Test exercises quiz flow through real stores
-- [ ] Test verifies word state progression
-- [ ] `npm test` passes
+- [x] Integration test file exists
+- [x] Test exercises quiz flow through real stores
+- [x] Test verifies word state progression
+- [x] `npm test` passes
 
 **Testing Instructions:**
 - Run: `npm test -- --testPathPattern='quizFlow'`

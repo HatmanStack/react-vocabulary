@@ -208,10 +208,10 @@ ci: remove --passWithNoTests flag from jest config
 
 **Verification Checklist:**
 
-- [ ] `.devcontainer/devcontainer.json` exists
-- [ ] Node version in the image matches what CI uses (Node 24)
-- [ ] `postCreateCommand` runs `npm ci`
-- [ ] No irrelevant VS Code extensions are listed
+- [x] `.devcontainer/devcontainer.json` exists
+- [x] Node version in the image matches what CI uses (Node 24)
+- [x] `postCreateCommand` runs `npm ci`
+- [x] No irrelevant VS Code extensions are listed
 
 **Testing Instructions:**
 

@@ -6,6 +6,7 @@
 
 import { Platform, Share } from 'react-native';
 import { useProgressStore } from '@/shared/store/progressStore';
+import { ListLevelProgress } from '@/shared/types';
 
 const EXPORT_VERSION = '1.0.0';
 
@@ -13,7 +14,7 @@ export interface ProgressExportData {
   version: string;
   exportDate: string;
   data: {
-    listLevelProgress: Record<string, any>;
+    listLevelProgress: Record<string, ListLevelProgress>;
     globalStats: {
       allTimeHints: number;
       allTimeWrong: number;
@@ -101,9 +102,9 @@ export async function importProgress(jsonString: string): Promise<{
 
     // Calculate preview stats
     const preview = {
-      wordsLearned: Object.values(importData.data.listLevelProgress).reduce((count, llp: any) => {
+      wordsLearned: Object.values(importData.data.listLevelProgress).reduce((count, llp) => {
         return (
-          count + Object.values(llp.wordProgress || {}).filter((wp: any) => wp.state === 3).length
+          count + Object.values(llp.wordProgress || {}).filter((wp) => wp.state === 3).length
         );
       }, 0),
       listsCompleted: importData.data.globalStats.listsCompleted?.length || 0,

@@ -37,7 +37,7 @@ interface TypographyProps {
   allowFontScaling?: boolean;
 }
 
-const VARIANT_MAP: Record<TypographyVariant, string> = {
+const VARIANT_MAP: Record<TypographyVariant, React.ComponentProps<typeof PaperText>['variant']> = {
   heading1: 'displayLarge',
   heading2: 'headlineLarge',
   heading3: 'headlineMedium',
@@ -78,8 +78,7 @@ export function Typography({
 
   return (
     <PaperText
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      variant={VARIANT_MAP[variant] as any}
+      variant={VARIANT_MAP[variant]}
       style={[{ color: getColor(), textAlign: align }, style]}
       allowFontScaling={allowFontScaling}
       accessibilityRole={getAccessibilityRole()}

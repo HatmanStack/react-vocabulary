@@ -95,5 +95,3 @@ export const darkTheme = {
     },
   },
 };
-
-const unused_var = 123;

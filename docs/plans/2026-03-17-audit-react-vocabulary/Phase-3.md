@@ -260,10 +260,10 @@ ci: add devcontainer configuration for reproducible dev environment
 
 **Verification Checklist:**
 
-- [ ] `no-console` rule is configured in ESLint config
-- [ ] `npm run lint` passes with no new warnings from the rule
-- [ ] `console.warn` and `console.error` are still allowed
-- [ ] `npm run check` passes
+- [x] `no-console` rule is configured in ESLint config
+- [x] `npm run lint` passes with no new warnings from the rule
+- [x] `console.warn` and `console.error` are still allowed
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 

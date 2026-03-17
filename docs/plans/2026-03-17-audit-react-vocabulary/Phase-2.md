@@ -163,7 +163,7 @@ refactor(types): consolidate duplicate types and extract listLevelKey helper
 - `src/features/quiz/screens/GraduationScreen.tsx` — lines 61, 85
 - `src/features/quiz/components/AnswerFeedback.tsx` — line 90
 - `src/features/progress/screens/StatsScreen.tsx` — line 21
-- `src/features/quiz/components/AchievementUnlockModal.tsx` — line 58
+- `src/features/progress/components/AchievementUnlockModal.tsx` — line 58
 - `src/features/vocabulary/screens/DifficultyScreen.tsx` — line 50
 - `src/features/vocabulary/screens/HomeScreen.tsx` — line 90
 - `src/features/vocabulary/components/ListCard.tsx` — line 70

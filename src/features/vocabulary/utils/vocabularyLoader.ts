@@ -82,12 +82,18 @@ export function getLevelWords(listId: string, levelId: string): VocabularyWord[]
   return level?.words || [];
 }
 
+// Module-level cache for getAllWords result
+let cachedAllWords: VocabularyWord[] | null = null;
+
 /**
  * Get all vocabulary words from all lists and levels
+ * Result is cached after first call since vocabulary data is static.
  *
  * @returns Array of all vocabulary words across all lists
  */
 export function getAllWords(): VocabularyWord[] {
+  if (cachedAllWords) return cachedAllWords;
+
   const allWords: VocabularyWord[] = [];
 
   vocabularyLists.forEach((list) => {
@@ -96,7 +102,8 @@ export function getAllWords(): VocabularyWord[] {
     });
   });
 
-  return allWords;
+  cachedAllWords = allWords;
+  return cachedAllWords;
 }
 
 /**

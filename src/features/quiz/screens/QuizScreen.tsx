@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Portal, Dialog, Button as PaperButton, useTheme } from 'react-native-paper';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -48,6 +48,27 @@ export default function QuizScreen() {
   const [hintDialogVisible, setHintDialogVisible] = useState(false);
   const [hintText, setHintText] = useState('');
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Shared quiz completion handler — single source of truth
+  const navigateToGraduation = useCallback(() => {
+    const durationMinutes = quizStartTime
+      ? (Date.now() - quizStartTime) / (1000 * 60)
+      : undefined;
+    const finalStats = endQuiz();
+    router.replace({
+      pathname: '/graduation',
+      params: {
+        listId,
+        levelId,
+        hints: finalStats.hints.toString(),
+        wrong: finalStats.wrong.toString(),
+        bestHints: '0',
+        bestWrong: '0',
+        durationMinutes: durationMinutes?.toString() || '0',
+      },
+    });
+  }, [quizStartTime, endQuiz, router, listId, levelId]);
 
   // Start quiz on mount
   useEffect(() => {
@@ -59,30 +80,19 @@ export default function QuizScreen() {
   // Check for quiz completion
   useEffect(() => {
     if (isQuizActive && isQuizComplete()) {
-      // Calculate quiz duration
-      const durationMinutes = quizStartTime
-        ? (Date.now() - quizStartTime) / (1000 * 60)
-        : undefined;
-
-      // Navigate to graduation screen with stats
-      const finalStats = endQuiz();
-      router.replace({
-        pathname: '/graduation',
-        params: {
-          listId,
-          levelId,
-          hints: finalStats.hints.toString(),
-          wrong: finalStats.wrong.toString(),
-          bestHints: '0',
-          bestWrong: '0',
-          durationMinutes: durationMinutes?.toString() || '0',
-        },
-      });
+      navigateToGraduation();
     }
     // Effect intentionally runs only on question index and start time changes.
-    // Store functions (isQuizComplete, endQuiz) and router are stable references.
+    // Store functions (isQuizComplete) and navigateToGraduation are stable references.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestionIndex, quizStartTime]);
+
+  // Clean up feedback timer on unmount
+  useEffect(() => {
+    return () => {
+      if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    };
+  }, []);
 
   if (!list || !currentQuestion) {
     return (
@@ -130,28 +140,13 @@ export default function QuizScreen() {
   const handleFeedbackEnd = () => {
     setShowFeedback(false);
     // Move to next question after feedback
-    setTimeout(() => {
+    feedbackTimerRef.current = setTimeout(() => {
+      feedbackTimerRef.current = null;
       getNextQuestion();
 
       // Check if quiz is complete after getting next question
       if (isQuizComplete()) {
-        const durationMinutes = quizStartTime
-          ? (Date.now() - quizStartTime) / (1000 * 60)
-          : undefined;
-
-        const finalStats = endQuiz();
-        router.replace({
-          pathname: '/graduation',
-          params: {
-            listId,
-            levelId,
-            hints: finalStats.hints.toString(),
-            wrong: finalStats.wrong.toString(),
-            bestHints: '0',
-            bestWrong: '0',
-            durationMinutes: durationMinutes?.toString() || '0',
-          },
-        });
+        navigateToGraduation();
       }
     }, 300);
   };

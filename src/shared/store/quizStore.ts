@@ -6,9 +6,10 @@
  */
 
 import { create } from 'zustand';
-import { QuizQuestion, QuizSession, QuestionType } from '@/shared/types';
+import { QuizQuestion, QuizSession, QuestionType, WordState } from '@/shared/types';
 import { useVocabularyStore } from './vocabularyStore';
 import { useProgressStore } from './progressStore';
+import { makeListLevelKey } from '@/shared/utils/listLevelKey';
 import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
 import { generateMultipleChoiceOptions } from '@/features/quiz/utils/questionGenerator';
 
@@ -206,13 +207,18 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       newTracker[prevIndex] = 1;
       set({ correctTracker: newTracker });
 
-      // Save progress to progressStore (mark as mastered)
+      // Save progress to progressStore with progressive state (0->1->2->3)
       const progressStore = useProgressStore.getState();
+      const key = makeListLevelKey(currentSession.listId, currentSession.levelId);
+      const currentWordProgress = progressStore.listLevelProgress?.[key]?.wordProgress[word.id];
+      const currentState = currentWordProgress?.state ?? 0;
+      const nextState = Math.min(currentState + 1, 3) as WordState;
+
       progressStore.updateWordProgress(
         word.id,
         currentSession.listId,
         currentSession.levelId,
-        3, // Mark as mastered
+        nextState,
         isCorrect,
         false
       );

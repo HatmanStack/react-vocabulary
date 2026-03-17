@@ -1,3 +1,6 @@
+// NOTE: These types mirror src/shared/types/progress.ts in the frontend.
+// If you change types here, update the frontend types to match.
+
 // Progress action types
 export type ProgressAction = 'get' | 'save' | 'check-username';
 

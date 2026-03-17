@@ -4,19 +4,9 @@
  * Defines all achievements and logic for checking/unlocking them.
  */
 
-import { UserProgress } from '@/shared/types';
+import { UserProgress, Achievement } from '@/shared/types';
 
-export interface Achievement {
-  id: string;
-  name: string;
-  description: string;
-  icon: string; // Icon name from Material Icons or emoji
-  category: 'milestone' | 'performance' | 'consistency' | 'completion';
-  isUnlocked: boolean;
-  unlockedAt?: string;
-  progress?: number; // For progressive achievements (0-100)
-  target?: number; // Target value for progressive achievements
-}
+export type { Achievement };
 
 export type AchievementId =
   | 'first-steps'

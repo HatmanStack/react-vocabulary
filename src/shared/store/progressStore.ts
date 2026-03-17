@@ -16,6 +16,7 @@ import {
   WordState,
   Achievement,
 } from '@/shared/types';
+import { makeListLevelKey } from '@/shared/utils/listLevelKey';
 import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
 import {
   checkUsername as apiCheckUsername,
@@ -240,7 +241,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Update word progress
       updateWordProgress: (wordId, listId, levelId, newState, isCorrect, hintUsed) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const now = new Date().toISOString();
 
         // Get or create list-level progress
@@ -316,7 +317,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Get list-level progress
       getListLevelProgress: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const listLevel = get().listLevelProgress[key];
         return listLevel ? Object.values(listLevel.wordProgress) : [];
       },
@@ -338,7 +339,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Update best score
       updateBestScore: (listId, levelId, stats) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const now = new Date().toISOString();
 
         // Get or create list-level progress
@@ -378,7 +379,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Get best score
       getBestScore: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         return get().listLevelProgress[key]?.bestScore;
       },
 
@@ -427,7 +428,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Calculate level progress (percentage)
       calculateLevelProgress: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const listLevel = get().listLevelProgress[key];
 
         if (!listLevel) return 0;
@@ -471,7 +472,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Reset list-level progress
       resetListLevelProgress: (listId, levelId) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const newListLevelProgress = { ...state.listLevelProgress };
         delete newListLevelProgress[key];
 

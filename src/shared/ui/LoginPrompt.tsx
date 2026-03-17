@@ -3,6 +3,11 @@
  *
  * A reusable login/username entry component with claim-based flow.
  * Allows users to enter a username for cloud sync.
+ *
+ * ARCHITECTURAL DECISION: No password or authentication by design.
+ * Sync uses username-only identification to keep the experience simple.
+ * Users are advised to pick a unique username for privacy. See backend
+ * handler (backend/src/index.ts) for full rationale.
  */
 
 import React, { useState, useCallback } from 'react';
@@ -127,6 +132,11 @@ export function LoginPrompt({ onComplete, onSkip }: LoginPromptProps) {
         <Typography variant="body" color="secondary" align="center">
           Enter a username to sync your progress across devices. Choose wisely - usernames cannot be
           changed!
+        </Typography>
+        <Spacer size="xs" />
+        <Typography variant="caption" color="secondary" align="center">
+          Tip: For privacy, choose a unique username that others won't guess. Anyone with your
+          username can access your progress data.
         </Typography>
 
         <Spacer size="lg" />

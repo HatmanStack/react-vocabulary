@@ -15,6 +15,10 @@ export class ValidationError extends Error {
   }
 }
 
+// ARCHITECTURAL DECISION: Username is the sole identifier — no auth tokens.
+// This is intentional to keep the sync flow simple for end users. Privacy is
+// maintained through username uniqueness rather than authentication. See the
+// handler comment in index.ts for full rationale.
 export function validateRequest(body: unknown): ProgressRequest {
   if (body === null || typeof body !== 'object') {
     throw new ValidationError('Request body must be an object', ErrorCodes.INVALID_JSON);

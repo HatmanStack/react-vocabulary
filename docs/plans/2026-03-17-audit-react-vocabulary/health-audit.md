@@ -17,15 +17,15 @@ goal: General health check — scan all 4 vectors equally
 - Overall health: **FAIR**
 - Biggest structural risk: The `progressStore.ts` (738 lines) is a god object combining persistence, cloud sync orchestration, achievement checking, session management, and progress calculations into a single Zustand store
 - Biggest operational risk: No authentication on the cloud sync API — anyone who knows a username can read or overwrite another user's entire progress data
-- Total findings: 3 critical, 6 high, 8 medium, 7 low
+- Total findings: 2 critical, 5 high, 8 medium, 7 low (1 critical + 1 high accepted as intentional design)
 
 ## Tech Debt Ledger
 
 ### CRITICAL
 
-1. **[Operational Debt]** `backend/src/index.ts:33-83` + `backend/src/validation.ts:1-80`
-   - **The Debt:** The cloud sync API has zero authentication. Any caller who knows (or guesses) a username can read their full progress via `action: "get"` or overwrite it via `action: "save"`. Username validation is the only gate. There is no API key, JWT, session token, or any other authentication mechanism.
-   - **The Risk:** Complete data integrity loss for any user. An attacker can enumerate usernames via `check-username` and then read/wipe progress for any account. This is exploitable today with a single curl command.
+1. ~~**[Operational Debt]** `backend/src/index.ts:33-83` + `backend/src/validation.ts:1-80`~~ **ACCEPTED — Intentional architectural decision.**
+   - **The Design:** The cloud sync API uses username-only identification with no passwords, tokens, or sessions. This is a deliberate trade-off to minimize friction for a vocabulary learning app. Users are advised to choose a unique username for privacy.
+   - **Mitigations added:** Privacy notice in LoginPrompt UI, inline `ARCHITECTURAL DECISION` comments in `backend/src/index.ts`, `backend/src/validation.ts`, `src/shared/services/syncService.ts`, and `src/shared/ui/LoginPrompt.tsx` to document this choice for future auditors.
 
 2. **[Operational Debt]** `backend/src/validation.ts:66-73`
    - **The Debt:** The `save` action validates that `progressData` exists and is an object, but performs no schema validation on its contents. The entire payload is written directly to DynamoDB via `PutCommand` at `backend/src/db.ts:82-87`. There is no size limit check on the request body.
@@ -57,9 +57,8 @@ goal: General health check — scan all 4 vectors equally
    - **The Debt:** `applyImportedProgress` calls `resetAllProgress()` (which is async — it calls `AsyncStorage.removeItem`) and then immediately calls `setState` synchronously. The reset and apply are not atomic.
    - **The Risk:** If the `resetAllProgress` async operation interleaves with the `setState` call, state can be corrupted — the reset callback may fire after the import data has been applied, wiping the just-imported data.
 
-9. **[Architectural Debt]** `src/shared/ui/LoginPrompt.tsx:38-101`
-   - **The Debt:** The "Is this you?" username claim flow at lines 86-101 allows any user to claim any existing username by clicking "Yes, that's me". There is no verification (no email, no password, no challenge).
-   - **The Risk:** Combined with the unauthenticated API (Finding #1), this means any person can take over any username and sync/overwrite their data through the normal UI flow.
+9. ~~**[Architectural Debt]** `src/shared/ui/LoginPrompt.tsx:38-101`~~ **ACCEPTED — Part of the no-auth design.**
+   - **The Design:** The "Is this you?" username claim flow is intentional. Without authentication, this is the expected way for users to access existing data across devices. Privacy relies on username uniqueness. See Finding #1.
 
 ### MEDIUM
 

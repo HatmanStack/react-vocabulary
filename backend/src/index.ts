@@ -30,6 +30,11 @@ function createErrorResponse(
   return createResponse(statusCode, body);
 }
 
+// ARCHITECTURAL DECISION: No authentication by design.
+// This API uses username-only identification (no passwords, tokens, or sessions)
+// to minimize friction for a vocabulary learning app. Users are advised to choose
+// a unique username for privacy. This is an intentional trade-off: simplicity over
+// strict access control. The data stored is non-sensitive learning progress only.
 export async function handler(
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> {

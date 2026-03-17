@@ -8,7 +8,6 @@ import { useSettingsStore } from '@/shared/store/settingsStore';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { useProgressStore } from '@/shared/store/progressStore';
-import { initializeStorage } from '@/shared/lib/storage';
 import { ErrorBoundary } from '@/shared/ui';
 
 // Minimum time between app resume syncs (5 minutes)
@@ -51,7 +50,6 @@ export default function RootLayout() {
   useEffect(() => {
     async function prepare() {
       try {
-        await initializeStorage();
         await Promise.all([
           useProgressStore.getState().loadFromStorage(),
           useSettingsStore.getState().loadFromStorage(),

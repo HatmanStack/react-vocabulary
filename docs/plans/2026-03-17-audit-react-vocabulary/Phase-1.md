@@ -35,8 +35,8 @@ Remove dead code, unused dependencies, unused files, unused exports, and debug s
 3. Delete line 27: `console.log('[HomeScreen] Loaded', vocabularyLists.length, 'vocabulary lists');`
 
 **Verification Checklist:**
-- [ ] No `console.log` statements remain in `HomeScreen.tsx`
-- [ ] `npm run check` passes
+- [x] No `console.log` statements remain in `HomeScreen.tsx`
+- [x] `npm run check` passes
 
 **Testing Instructions:**
 - No new tests needed. Existing tests should still pass.

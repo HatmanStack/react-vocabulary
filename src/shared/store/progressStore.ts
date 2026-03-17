@@ -16,15 +16,15 @@ import {
   WordState,
   Achievement,
 } from '@/shared/types';
+import { makeListLevelKey } from '@/shared/utils/listLevelKey';
+import { isValidProgressData } from '@/shared/utils/validateState';
 import { checkAllAchievements, getAllAchievements } from '@/features/progress/utils/achievements';
+import { isApiConfigured } from '@/shared/services/syncService';
 import {
-  checkUsername as apiCheckUsername,
-  getProgress as apiGetProgress,
-  saveProgress as apiSaveProgress,
-  isApiConfigured,
-  SyncError,
-} from '@/shared/services/syncService';
-import { mergeProgress } from '@/shared/utils/mergeProgress';
+  syncToCloud as orchestrateSyncToCloud,
+  syncFromCloud as orchestrateSyncFromCloud,
+  checkUsernameExists as orchestrateCheckUsername,
+} from '@/shared/services/syncOrchestrator';
 
 const STORAGE_KEY = 'vocabulary-progress';
 const USERNAME_KEY = 'vocabulary-username';
@@ -32,6 +32,9 @@ const SAVE_DEBOUNCE_MS = 500;
 
 // Debounce timer for storage saves
 let saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+// Timer for resetting sync status back to idle
+let syncStatusTimer: ReturnType<typeof setTimeout> | null = null;
 
 export type SyncStatus = 'idle' | 'syncing' | 'success' | 'error';
 
@@ -92,7 +95,7 @@ interface ProgressState extends UserProgress {
 
   // Reset functionality
   resetListLevelProgress: (listId: string, levelId: string) => void;
-  resetAllProgress: () => void;
+  resetAllProgress: () => Promise<void>;
 
   // Achievement tracking
   checkAndUnlockAchievements: (sessionData?: {
@@ -172,6 +175,26 @@ const initialState: Omit<
   lastCloudSyncAt: null,
 };
 
+// Extract serializable state fields for persistence
+const getDataToSave = (state: ProgressState) => ({
+  currentListId: state.currentListId,
+  currentLevelId: state.currentLevelId,
+  listLevelProgress: state.listLevelProgress,
+  globalStats: state.globalStats,
+  achievements: state.achievements,
+  dailyProgress: state.dailyProgress,
+  lastSyncedAt: state.lastSyncedAt,
+});
+
+// Immediately persist current state to AsyncStorage
+const persistToStorage = async (state: ProgressState) => {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(getDataToSave(state)));
+  } catch (error) {
+    console.error('Failed to save progress to storage:', error);
+  }
+};
+
 // Helper to save state to AsyncStorage (debounced)
 const saveStateToStorage = (state: ProgressState) => {
   // Clear any pending save
@@ -180,22 +203,22 @@ const saveStateToStorage = (state: ProgressState) => {
   }
 
   // Schedule a new save
-  saveDebounceTimer = setTimeout(async () => {
-    try {
-      const dataToSave = {
-        currentListId: state.currentListId,
-        currentLevelId: state.currentLevelId,
-        listLevelProgress: state.listLevelProgress,
-        globalStats: state.globalStats,
-        achievements: state.achievements,
-        dailyProgress: state.dailyProgress,
-        lastSyncedAt: state.lastSyncedAt,
-      };
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-    } catch (error) {
-      console.error('Failed to save progress to storage:', error);
-    }
+  saveDebounceTimer = setTimeout(() => {
+    saveDebounceTimer = null;
+    persistToStorage(state);
   }, SAVE_DEBOUNCE_MS);
+};
+
+/**
+ * Flush any pending debounced save immediately.
+ * Call this when the app is going to background to prevent data loss.
+ */
+export const flushPendingSave = async () => {
+  if (saveDebounceTimer) {
+    clearTimeout(saveDebounceTimer);
+    saveDebounceTimer = null;
+  }
+  await persistToStorage(useProgressStore.getState());
 };
 
 export const useProgressStore = create<ProgressState>()((set, get) => ({
@@ -215,11 +238,16 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       if (stored) {
         const data = JSON.parse(stored);
-        set({
-          ...data,
-          username: storedUsername || null,
-          _hydrated: true,
-        });
+        if (isValidProgressData(data)) {
+          set({
+            ...data,
+            username: storedUsername || null,
+            _hydrated: true,
+          });
+        } else {
+          console.warn('Invalid progress data in storage, using defaults');
+          set({ username: storedUsername || null, _hydrated: true });
+        }
       } else {
         set({
           username: storedUsername || null,
@@ -240,7 +268,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Update word progress
       updateWordProgress: (wordId, listId, levelId, newState, isCorrect, hintUsed) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const now = new Date().toISOString();
 
         // Get or create list-level progress
@@ -302,7 +330,8 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
         saveStateToStorage(get());
       },
 
-      // Get word progress
+      // Get word progress (returns first match across all lists — use
+      // getListLevelProgress for list-specific lookups)
       getWordProgress: (wordId) => {
         const state = get();
         // Search through all list-level progress
@@ -316,7 +345,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Get list-level progress
       getListLevelProgress: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const listLevel = get().listLevelProgress[key];
         return listLevel ? Object.values(listLevel.wordProgress) : [];
       },
@@ -338,7 +367,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Update best score
       updateBestScore: (listId, levelId, stats) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const now = new Date().toISOString();
 
         // Get or create list-level progress
@@ -378,7 +407,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Get best score
       getBestScore: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         return get().listLevelProgress[key]?.bestScore;
       },
 
@@ -427,7 +456,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Calculate level progress (percentage)
       calculateLevelProgress: (listId, levelId) => {
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const listLevel = get().listLevelProgress[key];
 
         if (!listLevel) return 0;
@@ -471,7 +500,7 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Reset list-level progress
       resetListLevelProgress: (listId, levelId) => {
         const state = get();
-        const key = `${listId}-${levelId}`;
+        const key = makeListLevelKey(listId, levelId);
         const newListLevelProgress = { ...state.listLevelProgress };
         delete newListLevelProgress[key];
 
@@ -569,149 +598,56 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
 
       // Cloud sync: Check if username exists
       checkUsernameExists: async (username: string) => {
-        if (!isApiConfigured()) {
-          return false;
-        }
-        try {
-          const result = await apiCheckUsername(username);
-          return result.exists;
-        } catch (error) {
-          console.error('Failed to check username:', error);
-          return false;
-        }
+        return orchestrateCheckUsername(username);
       },
 
       // Cloud sync: Push current progress to cloud
       syncToCloud: async () => {
+        if (get().syncStatus === 'syncing') return;
         const state = get();
-
-        // Skip if no username or API not configured
-        if (!state.username || !isApiConfigured()) {
-          return;
-        }
-
-        // Skip if already syncing
-        if (state.syncStatus === 'syncing') {
-          return;
-        }
-
         set({ syncStatus: 'syncing', lastSyncError: null });
 
-        try {
-          // Extract UserProgress from state
-          const progressData: UserProgress = {
-            currentListId: state.currentListId,
-            currentLevelId: state.currentLevelId,
-            listLevelProgress: state.listLevelProgress,
-            globalStats: state.globalStats,
-            achievements: state.achievements,
-            dailyProgress: state.dailyProgress,
-          };
+        const { updates, scheduleIdleReset } = await orchestrateSyncToCloud(state);
+        set(updates);
 
-          const result = await apiSaveProgress(state.username, progressData);
+        // Persist updated lastCloudSyncAt immediately to avoid re-sync on crash
+        if (updates.lastCloudSyncAt) {
+          await persistToStorage(get());
+        }
 
-          if (result.success) {
-            set({
-              syncStatus: 'success',
-              lastCloudSyncAt: result.lastSyncedAt,
-            });
-
-            // Reset to idle after a brief success display
-            setTimeout(() => {
-              set((current) =>
-                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
-              );
-            }, 2000);
-          } else {
-            set({
-              syncStatus: 'error',
-              lastSyncError: 'Failed to save progress',
-            });
-          }
-        } catch (error) {
-          const errorMessage =
-            error instanceof SyncError
-              ? error.message
-              : 'Failed to sync to cloud';
-          set({
-            syncStatus: 'error',
-            lastSyncError: errorMessage,
-          });
+        if (scheduleIdleReset) {
+          if (syncStatusTimer) clearTimeout(syncStatusTimer);
+          syncStatusTimer = setTimeout(() => {
+            set((current) =>
+              current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
+            );
+            syncStatusTimer = null;
+          }, 2000);
         }
       },
 
       // Cloud sync: Pull progress from cloud and merge
       syncFromCloud: async () => {
+        if (get().syncStatus === 'syncing') return;
         const state = get();
-
-        // Skip if no username or API not configured
-        if (!state.username || !isApiConfigured()) {
-          return;
-        }
-
-        // Skip if already syncing
-        if (state.syncStatus === 'syncing') {
-          return;
-        }
-
         set({ syncStatus: 'syncing', lastSyncError: null });
 
-        try {
-          const cloudData = await apiGetProgress(state.username);
+        const { updates, scheduleIdleReset } = await orchestrateSyncFromCloud(state);
+        set(updates);
 
-          if (cloudData) {
-            // Extract current progress
-            const localProgress: UserProgress = {
-              currentListId: state.currentListId,
-              currentLevelId: state.currentLevelId,
-              listLevelProgress: state.listLevelProgress,
-              globalStats: state.globalStats,
-              achievements: state.achievements,
-              dailyProgress: state.dailyProgress,
-            };
+        // Save merged state to local storage if we got new data
+        if (updates.listLevelProgress) {
+          await persistToStorage(get());
+        }
 
-            // Merge cloud data with local data
-            const mergedProgress = mergeProgress(localProgress, cloudData.progressData);
-
-            // Update state with merged data
-            set({
-              currentListId: mergedProgress.currentListId,
-              currentLevelId: mergedProgress.currentLevelId,
-              listLevelProgress: mergedProgress.listLevelProgress,
-              globalStats: mergedProgress.globalStats,
-              achievements: mergedProgress.achievements,
-              dailyProgress: mergedProgress.dailyProgress,
-              syncStatus: 'success',
-              lastCloudSyncAt: cloudData.lastSyncedAt,
-            });
-
-            // Save merged state to local storage
-            await saveStateToStorage(get());
-
-            // Reset to idle after a brief success display
-            setTimeout(() => {
-              set((current) =>
-                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
-              );
-            }, 2000);
-          } else {
-            // User doesn't exist in cloud yet, set to success
-            set({ syncStatus: 'success' });
-            setTimeout(() => {
-              set((current) =>
-                current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
-              );
-            }, 2000);
-          }
-        } catch (error) {
-          const errorMessage =
-            error instanceof SyncError
-              ? error.message
-              : 'Failed to sync from cloud';
-          set({
-            syncStatus: 'error',
-            lastSyncError: errorMessage,
-          });
+        if (scheduleIdleReset) {
+          if (syncStatusTimer) clearTimeout(syncStatusTimer);
+          syncStatusTimer = setTimeout(() => {
+            set((current) =>
+              current.syncStatus === 'success' ? { syncStatus: 'idle' } : {}
+            );
+            syncStatusTimer = null;
+          }, 2000);
         }
       },
 

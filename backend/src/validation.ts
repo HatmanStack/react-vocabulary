@@ -15,6 +15,10 @@ export class ValidationError extends Error {
   }
 }
 
+// ARCHITECTURAL DECISION: Username is the sole identifier — no auth tokens.
+// This is intentional to keep the sync flow simple for end users. Privacy is
+// maintained through username uniqueness rather than authentication. See the
+// handler comment in index.ts for full rationale.
 export function validateRequest(body: unknown): ProgressRequest {
   if (body === null || typeof body !== 'object') {
     throw new ValidationError('Request body must be an object', ErrorCodes.INVALID_JSON);
@@ -68,6 +72,33 @@ export function validateRequest(body: unknown): ProgressRequest {
       throw new ValidationError(
         'progressData is required for save action and must be an object',
         ErrorCodes.MISSING_PROGRESS_DATA
+      );
+    }
+
+    // Check payload size (DynamoDB limit is 400KB, leave margin)
+    const MAX_PAYLOAD_SIZE = 350_000; // 350KB
+    const payloadSize = Buffer.byteLength(JSON.stringify(data.progressData), 'utf8');
+    if (payloadSize > MAX_PAYLOAD_SIZE) {
+      throw new ValidationError(
+        'Progress data exceeds maximum size',
+        ErrorCodes.INVALID_PROGRESS_DATA
+      );
+    }
+
+    // Validate progressData shape
+    const pd = data.progressData as Record<string, unknown>;
+    if (pd.listLevelProgress !== undefined &&
+        (typeof pd.listLevelProgress !== 'object' || pd.listLevelProgress === null || Array.isArray(pd.listLevelProgress))) {
+      throw new ValidationError(
+        'Invalid listLevelProgress format',
+        ErrorCodes.INVALID_PROGRESS_DATA
+      );
+    }
+    if (pd.globalStats !== undefined &&
+        (typeof pd.globalStats !== 'object' || pd.globalStats === null || Array.isArray(pd.globalStats))) {
+      throw new ValidationError(
+        'Invalid globalStats format',
+        ErrorCodes.INVALID_PROGRESS_DATA
       );
     }
   }

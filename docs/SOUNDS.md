@@ -37,8 +37,10 @@ Place the following MP3 files in this directory:
 
 ## Attribution
 
-If using Creative Commons licensed sounds, add attribution here:
+> **Licensing risk:** The three sound files below have unknown provenance.
+> They must be replaced with CC0/public-domain files (with verified source)
+> before any commercial distribution. Until then, treat them as placeholder assets.
 
-- correct.mp3: [Source and License]
-- wrong.mp3: [Source and License]
-- complete.mp3: [Source and License]
+- correct.mp3: Source unknown — needs replacement with verified CC0 asset
+- wrong.mp3: Source unknown — needs replacement with verified CC0 asset
+- complete.mp3: Source unknown — needs replacement with verified CC0 asset

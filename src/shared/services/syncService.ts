@@ -41,7 +41,7 @@ export function isApiConfigured(): boolean {
 /**
  * Check if the device is online
  */
-export async function isOnline(): Promise<boolean> {
+async function isOnline(): Promise<boolean> {
   try {
     const state = await NetInfo.fetch();
     return state.isConnected === true;
@@ -59,7 +59,11 @@ function sleep(ms: number): Promise<void> {
 }
 
 /**
- * Make a single request to the sync API with timeout handling
+ * Make a single request to the sync API with timeout handling.
+ *
+ * ARCHITECTURAL DECISION: Requests are identified by username only — no auth
+ * tokens or sessions. This is intentional to keep sync frictionless for a
+ * vocabulary learning app. Privacy relies on username uniqueness, not authentication.
  */
 async function makeSingleRequest<T>(body: Record<string, unknown>): Promise<T> {
   if (!API_URL) {

@@ -1,9 +1,6 @@
-import HomeScreen from '@/features/vocabulary/screens/HomeScreen';
-
-console.log('[home.tsx] Route file loaded');
+import HomeScreen from "@/features/vocabulary/screens/HomeScreen";
 
 function HomeRoute() {
-  console.log('[home.tsx] HomeRoute component rendering');
   return <HomeScreen />;
 }
 

@@ -36,7 +36,6 @@ function createEvent(body: unknown): APIGatewayProxyEventV2 {
 
 beforeEach(() => {
   jest.clearAllMocks();
-  process.env.ALLOWED_ORIGINS = '*';
 });
 
 describe('handler', () => {
@@ -219,7 +218,10 @@ describe('handler', () => {
   });
 
   describe('CORS headers', () => {
-    it('should include CORS headers in response', async () => {
+    it('should default to empty origin when ALLOWED_ORIGINS is unset', async () => {
+      // ALLOWED_ORIGINS is captured at module load time (not per-request),
+      // so the default empty string blocks cross-origin requests unless
+      // the env var is explicitly set before the module loads.
       mockDb.checkUsernameExists.mockResolvedValue(false);
 
       const event = createEvent({
@@ -228,7 +230,7 @@ describe('handler', () => {
       });
       const result = await handler(event);
 
-      expect(result.headers?.['Access-Control-Allow-Origin']).toBe('*');
+      expect(result.headers?.['Access-Control-Allow-Origin']).toBe('');
       expect(result.headers?.['Content-Type']).toBe('application/json');
     });
   });

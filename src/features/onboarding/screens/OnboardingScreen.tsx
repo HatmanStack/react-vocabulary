@@ -92,7 +92,7 @@ export default function OnboardingScreen() {
   }, []);
 
   const handleScroll = useCallback(
-    (event: any) => {
+    (event: { nativeEvent: { contentOffset: { x: number } } }) => {
       const scrollPosition = event.nativeEvent.contentOffset.x;
       const index = Math.round(scrollPosition / width);
       setCurrentIndex(index);

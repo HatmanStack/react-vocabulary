@@ -4,30 +4,31 @@
 
 ---
 
-Comprehensive cross-platform vocabulary learning application. Master 360+ curated words through interactive quizzes, track progress with detailed statistics, and earn achievements.
+Comprehensive cross-platform vocabulary learning application. Master 350 curated words through interactive quizzes, track progress with detailed statistics, and earn achievements.
 
 ## Features
 
-- **360+ Words**: 18 themed lists across 5 difficulty levels (Basic → Professional)
+- **350 Words**: 18 themed lists across 5 difficulty levels (Basic → Professional)
 - **Dual Quiz Formats**: Multiple-choice and fill-in-the-blank questions
 - **Contextual Learning**: Definitions and memorable example sentences for each word
 - **Progress Tracking**: Statistics on correct/wrong answers, hints, and learning streaks
 - **Achievement System**: Unlock badges for milestones, performance, and consistency
 - **Cloud Sync**: Optional account-based progress synchronization
+- **Progress Export/Import**: Backup and restore progress data via JSON export
 - **Cross-Platform**: Single codebase for iOS, Android, and Web
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | React Native + Expo |
-| Language | TypeScript |
-| Navigation | Expo Router |
-| UI Library | React Native Paper |
-| State | Zustand |
-| Storage | AsyncStorage (local) + DynamoDB (cloud) |
-| Backend | AWS SAM Lambda |
-| Testing | Jest + React Native Testing Library |
+| Category   | Technology                              |
+| ---------- | --------------------------------------- |
+| Framework  | React Native + Expo                     |
+| Language   | TypeScript                              |
+| Navigation | Expo Router                             |
+| UI Library | React Native Paper                      |
+| State      | Zustand                                 |
+| Storage    | AsyncStorage (local) + DynamoDB (cloud) |
+| Backend    | AWS SAM Lambda                          |
+| Testing    | Jest + React Native Testing Library     |
 
 ## Installation
 
@@ -47,7 +48,7 @@ npm start
 
 1. **Select a List** – Choose from 18 themed vocabulary lists (Aurora, Cascade, Catalyst, etc.)
 2. **Pick Difficulty** – Basic, Intermediate, Advanced, Expert, or Professional
-3. **Take the Quiz** – 8 questions per session (4 multiple-choice + 4 fill-in-blank)
+3. **Take the Quiz** – 2 questions per word (1 multiple-choice + 1 fill-in-blank)
 4. **Review Results** – See your score and track word mastery
 
 ### Cloud Sync (Optional)
@@ -63,17 +64,20 @@ npm start
 
 ## Project Structure
 
-```
+```text
 react-vocabulary/
 ├── app/                    # Expo Router pages
 │   ├── _layout.tsx        # Root layout (theme, sync)
+│   ├── index.tsx          # Entry/splash screen
+│   ├── onboarding.tsx     # Onboarding flow
 │   ├── home.tsx           # Vocabulary list browser
 │   ├── difficulty.tsx     # Level selection
 │   ├── quiz.tsx           # Quiz session
 │   ├── graduation.tsx     # Completion screen
 │   ├── stats.tsx          # Progress analytics
 │   ├── settings.tsx       # App settings
-│   └── help.tsx           # FAQ
+│   ├── help.tsx           # FAQ
+│   └── +html.tsx          # HTML template for web
 │
 ├── src/
 │   ├── features/          # Feature modules
@@ -81,6 +85,7 @@ react-vocabulary/
 │   │   ├── quiz/          # Question generation, validation
 │   │   ├── progress/      # Stats, charts, achievements
 │   │   ├── settings/      # Preferences, export
+│   │   ├── onboarding/    # Onboarding flow screens
 │   │   └── help/          # FAQ content
 │   │
 │   ├── shared/
@@ -88,7 +93,9 @@ react-vocabulary/
 │   │   ├── types/         # TypeScript definitions
 │   │   ├── ui/            # Reusable components
 │   │   ├── hooks/         # Custom hooks (sound, haptics)
-│   │   └── services/      # Cloud sync client
+│   │   ├── services/      # Cloud sync client
+│   │   ├── lib/           # Theme, Levenshtein distance
+│   │   └── utils/         # mergeProgress, listLevelKey
 │   │
 │   └── assets/
 │       ├── vocabulary/    # 18 JSON word lists
@@ -102,30 +109,42 @@ react-vocabulary/
 
 ### State Management (Zustand)
 
-| Store | Purpose |
-|-------|---------|
-| `vocabularyStore` | Word lists, selected list/level |
-| `quizStore` | Current quiz session, questions, scoring |
-| `progressStore` | Word progress, achievements, cloud sync |
-| `settingsStore` | Theme, sound, haptics preferences |
+| Store                     | Purpose                                  |
+| ------------------------- | ---------------------------------------- |
+| `vocabularyStore`         | Word lists, selected list/level          |
+| `quizStore`               | Current quiz session, questions, scoring |
+| `progressStore`           | Word progress, achievements, cloud sync  |
+| `settingsStore`           | Theme, sound, haptics preferences        |
+| `adaptiveDifficultyStore` | Adaptive difficulty biasing              |
 
 ### Word Progress States
 
 Words progress through 4 states as users learn:
 
-| State | Meaning |
-|-------|---------|
-| 0 | Not started |
-| 1 | Seen/attempted |
-| 2 | Partially known |
-| 3 | Mastered (correct answer) |
+| State | Meaning                   |
+| ----- | ------------------------- |
+| 0     | Not started               |
+| 1     | Seen/attempted            |
+| 2     | Partially known           |
+| 3     | Mastered (correct answer) |
 
 ### Quiz Question Generation
 
-- 4 words selected per quiz session
+- All words from the selected level are quizzed
 - Each word gets 2 questions (1 multiple-choice + 1 fill-in-blank)
 - Multiple-choice: 1 correct + 3 random options from same difficulty
 - Fill-in-blank: Fuzzy matching using Levenshtein distance
+
+### Cloud Sync Merge Strategy
+
+When syncing progress between devices, conflicts are resolved by `src/shared/utils/mergeProgress.ts` using a deterministic "higher wins" strategy:
+
+- Word state: keeps the higher state value
+- First attempt date: keeps the earliest
+- Last attempt date: keeps the latest
+- Mastered date: keeps the earliest
+- Best score: fewer hints wins, then fewer wrong answers
+- Achievements: union by ID, preferring unlocked versions with earliest unlock date
 
 ## Testing
 
@@ -147,6 +166,7 @@ npm run check
 ```
 
 **Test Coverage:**
+
 - Unit tests for question generation, answer validation, achievements
 - Component tests for UI elements
 - Store tests for state management

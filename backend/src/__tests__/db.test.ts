@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, beforeAll } from '@jest/globals';
 import { mockClient } from 'aws-sdk-client-mock';
-import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import type { UserProgress } from '../types.js';
 
 // Set TABLE_NAME before importing db module
@@ -96,42 +96,36 @@ describe('saveProgress', () => {
     },
   };
 
-  it('should save new user progress and return timestamp', async () => {
-    // First GetCommand for checking createdAt - user doesn't exist
-    ddbMock.on(GetCommand).resolves({
-      Item: undefined,
-    });
-    ddbMock.on(PutCommand).resolves({});
+  it('should save progress atomically and return timestamp', async () => {
+    ddbMock.on(UpdateCommand).resolves({});
 
     const timestamp = await saveProgress('newuser', mockProgress);
 
     // Verify timestamp format
     expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
 
-    // Verify PutCommand was called
-    const putCall = ddbMock.calls().find(call => call.args[0] instanceof PutCommand);
-    expect(putCall).toBeDefined();
-    expect(putCall?.args[0].input.Item.username).toBe('newuser');
-    expect(putCall?.args[0].input.Item.progressData).toEqual(mockProgress);
+    // Verify UpdateCommand was called (single atomic operation, no GetCommand)
+    const calls = ddbMock.calls();
+    expect(calls).toHaveLength(1);
+    const updateInput = calls[0].args[0].input;
+    expect(updateInput.Key).toEqual({ username: 'newuser' });
+    expect(updateInput.UpdateExpression).toContain('if_not_exists(createdAt');
+    expect(updateInput.TableName).toBe('test-table');
+    expect(updateInput.ExpressionAttributeValues[':pd']).toEqual(mockProgress);
+    expect(updateInput.ExpressionAttributeValues[':now']).toBe(timestamp);
   });
 
-  it('should preserve createdAt for existing user', async () => {
-    const existingCreatedAt = '2024-01-01T00:00:00.000Z';
-
-    ddbMock.on(GetCommand).resolves({
-      Item: { createdAt: existingCreatedAt },
-    });
-    ddbMock.on(PutCommand).resolves({});
+  it('should use if_not_exists for createdAt to preserve existing value', async () => {
+    ddbMock.on(UpdateCommand).resolves({});
 
     await saveProgress('existinguser', mockProgress);
 
-    const putCall = ddbMock.calls().find(call => call.args[0] instanceof PutCommand);
-    expect(putCall?.args[0].input.Item.createdAt).toBe(existingCreatedAt);
+    const updateInput = ddbMock.call(0).args[0].input;
+    expect(updateInput.UpdateExpression).toContain('if_not_exists(createdAt, :now)');
   });
 
   it('should handle DynamoDB errors', async () => {
-    ddbMock.on(GetCommand).resolves({ Item: undefined });
-    ddbMock.on(PutCommand).rejects(new Error('DynamoDB error'));
+    ddbMock.on(UpdateCommand).rejects(new Error('DynamoDB error'));
 
     await expect(saveProgress('testuser', mockProgress)).rejects.toThrow('DynamoDB error');
   });

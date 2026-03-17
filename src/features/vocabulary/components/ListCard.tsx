@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import { Card, Typography, ProgressBar, Spacer } from '@/shared/ui';
 
 /**
@@ -67,9 +66,6 @@ export const ListCard = React.memo(function ListCard({
   max = 40,
   onPress,
 }: ListCardProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const theme = useTheme();
-
   // Get emoji for this list
   const emoji = LIST_EMOJIS[id] || '📚';
 

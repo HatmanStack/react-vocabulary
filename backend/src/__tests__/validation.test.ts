@@ -161,6 +161,66 @@ describe('validateRequest', () => {
 
       expect(result.progressData).toEqual({});
     });
+
+    it('should reject oversized progressData', () => {
+      // Create a payload > 350KB
+      const largeData = { listLevelProgress: { data: 'x'.repeat(400_000) } };
+      expect(() =>
+        validateRequest({ action: 'save', username: 'testuser', progressData: largeData })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with non-object listLevelProgress', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { listLevelProgress: 'invalid' },
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with array listLevelProgress', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { listLevelProgress: [1, 2, 3] },
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with non-object globalStats', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { globalStats: 'invalid' },
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should reject progressData with array globalStats', () => {
+      expect(() =>
+        validateRequest({
+          action: 'save',
+          username: 'testuser',
+          progressData: { globalStats: [1, 2, 3] },
+        })
+      ).toThrow(ValidationError);
+    });
+
+    it('should accept valid progressData with proper shape', () => {
+      const result = validateRequest({
+        action: 'save',
+        username: 'testuser',
+        progressData: {
+          listLevelProgress: { 'list-a-basic': {} },
+          globalStats: { allTimeCorrect: 10 },
+        },
+      });
+      expect(result.progressData).toBeDefined();
+    });
   });
 
   describe('body validation', () => {

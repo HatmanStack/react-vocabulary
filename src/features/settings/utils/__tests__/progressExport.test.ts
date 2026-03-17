@@ -28,17 +28,18 @@ jest.mock('@/shared/store/progressStore', () => ({
     getState: jest.fn(),
     setState: jest.fn(),
   },
+  flushPendingSave: jest.fn().mockResolvedValue(undefined),
 }));
 
 describe('progressExport', () => {
-  const mockProgressData = {
+  const mockProgressData: Pick<ProgressExportData['data'], 'listLevelProgress' | 'globalStats'> = {
     listLevelProgress: {
       'list-a-basic': {
         listId: 'list-a',
         levelId: 'basic',
         wordProgress: {
-          word1: { state: 3, correctCount: 5, wrongCount: 0 },
-          word2: { state: 2, correctCount: 2, wrongCount: 1 },
+          word1: { state: 3 as const, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+          word2: { state: 2 as const, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
         },
       },
     },
@@ -177,9 +178,9 @@ describe('progressExport', () => {
               listId: 'list-a',
               levelId: 'basic',
               wordProgress: {
-                word1: { state: 3, correctCount: 5, wrongCount: 0 },
-                word2: { state: 3, correctCount: 4, wrongCount: 0 },
-                word3: { state: 2, correctCount: 2, wrongCount: 1 },
+                word1: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word2: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 4, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word3: { state: 2, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
           },
@@ -269,16 +270,16 @@ describe('progressExport', () => {
               listId: 'list-a',
               levelId: 'basic',
               wordProgress: {
-                word1: { state: 3, correctCount: 5, wrongCount: 0 },
-                word2: { state: 3, correctCount: 4, wrongCount: 0 },
-                word3: { state: 2, correctCount: 2, wrongCount: 1 },
+                word1: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 5, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word2: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 4, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
+                word3: { state: 2, hintsUsed: 0, wrongAttempts: 1, correctAttempts: 2, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
             'list-b-advanced': {
               listId: 'list-b',
               levelId: 'advanced',
               wordProgress: {
-                word4: { state: 3, correctCount: 3, wrongCount: 0 },
+                word4: { state: 3, hintsUsed: 0, wrongAttempts: 0, correctAttempts: 3, lastAttemptDate: '2024-01-01', firstAttemptDate: '2024-01-01' },
               },
             },
           },
@@ -329,8 +330,8 @@ describe('progressExport', () => {
   });
 
   describe('applyImportedProgress', () => {
-    it('applies imported progress to store', () => {
-      const mockResetAllProgress = jest.fn();
+    it('applies imported progress to store', async () => {
+      const mockResetAllProgress = jest.fn().mockResolvedValue(undefined);
       (useProgressStore.getState as jest.Mock).mockReturnValue({
         resetAllProgress: mockResetAllProgress,
       });
@@ -344,7 +345,7 @@ describe('progressExport', () => {
         },
       };
 
-      const result = applyImportedProgress(JSON.stringify(validExport));
+      const result = await applyImportedProgress(JSON.stringify(validExport));
 
       expect(result).toBe(true);
       expect(mockResetAllProgress).toHaveBeenCalled();
@@ -355,8 +356,8 @@ describe('progressExport', () => {
       });
     });
 
-    it('sets lastSyncedAt to current time', () => {
-      const mockResetAllProgress = jest.fn();
+    it('sets lastSyncedAt to current time', async () => {
+      const mockResetAllProgress = jest.fn().mockResolvedValue(undefined);
       (useProgressStore.getState as jest.Mock).mockReturnValue({
         resetAllProgress: mockResetAllProgress,
       });
@@ -377,7 +378,7 @@ describe('progressExport', () => {
       };
 
       const beforeTime = Date.now();
-      applyImportedProgress(JSON.stringify(validExport));
+      await applyImportedProgress(JSON.stringify(validExport));
       const afterTime = Date.now();
 
       const setStateCall = (useProgressStore.setState as jest.Mock).mock.calls[0][0];
@@ -386,8 +387,8 @@ describe('progressExport', () => {
       expect(syncedAtTime).toBeLessThanOrEqual(afterTime);
     });
 
-    it('handles invalid JSON gracefully', () => {
-      const result = applyImportedProgress('invalid json');
+    it('handles invalid JSON gracefully', async () => {
+      const result = await applyImportedProgress('invalid json');
 
       expect(result).toBe(false);
       expect(console.error).toHaveBeenCalledWith(
@@ -396,7 +397,7 @@ describe('progressExport', () => {
       );
     });
 
-    it('handles store errors gracefully', () => {
+    it('handles store errors gracefully', async () => {
       (useProgressStore.getState as jest.Mock).mockImplementation(() => {
         throw new Error('Store error');
       });
@@ -416,7 +417,7 @@ describe('progressExport', () => {
         },
       };
 
-      const result = applyImportedProgress(JSON.stringify(validExport));
+      const result = await applyImportedProgress(JSON.stringify(validExport));
 
       expect(result).toBe(false);
       expect(console.error).toHaveBeenCalled();

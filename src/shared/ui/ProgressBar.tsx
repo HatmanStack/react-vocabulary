@@ -52,6 +52,7 @@ export function ProgressBar({
       duration: 300,
       useNativeDriver: false,
     }).start();
+    // animatedProgress is a stable Animated.Value ref — safe to omit
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [normalizedProgress]);
 

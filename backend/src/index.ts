@@ -3,7 +3,10 @@ import { validateRequest, ValidationError } from './validation.js';
 import { checkUsernameExists, getProgress, saveProgress } from './db.js';
 import { ErrorCodes, ErrorResponse } from './types.js';
 
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '*';
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || '';
+if (!ALLOWED_ORIGINS) {
+  console.warn('ALLOWED_ORIGINS is not set — cross-origin requests will be blocked. Set this env var to your app origin for cloud sync to work.');
+}
 
 function createResponse(
   statusCode: number,
@@ -30,6 +33,11 @@ function createErrorResponse(
   return createResponse(statusCode, body);
 }
 
+// ARCHITECTURAL DECISION: No authentication by design.
+// This API uses username-only identification (no passwords, tokens, or sessions)
+// to minimize friction for a vocabulary learning app. Users are advised to choose
+// a unique username for privacy. This is an intentional trade-off: simplicity over
+// strict access control. The data stored is non-sensitive learning progress only.
 export async function handler(
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> {

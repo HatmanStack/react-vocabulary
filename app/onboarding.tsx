@@ -1,9 +1,6 @@
-import OnboardingScreen from '@/features/onboarding/screens/OnboardingScreen';
-
-console.log('[onboarding.tsx] Route file loaded');
+import OnboardingScreen from "@/features/onboarding/screens/OnboardingScreen";
 
 function OnboardingRoute() {
-  console.log('[onboarding.tsx] OnboardingRoute component rendering');
   return <OnboardingScreen />;
 }
 

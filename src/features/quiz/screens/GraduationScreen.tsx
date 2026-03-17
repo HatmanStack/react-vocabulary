@@ -19,9 +19,11 @@ export default function GraduationScreen() {
     levelId: string;
     hints?: string;
     wrong?: string;
+    bestHints?: string;
+    bestWrong?: string;
     durationMinutes?: string;
   }>();
-  const { listId, levelId, hints, wrong, durationMinutes } = params;
+  const { listId, levelId, hints, wrong, bestHints: prevBestHintsParam, bestWrong: prevBestWrongParam, durationMinutes } = params;
   const progressStore = useProgressStore();
   const quizStore = useQuizStore();
   const { playComplete } = useSound();
@@ -58,6 +60,7 @@ export default function GraduationScreen() {
         useNativeDriver: true,
       }),
     ]).start();
+    // Effect intentionally runs only on mount — fadeAnim and scaleAnim are stable refs
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -82,6 +85,7 @@ export default function GraduationScreen() {
     if (progressStore.username) {
       progressStore.syncToCloud();
     }
+    // progressStore is a stable Zustand store ref — safe to omit from deps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listId, levelId, hints, wrong, durationMinutes]);
 
@@ -89,14 +93,19 @@ export default function GraduationScreen() {
   const hintsUsed = parseInt(hints || '0', 10);
   const wrongAnswers = parseInt(wrong || '0', 10);
 
-  // Get best scores from progressStore
+  // Use pre-endQuiz best score from route params for accurate "new best" detection
+  const prevBestHints = parseInt(prevBestHintsParam || '-1', 10);
+  const prevBestWrong = parseInt(prevBestWrongParam || '-1', 10);
+  const hadPreviousBest = prevBestHints >= 0;
+
+  // Current best (post-update) for display
   const bestScore = progressStore.getBestScore(listId as string, levelId as string);
   const bestHints = bestScore?.hints ?? 0;
   const bestWrong = bestScore?.wrong ?? 0;
 
-  // Check if this is a new best score
+  // Check if this is a new best score (compare against PREVIOUS best, before endQuiz updated it)
   const isNewBest =
-    !bestScore || hintsUsed < bestHints || (hintsUsed === bestHints && wrongAnswers < bestWrong);
+    !hadPreviousBest || hintsUsed < prevBestHints || (hintsUsed === prevBestHints && wrongAnswers < prevBestWrong);
 
   // Get global stats
   const globalStats = progressStore.getGlobalStats();

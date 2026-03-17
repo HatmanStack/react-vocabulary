@@ -1,6 +1,6 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Button as PaperButton, Surface } from 'react-native-paper';
+import { Text, Button as PaperButton, Surface, withTheme, MD3Theme } from 'react-native-paper';
 
 /**
  * ErrorBoundary Component
@@ -27,6 +27,8 @@ interface ErrorBoundaryProps {
   fallback?: ReactNode;
   /** Callback when error occurs */
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  /** Theme injected by withTheme HOC */
+  theme: MD3Theme;
 }
 
 interface ErrorBoundaryState {
@@ -35,7 +37,7 @@ interface ErrorBoundaryState {
   errorInfo: ErrorInfo | null;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundaryBase extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
@@ -80,8 +82,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       // Default error UI
+      const { theme } = this.props;
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
           <Surface style={styles.surface} elevation={2}>
             <Text variant="headlineMedium" style={styles.title}>
               Oops! Something went wrong
@@ -90,8 +93,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               We're sorry for the inconvenience. Please try again.
             </Text>
             {__DEV__ && this.state.error && (
-              <View style={styles.errorDetails}>
-                <Text variant="bodySmall" style={styles.errorText}>
+              <View style={[styles.errorDetails, { backgroundColor: theme.colors.errorContainer }]}>
+                <Text variant="bodySmall" style={[styles.errorText, { color: theme.colors.error }]}>
                   {this.state.error.toString()}
                 </Text>
               </View>
@@ -114,7 +117,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f5f5f5',
   },
   surface: {
     padding: 24,
@@ -132,16 +134,16 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   errorDetails: {
-    backgroundColor: '#fee',
     padding: 12,
     borderRadius: 4,
     marginBottom: 16,
   },
   errorText: {
     fontFamily: 'monospace',
-    color: '#c00',
   },
   button: {
     marginTop: 8,
   },
 });
+
+export const ErrorBoundary = withTheme(ErrorBoundaryBase) as unknown as React.ComponentType<Omit<ErrorBoundaryProps, 'theme'>>;

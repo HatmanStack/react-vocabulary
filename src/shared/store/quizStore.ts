@@ -5,12 +5,21 @@
  * Handles word state progression (0→1→2→3) based on question type and correctness.
  */
 
-import { create } from 'zustand';
-import { QuizQuestion, QuizSession, QuestionType } from '@/shared/types';
-import { useVocabularyStore } from './vocabularyStore';
-import { useProgressStore } from './progressStore';
-import { validateMultipleChoice, validateFillInBlank } from '@/features/quiz/utils/answerValidator';
-import { generateMultipleChoiceOptions } from '@/features/quiz/utils/questionGenerator';
+import { create } from "zustand";
+import {
+  QuizQuestion,
+  QuizSession,
+  QuestionType,
+  WordState,
+} from "@/shared/types";
+import { useVocabularyStore } from "@/shared/store/vocabularyStore";
+import { useProgressStore } from "@/shared/store/progressStore";
+import { makeListLevelKey } from "@/shared/utils/listLevelKey";
+import {
+  validateMultipleChoice,
+  validateFillInBlank,
+} from "@/features/quiz/utils/answerValidator";
+import { generateMultipleChoiceOptions } from "@/features/quiz/utils/questionGenerator";
 
 interface SessionStats {
   hintsUsed: number;
@@ -22,18 +31,21 @@ interface QuizState {
   // Session data
   currentSession: QuizSession | null;
   currentQuestion: QuizQuestion | null;
-  currentQuestionIndex: number; // 1-based question number for display (1-8)
+  currentQuestionIndex: number; // 1-based question number for display
   isQuizActive: boolean;
   sessionStats: SessionStats;
-  questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (8 total)
-  correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly (length 8)
-  presentationCountTracker: number[]; // Count of how many times each question has been presented (length 8)
+  questionOrder: { wordIndex: number; type: QuestionType }[]; // Shuffled questions (words.length * 2)
+  correctTracker: number[]; // 0 = not answered correctly, 1 = answered correctly
+  presentationCountTracker: number[]; // Count of how many times each question has been presented
   currentOrderIndex: number; // Current position in questionOrder (0-based)
 
   // Actions
   startQuiz: (listId: string, levelId: string) => void;
   getNextQuestion: () => void;
-  submitAnswer: (userAnswer: string) => { isCorrect: boolean; correctAnswer: string };
+  submitAnswer: (userAnswer: string) => {
+    isCorrect: boolean;
+    correctAnswer: string;
+  };
   useHint: () => string;
   getCorrectAnswer: () => string;
   incrementHints: () => void;
@@ -90,17 +102,20 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     // Create question order: 2 questions per word (multiple + fillin)
     const questionOrder: { wordIndex: number; type: QuestionType }[] = [];
     words.forEach((_, wordIndex) => {
-      questionOrder.push({ wordIndex, type: 'multiple' });
-      questionOrder.push({ wordIndex, type: 'fillin' });
+      questionOrder.push({ wordIndex, type: "multiple" });
+      questionOrder.push({ wordIndex, type: "fillin" });
     });
 
     // Shuffle using Fisher-Yates
     for (let i = questionOrder.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [questionOrder[i], questionOrder[j]] = [questionOrder[j], questionOrder[i]];
+      [questionOrder[i], questionOrder[j]] = [
+        questionOrder[j],
+        questionOrder[i],
+      ];
     }
 
-    // Initialize tracker arrays (all 0s) - 8 questions total
+    // Initialize tracker arrays (all 0s)
     const correctTracker = new Array(questionOrder.length).fill(0);
     const presentationCountTracker = new Array(questionOrder.length).fill(0);
 
@@ -121,16 +136,21 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // Get next question
   getNextQuestion: () => {
-    const { currentSession, questionOrder, correctTracker, presentationCountTracker, currentOrderIndex } = get();
+    const {
+      currentSession,
+      questionOrder,
+      correctTracker,
+      presentationCountTracker,
+      currentOrderIndex,
+    } = get();
 
     if (!currentSession) {
-      console.error('No active quiz session');
+      console.error("No active quiz session");
       return;
     }
 
     // Check if quiz is complete
     if (get().isQuizComplete()) {
-      console.log('Quiz complete! All questions answered correctly.');
       return;
     }
 
@@ -153,7 +173,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
     // Generate options for multiple choice questions
     const options =
-      questionType === 'multiple' ? generateMultipleChoiceOptions(word, words) : undefined;
+      questionType === "multiple"
+        ? generateMultipleChoiceOptions(word, words)
+        : undefined;
 
     const question: QuizQuestion = {
       word,
@@ -161,7 +183,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       options,
     };
 
-    // Question number is the position in shuffled order (1-based, 1-8)
+    // Question number is the position in shuffled order (1-based)
     const questionNumber = nextIndex + 1;
 
     // Increment presentation count for this question
@@ -178,11 +200,17 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
   // Submit answer and update tracker
   submitAnswer: (userAnswer: string) => {
-    const { currentQuestion, currentSession, questionOrder, currentOrderIndex, correctTracker } = get();
+    const {
+      currentQuestion,
+      currentSession,
+      questionOrder,
+      currentOrderIndex,
+      correctTracker,
+    } = get();
 
     if (!currentQuestion || !currentSession) {
-      console.error('No active question');
-      return { isCorrect: false, correctAnswer: '' };
+      console.error("No active question");
+      return { isCorrect: false, correctAnswer: "" };
     }
 
     const { word, type } = currentQuestion;
@@ -190,12 +218,13 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
     // Validate answer based on question type
     const isCorrect =
-      type === 'multiple'
+      type === "multiple"
         ? validateMultipleChoice(userAnswer, correctAnswer)
         : validateFillInBlank(userAnswer, correctAnswer);
 
     // Get the current question index in the order
-    const prevIndex = (currentOrderIndex - 1 + questionOrder.length) % questionOrder.length;
+    const prevIndex =
+      (currentOrderIndex - 1 + questionOrder.length) % questionOrder.length;
 
     // Update stats
     if (isCorrect) {
@@ -206,15 +235,24 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       newTracker[prevIndex] = 1;
       set({ correctTracker: newTracker });
 
-      // Save progress to progressStore (mark as mastered)
+      // Save progress to progressStore with progressive state (0->1->2->3)
       const progressStore = useProgressStore.getState();
+      const key = makeListLevelKey(
+        currentSession.listId,
+        currentSession.levelId,
+      );
+      const currentWordProgress =
+        progressStore.listLevelProgress?.[key]?.wordProgress[word.id];
+      const currentState = currentWordProgress?.state ?? 0;
+      const nextState = Math.min(currentState + 1, 3) as WordState;
+
       progressStore.updateWordProgress(
         word.id,
         currentSession.listId,
         currentSession.levelId,
-        3, // Mark as mastered
+        nextState,
         isCorrect,
-        false
+        false,
       );
     } else {
       get().incrementWrong();
@@ -228,7 +266,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     const { currentQuestion } = get();
 
     if (!currentQuestion) {
-      return '';
+      return "";
     }
 
     get().incrementHints();
@@ -240,7 +278,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     const { currentQuestion } = get();
 
     if (!currentQuestion) {
-      return '';
+      return "";
     }
 
     return currentQuestion.word.word;
@@ -254,7 +292,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       return 0;
     }
 
-    const prevIndex = (currentOrderIndex - 1 + presentationCountTracker.length) % presentationCountTracker.length;
+    const prevIndex =
+      (currentOrderIndex - 1 + presentationCountTracker.length) %
+      presentationCountTracker.length;
     return presentationCountTracker[prevIndex] || 0;
   },
 
@@ -288,17 +328,6 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     }));
   },
 
-  // Reset session stats
-  resetStats: () => {
-    set({
-      sessionStats: {
-        hintsUsed: 0,
-        wrongAnswers: 0,
-        correctAnswers: 0,
-      },
-    });
-  },
-
   // End quiz and return final stats
   endQuiz: () => {
     const { sessionStats, currentSession } = get();
@@ -315,6 +344,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 
     set({
       isQuizActive: false,
+      currentSession: null,
     });
 
     return {
@@ -327,6 +357,8 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   // Check if quiz is complete (all tracker values are 1)
   isQuizComplete: () => {
     const { correctTracker } = get();
-    return correctTracker.length > 0 && correctTracker.every((val) => val === 1);
+    return (
+      correctTracker.length > 0 && correctTracker.every((val) => val === 1)
+    );
   },
 }));

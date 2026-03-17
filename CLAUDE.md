@@ -44,7 +44,7 @@ Each feature (vocabulary, quiz, progress, settings, onboarding, help) is self-co
 
 ### Quiz Domain Logic
 
-- 4 words per session, each gets 2 questions (1 multiple-choice + 1 fill-in-blank)
+- All words from the selected level are quizzed, each gets 2 questions (1 multiple-choice + 1 fill-in-blank)
 - Multiple-choice uses 3 random distractors from the same difficulty level
 - Fill-in-blank uses Levenshtein distance for typo tolerance (1 char)
 - Word progress: 0 (not started) → 1 (seen) → 2 (partial) → 3 (mastered)

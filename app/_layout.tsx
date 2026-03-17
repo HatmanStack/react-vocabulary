@@ -1,15 +1,18 @@
-import { Stack } from 'expo-router';
-import Head from 'expo-router/head';
-import { useColorScheme, AppState, AppStateStatus } from 'react-native';
-import { PaperProvider, Snackbar } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { lightTheme, darkTheme } from '@/shared/lib/theme';
-import { useSettingsStore } from '@/shared/store/settingsStore';
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
-import { useProgressStore } from '@/shared/store/progressStore';
-import { initializeStorage } from '@/shared/lib/storage';
-import { ErrorBoundary } from '@/shared/ui';
+import { Stack } from "expo-router";
+import Head from "expo-router/head";
+import { useColorScheme, AppState, AppStateStatus } from "react-native";
+import { PaperProvider, Snackbar } from "react-native-paper";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { lightTheme, darkTheme } from "@/shared/lib/theme";
+import { useSettingsStore } from "@/shared/store/settingsStore";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+import {
+  useProgressStore,
+  flushPendingSave,
+} from "@/shared/store/progressStore";
+import { useVocabularyStore } from "@/shared/store/vocabularyStore";
+import { ErrorBoundary } from "@/shared/ui";
 
 // Minimum time between app resume syncs (5 minutes)
 const SYNC_THROTTLE_MS = 5 * 60 * 1000;
@@ -17,7 +20,7 @@ const SYNC_THROTTLE_MS = 5 * 60 * 1000;
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const systemColorScheme = useColorScheme();
   const theme = useSettingsStore((state) => state.theme);
   const syncStatus = useProgressStore((state) => state.syncStatus);
@@ -28,8 +31,8 @@ export default function RootLayout() {
   // Show snackbar when sync error occurs
   useEffect(() => {
     if (
-      syncStatus === 'error' &&
-      previousSyncStatusRef.current !== 'error' &&
+      syncStatus === "error" &&
+      previousSyncStatusRef.current !== "error" &&
       lastSyncError
     ) {
       setSnackbarMessage(lastSyncError);
@@ -51,7 +54,8 @@ export default function RootLayout() {
   useEffect(() => {
     async function prepare() {
       try {
-        await initializeStorage();
+        // Load vocabulary data and hydrate stores in parallel
+        useVocabularyStore.getState().loadVocabularyLists();
         await Promise.all([
           useProgressStore.getState().loadFromStorage(),
           useSettingsStore.getState().loadFromStorage(),
@@ -65,7 +69,7 @@ export default function RootLayout() {
           lastSyncTimeRef.current = Date.now();
         }
       } catch (error) {
-        console.error('[RootLayout] Failed to initialize app:', error);
+        console.error("[RootLayout] Failed to initialize app:", error);
         setIsReady(true);
       }
     }
@@ -75,7 +79,12 @@ export default function RootLayout() {
   // App state change handler for background->foreground sync
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
-      if (nextAppState === 'active') {
+      // Flush pending saves when app goes to background to prevent data loss
+      if (nextAppState === "background" || nextAppState === "inactive") {
+        flushPendingSave();
+      }
+
+      if (nextAppState === "active") {
         const progressStore = useProgressStore.getState();
 
         // Only sync if:
@@ -84,7 +93,7 @@ export default function RootLayout() {
         // 3. Enough time has passed since last sync
         if (
           progressStore.username &&
-          progressStore.syncStatus !== 'syncing' &&
+          progressStore.syncStatus !== "syncing" &&
           Date.now() - lastSyncTimeRef.current > SYNC_THROTTLE_MS
         ) {
           progressStore.fullSync();
@@ -93,7 +102,10 @@ export default function RootLayout() {
       }
     };
 
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange,
+    );
 
     return () => {
       subscription.remove();
@@ -101,10 +113,10 @@ export default function RootLayout() {
   }, []);
 
   const getActiveTheme = () => {
-    if (theme === 'auto') {
-      return systemColorScheme === 'dark' ? darkTheme : lightTheme;
+    if (theme === "auto") {
+      return systemColorScheme === "dark" ? darkTheme : lightTheme;
     }
-    return theme === 'dark' ? darkTheme : lightTheme;
+    return theme === "dark" ? darkTheme : lightTheme;
   };
 
   const activeTheme = getActiveTheme();
@@ -112,7 +124,12 @@ export default function RootLayout() {
   if (!isReady) {
     const loadingTheme = getActiveTheme();
     return (
-      <View style={[styles.loadingContainer, { backgroundColor: loadingTheme.colors.background }]}>
+      <View
+        style={[
+          styles.loadingContainer,
+          { backgroundColor: loadingTheme.colors.background },
+        ]}
+      >
         <ActivityIndicator size="large" color={loadingTheme.colors.primary} />
       </View>
     );
@@ -122,15 +139,20 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <PaperProvider theme={activeTheme}>
         <Head>
-          <title>Vocabulary Learning App - Master 360+ Words with Interactive Quizzes</title>
-          <meta name="description" content="Build your vocabulary with 360+ words across 18 themed lists. Interactive quizzes, progress tracking, achievements, and cloud sync. Free vocabulary builder for all ages." />
+          <title>
+            Vocabulary Learning App - Master 350 Words with Interactive Quizzes
+          </title>
+          <meta
+            name="description"
+            content="Build your vocabulary with 350 words across 18 themed lists. Interactive quizzes, progress tracking, achievements, and cloud sync. Free vocabulary builder for all ages."
+          />
           <link rel="canonical" href="https://vocabulary.hatstack.fun" />
         </Head>
         <ErrorBoundary>
           <Stack
             screenOptions={{
               headerShown: false,
-              animation: 'slide_from_right',
+              animation: "slide_from_right",
               gestureEnabled: true,
             }}
           >
@@ -142,29 +164,29 @@ export default function RootLayout() {
             <Stack.Screen
               name="graduation"
               options={{
-                animation: 'fade',
+                animation: "fade",
                 gestureEnabled: false,
               }}
             />
             <Stack.Screen
               name="stats"
               options={{
-                presentation: 'modal',
-                animation: 'slide_from_bottom',
+                presentation: "modal",
+                animation: "slide_from_bottom",
               }}
             />
             <Stack.Screen
               name="settings"
               options={{
-                presentation: 'modal',
-                animation: 'slide_from_bottom',
+                presentation: "modal",
+                animation: "slide_from_bottom",
               }}
             />
             <Stack.Screen
               name="help"
               options={{
-                presentation: 'modal',
-                animation: 'slide_from_bottom',
+                presentation: "modal",
+                animation: "slide_from_bottom",
               }}
             />
           </Stack>
@@ -173,7 +195,7 @@ export default function RootLayout() {
             onDismiss={handleDismissSnackbar}
             duration={5000}
             action={{
-              label: 'Retry',
+              label: "Retry",
               onPress: handleRetrySync,
             }}
           >
@@ -188,7 +210,7 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

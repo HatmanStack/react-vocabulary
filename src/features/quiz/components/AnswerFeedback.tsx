@@ -87,6 +87,7 @@ export function AnswerFeedback({ isCorrect, isVisible, onAnimationEnd }: AnswerF
       fadeAnim.setValue(reducedMotion ? 1 : 0);
       scaleAnim.setValue(reducedMotion ? 1 : 0.8);
     }
+    // fadeAnim, scaleAnim are stable Animated.Value refs; onAnimationEnd is a stable callback
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, reducedMotion]);
 

@@ -1,3 +1,6 @@
+// NOTE: These types mirror src/shared/types/progress.ts in the frontend.
+// If you change types here, update the frontend types to match.
+
 // Progress action types
 export type ProgressAction = 'get' | 'save' | 'check-username';
 
@@ -42,6 +45,7 @@ export const ErrorCodes = {
   USER_NOT_FOUND: 'USER_NOT_FOUND',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
   INVALID_JSON: 'INVALID_JSON',
+  INVALID_PROGRESS_DATA: 'INVALID_PROGRESS_DATA',
 } as const;
 
 export type ErrorCode = (typeof ErrorCodes)[keyof typeof ErrorCodes];

@@ -5,7 +5,9 @@
  */
 
 import { Platform, Share } from 'react-native';
-import { useProgressStore } from '@/shared/store/progressStore';
+import { useProgressStore, flushPendingSave } from '@/shared/store/progressStore';
+import { ListLevelProgress } from '@/shared/types';
+import { isValidProgressExportData } from '@/shared/utils/validateState';
 
 const EXPORT_VERSION = '1.0.0';
 
@@ -13,7 +15,7 @@ export interface ProgressExportData {
   version: string;
   exportDate: string;
   data: {
-    listLevelProgress: Record<string, any>;
+    listLevelProgress: Record<string, ListLevelProgress>;
     globalStats: {
       allTimeHints: number;
       allTimeWrong: number;
@@ -84,15 +86,16 @@ export async function importProgress(jsonString: string): Promise<{
   };
 }> {
   try {
-    const importData: ProgressExportData = JSON.parse(jsonString);
+    const parsed = JSON.parse(jsonString);
 
-    // Validate version
-    if (!importData.version || !importData.data) {
+    if (!isValidProgressExportData(parsed)) {
       return {
         success: false,
         error: 'Invalid export file format',
       };
     }
+
+    const importData = parsed as ProgressExportData;
 
     // Version compatibility check
     if (importData.version !== EXPORT_VERSION) {
@@ -101,9 +104,9 @@ export async function importProgress(jsonString: string): Promise<{
 
     // Calculate preview stats
     const preview = {
-      wordsLearned: Object.values(importData.data.listLevelProgress).reduce((count, llp: any) => {
+      wordsLearned: Object.values(importData.data.listLevelProgress).reduce((count, llp) => {
         return (
-          count + Object.values(llp.wordProgress || {}).filter((wp: any) => wp.state === 3).length
+          count + Object.values(llp.wordProgress || {}).filter((wp) => wp.state === 3).length
         );
       }, 0),
       listsCompleted: importData.data.globalStats.listsCompleted?.length || 0,
@@ -125,13 +128,18 @@ export async function importProgress(jsonString: string): Promise<{
 /**
  * Apply imported progress data to store
  */
-export function applyImportedProgress(jsonString: string): boolean {
+export async function applyImportedProgress(jsonString: string): Promise<boolean> {
   try {
-    const importData: ProgressExportData = JSON.parse(jsonString);
+    const parsed = JSON.parse(jsonString);
+    if (!isValidProgressExportData(parsed)) {
+      console.error('Failed to apply imported progress: invalid data structure');
+      return false;
+    }
+    const importData = parsed as ProgressExportData;
     const progressStore = useProgressStore.getState();
 
-    // Reset and apply imported data
-    progressStore.resetAllProgress();
+    // Reset and wait for storage clear to complete before applying new data
+    await progressStore.resetAllProgress();
 
     // Manually set the state (bypassing normal actions to avoid conflicts)
     useProgressStore.setState({
@@ -139,6 +147,9 @@ export function applyImportedProgress(jsonString: string): boolean {
       globalStats: importData.data.globalStats,
       lastSyncedAt: new Date().toISOString(),
     });
+
+    // Persist to storage immediately — setState bypasses debounced save
+    await flushPendingSave();
 
     return true;
   } catch (error) {

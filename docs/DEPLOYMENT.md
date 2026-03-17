@@ -55,7 +55,6 @@ SAM prompts for:
 ### Subsequent Deployments
 
 ```bash
-cd backend
 npm run deploy
 ```
 

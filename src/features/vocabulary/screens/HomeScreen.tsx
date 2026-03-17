@@ -20,11 +20,9 @@ const BREAKPOINTS = {
 const GRID_GAP = 16;
 
 export default function HomeScreen() {
-  console.log('[HomeScreen] Component rendering');
   const router = useRouter();
   const theme = useTheme();
   const vocabularyLists = loadVocabularyLists();
-  console.log('[HomeScreen] Loaded', vocabularyLists.length, 'vocabulary lists');
   const { width } = useWindowDimensions();
   const progressStore = useProgressStore();
   const reducedMotion = useReducedMotion();

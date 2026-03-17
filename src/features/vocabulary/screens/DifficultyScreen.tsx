@@ -47,6 +47,7 @@ export default function DifficultyScreen() {
       })
     );
     Animated.parallel(animations).start();
+    // Effect intentionally runs only on mount — slideAnims are stable refs
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

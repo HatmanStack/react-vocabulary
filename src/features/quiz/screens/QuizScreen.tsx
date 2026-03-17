@@ -53,8 +53,8 @@ export default function QuizScreen() {
   useEffect(() => {
     startQuiz(listId, levelId);
     setQuizStartTime(Date.now());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listId, levelId]);
+    // startQuiz is a stable Zustand store action — safe to include in deps
+  }, [listId, levelId, startQuiz]);
 
   // Check for quiz completion
   useEffect(() => {
@@ -79,6 +79,8 @@ export default function QuizScreen() {
         },
       });
     }
+    // Effect intentionally runs only on question index and start time changes.
+    // Store functions (isQuizComplete, endQuiz) and router are stable references.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestionIndex, quizStartTime]);
 

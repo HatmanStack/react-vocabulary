@@ -85,6 +85,7 @@ export default function HomeScreen() {
       })
     );
     Animated.parallel(animations).start();
+    // fadeAnims are stable Animated.Value refs — safe to omit
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reducedMotion]);
 

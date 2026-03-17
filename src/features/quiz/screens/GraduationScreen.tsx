@@ -58,6 +58,7 @@ export default function GraduationScreen() {
         useNativeDriver: true,
       }),
     ]).start();
+    // Effect intentionally runs only on mount — fadeAnim and scaleAnim are stable refs
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -82,6 +83,7 @@ export default function GraduationScreen() {
     if (progressStore.username) {
       progressStore.syncToCloud();
     }
+    // progressStore is a stable Zustand store ref — safe to omit from deps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listId, levelId, hints, wrong, durationMinutes]);
 

@@ -55,6 +55,7 @@ export function AchievementUnlockModal({
       fadeAnim.setValue(reducedMotion ? 1 : 0);
       scaleAnim.setValue(reducedMotion ? 1 : 0.5);
     }
+    // fadeAnim, scaleAnim are stable Animated.Value refs — safe to omit
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, achievement, reducedMotion]);
 

@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Interactive vocabulary quiz app with Expo Router and React Native
-- 18 themed word lists with 360+ words across 5 difficulty levels
+- 18 themed word lists with 350 words across 5 difficulty levels
 - Quiz sessions: 4 words per session, multiple-choice and fill-in-the-blank questions
 - Levenshtein distance-based typo tolerance for fill-in-the-blank answers
 - Word progress tracking (not started → seen → partial → mastered)

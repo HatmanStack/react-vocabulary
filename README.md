@@ -7,7 +7,7 @@
 [![Expo](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-Master 360+ words through interactive quizzes. Track progress, earn achievements, sync across devices.
+Master 350 words through interactive quizzes. Track progress, earn achievements, sync across devices.
 
 [Try It](https://vocabulary.hatstack.fun) · [Documentation](./docs/README.md)
 

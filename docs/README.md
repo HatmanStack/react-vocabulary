@@ -4,11 +4,11 @@
 
 ---
 
-Comprehensive cross-platform vocabulary learning application. Master 360+ curated words through interactive quizzes, track progress with detailed statistics, and earn achievements.
+Comprehensive cross-platform vocabulary learning application. Master 350 curated words through interactive quizzes, track progress with detailed statistics, and earn achievements.
 
 ## Features
 
-- **360+ Words**: 18 themed lists across 5 difficulty levels (Basic → Professional)
+- **350 Words**: 18 themed lists across 5 difficulty levels (Basic → Professional)
 - **Dual Quiz Formats**: Multiple-choice and fill-in-the-blank questions
 - **Contextual Learning**: Definitions and memorable example sentences for each word
 - **Progress Tracking**: Statistics on correct/wrong answers, hints, and learning streaks
@@ -18,16 +18,16 @@ Comprehensive cross-platform vocabulary learning application. Master 360+ curate
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | React Native + Expo |
-| Language | TypeScript |
-| Navigation | Expo Router |
-| UI Library | React Native Paper |
-| State | Zustand |
-| Storage | AsyncStorage (local) + DynamoDB (cloud) |
-| Backend | AWS SAM Lambda |
-| Testing | Jest + React Native Testing Library |
+| Category   | Technology                              |
+| ---------- | --------------------------------------- |
+| Framework  | React Native + Expo                     |
+| Language   | TypeScript                              |
+| Navigation | Expo Router                             |
+| UI Library | React Native Paper                      |
+| State      | Zustand                                 |
+| Storage    | AsyncStorage (local) + DynamoDB (cloud) |
+| Backend    | AWS SAM Lambda                          |
+| Testing    | Jest + React Native Testing Library     |
 
 ## Installation
 
@@ -102,23 +102,23 @@ react-vocabulary/
 
 ### State Management (Zustand)
 
-| Store | Purpose |
-|-------|---------|
-| `vocabularyStore` | Word lists, selected list/level |
-| `quizStore` | Current quiz session, questions, scoring |
-| `progressStore` | Word progress, achievements, cloud sync |
-| `settingsStore` | Theme, sound, haptics preferences |
+| Store             | Purpose                                  |
+| ----------------- | ---------------------------------------- |
+| `vocabularyStore` | Word lists, selected list/level          |
+| `quizStore`       | Current quiz session, questions, scoring |
+| `progressStore`   | Word progress, achievements, cloud sync  |
+| `settingsStore`   | Theme, sound, haptics preferences        |
 
 ### Word Progress States
 
 Words progress through 4 states as users learn:
 
-| State | Meaning |
-|-------|---------|
-| 0 | Not started |
-| 1 | Seen/attempted |
-| 2 | Partially known |
-| 3 | Mastered (correct answer) |
+| State | Meaning                   |
+| ----- | ------------------------- |
+| 0     | Not started               |
+| 1     | Seen/attempted            |
+| 2     | Partially known           |
+| 3     | Mastered (correct answer) |
 
 ### Quiz Question Generation
 
@@ -147,6 +147,7 @@ npm run check
 ```
 
 **Test Coverage:**
+
 - Unit tests for question generation, answer validation, achievements
 - Component tests for UI elements
 - Store tests for state management

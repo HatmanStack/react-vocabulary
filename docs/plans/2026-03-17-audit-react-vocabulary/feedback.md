@@ -2,6 +2,20 @@
 
 ## Active Feedback
 
+### [CODE_REVIEW] FB-003: progressStore.ts exceeds 500-line target after sync extraction
+- **Phase:** Phase-2
+- **Task:** Task 9
+- **Severity:** MINOR
+- **Details:** The Phase-2 verification checklist (line 854) states "Verify `progressStore.ts` is under 500 lines." After extracting sync orchestration to `syncOrchestrator.ts`, the file is 666 lines -- still above the 500-line target. The extraction was done correctly and moved meaningful logic out, but the store has many methods (word progress, sessions, best scores, global stats, achievements, list completion) that keep it large.
+- **Suggested Fix:** This is a non-blocking observation. The extraction achieved its architectural goal of separating concerns. A future phase could further decompose the store (e.g., extract achievement logic), but this is not required for Phase 2 approval.
+
+### [CODE_REVIEW] FB-004: Residual console.log in quizStore.ts
+- **Phase:** Phase-2
+- **Task:** General
+- **Severity:** MINOR
+- **Details:** `src/shared/store/quizStore.ts` line 134 contains `console.log('Quiz complete! All questions answered correctly.')`. This debug logging should have been removed in Phase 1 (Health #10) but was missed. It is not a Phase 2 regression since the line was already present before Phase 2.
+- **Suggested Fix:** Remove the console.log statement. This is non-blocking for Phase 2 approval since it predates Phase 2 changes.
+
 ### [PLAN_REVIEW] FB-002: Cross-reference table in Phase-0 has incorrect task numbers
 - **Phase:** Phase-0
 - **Task:** Cross-Reference Table (lines 103, 106, 118, 121)

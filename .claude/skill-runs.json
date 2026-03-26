@@ -1,0 +1,8 @@
+[
+  {
+    "skill": "audit",
+    "date": "2026-03-17",
+    "plan": "2026-03-17-audit-react-vocabulary",
+    "audits": ["health", "eval", "docs"]
+  }
+]

@@ -10,8 +10,8 @@
     "check": "npm run type-check && npm run test"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.1012.0",
-    "@aws-sdk/lib-dynamodb": "^3.1012.0"
+    "@aws-sdk/client-dynamodb": "^3.1022.0",
+    "@aws-sdk/lib-dynamodb": "^3.1022.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.161",

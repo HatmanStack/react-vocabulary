@@ -49,6 +49,7 @@ jobs:
       - run: npm run check
 
   status-check:
+    name: All Checks Passed
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [check, backend]

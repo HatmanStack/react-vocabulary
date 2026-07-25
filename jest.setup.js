@@ -3,6 +3,30 @@
  * Configures mocks and global test environment
  */
 
+// Expo SDK 57 installs its WinterCG globals as enumerable lazy getters that
+// `require()` on first access. Jest enumerates globals during teardown, which
+// fires any getter still unread after the module registry is gone and throws
+// "trying to `import` a file outside of the scope of the test code". Reading
+// them here swaps each getter for a plain value while the registry is alive.
+for (const name of [
+  'fetch',
+  'Headers',
+  'Request',
+  'Response',
+  'TextDecoder',
+  'TextDecoderStream',
+  'TextEncoderStream',
+  'URL',
+  'URLSearchParams',
+  'DOMException',
+]) {
+  try {
+    void globalThis[name];
+  } catch {
+    // Global not installed on this platform preset; nothing to materialize.
+  }
+}
+
 // Mock AsyncStorage
 const mockAsyncStorage = {
   setItem: jest.fn(() => Promise.resolve()),
